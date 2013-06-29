@@ -20,6 +20,7 @@
 \newif\ifthreeauthors\threeauthorsfalse
 \newif\iffourauthors\fourauthorsfalse
 \newif\iftwoadvisors\twoadvisorsfalse
+\newif\iftwoadvisorsreader\twoadvisorsreaderfalse
 \newif\ifnpssinglespace\npssinglespacefalse
 \newif\ifclassified\classifiedfalse
 \newif\ifnpsdissertation\npsdissertationfalse
@@ -39,9 +40,10 @@
 \DeclareOption{authorindex}{\npsauthorindextrue}   % generate an author index
 \DeclareOption{thesis}{\npsthesistrue}             % is this a thesis?
 \DeclareOption{twoauthors}{\twoauthorstrue}        % two students? 
-\DeclareOption{threeauthors}{\threeauthorstrue}	   % or three students?
+\DeclareOption{threeauthors}{\threeauthorstrue}    % or three students?
 \DeclareOption{fourauthors}{\fourauthorstrue}      % or four students? 
-\DeclareOption{twoadvisors}{\twoadvisorstrue}      % two advisors? 
+\DeclareOption{twoadvisors}{\twoadvisorstrue}      % two advisors? (but no second reader)
+\DeclareOption{twoadvisorsreader}{\twoadvisorsreadertrue}      % two advisors? (AND also second reader)
 \DeclareOption{classified}{\classifiedtrue}        % you're in the STBL or SCIF
 \DeclareOption{singlespace}{\npssinglespacetrue}   % looks better
 \DeclareOption{dissertation}{\npsdissertationtrue} % getting a phd!
@@ -145,17 +147,17 @@
 
 % Bring in the modern LaTeX packages; look at CTAN to see what each of
 % these does.  Each package has a user's manual to reference for assistance.
-\usepackage[utf8x]{inputenc}	% accented letters in tex files allowed
+\usepackage[utf8x]{inputenc}    % accented letters in tex files allowed
 \usepackage{graphicx}           % better way to bring in graphics
 \usepackage{tabularx}           % tables that expand to with width requested
-\usepackage{titletoc}		% adds toc commands
-\usepackage{titlesec}		% complete replacement for titles
-\usepackage{fancyhdr}		% puts chapters names in footers
-\usepackage{ccaption}		% control captions
+\usepackage{titletoc}       % adds toc commands
+\usepackage{titlesec}       % complete replacement for titles
+\usepackage{fancyhdr}       % puts chapters names in footers
+\usepackage{ccaption}       % control captions
 \usepackage{setspace}           % enabled \doublespacing, \onehalfspacing, etc.
 \usepackage{multicol}           % multiple columns; good for you!
 \usepackage{fancyvrb}           % a better verbatim
-\usepackage{varioref}		% provides \vref - smart referencing
+\usepackage{varioref}       % provides \vref - smart referencing
 \usepackage{xspace}             % provides \xspace
 \usepackage{nps_sf298}           % Bring in SF298 for the documentation page
 \usepackage{latexsym}           % gives \Box
@@ -166,14 +168,14 @@
 \usepackage{color}
 \usepackage{xcolor}
 \usepackage{paralist}       % {compactenum} {compactitem} environments
-\usepackage{enumitem}		% No extra space before lists
+\usepackage{enumitem}       % No extra space before lists
 \setlist{nolistsep}
 
 %These packages recommended by students
 \usepackage{float}                  % reimplementation of float package
 \usepackage{cite}                   % for [5-8] reference style
 \usepackage{amsmath}                % for many types of math equations
-\usepackage{url}		    % nice handling of URLs
+\usepackage{url}            % nice handling of URLs
 % The following package allows for very nice graphics and figures
 % proper usage requires additional information located at:
 % http://asymptote.sourceforge.net/
@@ -247,7 +249,7 @@
 \researchchair{Jeffrey Paduan} % reasonable default
 
 % If you are getting two degrees, use \and between the names.
-\def\degree#1{\setbox0\hbox{#1}	 %for side effect of setting \@degreeword
+\def\degree#1{\setbox0\hbox{#1}  %for side effect of setting \@degreeword
   \gdef\@degree{#1}}
 
 % \and is used inside the \degree argument to separate two degrees
@@ -493,7 +495,7 @@
 \else
 % New NPS
   \typeout{Using new NPS thesis design}
-  \setcounter{tocdepth}{1}	% only put chapters and sections in the TOC
+  \setcounter{tocdepth}{1}  % only put chapters and sections in the TOC
 
   % These were in the {document}
   % Specify our spacings --- Turns out that we want to do this
@@ -547,25 +549,25 @@
   \contentsmargin{2.55em}
   \dottedcontents{section}[1.5em]{}{2.3em}{1pc}
   \titlecontents{section}                                 % section
-  	        [25pt]                                    % left
-	        {\vspace{-1.2ex}}                         % above
-	        {\SECTIONBOLDFACE\contentslabel{2.3em}}   % before with label
-	        {\hspace*{-2.3em}}                        % before without label
-	        {\titlerule*[1pc]{.}\contentspage}        % filler and page
+            [25pt]                                    % left
+            {\vspace{-1.2ex}}                         % above
+            {\SECTIONBOLDFACE\contentslabel{2.3em}}   % before with label
+            {\hspace*{-2.3em}}                        % before without label
+            {\titlerule*[1pc]{.}\contentspage}        % filler and page
 
   \titlecontents{subsection}                              % section
-  	        [25pt]                                    % left
-	        {\vspace{-1.8ex}}                         % above
-	        {\contentslabel{2.3em}}                   % before with label
-	        {\hspace*{-2.3em}}                        % before without label
-	        {\titlerule*[1pc]{.}\contentspage}        % filler and page
+            [25pt]                                    % left
+            {\vspace{-1.8ex}}                         % above
+            {\contentslabel{2.3em}}                   % before with label
+            {\hspace*{-2.3em}}                        % before without label
+            {\titlerule*[1pc]{.}\contentspage}        % filler and page
 
   \titlecontents{subsubsection}                           % subsection
-  	        [52pt]                                    % left
-	        {\vspace{-1.8ex}}                         % above
-	        {\contentslabel{2.3em}}                   % before with label
-	        {\hspace*{-2.3em}}                        % before without label
-	        {\titlerule*[1pc]{.}\contentspage}        % filler and page
+            [52pt]                                    % left
+            {\vspace{-1.8ex}}                         % above
+            {\contentslabel{2.3em}}                   % before with label
+            {\hspace*{-2.3em}}                        % before without label
+            {\titlerule*[1pc]{.}\contentspage}        % filler and page
 
   \newcommand{\NPSend}{
     \ifnpsauthorindex
@@ -659,7 +661,7 @@
   % starts, because the \NPScover command appears first
   \pagestyle{fancy}
   \rhead{}
-  \chead{}								% Removing "\textsf{\@securitybanner}" from top banner
+  \chead{}                              % Removing "\textsf{\@securitybanner}" from top banner
   \lhead{}
   \renewcommand{\headrulewidth}{0pt}
   \cfoot{\textsf{\@securitybanner} \\ \thepage}
@@ -685,7 +687,7 @@
     \fi
     ~
     \vfill
-	 \vspace*{\fill}
+     \vspace*{\fill}
   \fi  
 
   % Print the box on the front page
@@ -714,18 +716,23 @@
         \vspace{1pc}
         \ifnpsthesis
           \begin{tabularx}{4.45in}{lXl}
-	    \ifnpsdissertation
-              Dissertation Supervisor: & & \@thesisadvisor \\ 
-	    \else
+            \ifnpsdissertation
+                Dissertation Supervisor: & & \@thesisadvisor \\
+            \else
                 \iftwoadvisors
-          	  Thesis Co-Advisors: & \hspace{1in} & \@thesisadvisorone \\
-          	                                     & \hspace{1in} & \@thesisadvisortwo \\
-          	  % Second Reader: &  \hspace{1in} & \@secondreader  \\
+                    Thesis Co-Advisors: & \hspace{1in} & \@thesisadvisorone \\
+                                        & \hspace{1in} & \@thesisadvisortwo \\
                 \else
-          	  Thesis Advisor: & \hspace{1in} & \@thesisadvisor \\
-          	  Second Reader: &  \hspace{1in} & \@secondreader  \\
+                        \iftwoadvisorsreader
+                        Thesis Co-Advisors: & \hspace{1in} & \@thesisadvisorone \\
+                                            & \hspace{1in} & \@thesisadvisortwo \\
+                        Second Reader: &  \hspace{1in} & \@secondreader  \\
+                        \else
+                        Thesis Advisor: & \hspace{1in} & \@thesisadvisor \\
+                        Second Reader: &  \hspace{1in} & \@secondreader  \\
+                    \fi
                 \fi
-	    \fi
+            \fi
           \end{tabularx}
         \fi
 
@@ -835,97 +842,120 @@
 
   \ifnpsdissertation 
      \newcommand{\sigspace}{1.5pc}
-	  \vspace{\sigspace}
-	  \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-	  \cline{2-3}
-	    Author: & \@author & &\\
-	   \end{tabular}
-	   
-	  \vspace{\sigspace}
-	  \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-	  \cline{2-2}
-	  \cline{4-4}
-	  Approved by: & \@thesisadvisor       & 	& \@comitteechair \\
-	               & Dissertation Advisor  & 	& Dissertation Committee Chair \\
-	  \end{tabular}
-	  
-	  \vspace{\sigspace}
-	  \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-	  \cline{2-2}
-	  \cline{4-4}
-	        & \@advisorOne	& 	& \@advisorTwo\\
-	        & Advisor	&       & Advisor\\
-	  \end{tabular}
-	  
-	  \vspace{\sigspace}
-	  \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-	  \cline{2-2}
-	  \cline{4-4}
-	        & \@advisorThree	& 	& \@advisorFour\\
-	        & Advisor		& 	& Advisor\\
-	  \end{tabular}
-	  
-	  \vspace{\sigspace}
-	  \begin{tabular}{p{1in}p{2in}p{0.25in}p{1.75in}}
-	  \cline{2-4}
-	   Approved by: & \@departmentchair  \\
-	  	 	& \multicolumn{2}{l}{Chair, \@department} & \\
-	  \end{tabular}
-	  
-	  \vspace{\sigspace}
-	  \begin{tabular}{p{1in}p{2in}p{0.25in}p{1.75in}}
-	  \cline{2-4}
-	  Approved by: & \@assocprovost & &\\
-    	               & \multicolumn{2}{l}{Associate Provost for Academic Affairs} \\
-	  \end{tabular}                                   
+      \vspace{\sigspace}
+      \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
+      \cline{2-3}
+        Author: & \@author & &\\
+       \end{tabular}
+
+      \vspace{\sigspace}
+      \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
+      \cline{2-2}
+      \cline{4-4}
+      Approved by: & \@thesisadvisor       &    & \@comitteechair \\
+                   & Dissertation Advisor  &    & Dissertation Committee Chair \\
+      \end{tabular}
+
+      \vspace{\sigspace}
+      \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
+      \cline{2-2}
+      \cline{4-4}
+            & \@advisorOne  &   & \@advisorTwo\\
+            & Advisor   &       & Advisor\\
+      \end{tabular}
+
+      \vspace{\sigspace}
+      \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
+      \cline{2-2}
+      \cline{4-4}
+            & \@advisorThree    &   & \@advisorFour\\
+            & Advisor       &   & Advisor\\
+      \end{tabular}
+
+      \vspace{\sigspace}
+      \begin{tabular}{p{1in}p{2in}p{0.25in}p{1.75in}}
+      \cline{2-4}
+       Approved by: & \@departmentchair  \\
+            & \multicolumn{2}{l}{Chair, \@department} & \\
+      \end{tabular}
+
+      \vspace{\sigspace}
+      \begin{tabular}{p{1in}p{2in}p{0.25in}p{1.75in}}
+      \cline{2-4}
+      Approved by: & \@assocprovost & &\\
+                       & \multicolumn{2}{l}{Associate Provost for Academic Affairs} \\
+      \end{tabular}
   \else  
     \iftwoadvisors
-  	  \newcommand{\sigspace}{.4in}
+      \newcommand{\sigspace}{.4in}
 
-	  \begin{tabbing}
-	   \hspace{2.5in}\=\\[\sigspace]       % Set the tabs
+      \begin{tabbing}
+       \hspace{2.5in}\=\\[\sigspace]       % Set the tabs
 
-	  \iftwoauthors
-	  \hspace{.5in} Authors: \> \@author \\[\sigspace]
-	           \> \@authortwo\\[\sigspace]
-	  \else
-	  \hspace{.5in} Author: \> \@author \\[\sigspace]
-	  \fi
+      \iftwoauthors
+      \hspace{.5in} Authors: \> \@author \\[\sigspace]
+               \> \@authortwo\\[\sigspace]
+      \else
+      \hspace{.5in} Author: \> \@author \\[\sigspace]
+      \fi
   
-	  \hspace{.5in} Approved by:   \> \@thesisadvisorone \\
-	                 \> Thesis Co-Advisor \\[\sigspace]
+      \hspace{.5in} Approved by:   \> \@thesisadvisorone \\
+                     \> Thesis Co-Advisor \\[\sigspace]
 
-	                 \> \@thesisadvisortwo \\
-	                 \> Thesis Co-Advisor \\[\sigspace]
+                     \> \@thesisadvisortwo \\
+                     \> Thesis Co-Advisor \\[\sigspace]
 
-	                 \> \@secondreader \\
-	                 \> Second Reader \\[\sigspace]
+                     \> \@departmentchair \\
+                     \>  Chair, \@department \\
+      \end{tabbing}
+    \else
+    \iftwoadvisorsreader
+      \newcommand{\sigspace}{.4in}
 
-	                 \> \@departmentchair \\
-	                 \>  Chair, \@department \\
-	  \end{tabbing}
+      \begin{tabbing}
+       \hspace{2.5in}\=\\[\sigspace]       % Set the tabs
+
+      \iftwoauthors
+      \hspace{.5in} Authors: \> \@author \\[\sigspace]
+               \> \@authortwo\\[\sigspace]
+      \else
+      \hspace{.5in} Author: \> \@author \\[\sigspace]
+      \fi
+
+      \hspace{.5in} Approved by:   \> \@thesisadvisorone \\
+                     \> Thesis Co-Advisor \\[\sigspace]
+
+                     \> \@thesisadvisortwo \\
+                     \> Thesis Co-Advisor \\[\sigspace]
+
+                     \> \@secondreader \\
+                     \> Second Reader \\[\sigspace]
+
+                     \> \@departmentchair \\
+                     \>  Chair, \@department \\
+      \end{tabbing}
 \else
-  	  \newcommand{\sigspace}{.65in}
+      \newcommand{\sigspace}{.65in}
 
-	  \begin{tabbing}
-	   \hspace{2.5in}\=\\[\sigspace]       % Set the tabs
+      \begin{tabbing}
+       \hspace{2.5in}\=\\[\sigspace]       % Set the tabs
 
-	  \iftwoauthors
-	  \hspace{.5in} Authors: \> \@author \\[\sigspace]
-	           \> \@authortwo\\[\sigspace]
-	  \else
-	  \hspace{.5in} Author: \> \@author \\[\sigspace]
-	  \fi
-  
-	  \hspace{.5in} Approved by:   \> \@thesisadvisor \\
-	                 \> Thesis Advisor \\[\sigspace]
+      \iftwoauthors
+      \hspace{.5in} Authors: \> \@author \\[\sigspace]
+               \> \@authortwo\\[\sigspace]
+      \else
+      \hspace{.5in} Author: \> \@author \\[\sigspace]
+      \fi
 
-	                 \> \@secondreader \\
-	                 \> Second Reader \\[\sigspace]
+      \hspace{.5in} Approved by:   \> \@thesisadvisor \\
+                     \> Thesis Advisor \\[\sigspace]
 
-	                 \> \@departmentchair \\
-	                 \>  Chair, \@department \\
-	  \end{tabbing}
+                     \> \@secondreader \\
+                     \> Second Reader \\[\sigspace]
+
+                     \> \@departmentchair \\
+                     \>  Chair, \@department \\
+      \end{tabbing}
           \fi
   \fi
   \cleardoublepage
