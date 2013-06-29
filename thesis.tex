@@ -1,0 +1,200 @@
+% This starts the document; the "npsreport" style is really a modified
+% report style. Feel free to use the options:
+%
+% The options of this document are explained in the techreport.pdf
+% Please reference this document for specific use of each of the commands
+% and their purpose.
+
+\documentclass[twoside,index]{npsreport} 
+
+%==================
+% Include additional macros that may be useful for your thesis
+%\input{ARSENL_macros.tex}
+
+
+%======================
+% MOVE ALL OF THESE CUSTOMIZATIONS TO THE TEMPLATE
+\usepackage{setspace}   
+% set the separation between bib references
+
+\usepackage{url}
+%=======================
+
+
+\securitybanner{}								
+%\securitybanner{FOR OFFICIAL USE ONLY}				% Uncomment if your thesis is FOUO (and comment the above line(s) for good measure)
+\title{[TITLE]}
+\author{[AUTHOR]}
+\degree{Master of Science in [DEGREE]}
+
+\degreeabbreviation{MS}   % Should be MS, MBA or MA
+
+
+\department{Department of [DEPARTMENT]}
+\thesisadvisor{[PRIMARY ADVISER]}
+\secondreader{[SECOND READER]}
+\departmentchair{[DEPARTMENT CHAIR]}
+\rank{[RANK]}
+
+% Your previous degree:
+% e.g. \prefdegrees{B.S., Electrical Engineering, My School, 2011}
+\prevdegrees{[UNDERGRADUATE DEGREE]}  
+
+% the date you are graduating:
+\degreedate{[DEGREE DATE]} 
+
+% See Thesis processor's thesis release form for approved distribution statements.
+\distribution{Approved for public release; distribution is unlimited}
+
+
+% Your abstract.  New paragraphs start after an empty line.
+\abstract{
+  [INSERT ABSTRACT HERE]
+}
+
+% Information for the SF298.
+% These are mandatory:
+\ReportType{Master's Thesis}
+\ReportDate{MM-DD-YYY} 		% graduation date
+\DatesCovered{2102-06-01---2104-10-31}
+\SponsoringAgency{Department of the Navy}
+\ReportClassification{Unclassified}
+\AbstractClassification{Unclassified}
+\PageClassification{Unclassified}
+
+% Reports use this line, not needed for a thesis 
+
+\SupplementaryNotes{ The views expressed in this thesis are those of
+  the author and do not reflect the official policy or position of the
+  Department of Defense or the U.S. Government.%
+  \footnotesize IRB Protocol Number: XXXX}
+
+% These are optional:
+\RPTpreparedFor{}
+\ContractNumber{}
+\GrantNumber{}
+\ProgramElementNumber{}
+\TaskNumber{}
+\WorkUnitNumber{}
+\POReportNumber{}
+\Acronyms{}
+\SMReportNumber{}
+\SubjectTerms{}
+\ResponsiblePerson{}
+\RPTelephone{}
+
+
+%
+% your thesis begins here
+%
+
+
+% Prevent footnotes from being reset at each chapter
+% Comment this out to have the reset with each chapter.
+\makeatletter
+\@removefromreset{footnote}{chapter}
+\makeatother
+
+
+% This must be on a line by itself:
+\begin{document}
+
+\NPScover                       % Cover page
+\NPSsftne                       % SF298 form
+\NPSthesistitle                 % Title page
+\NPSabstractpage                % Abstract Page
+\NPSfrontmatter                 % NPS front matter follows
+
+% This changes the chaptermark and includes the various tables
+% It must be here
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}}
+
+\NPStableOfContents
+\NPSlistOfFigures
+\NPSlistOfTables
+
+`% If you need a list of acronyms, here's how to do it
+\NPSlistOfAcronyms{
+ \begin{description}
+   \item[NPS] Naval Postgraduate School
+   \item[USG] United States Government
+ \end{description}
+}
+
+\NPSexecsummary{
+  [EXECUTIVE SUMMARY CONTENTS]
+}
+
+% Put the acknowledgements here.  New paragraphs start after an empty line.
+\NPSacknowledgements{
+  [ACKNOWLEDGEMENTS CONTENTS]
+}
+
+
+% NPS body follows
+\NPSbody
+
+% You have two options on how to structure your thesis:
+% a) Do your thesis in this single file.  All chapters, sections, etc. go in this file.
+%    This can make navigating your thesis a little more difficult.
+% b) Use multiple files.  One chapter per file is recommended.
+%    This breaks your thesis up into logical units to edit.
+
+\include{chapter1}
+% include other chapters here.
+\include{appendix1}
+% include other appendices here.
+
+% Change the bibliographystyle to match your Department's preference.
+\def\showURL{}
+%\bibliographystyle{nps-plain-unsorted}
+
+%========================
+% TODO list
+%========================
+% 1. We would like intra-entry line spacing to be less 
+% 2. Left justify entry
+%========================
+
+\raggedright			% don't automatically full justify bibliographic references
+
+\singlespacing		% reduce extra line breaks between entries
+
+
+\bibliographystyle{IEEEtran}
+% List all your BibTeX reference source files (ending in *.bib extension)
+\bibliography{thesis}
+
+% This is the official end of the thesis. 
+% It automatically adds the references.
+\NPSend         
+
+% This is the official distribution list.
+% Free free to comment out or add your own
+% The list is automatically properly numbered.
+
+\chapter*{Initial Distribution List}
+\addcontentsline{toc}{chapter}{Initial Distribution List}
+\singlespace
+\begin{enumerate}
+\item Defense Technical Information Center\\Ft. Belvoir, Virginia
+\item Dudley Knox Library\\Naval Postgraduate School\\Monterey, California
+
+%---- NO LONGER NECESSARY, due to Special Abstract Form
+%\item Marine Corps Representative\\Naval Postgraduate School\\Monterey, California
+%\item Directory, Training and Education, MCCDC, Code C46\\Quantico, Virginia
+%\item Marine Corps Tactical System Support Activity (Attn: Operations Officer)\\Camp Pendleton, California
+%
+%\textit{Officer students in the Operations Research Program are also required to show:}
+%\item Director, Studies and Analysis Division, MCCDC, Code C45\\ Quantico, Virginia
+%
+%\textit{Officer students in the Space Ops/Space Engineering Program or in the Information Warfare/Information Systems and Operations are also required to show:}
+%\item Head, Information Operations and Space Integration Branch,\\ PLI/PP\&O/HQMC, Washington, DC
+
+\end{enumerate}
+
+
+\end{document}
+
+% LocalWords:  
+

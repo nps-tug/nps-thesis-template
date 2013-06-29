@@ -1,0 +1,36 @@
+% The appendix style has three options:
+
+% Option 1 - Single appendix; 2 entries in Table of Contents
+%  \NPSappendix 
+%  \chapter{title} 
+%  This option creates a TOC entry ``Appendix''
+%  and then a second entry of your appendix title.
+%  The appendix is lettered ``A'' in the TOC.
+
+% Option 2 - Single appendix; 1 entry in Table of Contents
+%  \NPSappendixTOC{title}
+%  This creates a TOC entry ``Appendix: title''
+%  For a single appendix thesis, this is the preferred style.
+%  The appendix is not lettered.
+%  You do not need to use \chapter{} at all.
+%  Use \section*{} instead of \section{} to keep entries
+%  out of the table of contents.
+
+% Option 3 - Multiple appendices
+%  \NPSappendices
+%  This creates a TOC entry ``Appendices''
+%  And then for each appendix, use \chapter{title} to create 
+%  the appendices.
+
+
+% Appendix mode begins
+% Your first appendix file needs one of the following lines.
+% \NPSappendix
+\NPSappendixTOC{Appendix TITLE}
+% \NPSappendices
+
+% Options 1 and 3 need this \chapter{title} 
+% Option 3 would also have additional \chapter{title} entries.
+%\chapter{APPENDIX NAME}
+APPENDIX BODY TEXT
+

@@ -1,0 +1,145 @@
+%
+% This used to be maintained, but the thesis office kept changing it.
+%
+
+\newcommand{\onecol}[1]{\multicolumn{3}{|p{5.5in}|}{#1}}
+\newcommand{\onecok}[1]{\multicolumn{5}{|p{5.5in}|}{#1}}
+\newcommand{\onecom}[1]{\multicolumn{4}{|p{5.5in}|}{#1}}
+\newcommand{\checkbox}{{\large\raisebox{-2pt}{$\Box$}}}
+\newcommand{\yesbox}{Yes \checkbox}
+\newcommand{\nobox}{No \checkbox}
+\newcommand{\NPSthesisreleaseform}{
+  \thispagestyle{empty}
+  \setlength{\parskip}{0pt}\singlespacing
+  \enlargethispage{1in}
+  \vspace*{-4pc}
+  {\fontsize{8}{10}\selectfont
+  \textbf{THESIS RELEASE FORM}\\
+  Required upon final submission of thesis material to thesis processor;
+  all sections must be completed and appropriate signatures obtained.\\
+
+  \fontsize{9}{12}\selectfont
+  \begin{tabular}{|p{1.5in}|p{1.5in}|p{2.83in}|}
+  \hline
+  \onecol{\textbf{PART I: GENERAL INFORMATION}}\\
+  \hline \onecol{Thesis Title: \textbf{\@title}}\\
+  \hline \onecol{Graduation Date: \textbf{\@date}} \\
+  \hline \onecol{1. Author(s) \textbf{\@author}} \\
+  \hline \onecol{2. Thesis Advisor: \textbf{\@thesisadvisor}} \\
+  \hline \onecol{3. Program Officer (GEAS and OR Only)} \\
+  \hline 4. Program Office Code: & Curriculum Number: & Degree: \@degreeabbreviation\\
+%  & & \\
+  \hline \onecol{5. Department/ Group Chair or Dean: \@departmentchair }\\
+  \hline
+  \end{tabular}
+
+\vfill
+
+  \begin{tabular}{|p{1in}p{.5in}p{.5in}p{2.5in}p{1in}|}
+  \hline
+  \onecok{\textbf{PART II: APPROVAL FOR THESIS PUBLICATION ON THE NPS HOMEPAGE/DTIC WEB PAGE}}\\
+
+  \hline \onecok{The undersigned certify that to the best of their
+    knowledge the above thesis should be published on the NPS Homepage
+    and released on the Defense Technical Information Center Web Page.
+    Criteria for release are: 1) Quality is high; 2) Subject matter is
+    relevant to Navy/DoD/government agency; 3) Thesis does not contain
+    (individually or in aggregate with other theses) sensitive,
+    proprietary or classified material, e.g. Distribution Statement
+    A.}\\
+  \hline
+  \onecok{Approval for release to www:   (Yes=release -- *No=do not
+    release) (If giving a NO response, please provide reason below)} \\
+  \hline
+        Author(s) & \yesbox & \nobox &                        &      \\
+\cline{4-5}       &     &    &                        & Date \\  
+\cline{4-5}       &     &    & Signature(s)/Author(s) & Date \\
+       Advisor(s) & \yesbox & \nobox &                        &      \\
+
+\onecok{}\\
+\cline{4-5}       & \multicolumn{2}{c}{\textbf{Hold: **\_\_\_}} &
+                               Signature/Advisor      & Date \\
+\onecok{}\\
+       Program Officer & \yesbox & \nobox &                   &      \\
+\cline{4-5}       &     &    & Signature/Program Officer (GSEAS only)& Date\\
+       Chair or Dean & \yesbox & \nobox &  & \\
+\cline{4-5}       &     &    & Signature/Chair or Dean & Date\\
+\hline
+  \onecok{Reasons for Not Releasing Thesis to www.} \\
+\hline
+ \onecok{* If no is checked above and the student is International,
+   use  Distribution Statement F.}\\
+\hline
+ \onecok{** If hold, estimate date for release: \_\_\_\_\_\_\_
+        This date will be confirmed with the advisor before releasing
+        to the www. }\\
+\hline 
+  \end{tabular}
+
+\begin{tabular}{|p{.25in}|p{4.40in}|p{.5in}|p{.5in}|}
+\hline
+& \textbf{HUMAN SUBJECTS RESEARCH} & YES & NO \\
+\hline
+& Does this thesis involve research with human subjects? & \checkbox&\checkbox\\
+\hline
+& If yes, list protocol number here and in block 11 of DD Form 298, in
+thesis: & \checkbox & \checkbox \\
+& If yes, has end of experiment report and all supporting
+documentation, i.e., informed consent forms, been submitted to the
+Human Research Protection Office? & \checkbox & \checkbox \\
+\hline
+\end{tabular}
+
+\vfill
+  \begin{tabular}{|p{2in}p{2in}p{1.83in}|}
+
+ \hline
+  \multicolumn{3}{|p{6in}|}{\textbf{PART III: CERTIFICATION OF ORIGINAL
+      WORK:} The undersigned certifies that the thesis identified above
+    is an original work of the author (s).  Work of others contained
+    within the thesis has been appropriately cited.}\\
+   ~&~&~\\
+   ~&~&~\\
+    \cline{1-1}\cline{3-3} Signature/Author(s) && Date\\
+  \hline
+   \end{tabular}
+
+\vfill
+  \begin{tabular}{|p{2in}p{.75in}@{\hspace{1pc}}|@{\hspace{1pc}}p{2in}p{.75in}|}
+  \hline
+  \onecom{\textbf{PART IV: THESIS DISTRIBUTION
+        STATEMENT:} In view of the literary quality and technical
+      content of this thesis, and the extent of 
+its self-contained contribution to the field of knowledge, and the
+potential contribution to the reputation of the School, it is
+recommended that the distribution of this thesis be as follows:}\\
+ \hline
+  \onecom{Statement:  (Select Based on Attached Questionnaire) 
+   \hfill
+   A \checkbox \hfill B \checkbox \hfill C \checkbox \hfill D \checkbox \hfill 
+   E \checkbox \hfill F \checkbox \hfill X \checkbox \hfill }\\
+\hline
+  \onecom{Thesis Classification:   Unclassified \checkbox Classified \checkbox Level of Classification:} \\
+\hline
+  \onecom{Review and Clearance by OASD Required:  \yesbox \nobox} \\
+\hline
+
+  \onecom{\checkbox Thesis contains proprietary information or is an
+    externally controlled distribution thesis.  Therefore, permission
+    of distribution should be obtained from the following individuals
+    and companies as listed in blocks 9 and/or 10 of Standard Form
+    298.  It is the Advisor’s responsibility to secure permission.
+    The certification below indicates that permission has been
+    secured.}\\
+\hline
+  \onecom{I certify that the distribution as delineated above is in compliance with the designated distribution statement. }\\
+\hline
+    & & & \\
+    & & & \\
+\cline{1-1}\cline{2-2}\cline{3-3}\cline{4-4}Signature/Thesis Advisor & Date & Signature/Chair or Dean & Date \\
+\hline
+  \end{tabular}
+  }
+}
+
+
