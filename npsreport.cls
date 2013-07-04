@@ -1086,6 +1086,18 @@
   \doublespacing
 }
 
+\newcommand{\NPSdistribution}[1]{
+\ifnpsarticle
+  \addcontentsline{toc}{section}{#1}
+  \section*{#1}
+\else
+  \addcontentsline{toc}{chapter}{#1}
+  \def\chaptername{#1}
+  \chapter*{#1}
+\fi
+  \singlespacing    % reduce extra line breaks between entries
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Special Commands Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1102,7 +1114,7 @@
 
 \newcommand{\NPSlistOfFigures}{
   \chapter*{\listfigurename\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Figures}
+  \addcontentsline{toc}{chapter}{List of Figures}
   \lhead{}\rhead{}
   \def\listfigurename{}
   \thispagestyle{fancy}\listoffigures\cleardoublepage
@@ -1111,7 +1123,7 @@
 \newcommand{\NPSlistOfTables}{
   \lhead{}\rhead{}
   \chapter*{\listtablename\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Tables}
+  \addcontentsline{toc}{chapter}{List of Tables}
   \def\listtablename{}
   \thispagestyle{fancy}\listoftables\cleardoublepage
 }
@@ -1129,7 +1141,7 @@
 \newcommand{\NPSlistOfAcronymsFromFile}[1]{
   \lhead{}\rhead{}
   \chapter*{List of Acronyms and Abbreviations\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+  \addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
   \def\listacronymname{List of Acronyms and Abbreviations}
   \thispagestyle{fancy}\input{#1}\cleardoublepage
 }
