@@ -174,7 +174,7 @@
 %These packages recommended by students
 \usepackage{float}                  % reimplementation of float package
 \usepackage{cite}                   % for [5-8] reference style
-\usepackage{amsmath}                % for many types of math equations
+\usepackage{amsmath,amsfonts}       % for many types of math equations
 \usepackage{url}            % nice handling of URLs
 % The following package allows for very nice graphics and figures
 % proper usage requires additional information located at:
@@ -202,7 +202,6 @@
 % Here are some commands that will help you make more attractive LaTeX
 % Notice that \etal is italicized, but not e.g., etc. , or i.e.
 % Please see p. 5, Section VI, para. 3, of The IEEE Editorial Style Manual
-\newcommand{\checkmark}{\Pisymbol{pzd}{52}}
 \newcommand{\eg}{e.g.,\xspace}
 \newcommand{\ie}{i.e.,\xspace}
 \newcommand{\etc}{etc.\xspace}
