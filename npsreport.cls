@@ -150,16 +150,16 @@
 \usepackage[utf8x]{inputenc}    % accented letters in tex files allowed
 \usepackage{graphicx}           % better way to bring in graphics
 \usepackage{tabularx}           % tables that expand to with width requested
-\usepackage{titletoc}       % adds toc commands
-\usepackage{titlesec}       % complete replacement for titles
-\usepackage{fancyhdr}       % puts chapters names in footers
-\usepackage{ccaption}       % control captions
+\usepackage{titletoc}           % adds toc commands
+\usepackage{titlesec}           % complete replacement for titles
+\usepackage{fancyhdr}           % puts chapters names in footers
+\usepackage{ccaption}           % control captions
 \usepackage{setspace}           % enabled \doublespacing, \onehalfspacing, etc.
 \usepackage{multicol}           % multiple columns; good for you!
 \usepackage{fancyvrb}           % a better verbatim
-\usepackage{varioref}       % provides \vref - smart referencing
+\usepackage{varioref}           % provides \vref - smart referencing
 \usepackage{xspace}             % provides \xspace
-\usepackage{nps_sf298}           % Bring in SF298 for the documentation page
+\usepackage{nps_sf298}          % Bring in SF298 for the documentation page
 \usepackage{latexsym}           % gives \Box
 \usepackage{graphicx}           % it's better
 \usepackage{multirow}           % for table cells with multiple row   
@@ -242,11 +242,15 @@
 \def\department#1{\gdef\@department{#1}}
 \def\departmentchair#1{\gdef\@departmentchair{#1}}
 \def\researchchair#1{\gdef\@researchchair{#1}}
+\def\president#1{\gdef\@president{#1}}
+\def\provost#1{\gdef\@provost{#1}}
 
 % Provide reasonable defaults
 \department{Computer Science}
 \departmentchair{Peter Denning}
-\researchchair{Jeffrey Paduan} % reasonable default
+\researchchair{Jeffrey Paduan}
+\president{Daniel T. Oliver}
+\provost{Douglas A. Hensler}
 
 % If you are getting two degrees, use \and between the names.
 \def\degree#1{\setbox0\hbox{#1}  %for side effect of setting \@degreeword
@@ -290,9 +294,6 @@
 
 \def\securitybanner#1{\setbox0\hbox{#1} \gdef\@securitybanner{#1}}
 \securitybanner{}               % default is no banner
-
-
-
 
 % \distribution
 \def\distribution#1{\setbox0\hbox{#1}
@@ -1007,8 +1008,8 @@
   \end{center}
 
   \begin{tabular}{p{2.5in}p{2.5in}}
-  Daniel T. Oliver & Leonard A. Ferrari \\
-  President        & Executive Vice President and Provost \\
+  \@president & \@provost \\
+  President   & \mbox{Executive Vice President and Provost} \\
   \\
   \\
   \multicolumn{2}{p{6.25in}}{\@SponsoringNotation}\\
@@ -1040,7 +1041,7 @@
   \\
   \rule{2in}{1pt} & \rule{2in}{1pt}\\
   \@departmentchair        & \@researchchair\\
-  Chairman of \@department & Vice President and Dean of Research
+  Chairman of \@department & \mbox{Vice President and Dean of Research}
   \end{tabular}
   \newpage
   \thisPageIntentionallyLeftBlank
