@@ -674,7 +674,7 @@
   \vfill
   \textbf{\sf@POReportNumber}   % if not defined, will be blank
   \begin{center}
-  \includegraphics{nps_logo_3clr_cymk}
+  \includegraphics{figs/nps_logo_3clr_cymk}
   \textbf{\huge\ifclassified\Large\fi{}\\NAVAL\\POSTGRADUATE\\SCHOOL\\}
   \vspace{2pc}
   \textbf{\large{}MONTEREY, CALIFORNIA\\}
