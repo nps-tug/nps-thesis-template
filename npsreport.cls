@@ -1074,6 +1074,19 @@
   \fi
 }
 
+\newcommand{\NPSbibliography}[1]{
+  \bibliographystyle{nps_thesis}
+  \raggedright      % don't automatically full justify bibliographic references
+  \singlespacing    % reduce extra line breaks between entries
+\ifnpsarticle
+  \addcontentsline{toc}{section}{References}
+\else
+  \addcontentsline{toc}{chapter}{References}
+\fi
+  \bibliography{#1}
+  \doublespacing
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Special Commands Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
