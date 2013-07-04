@@ -103,6 +103,14 @@
   \npsthesistrue
 \fi
 
+\iffourauthors        % if there are four, then there are two and three
+  \threeauthorstrue
+  \twoauthorstrue
+\fi
+\ifthreeauthors       % if there are three, then there are two
+  \twoauthorstrue
+\fi
+
 \ifclassified
   \typeout{*********************************************}
   \typeout{******** MAKING CLASSIFIED THESIS ***********}
@@ -947,7 +955,7 @@
                      \>  Chair, \@department \\
       \end{tabbing}
     \else
-      \newcommand{\sigspace}{.65in}
+      \newcommand{\sigspace}{.5in}
 
       \begin{tabbing}
        \hspace{2.5in}\=\\[\sigspace]       % Set the tabs
@@ -1044,15 +1052,15 @@
   \\
   \\
   \@SignatureOne   & \iftwoauthors \@SignatureTwo \fi \\[-2pc]
-  \rule{2in}{1pt} & \iftwoauthors \rule{2in}{1pt} \fi\\
-  \@author        & \@authortwo\\
-  \@rank          & \@ranktwo\\
+  \rule{2in}{1pt}  & \iftwoauthors \rule{2in}{1pt} \fi\\
+  \@author         & \iftwoauthors \@authortwo \fi\\
+  \@rank           & \iftwoauthors \@ranktwo \fi\\
   \\
   \ifthreeauthors
   \@SignatureThree & \iffourauthors \@SignatureFour \fi \\[-2pc]
-  \rule{2in}{1pt} & \iffourauthors \rule{2in}{1pt} \fi\\
-  \@authorthree        & \@authorfour\\
-  \@rankthree          & \@rankfour\\
+  \rule{2in}{1pt}  & \iffourauthors \rule{2in}{1pt} \fi\\
+  \@authorthree    & \iffourauthors \@authorfour \fi\\
+  \@rankthree      & \iffourauthors \@rankfour \fi\\
   \fi
 
   \\
