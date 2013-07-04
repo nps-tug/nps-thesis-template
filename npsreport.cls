@@ -730,12 +730,11 @@
                         \else
                         Thesis Advisor: & \hspace{1in} & \@thesisadvisor \\
                         Second Reader: &  \hspace{1in} & \@secondreader  \\
-                    \fi
+                        \fi
                 \fi
             \fi
           \end{tabularx}
         \fi
-
     \end{minipage}
   }
 
@@ -846,7 +845,7 @@
       \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
       \cline{2-3}
         Author: & \@author & &\\
-       \end{tabular}
+      \end{tabular}
 
       \vspace{\sigspace}
       \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
@@ -934,7 +933,7 @@
                      \> \@departmentchair \\
                      \>  Chair, \@department \\
       \end{tabbing}
-\else
+    \else
       \newcommand{\sigspace}{.65in}
 
       \begin{tabbing}
@@ -956,7 +955,8 @@
                      \> \@departmentchair \\
                      \>  Chair, \@department \\
       \end{tabbing}
-          \fi
+    \fi
+    \fi
   \fi
   \cleardoublepage
 }
