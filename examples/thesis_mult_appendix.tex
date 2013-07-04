@@ -1,0 +1,183 @@
+% This starts the document; the "npsreport" style is really a modified
+% report style. Feel free to use the options explained in the technical
+% report NPS-CS-11-011, included under the doc/ directory.
+\documentclass[twoside,thesis]{npsreport}
+
+%
+% Put extra packages you may need to customize your thesis
+%
+\usepackage{doc,lipsum} % provides \BibTex and \lipsum macros, for demos
+
+
+\title{[Title]}
+
+% Student info
+\author{[Author Name]}
+\rank{[Rank]}
+\degree{Master of Science in [Degree]}
+\degreeabbreviation{MS}   % Should be MS, MBA or MA
+\prevdegrees{[B.S., Undergrad Degree, My Old School, Year]} % previous degree
+
+% Department info
+\department{Department of [Department]}
+\thesisadvisor{[Primary Advisor]}
+\secondreader{[Second Reader]}
+\departmentchair{[Dr.\ Department Chair]}
+
+% The date you are graduating:
+\degreedate{[Month Year]}
+
+% See Thesis processor's release form for approved distribution statements.
+\distribution{Approved for public release; distribution is unlimited}
+
+% Your abstract.  New paragraphs start after an empty line.
+\abstract{
+  \lipsum[1] % example text, remove me
+}
+
+% Switch the below lines around, if FOUO
+\securitybanner{}  %\securitybanner{FOR OFFICIAL USE ONLY}
+
+%
+% Mandatory fields for the SF298.
+%
+\ReportType{Master's Thesis}
+\ReportDate{MM-DD-YYY} 		% for a thesis, graduation date
+\DatesCovered{2102-06-01---2104-10-31}
+\SponsoringAgency{Department of the Navy}
+\ReportClassification{Unclassified}
+\AbstractClassification{Unclassified}
+\PageClassification{Unclassified}
+%
+% Optional fields for the SF298.
+%
+\RPTpreparedFor{}
+\SponsoringNotation{}
+\ContractNumber{}
+\GrantNumber{}
+\ProgramElementNumber{}
+\TaskNumber{}
+\WorkUnitNumber{}
+\POReportNumber{}
+\Acronyms{}
+\SMReportNumber{}
+\SubjectTerms{}
+\ResponsiblePerson{}
+\RPTelephone{}
+\SignatureOne{}
+\SignatureTwo{}
+\SupplementaryNotes{The views expressed in this document are those of
+  the author and do not reflect the official policy or position of the
+  Department of Defense or the U.S. Government. %
+ %\footnotesize IRB Protocol Number: XXXX % if you need to note an IRB Protocol
+}
+
+% Optional. Prevents footnotes from being reset at each chapter
+% Comment this out to have them reset with each chapter.
+\makeatletter
+\@removefromreset{footnote}{chapter}
+\makeatother
+
+%
+% Your thesis begins here
+%
+\begin{document}
+
+\NPScover                  % Cover page
+%\NPSsignature             % NPS signature page, for tech reports
+\NPSsftne                  % SF298 form
+\NPSthesistitle            % Title page
+\NPSabstractpage           % Abstract Page
+\NPSfrontmatter            % NPS front matter follows
+
+% This changes the chaptermark and includes the various tables
+% It must be here.
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}}
+
+%
+% If you don't need one of these, comment it out.
+%
+\NPStableOfContents
+\NPSlistOfFigures
+\NPSlistOfTables
+\NPSlistOfAcronymsFromFile{acronyms}
+
+%
+% Put Executive summary here.
+% New paragraphs start after an empty line.
+%
+\NPSexecsummary{
+  \lipsum[1-4] % example text; remove me
+}
+
+%
+% Put acknowledgements here.  
+% New paragraphs start after an empty line.
+%
+\NPSacknowledgements{
+  \lipsum[1-3] % example text; remove me
+}
+
+% Start layout for the NPS body
+\NPSbody
+
+
+% CHAPTERS
+% You have two options on how to structure your thesis:
+% a) A single file. All chapters, sections, etc. go in this file.
+%    This can make navigating your thesis a little more difficult.
+% b) Use multiple files.  One chapter per file is recommended.
+%    This breaks your thesis up into logical units to edit.
+%
+\input{chapter1}
+%
+% (include other chapters here...)
+%
+
+
+% APPENDICES
+% For using multiple appendices, you need to announce the beginning
+% of each appendix with the \chapter{} command.
+%
+\NPSappendices
+\chapter{[First appendix title]}
+\input{appendix1}
+\chapter{[Second appendix title]}
+\input{appendix1}
+
+% REFERENCES
+% List all your BibTeX reference source files (ending in *.bib extension)
+%
+\NPSbibliography{thesis}
+
+
+%
+% This is the official end of the thesis.
+%
+\NPSend
+
+% DISTRIBUTION LIST
+% The list is automatically properly numbered
+% and already populated with the mandatory recipients.
+%
+\NPSdistribution{Initial Distribution List}
+\begin{enumerate}
+\item Defense Technical Information Center\\Ft. Belvoir, Virginia
+\item Dudley Knox Library\\Naval Postgraduate School\\Monterey, California
+%
+%---- Other entries are no longer needed, because of Special Abstract Form
+% Marine Corps students are required to show:
+%\item Marine Corps Representative\\Naval Postgraduate School\\Monterey, California
+%\item Directory, Training and Education, MCCDC, Code C46\\Quantico, Virginia
+%\item Marine Corps Tactical System Support Activity (Attn: Operations Officer)\\Camp Pendleton, California
+%
+% Officer students in the Operations Research Program are also required to show:
+%\item Director, Studies and Analysis Division, MCCDC, Code C45\\ Quantico, Virginia
+%
+% Officer students in the Space Ops/Space Engineering Program or in the Information Warfare/Information Systems and Operations are also required to show:
+%\item Head, Information Operations and Space Integration Branch,\\ PLI/PP\&O/HQMC, Washington, DC
+\end{enumerate}
+
+
+\end{document}
+
