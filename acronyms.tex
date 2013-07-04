@@ -1,0 +1,58 @@
+
+%% The NPS template readily supports two types of list of acronyms.
+%% Option 1 - Basic list of acronyms
+%% In your document, you are responsible to write out the long form on the
+%% first use, then you can simply use the acronym in your paragraphs that
+%% follow.  This can become cumbersome during revisions to your thesis
+%% because it is your responsibility to know if the acronym has been used yet.
+\begin{description}
+\item[NPS] Naval Postgraduate School
+\item[TCP] Transmission Control Protocol
+\item[UDP] User Datagram Protocol
+\item[USG] United States Government
+\end{description}
+
+
+%% Option 2 - Powerful list of acronyms
+%% The acronym option must be used on the documentclass line in thesis.tex
+%% LaTeX tracks the usage of acronyms and uses the long form on their 
+%% first use.  This ensures consistency throughout your document even 
+%% in different revisions of your document.
+%% Your writing is also more portable to a journal or conference paper.
+%% 
+%% The NPS template will only print items in this list that are actually
+%% used in the paper.  In this manner, your acronym list will always be 
+%% up to date.  You can then reuse this acronyms.tex in other documents
+%% as you continue to expand your acronyms in use.
+%%
+%% On the first line below, the longest acronym is placed in the 
+%% square brackets.  This is used to size the column of the table 
+%% correctly.
+%\begin{acronym}[XXX] % longest acronym in these square brackets
+%\acro{NPS}{Naval Postgraduate School}
+%\acro{US}{United States}
+%\acro{DoD}{Department of Defense}
+%\acro{TCP}{Transmission Control Protocol}	
+%\acro{UDP}{User Datagram Protocol}	
+%\end{acronym}
+
+%% Additional notes on option 2
+
+%% To use your acronym in a paragraph use \ac{shortname} or \acplural{shortname}
+%% \acp{shortname} for plural shorthand.
+%% Ex:  The \ac{FFT2} is performed on the data. 
+%% The \acplural{FFT2} are efficient.
+%% This command is how LaTeX tracks their usage.
+
+%% If you are also using the index option, you may want to use this:
+%% \newcommand{\FFT2}{\ac{FFT2}\index{fast Fourier Transform}\xspace}
+%% to save some time and typing.  Then you can do:
+%% Ex: The \FFT2 is performed on the data.
+%% The acronym will be used correctly, and the index will contain the 
+%% use of the keyword. 
+%%
+%% The command's \xspace ensures that the spacing after the word is
+%% handled correctly (ie, last word of a sentence gets a period on 
+%% the word).
+
+
