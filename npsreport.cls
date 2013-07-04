@@ -592,8 +592,12 @@
 \newcommand{\NPSappendix}{
   \appendix                       % Appendix mode
   \clearpage
+\ifnpsarticle
+  \addcontentsline{toc}{section}{Appendix}  % Insert ``Appendix'' into TOC
+\else
   \addcontentsline{toc}{chapter}{Appendix}  % Insert ``Appendix'' into TOC
   \def\chaptername{Appendix}  % not sure why this is needed, but it is
+\fi
 }
 
 % Use this to change to appendix mode and insert ``Appendix: Title'' into the Table of Contents.
@@ -602,9 +606,14 @@
 \newcommand{\NPSappendixTOC}[1] {
   \appendix                       % Appendix mode
   \clearpage
-  \addcontentsline{toc}{chapter}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC 
+\ifnpsarticle
+  \addcontentsline{toc}{section}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
+  \section*{Appendix:~#1}
+\else
+  \addcontentsline{toc}{chapter}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
   \def\chaptername{Appendix}  % not sure why this is needed, but it is
   \chapter*{Appendix:~#1}
+\fi
 }
 
 % Use this to change to appendix mode and insert ``Appendices'' into the Table of Contents.
@@ -613,8 +622,12 @@
 \newcommand{\NPSappendices}{
   \appendix                       % Appendix mode
   \clearpage
+\ifnpsarticle
+  \addcontentsline{toc}{section}{Appendices}  % Insert ``Appendices'' into TOC
+\else
   \addcontentsline{toc}{chapter}{Appendices}  % Insert ``Appendices'' into TOC
   \def\chaptername{Appendix}  % not sure why this is needed, but it is
+\fi
 }
 
 
@@ -987,14 +1000,24 @@
 }
 
 \newcommand{\NPSexecsummary}[1]{
+\ifnpsarticle
+  \begin{center}\textbf{\large{Executive Summary\ULABEL}}\end{center}
+\else
+  \addcontentsline{toc}{chapter}{Executive Summary}
   \chapter*{Executive Summary\ULABEL}
+\fi
   \onehalfspacing
   #1
 }
 
 
 \newcommand{\NPSacknowledgements}[1]{
+\ifnpsarticle
+  \begin{center}\textbf{\large{Acknowledgements\ULABEL}}\end{center}
+\else
+  \addcontentsline{toc}{chapter}{Acknowledgements}
   \chapter*{Acknowledgements\ULABEL}
+\fi
   \onehalfspacing
   #1
 }
@@ -1074,6 +1097,7 @@
 }
 
 \newcommand{\NPSbibliography}[1]{
+  \clearpage
   \bibliographystyle{nps_thesis}
   \raggedright      % don't automatically full justify bibliographic references
   \singlespacing    % reduce extra line breaks between entries
@@ -1113,25 +1137,40 @@
 }
 
 \newcommand{\NPSlistOfFigures}{
-  \chapter*{\listfigurename\ULABEL}
-  \addcontentsline{toc}{chapter}{List of Figures}
   \lhead{}\rhead{}
+\ifnpsarticle
+  \addcontentsline{toc}{section}{List of Figures}
+  \section*{\listfigurename\ULABEL}
+\else
+  \addcontentsline{toc}{chapter}{List of Figures}
+  \chapter*{\listfigurename\ULABEL}
+\fi
   \def\listfigurename{}
   \thispagestyle{fancy}\listoffigures\cleardoublepage
 }
 
 \newcommand{\NPSlistOfTables}{
   \lhead{}\rhead{}
-  \chapter*{\listtablename\ULABEL}
+\ifnpsarticle
+  \addcontentsline{toc}{section}{List of Tables}
+  \section*{\listtablename\ULABEL}
+\else
   \addcontentsline{toc}{chapter}{List of Tables}
+  \chapter*{\listtablename\ULABEL}
+\fi
   \def\listtablename{}
   \thispagestyle{fancy}\listoftables\cleardoublepage
 }
 
 \newcommand{\NPSlistOfAcronyms}[1]{
   \lhead{}\rhead{}
+\ifnpsarticle
+  \section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
+  \addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
+\else
   \chapter*{List of Acronyms and Abbreviations\ULABEL}
   \addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+\fi
   \def\listacronymname{List of Acronyms and Abbreviations}
   \thispagestyle{fancy}
   #1
@@ -1140,8 +1179,13 @@
 
 \newcommand{\NPSlistOfAcronymsFromFile}[1]{
   \lhead{}\rhead{}
+\ifnpsarticle
+  \section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
+  \addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
+\else
   \chapter*{List of Acronyms and Abbreviations\ULABEL}
   \addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+\fi
   \def\listacronymname{List of Acronyms and Abbreviations}
   \thispagestyle{fancy}\input{#1}\cleardoublepage
 }
