@@ -167,7 +167,7 @@
 \usepackage{fancyvrb}           % a better verbatim
 \usepackage{varioref}           % provides \vref - smart referencing
 \usepackage{xspace}             % provides \xspace
-\usepackage{nps_sf298}          % Bring in SF298 for the documentation page
+\usepackage[old298]{nps_sf298}  % Bring in SF298 for the documentation page
 \usepackage{latexsym}           % gives \Box
 \usepackage{graphicx}           % it's better
 \usepackage{multirow}           % for table cells with multiple row   

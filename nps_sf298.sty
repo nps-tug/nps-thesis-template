@@ -101,6 +101,8 @@
 \newif\ifsf@floatlongboxes
 \DeclareOption{floatlongboxes}{\sf@floatlongboxestrue}
 \DeclareOption{nofloatlongboxes}{\sf@floatlongboxesfalse}
+\newif\ifsf@oldform
+\DeclareOption{old298}{\sf@oldformtrue}
 %\ExecuteOptions{config,nofloatlongboxes}										%%%%%%%%%%%%%%%%%%%%
 \ProcessOptions																				
 %\if Y\sf@config																				%%%%%%%%%%%%%%%%%%%%
@@ -201,7 +203,11 @@
       \@tempskipa\oddsidemargin
       \advance\@tempskipa 42pt
       \hskip-\@tempskipa
+  \ifsf@oldform
+      \sf@drawoldform
+  \else
       \sf@drawform
+  \fi
       \hss}%
     \vss}%
     
@@ -535,6 +541,200 @@
     \put(328, 33){\makebox(0,0)[l]{\sf@ResponsiblePerson}}
     \put(328,  9){\makebox(0,0)[l]{\sf@RPTelephone}}
   \end{picture}}
+%
+% An option to support SF298 Rev 2-89
+%
+\newcommand\sf@drawoldform{%
+  \sf@setentryfont
+  \setlength{\unitlength}{1bp}
+  \begin{picture}(539,707)(\sf@LeftShift,\sf@DownShift)
+    % Draw blank form
+    \linethickness{1bp}%
+    \put(  0,  0){\framebox(539,707){}}
+    % Horizontal lines
+    \linethickness{0.5bp}%
+    \put(  0,687){\line(1,0){539}}
+    \put(  0,635){\line(1,0){539}}
+    \put(  0,611){\line(1,0){539}}
+    \put(  0,540){\line(1,0){360}}
+    \put(  0,491){\line(1,0){539}}
+    \put(  0,431){\line(1,0){539}}
+    \put(  0,372){\line(1,0){539}}
+    \put(  0,330){\line(1,0){539}}
+    \put(  0,300){\line(1,0){539}}
+    \put(  0, 95){\line(1,0){539}}
+    \put(  0, 48){\line(1,0){539}}
+
+    % START OF FIELDS
+    \put(  0,687){\makebox(350, 20){%
+      \sf@settitlefontA REPORT DOCUMENTATION PAGE}}
+
+    \put(360,707){\line(0,-1){ 20}}
+
+    \put(357,687){\makebox(180, 20){%
+      \sf@settitlefontB\shortstack[c]{%
+        Form Approved OMB No.~0704--0188}}}
+
+    \put(  3,635){\makebox(533, 50){%
+      \sf@settitlefontF\parbox{533bp}{\raggedright
+      Public reporting burden for this collection of information
+      is estimated to average 1 hour per response, including the
+      time for reviewing instruction, searching existing data
+      sources, gathering and maintaining the data needed, and
+      completing and reviewing the collection of information.
+      Send comments regarding this burden estimate or any other
+      aspect of this collection of information, including
+      suggestions for reducing this burden to Washington headquarters
+      Services, Directorate for Information Operations and Reports,
+      1215 Jefferson Davis Highway, Suite 1204, Arlington, VA
+      22202--4302, and to the Office of Management and Budget,
+      Paperwork Reduction Project (0704-0188) Washington DC 20503.}}}
+
+    % FIELD 1
+    \put(  0,611){\makebox(144, 24)[tl]{%
+      \sf@settitlefontE\sf@strut 1.\ AGENCY USE ONLY
+      \sf@settitlefontF (Leave Blank)}}
+
+    % FIELD 2
+    \put(180,635){\line(0,-1){ 24}}
+    \put(180,611){\makebox(110, 24)[tl]{%
+      \sf@settitlefontE\sf@strut 2.\ REPORT DATE}}
+    \put(185,614){\makebox(0,0)[bl]{\sf@ReportDate}}
+    \put(290,635){\line(0,-1){ 24}}
+
+    % FIELD 3
+    \put(290,611){\makebox(249, 24)[tl]{%
+      \sf@settitlefontE\sf@strut 3.\ REPORT TYPE AND DATES COVERED}}
+    \put(295,614){\makebox(0,0)[bl]{\sf@ReportType\qquad\sf@DatesCovered}}
+
+    % FIELD 4
+    \put(  0,540){\makebox(360,70)[tl]{%
+      \sf@settitlefontE\sf@strut 4.\ TITLE AND SUBTITLE}}
+    \put(  4,544){\sf@parbox( 70,350){\sf@Title}}
+    \put(360,611){\line(0,-1){180}}
+
+    % FIELD 5
+    \put(360,581){\makebox(179, 30)[tl]{%
+      \sf@settitlefontE\sf@strut 5.\ FUNDING NUMBERS}}
+    \put(364,585){\makebox(0,0)[bl]{\sf@ContractNumber}}
+    \put(364,555){\makebox(0,0)[bl]{\sf@GrantNumber}}
+    \put(364,525){\makebox(0,0)[bl]{\sf@ProgramElementNumber}}
+
+    % FIELD 6
+    \put(  0,490){\makebox(360, 50)[tl]{%
+      \sf@settitlefontE\sf@strut 6.\ AUTHOR(S)}}
+    \put(  4,494){\sf@parbox( 50,350){\sf@Author}}
+
+    % FIELD 7
+    \put(  0,430){\makebox(359, 60)[tl]{%
+      \sf@settitlefontE\sf@strut
+      7.\ PERFORMING ORGANIZATION NAME(S) AND ADDRESS(ES)}}
+    \put( 20,454){\makebox(0,0)[l]{%
+      \parbox{355bp}{\raggedright\sf@PerformingOrg}}}
+
+    % FIELD 8
+    \put(360,430){\makebox(180, 60)[tl]{%
+      \sf@settitlefontE\shortstack[l]{%
+        \sf@strut 8.\ PERFORMING ORGANIZATION REPORT\\[-2pt]
+        \sf@strut\phantom{8.\ }NUMBER}}}
+    \put(370,434){\sf@parbox( 46,176){\sf@POReportNumber}}
+
+    % FIELD 9
+    \put(  0,370){\makebox(359, 60)[tl]{%
+      \sf@settitlefontE\sf@strut
+      9.\ SPONSORING / MONITORING AGENCY NAME(S) AND ADDRESS(ES)}}
+    \put( 20,394){\makebox(0,0)[l]{%
+      \parbox{355bp}{\raggedright \sf@SponsoringAgency}}}
+
+    % FIELD 10
+    \put(360,431){\line(0,-1){59}}
+    \put(360,371){\makebox(180, 60)[tl]{%
+      \sf@settitlefontE\shortstack[l]{%
+        \sf@strut 10.\ SPONSORING / MONITORING\\[-2pt]
+        \sf@strut\phantom{10.\ }AGENCY REPORT NUMBER}}}
+    \put(370,372){\sf@parbox( 46,176){\sf@SMReportNumber}}
+
+    % FIELD 11
+    \put(  0,342){\makebox(539, 30)[tl]{%
+      \sf@settitlefontE\sf@strut 11.\ SUPPLEMENTARY NOTES}}
+    \put(  4,340){\sf@parbox( 25,532){\sf@SupplementaryNotes}}
+
+    % FIELD 12
+    \put(  0,300){\makebox(539, 30)[tl]{%
+      \sf@settitlefontE\sf@strut
+      12a.\ DISTRIBUTION / AVAILABILITY STATEMENT}}
+    \put(  4,300){\sf@parbox( 25,532){\sf@DistributionStatement}}
+    \put(360,330){\line(0,-1){30}}
+    \put(360,300){\makebox(180, 30)[tl]{%
+      \sf@settitlefontE\shortstack[l]{%
+        \sf@strut 12b.\ DISTRIBUTION CODE}}}
+    \put(370,302){\sf@parbox( 30,176){}}
+
+    % FIELD 13
+    \put(  0,95){\makebox(539,200)[tl]{%
+      \sf@settitlefontE\sf@strut 13.\ ABSTRACT
+      \sf@settitlefontF (maximum 200 words)}}
+    \put(  4, 95){\sf@parbox(260,533){\sf@Abstract}}
+
+    % FIELD 14
+    \put(  0, 48){\makebox(450, 46)[tl]{%
+      \sf@settitlefontE\sf@strut 14.\ SUBJECT TERMS}}
+    \put(  4, 51){\sf@parbox( 36,533){\sf@SubjectTerms}}
+
+    % FIELD 15
+    \put(450, 95){\line(0,-1){ 48}}
+    \put(450, 70){\makebox( 86, 23)[tl]{%
+      \sf@settitlefontE\shortstack[l]{%
+        \sf@strut 15.\ NUMBER OF\\[-2pt]
+        \sf@strut\phantom{15.\ }PAGES}}}
+    \put(512, 78){\makebox(0,0){\large\sf@NumberPages}}
+
+    % FIELD 16
+    \put(450, 70){\line(1,0){90}}
+    \put(450, 47){\makebox( 86, 23)[tl]{%
+      \sf@settitlefontE\shortstack[l]{%
+        \sf@strut 16.\ PRICE CODE}}}
+
+    % FIELD 17-19
+    \put(  0,  0){\makebox( 150, 48)[tl]{%
+      \sf@settitlefontE\shortstack[l]{%
+        \sf@strut 17.\ SECURITY\\[-2pt]
+        \sf@strut\phantom{17.\ }CLASSIFICATION OF\\[-2pt]
+        \sf@strut\phantom{17.\ }REPORT}}}
+    \put( 60, 13){\makebox(0,0){\sf@ReportClassification}}
+    \put(150, 48){\line(0,-1){ 48}}
+    \put(150,  0){\makebox( 150, 48)[tl]{%
+      \sf@settitlefontE\shortstack[l]{%
+        \sf@strut 18.\ SECURITY\\[-2pt]
+        \sf@strut\phantom{18.\ }CLASSIFICATION OF THIS\\[-2pt]
+        \sf@strut\phantom{18.\ }PAGE}}}
+    \put(210, 13){\makebox(0,0){\sf@AbstractClassification}}
+    \put(300, 48){\line(0,-1){ 48}}
+    \put(300,  0){\makebox( 150, 48)[tl]{%
+      \sf@settitlefontE\shortstack[l]{%
+        \sf@strut 19.\ SECURITY\\[-2pt]
+        \sf@strut\phantom{19.\ }CLASSIFICATION OF\\[-2pt]
+        \sf@strut\phantom{19.\ }ABSTRACT}}}
+    \put(360, 13){\makebox(0,0){\sf@PageClassification}}
+
+    % FIELD 20
+    \put(450, 48){\line(0,-1){ 48}}
+    \put(450,  0){\makebox( 86, 48)[tl]{%
+      \sf@settitlefontE\shortstack[l]{%
+        \sf@strut 20.\ LIMITATION OF\\[-2pt]
+        \sf@strut\phantom{20.\ }ABSTRACT}}}
+    \put(490, 13){\makebox(0,0){\sf@AbstractLimitation}}
+
+    % FOOTER
+    \put(10,-10){\makebox(40,17)[bl]{\sf@titlefontE NSN 7540-01-280-5500}}
+    \put(415,-17){\makebox(123, 17)[bl]{%
+      \shortstack[l]{%
+        {\sf@settitlefontE Standard Form 298 (Rev.\ 2--89)}\\[-2pt]%
+        {\sf@settitlefontD Prescribed by ANSI Std.\ 239--18}}}}
+  \end{picture}}
+%
+% End Old Form
+%
 \endinput
 %%
 %% End of file `sf298.sty'.
