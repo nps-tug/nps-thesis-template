@@ -103,6 +103,14 @@
   \npsthesistrue
 \fi
 
+\iffourauthors        % if there are four, then there are two and three
+  \threeauthorstrue
+  \twoauthorstrue
+\fi
+\ifthreeauthors       % if there are three, then there are two
+  \twoauthorstrue
+\fi
+
 \ifclassified
   \typeout{*********************************************}
   \typeout{******** MAKING CLASSIFIED THESIS ***********}
@@ -150,16 +158,16 @@
 \usepackage[utf8x]{inputenc}    % accented letters in tex files allowed
 \usepackage{graphicx}           % better way to bring in graphics
 \usepackage{tabularx}           % tables that expand to with width requested
-\usepackage{titletoc}       % adds toc commands
-\usepackage{titlesec}       % complete replacement for titles
-\usepackage{fancyhdr}       % puts chapters names in footers
-\usepackage{ccaption}       % control captions
+\usepackage{titletoc}           % adds toc commands
+\usepackage{titlesec}           % complete replacement for titles
+\usepackage{fancyhdr}           % puts chapters names in footers
+\usepackage{ccaption}           % control captions
 \usepackage{setspace}           % enabled \doublespacing, \onehalfspacing, etc.
 \usepackage{multicol}           % multiple columns; good for you!
 \usepackage{fancyvrb}           % a better verbatim
-\usepackage{varioref}       % provides \vref - smart referencing
+\usepackage{varioref}           % provides \vref - smart referencing
 \usepackage{xspace}             % provides \xspace
-\usepackage{nps_sf298}           % Bring in SF298 for the documentation page
+\usepackage[old298]{nps_sf298}  % Bring in SF298 for the documentation page
 \usepackage{latexsym}           % gives \Box
 \usepackage{graphicx}           % it's better
 \usepackage{multirow}           % for table cells with multiple row   
@@ -174,7 +182,7 @@
 %These packages recommended by students
 \usepackage{float}                  % reimplementation of float package
 \usepackage{cite}                   % for [5-8] reference style
-\usepackage{amsmath}                % for many types of math equations
+\usepackage{amsmath,amsfonts}       % for many types of math equations
 \usepackage{url}            % nice handling of URLs
 % The following package allows for very nice graphics and figures
 % proper usage requires additional information located at:
@@ -202,7 +210,6 @@
 % Here are some commands that will help you make more attractive LaTeX
 % Notice that \etal is italicized, but not e.g., etc. , or i.e.
 % Please see p. 5, Section VI, para. 3, of The IEEE Editorial Style Manual
-\newcommand{\checkmark}{\Pisymbol{pzd}{52}}
 \newcommand{\eg}{e.g.,\xspace}
 \newcommand{\ie}{i.e.,\xspace}
 \newcommand{\etc}{etc.\xspace}
@@ -242,11 +249,15 @@
 \def\department#1{\gdef\@department{#1}}
 \def\departmentchair#1{\gdef\@departmentchair{#1}}
 \def\researchchair#1{\gdef\@researchchair{#1}}
+\def\president#1{\gdef\@president{#1}}
+\def\provost#1{\gdef\@provost{#1}}
 
 % Provide reasonable defaults
 \department{Computer Science}
 \departmentchair{Peter Denning}
-\researchchair{Jeffrey Paduan} % reasonable default
+\researchchair{Jeffrey Paduan}
+\president{Daniel T. Oliver}
+\provost{Douglas A. Hensler}
 
 % If you are getting two degrees, use \and between the names.
 \def\degree#1{\setbox0\hbox{#1}  %for side effect of setting \@degreeword
@@ -290,9 +301,6 @@
 
 \def\securitybanner#1{\setbox0\hbox{#1} \gdef\@securitybanner{#1}}
 \securitybanner{}               % default is no banner
-
-
-
 
 % \distribution
 \def\distribution#1{\setbox0\hbox{#1}
@@ -592,8 +600,12 @@
 \newcommand{\NPSappendix}{
   \appendix                       % Appendix mode
   \clearpage
+\ifnpsarticle
+  \addcontentsline{toc}{section}{Appendix}  % Insert ``Appendix'' into TOC
+\else
   \addcontentsline{toc}{chapter}{Appendix}  % Insert ``Appendix'' into TOC
   \def\chaptername{Appendix}  % not sure why this is needed, but it is
+\fi
 }
 
 % Use this to change to appendix mode and insert ``Appendix: Title'' into the Table of Contents.
@@ -602,9 +614,14 @@
 \newcommand{\NPSappendixTOC}[1] {
   \appendix                       % Appendix mode
   \clearpage
-  \addcontentsline{toc}{chapter}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC 
+\ifnpsarticle
+  \addcontentsline{toc}{section}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
+  \section*{Appendix:~#1}
+\else
+  \addcontentsline{toc}{chapter}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
   \def\chaptername{Appendix}  % not sure why this is needed, but it is
   \chapter*{Appendix:~#1}
+\fi
 }
 
 % Use this to change to appendix mode and insert ``Appendices'' into the Table of Contents.
@@ -613,8 +630,12 @@
 \newcommand{\NPSappendices}{
   \appendix                       % Appendix mode
   \clearpage
+\ifnpsarticle
+  \addcontentsline{toc}{section}{Appendices}  % Insert ``Appendices'' into TOC
+\else
   \addcontentsline{toc}{chapter}{Appendices}  % Insert ``Appendices'' into TOC
   \def\chaptername{Appendix}  % not sure why this is needed, but it is
+\fi
 }
 
 
@@ -674,7 +695,7 @@
   \vfill
   \textbf{\sf@POReportNumber}   % if not defined, will be blank
   \begin{center}
-  \includegraphics{nps_logo_3clr_cymk}
+  \includegraphics{figs/nps_logo_3clr_cymk}
   \textbf{\huge\ifclassified\Large\fi{}\\NAVAL\\POSTGRADUATE\\SCHOOL\\}
   \vspace{2pc}
   \textbf{\large{}MONTEREY, CALIFORNIA\\}
@@ -730,12 +751,11 @@
                         \else
                         Thesis Advisor: & \hspace{1in} & \@thesisadvisor \\
                         Second Reader: &  \hspace{1in} & \@secondreader  \\
-                    \fi
+                        \fi
                 \fi
             \fi
           \end{tabularx}
         \fi
-
     \end{minipage}
   }
 
@@ -846,7 +866,7 @@
       \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
       \cline{2-3}
         Author: & \@author & &\\
-       \end{tabular}
+      \end{tabular}
 
       \vspace{\sigspace}
       \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
@@ -934,8 +954,8 @@
                      \> \@departmentchair \\
                      \>  Chair, \@department \\
       \end{tabbing}
-\else
-      \newcommand{\sigspace}{.65in}
+    \else
+      \newcommand{\sigspace}{.5in}
 
       \begin{tabbing}
        \hspace{2.5in}\=\\[\sigspace]       % Set the tabs
@@ -956,7 +976,8 @@
                      \> \@departmentchair \\
                      \>  Chair, \@department \\
       \end{tabbing}
-          \fi
+    \fi
+    \fi
   \fi
   \cleardoublepage
 }
@@ -987,14 +1008,24 @@
 }
 
 \newcommand{\NPSexecsummary}[1]{
+\ifnpsarticle
+  \begin{center}\textbf{\large{Executive Summary\ULABEL}}\end{center}
+\else
+  \addcontentsline{toc}{chapter}{Executive Summary}
   \chapter*{Executive Summary\ULABEL}
+\fi
   \onehalfspacing
   #1
 }
 
 
 \newcommand{\NPSacknowledgements}[1]{
+\ifnpsarticle
+  \begin{center}\textbf{\large{Acknowledgements\ULABEL}}\end{center}
+\else
+  \addcontentsline{toc}{chapter}{Acknowledgements}
   \chapter*{Acknowledgements\ULABEL}
+\fi
   \onehalfspacing
   #1
 }
@@ -1007,8 +1038,8 @@
   \end{center}
 
   \begin{tabular}{p{2.5in}p{2.5in}}
-  Daniel T. Oliver & Leonard A. Ferrari \\
-  President        & Executive Vice President and Provost \\
+  \@president & \@provost \\
+  President   & \mbox{Executive Vice President and Provost} \\
   \\
   \\
   \multicolumn{2}{p{6.25in}}{\@SponsoringNotation}\\
@@ -1021,15 +1052,15 @@
   \\
   \\
   \@SignatureOne   & \iftwoauthors \@SignatureTwo \fi \\[-2pc]
-  \rule{2in}{1pt} & \iftwoauthors \rule{2in}{1pt} \fi\\
-  \@author        & \@authortwo\\
-  \@rank          & \@ranktwo\\
+  \rule{2in}{1pt}  & \iftwoauthors \rule{2in}{1pt} \fi\\
+  \@author         & \iftwoauthors \@authortwo \fi\\
+  \@rank           & \iftwoauthors \@ranktwo \fi\\
   \\
   \ifthreeauthors
   \@SignatureThree & \iffourauthors \@SignatureFour \fi \\[-2pc]
-  \rule{2in}{1pt} & \iffourauthors \rule{2in}{1pt} \fi\\
-  \@authorthree        & \@authorfour\\
-  \@rankthree          & \@rankfour\\
+  \rule{2in}{1pt}  & \iffourauthors \rule{2in}{1pt} \fi\\
+  \@authorthree    & \iffourauthors \@authorfour \fi\\
+  \@rankthree      & \iffourauthors \@rankfour \fi\\
   \fi
 
   \\
@@ -1040,7 +1071,7 @@
   \\
   \rule{2in}{1pt} & \rule{2in}{1pt}\\
   \@departmentchair        & \@researchchair\\
-  Chairman of \@department & Vice President and Dean of Research
+  Chairman of \@department & \mbox{Vice President and Dean of Research}
   \end{tabular}
   \newpage
   \thisPageIntentionallyLeftBlank
@@ -1073,6 +1104,32 @@
   \fi
 }
 
+\newcommand{\NPSbibliography}[1]{
+  \clearpage
+  \bibliographystyle{nps_thesis}
+  \raggedright      % don't automatically full justify bibliographic references
+  \singlespacing    % reduce extra line breaks between entries
+\ifnpsarticle
+  \addcontentsline{toc}{section}{References}
+\else
+  \addcontentsline{toc}{chapter}{References}
+\fi
+  \bibliography{#1}
+  \doublespacing
+}
+
+\newcommand{\NPSdistribution}[1]{
+\ifnpsarticle
+  \addcontentsline{toc}{section}{#1}
+  \section*{#1}
+\else
+  \addcontentsline{toc}{chapter}{#1}
+  \def\chaptername{#1}
+  \chapter*{#1}
+\fi
+  \singlespacing    % reduce extra line breaks between entries
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Special Commands Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1088,25 +1145,40 @@
 }
 
 \newcommand{\NPSlistOfFigures}{
-  \chapter*{\listfigurename\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Figures}
   \lhead{}\rhead{}
+\ifnpsarticle
+  \addcontentsline{toc}{section}{List of Figures}
+  \section*{\listfigurename\ULABEL}
+\else
+  \addcontentsline{toc}{chapter}{List of Figures}
+  \chapter*{\listfigurename\ULABEL}
+\fi
   \def\listfigurename{}
   \thispagestyle{fancy}\listoffigures\cleardoublepage
 }
 
 \newcommand{\NPSlistOfTables}{
   \lhead{}\rhead{}
+\ifnpsarticle
+  \addcontentsline{toc}{section}{List of Tables}
+  \section*{\listtablename\ULABEL}
+\else
+  \addcontentsline{toc}{chapter}{List of Tables}
   \chapter*{\listtablename\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Tables}
+\fi
   \def\listtablename{}
   \thispagestyle{fancy}\listoftables\cleardoublepage
 }
 
 \newcommand{\NPSlistOfAcronyms}[1]{
   \lhead{}\rhead{}
+\ifnpsarticle
+  \section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
+  \addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
+\else
   \chapter*{List of Acronyms and Abbreviations\ULABEL}
   \addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+\fi
   \def\listacronymname{List of Acronyms and Abbreviations}
   \thispagestyle{fancy}
   #1
@@ -1115,8 +1187,13 @@
 
 \newcommand{\NPSlistOfAcronymsFromFile}[1]{
   \lhead{}\rhead{}
+\ifnpsarticle
+  \section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
+  \addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
+\else
   \chapter*{List of Acronyms and Abbreviations\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+  \addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+\fi
   \def\listacronymname{List of Acronyms and Abbreviations}
   \thispagestyle{fancy}\input{#1}\cleardoublepage
 }
