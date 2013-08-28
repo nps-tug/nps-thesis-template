@@ -1,7 +1,7 @@
 % This starts the document; the "npsreport" style is really a modified
 % report style. Feel free to use the options explained in the technical
 % report NPS-CS-11-011, included under the doc/ directory.
-\documentclass[twoside,thesis]{npsreport}
+\documentclass[singlespace,article]{npsreport}
 
 %
 % Put extra packages you may need to customize your thesis
@@ -20,8 +20,8 @@
 
 % Department info
 \department{Department of [Department]}
-\thesisadvisor{[Primary Advisor]}
-\secondreader{[Second Reader]}
+%\thesisadvisor{[Primary Advisor]}
+%\secondreader{[Second Reader]}
 \departmentchair{[Dr.\ Department Chair]}
 
 % The date you are graduating:
@@ -41,7 +41,7 @@
 %
 % Mandatory fields for the SF298.
 %
-\ReportType{Master's Thesis}
+\ReportType{Technical Report}
 \ReportDate{MM-DD-YYY} 		% for a thesis, graduation date
 \DatesCovered{2102-06-01---2104-10-31}
 \SponsoringAgency{Department of the Navy}
@@ -52,12 +52,13 @@
 % Optional fields for the SF298.
 %
 \RPTpreparedFor{}
+\SponsoringNotation{}
 \ContractNumber{}
 \GrantNumber{}
 \ProgramElementNumber{}
 \TaskNumber{}
 \WorkUnitNumber{}
-\POReportNumber{}
+\POReportNumber{NPS-XX-YY-ZZ}
 \Acronyms{}
 \SMReportNumber{}
 \SubjectTerms{}
@@ -83,23 +84,21 @@
 \begin{document}
 
 \NPScover                  % Cover page
-%\NPSsignature             % NPS signature page, for tech reports
+\NPSsignature             % NPS signature page, for tech reports
 \NPSsftne                  % SF298 form
-\NPSthesistitle            % Title page
-\NPSabstractpage           % Abstract Page
+%\NPSthesistitle            % Title page
+%\NPSabstractpage           % Abstract Page
 \NPSfrontmatter            % NPS front matter follows
 
-% This changes the chaptermark and includes the various tables
-% It must be here.
-\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}}
 
 %
 % If you don't need one of these, comment it out.
 %
 \NPStableOfContents
-\NPSlistOfFigures
-\NPSlistOfTables
+%\NPSlistOfFigures
+%\NPSlistOfTables
 \NPSlistOfAcronymsFromFile{acronyms}
+
 
 %
 % Put Executive summary here.

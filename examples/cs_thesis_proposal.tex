@@ -1,0 +1,361 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thesis Proposal Template
+%
+% This is a Latex template for the GSOIS thesis proposal.  It is modeled
+% off of the Word template provided at 
+% http://www.nps.edu/Academics/Schools/GSOIS/Departments/CS/ProgOfficer/CSProgOfficer.html
+%
+% This should be built using the Makefile in the domex-report directory
+% and adding thesisproposal-template.pdf (or the saved title) to the 
+% ALL variable.
+%
+% Track Changes
+% 2012-01-25 : Created (kmfoster)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+\usepackage{url}
+\usepackage{ulem}
+\usepackage{paralist}
+\usepackage[letterpaper,hmargin=1in,vmargin=1in]{geometry}
+\usepackage{bibentry}
+
+\nobibliography*
+
+\begin{document}
+\noindent MEMORANDUM \hfill Date: [DATE]\\
+
+\noindent 
+From: [AUTHOR]\\
+Section(s): 368\\
+
+\noindent
+To: Program Officer, CDR Duane Davis, USN\\
+
+\noindent
+Via: 
+\begin{compactenum}
+\item Thesis Advisor:  [ADVISOR 1]
+%\item Thesis Advisor:  [ADVISOR 2]
+\item Academic Associate: Thomas W. Otani
+\item Chairman, Computer Science: Peter J. Denning
+\end{compactenum}
+
+\noindent 
+\\
+Subj: THESIS PROPOSAL\\
+\\
+Encl: (1) Thesis Proposal\\
+%     (2) Institutional Review Board (IRB) Form
+\\
+
+\begin{compactenum}
+\item Tentative Title of Proposed Thesis: [TITLE]
+\item General Area of Proposed Thesis Research:  FORMTEXT      
+\item Enclosure (1) is the Thesis Proposal with a milestone plan
+  (dates/events) for research and thesis completion.
+\item I expect that my thesis will be UNCLASSIFIED .  If classified, I
+  have read Chapter V of NAVPGSCOLINST 5510.2, and the NPS Research
+  Admin web page (http://www.nps.edu/research/research1.html)
+  concerning Classified Theses.
+\item I reviewed the Institutional Review Board (IRB) web page
+  concerning the use of humans in research
+  (http://www.nps.edu/research/IRB.htm).  I am aware that if I use
+  humans as subjects I must forward an IRB application via my thesis
+  advisor before any data collection can begin as outlined in NPGSINST
+  3900.4.
+\item I anticipate the following travel or other extraordinary
+  requirements: N/A.
+% If you are expecting to travel for conferences or meetings, please enter 
+% information below and uncomment relevant fields.
+%\begin{itemize}
+%\item [EVENT 1] in [PLACE 1], [DATES 1].
+%\item [EVENT 2] in [PLACE 2], [DATES 2].
+%\item Blue Team Summit in Linthicum, MD, 29 February - 3 March, 2012.
+%\item Privacy Law Scholars Conference in Washington D.C., 7- 8 June, 2012.
+%\end{itemize}
+\end{compactenum}
+
+\noindent
+\newcommand{\sigspace}{\uline{\hspace{2in}}}
+\newcommand{\datespace}{\uline{\hspace{.75in}}}
+
+\begin{tabular}{lll}
+\\
+% Single Student Thesis
+& \sigspace &  \\
+& Student Signature & \\
+% For Joint Thesis, uncoment next two lines and comment out previous two lines
+%& \sigspace & \sigspace  \\
+%& Student Signature & Student Signature \\
+\\
+\\
+1. Approved and Forwarded:  & \sigspace & \datespace \\
+& Thesis Advisor & Date\\
+\\
+\\
+2. Approved and Forwarded: & \sigspace & \datespace \\
+& Academic Associate, CS & Date\\ 
+\\
+\\
+3. Approved and Forwarded: & \sigspace & \datespace \\
+& Chairman, CS Department & Date\\
+\\
+\\
+4. Approved and Retained: & \sigspace & \datespace \\
+& Program Officer, CS Department & Date\\
+\end{tabular}
+\newpage
+\begin{center}
+{\large\textbf{THESIS PROPOSAL}}
+\end{center}
+
+\def\thesection {\Alph{section}.}
+% prevents indenting for paragraphs
+\setlength{\parindent}{0pt} 
+% puts 2 carraige returns between paragraphs
+\setlength{\parskip}{2ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A. General Information
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{General Information}
+
+\begin{enumerate}
+\item Name:  [AUTHOR 1]
+\item Email:  \verb|[AUTHOR 1 SID]@nps.edu|
+\item Curriculum:  Computer Science (368)
+\item Thesis  Advisor: [ADVISOR 1]
+%\item Thesis  Advisor: [ADVISOR 2]
+\item Academic Associate:  Thomas W. Otani
+\item Chair, CS Department: Peter J. Denning
+\item Date of Graduation:  [GRAD MONTH], [GRAD YEAR] 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% B. Area of Research
+%
+% Identify the proposed area of research in brief terms and state the 
+% proposed title of the thesis.  The exact title can be changed as the 
+% research and writing progress. A more detailed discussion is required 
+% in D below.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Area of Research}
+
+The proposed topic of the thesis is [GENERAL AREA OF RESEARCH].  
+
+The title of this thesis will be \textbf{[THESIS TITLE]}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% C. Research Questions
+%
+% Identify the primary research question and subsidiary research
+% questions. The primary research question should be broad enough
+% that it covers the entire spectrum of the research activity.  
+% Subsidiary research questions subdivide the primary research question 
+% into manageable research segments. This should be a very explicit 
+% statement of the questions the research will seek to answer.  While 
+% the questions may be redefined later as the research progresses, the 
+% initial objectives should be made very specific.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Research Questions}
+
+Research questions being pursued in this work include:
+
+\begin{itemize}
+
+\item This is the first research question.
+
+\item This is the second research question and a citation \cite{mm2}.
+
+\item This is the first research question.
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% D. Discussion
+%
+% Discuss briefly the background leading up to this study, the major 
+% issues and concepts involved, the key problems related to this area, 
+% policy and operational considerations and implications, and the 
+% theoretical framework within which the study will be conducted.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+
+[DISCUSSION]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% E. Scope of Thesis
+%
+% Describe the main thrust of the study, what areas will be specifically
+% investigated and what areas will be excluded.  Put boundaries around 
+% the study.  Identify what the study will be (e.g., a case study, 
+% implementation guide, development of a model, assessment of a model, 
+% policy or management guide).  Discuss any limitations of the study.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Scope of the Thesis}
+
+[SCOPE]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% F. Methodology
+%
+% This section should explain the conceptual foundation or framework 
+% within which the questions will be examined and the specific research 
+% techniques that will be used to answer the questions.  In other words, 
+% the study should be conducted within the context of some recognized and
+% valid model of problem solving and should use appropriate methods of 
+% collecting and analyzing data relevant to the problem.  For example, if 
+% the problem were to determine the optimal replacement cycle for lights
+% on navigational buoys, the conceptual foundation (model) might be the 
+% present value of life cycle cost.  The research method might then 
+% include collection of actual data on the amounts of all relevant costs, 
+% statistical analysis to determine the expected value of such costs, and 
+% discounting to determine the lowest present value of all alternative 
+% life cycle cost patterns.  Describe the general kinds of information to 
+% be used, the sources from which the data will be collected, and the 
+% methodology to be used in collecting the data.  Be specific in 
+% identifying the method(s) of research (e.g., questionnaires, interviews, 
+% etc.) why the method(s) selected are appropriate, and what types of 
+% individuals/organizations will be approached.  Discuss how any 
+% limitations identified in Part E above will affect your methodology or 
+% data sources. Briefly list the kinds of questions you intend to include 
+% in your questionnaire or you expect to use during interviews.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methodology}
+
+[METHODOLOGY]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% G. Chapter Outline
+%
+% Identify the tentative chapter headings and provide brief discussion 
+% of chapter content.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter Outline}
+
+\begin{enumerate}
+\item \textbf{Introduction} - An introduction to the research area and problem of interest.  
+\item \textbf{Previous Work} - A survey of similar work in the field.
+\item \textbf{Methodology} - A discussion of the Methodology.
+\item \textbf{Test Design and Implementation} - A description of the tests.
+\item \textbf{Results} - A discussion of results.
+\item \textbf{Conclusion and Future Work} - A discussion of lessons-learned and future work.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% H. Schedule
+%
+% This is a tentative list of target dates for completion of the 
+% successive states of the project.  You will not be held strictly to 
+% this schedule; it is a means of conveying to others when you expect to 
+% complete major milestones of the study.  It is important to recognize 
+% that the various stages of the work must be done in a logical sequence 
+% and that these various stages require different amounts of time.  
+% (Note that this section of the proposal fulfills the requirements that
+% a schedule be attached to Thesis Report No. 1.)  Give the dates during 
+% which the various stages will be accomplished.  Your stages may differ 
+% from the sample below.
+%
+%  1. Literature review:    
+%  2. Draft thesis, Cover through Chapter 2, and initial list of references 
+% <to advisor(s) to check background knowledge and problem statement, and 
+% to approve proposed plan to conduct research>   
+%  3. Draft thesis checked by thesis processor for format:    
+%  4. Construct research design:    
+%  5. Conduct research and any associated travel:    
+%  6. Analyze data:    
+%  7. Draft thesis to advisor(s):    
+%  8. Final thesis submission for signatures:     
+%
+% The list of activities/milestones above may be modified as required; 
+% however, enough fidelity must exist to give the reviewers a good idea 
+% of how you plan to complete your thesis.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Schedule}
+
+\begin{itemize}
+\item Literature review: [TARGET DATE]
+\item Draft Chapters 1 - 3: [TARGET DATE]
+\item ...
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% I. Benefits of Study
+%
+% State the contribution expected from your research efforts, what 
+% individuals/organizations will use the results of your thesis and 
+% what problems/issues you feel will be addressed/resolved.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section {Benefits of the Study}
+
+[DISCUSSION OF THESIS CONTRIBUTION]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% J. Anticipated Travel/Funding Requirements
+%
+% List the locations to which you must travel to conduct your research, 
+% anticipated length of stay and approximate amount required for travel, 
+% per diem and miscellaneous expenses.  Be realistic in identifying your 
+% needs and do so as early as possible.  Your advisor and Curricular 
+% Officer can assist in finding sources of funds.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Anticipated Travel/Funding Requirements}
+There is currently no anticipated travel.
+% If you anticipate traveling for conferences or meetings for your thesis, 
+% fill out the appropriate information in the table below and uncomment the 
+% related lines.  This section should be consistent with what was previously 
+% reported on the signature page.
+%\begin{center}
+%\begin{tabular}{|l|l|l|l|}
+%\hline
+%\textbf{Event} & \textbf{Location} & \textbf{Dates} & \textbf{Approximate cost} \\
+%\hline
+%[EVENT 1] & [LOCATION 1] & [DATES 1] & [EST. COST 1] \\
+%\hline
+%[EVENT 2] & [LOCATION 2] & [DATES 2] & [EST. COST 2] \\
+%\hline
+%\end{tabular}
+%\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% K. Preliminary Bibliography
+%
+% Provide a listing of representative materials consulted during 
+% preliminary literature search.  This should include references to the 
+% problem or issue to be studied, the organizations or other context in 
+% which it arises, and the research method(s) to be used.  It should 
+% include any prior studies of a similar nature.  A minimum of three 
+% references is required.  A Thesis/Dissertation can be one of the three; 
+% the other two must then be non-thesis/non-dissertation references.  The 
+% final bibliography will probably be much more extensive.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preliminary Bibliography}
+% This is a hack to reduce the space between the section header and the 
+% reference list.  Since the reference list has a blank title, it results 
+% in extra space between the reference contents and the section header.
+% parskip value of 0 was tested but still left a large gap. 
+% You should comment this out if it is causing problems
+\setlength{\parskip}{-.15in} 
+
+% print the bibliography with no title
+\renewcommand{\refname}{} % redefines the reference title to blank
+
+% list all references that should be included but weren't cited
+\nocite{mm2} % don't technically need because we cited mm2, but just for demo
+%\nocite{[CITATION 1]}
+%\nocite{[CITATION 2]}
+%\nocite{[CITATION 3]}
+
+\bibliographystyle{plain}
+% include the .bib file where your references come from, only list the file 
+% root (e.g. thesis for thesis.bib)
+\bibliography{thesis}
+
+
+\end{document}
+
+
+   
+
+
+

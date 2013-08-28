@@ -1,7 +1,7 @@
 % This starts the document; the "npsreport" style is really a modified
 % report style. Feel free to use the options explained in the technical
 % report NPS-CS-11-011, included under the doc/ directory.
-\documentclass[twoside,thesis]{npsreport}
+\documentclass[twoside,thesis,twoadvisorsreader]{npsreport}
 
 %
 % Put extra packages you may need to customize your thesis
@@ -20,7 +20,8 @@
 
 % Department info
 \department{Department of [Department]}
-\thesisadvisor{[Primary Advisor]}
+\thesisadvisorone{[First Advisor]}
+\thesisadvisortwo{[Second Advisor]}
 \secondreader{[Second Reader]}
 \departmentchair{[Dr.\ Department Chair]}
 
@@ -52,6 +53,7 @@
 % Optional fields for the SF298.
 %
 \RPTpreparedFor{}
+\SponsoringNotation{}
 \ContractNumber{}
 \GrantNumber{}
 \ProgramElementNumber{}

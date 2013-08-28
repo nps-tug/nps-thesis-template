@@ -52,6 +52,7 @@
 % Optional fields for the SF298.
 %
 \RPTpreparedFor{}
+\SponsoringNotation{}
 \ContractNumber{}
 \GrantNumber{}
 \ProgramElementNumber{}
@@ -135,14 +136,14 @@
 
 
 % APPENDICES
-% You have two recommended options for your appendix:
-% a) A single appendix (with a single TOC entry)
-% b) Multiple appendices. Look under the examples directory for a demo of
-%   multiple appendices.
+% For using multiple appendices, you need to announce the beginning
+% of each appendix with the \chapter{} command.
 %
-\NPSappendixTOC{[My Appendix Title]}
+\NPSappendices
+\chapter{[First appendix title]}
 \input{appendix1}
-
+\chapter{[Second appendix title]}
+\input{appendix1}
 
 % REFERENCES
 % List all your BibTeX reference source files (ending in *.bib extension)
