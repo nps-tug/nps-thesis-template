@@ -323,6 +323,13 @@
       \noindent
       \parbox{#2\unitlength}{\raggedright#3}%
     \vfil}}}
+\def\sf@abstractparbox(#1,#2)#3{%
+  \makebox(0,0)[bl]{%
+    \vbox to #1\unitlength{%
+      \vss
+      \noindent
+      \parbox{#2\unitlength}{#3}%
+    \vfil}}}
 \newcommand\sf@drawform{%
   \sf@setentryfont
   \setlength{\unitlength}{1bp}
@@ -674,7 +681,7 @@
     \put(  0,95){\makebox(539,200)[tl]{%
       \sf@settitlefontE\sf@strut 13.\ ABSTRACT
       \sf@settitlefontF (maximum 200 words)}}
-    \put(  4, 95){\sf@parbox(260,533){\sf@Abstract}}
+      \put(  4, 95){\sf@abstractparbox(260,533){\sf@Abstract}}
 
     % FIELD 14
     \put(  0, 48){\makebox(450, 46)[tl]{%
@@ -687,7 +694,7 @@
       \sf@settitlefontE\shortstack[l]{%
         \sf@strut 15.\ NUMBER OF\\[-2pt]
         \sf@strut\phantom{15.\ }PAGES}}}
-    \put(512, 78){\makebox(0,0){\large\sf@NumberPages}}
+    \put(512, 78){\makebox(0,0){\sf@NumberPages}}
 
     % FIELD 16
     \put(450, 70){\line(1,0){90}}
