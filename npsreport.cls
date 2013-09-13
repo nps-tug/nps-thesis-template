@@ -1133,6 +1133,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Special Commands Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\NPSSecurityStamp}{
+  \begin{picture}(1,1)
+  \put(0,75){\begin{minipage}{6.5in}\begin{center}{\textsf{\@securitybanner}}\end{center}\end{minipage}}
+   % top
+  \put(0,-590){\begin{minipage}{6.5in}\begin{center}{\textsf{\@securitybanner}}\end{center}\end{minipage}}
+   % bot
+  \end{picture}
+}
+
 \newcommand{\NPStableOfContents}{
 \ifnpsarticle
   \section*{\contentsname\ULABEL}
@@ -1141,7 +1150,8 @@
 \fi
   \lhead{}\rhead{}
   \def\contentsname{}           % clear, because it will be in the header
-  \thispagestyle{fancy}\tableofcontents\cleardoublepage
+  \NPSSecurityStamp
+  \thispagestyle{fancy}\vspace{-1in}\tableofcontents\cleardoublepage
 }
 
 \newcommand{\NPSlistOfFigures}{
@@ -1154,7 +1164,8 @@
   \chapter*{\listfigurename\ULABEL}
 \fi
   \def\listfigurename{}
-  \thispagestyle{fancy}\listoffigures\cleardoublepage
+  \NPSSecurityStamp
+  \thispagestyle{fancy}\vspace{-1in}\listoffigures\cleardoublepage
 }
 
 \newcommand{\NPSlistOfTables}{
@@ -1167,7 +1178,8 @@
   \chapter*{\listtablename\ULABEL}
 \fi
   \def\listtablename{}
-  \thispagestyle{fancy}\listoftables\cleardoublepage
+  \NPSSecurityStamp
+  \thispagestyle{fancy}\vspace{-1in}\listoftables\cleardoublepage
 }
 
 \newcommand{\NPSlistOfAcronyms}[1]{
