@@ -199,16 +199,23 @@
     \advance\@tempskipa\headsep
     \advance\@tempskipa\baselineskip
     \vskip-\@tempskipa
-    \hbox to 0pt{%
+    \vskip 0.3in  % this corrects the top margin to be at 1in
+    \vfill
+    \hbox to 6.75in{%  this roughly centers the form for 1.25 in margins
       \@tempskipa\oddsidemargin
       \advance\@tempskipa 42pt
       \hskip-\@tempskipa
   \ifsf@oldform
-      \sf@drawoldform
+      
+      % the size 6.3 in is an approximate fit for the picture environment geometry
+      \hfill \resizebox{6.3in}{!}{\sf@drawoldform}\hfill
+      % original code 
+      %\sf@drawoldform
   \else
       \sf@drawform
   \fi
-      \hss}%
+    \hss}%
+    \vfill
     \vss}%
     
   \newpage
@@ -554,12 +561,13 @@
 \newcommand\sf@drawoldform{%
   \sf@setentryfont
   \setlength{\unitlength}{1bp}
+  %\LeftShift[100pt]
   \begin{picture}(539,707)(\sf@LeftShift,\sf@DownShift)
     % Draw blank form
-    \linethickness{1bp}%
+    \linethickness{1.25pt}%
     \put(  0,  0){\framebox(539,707){}}
     % Horizontal lines
-    \linethickness{0.5bp}%
+    \linethickness{1.25pt}%
     \put(  0,687){\line(1,0){539}}
     \put(  0,635){\line(1,0){539}}
     \put(  0,611){\line(1,0){539}}
