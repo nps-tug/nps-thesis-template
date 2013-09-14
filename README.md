@@ -18,7 +18,14 @@ Status
 For each release, the reports under `examples/` will be tested and then vetted 
 through the thesis processing office. The following options are supported:
 
-* dissertations
+* dissertations, with the following options:
+
+|  Author | Advisor | Reader |
+|:-------:|:-------:|:------:|
+| 1       | 5       | -      |
+| 1       | 6       | -      |
+
+
 * theses, with the following options:
 
 |  Author | Advisor | Reader |

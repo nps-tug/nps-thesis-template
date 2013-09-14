@@ -1,7 +1,11 @@
 % This starts the document; the "npsreport" style is really a modified
 % report style. Feel free to use the options explained in the technical
 % report NPS-CS-11-011, included under the doc/ directory.
-\documentclass[twoside,dissertation]{npsreport}
+\documentclass[twoside,dissertation,fivemembers,advisoralone]{npsreport}
+% For Ph.D. committees with 5 members:
+% use fivemembers and one of the following:
+%   advisoralone - use advisors 1, 3, 4, 5, 6
+%   advisornotalone - use advisors 1, 2, 3, 4, 5 
 
 %
 % Put extra packages you may need to customize your thesis
@@ -11,26 +15,65 @@
 
 \title{[Title]}
 
+%
 % Student info
+%
 \author{[Author Name]}
 \rank{[Rank]}
 \degree{Doctor of Philosophy in [Degree]}
 \degreeabbreviation{PhD}   % Should be MS, MBA or MA
 \prevdegrees{[B.S., Undergrad Degree, My Old School, Year]} % previous degree
-
-% Department info
 \department{Department of [Department]}
+% The date you are graduating:
+\degreedate{[Month Year]}
+
+%
+% Advisors info for Signature page
+% Each entry can have up to four lines of title.
+% Comment out blank entries! 
+%
 \thesisadvisor{[Primary Advisor]}
 \advisorOne{[Dr.\ Advisor One]}
+\advisorOneLineOne{Professor, Department of}
+\advisorOneLineTwo{Computer Science}
+%\advisorOneLineThree{}
+%\advisorOneLineFour{}
 \advisorTwo{[Dr.\ Advisor Two]}
+\advisorTwoLineOne{Assistant Professor, }
+\advisorTwoLineTwo{Department of Electrical}
+\advisorTwoLineThree{ and Computer Engineering}
+%\advisorTwoLineFour{}
 \advisorThree{[Dr.\ Advisor Three]}
+\advisorThreeLineOne{Professor, Department of}
+\advisorThreeLineTwo{Computer Science}
+%\advisorThreeLineThree{}
+%\advisorThreeLineFour{}
 \advisorFour{[Dr.\ Advisor Four]}
-\comitteechair{[Dr.\ Committee Char]}
+\advisorFourLineOne{Professor, Department of}
+\advisorFourLineTwo{Computer Science}
+%\advisorFourLineThree{}
+%\advisorFourLineFour{}
+\advisorFive{[Dr.\ Advisor Five]}
+\advisorFiveLineOne{Professor, Department of}
+\advisorFiveLineTwo{Computer Science}
+%\advisorFiveLineThree{}
+%\advisorFiveLineFour{}
+\advisorSix{[Dr.\ Advisor Six]}
+\advisorSixLineOne{Professor, Department of}
+\advisorSixLineTwo{Computer Science}
+%\advisorSixLineThree{}
+%\advisorSixLineFour{}
+
+%\comitteechair{[Dr.\ Committee Char]}
 \departmentchair{[Dr.\ Department Chair]}
 \assocprovost{[Dr.\ Associate Provost]}
 
-% The date you are graduating:
-\degreedate{[Month Year]}
+% Signature page font size
+% If your signature page font size needs to be smaller, use one of these
+%\NPSsignaturefontsizesmall 
+%\NPSsignaturefontsizefootnote
+% If everything will still not fit, may need to edit the \vfill entries
+% in npsreport.cls 
 
 % See Thesis processor's release form for approved distribution statements.
 \distribution{Approved for public release; distribution is unlimited}
