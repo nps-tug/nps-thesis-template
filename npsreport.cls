@@ -4,6 +4,17 @@
 % 2011-sep-08 - slg - not many changes
 % 2011-jul-10 - slg additional packages added;  caption font changed
 %               to 11 on 12 rather 9 on 10
+% 2012-sep-22 - twa - improving comments, acronym package support
+% 2012-sep-24 - twa - improving dissertation signature page
+% Timeline for project: 
+% 
+
+% The majority of this file is not needed to be editted by the average user.
+% Things for everyone to look at below:
+%  - optional list of packages to include the ones appropriate for your 
+%    document
+%  - macros like sgraphic that can be used to create figures in your document
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{npsreport}[2008/10/01]
 
@@ -24,6 +35,22 @@
 \newif\ifnpssinglespace\npssinglespacefalse
 \newif\ifclassified\classifiedfalse
 \newif\ifnpsdissertation\npsdissertationfalse
+\newif\ifNPSdissertationfivemembers\NPSdissertationfivemembersfalse
+\newif\ifNPSdissertationadvisoralone\NPSdissertationadvisoralonefalse
+\newif\ifNPSdissertationadvisornotalone\NPSdissertationadvisornotalonefalse
+\newif\ifdissertationfontset\dissertationfontsetfalse
+\newif\ifrowonelineone\rowonelineonefalse
+\newif\ifrowonelinetwo\rowonelinetwofalse
+\newif\ifrowonelinethree\rowonelinethreefalse
+\newif\ifrowonelinefour\rowonelinefourfalse
+\newif\ifrowtwolineone\rowtwolineonefalse
+\newif\ifrowtwolinetwo\rowtwolinetwofalse
+\newif\ifrowtwolinethree\rowtwolinethreefalse
+\newif\ifrowtwolinefour\rowtwolinefourfalse
+\newif\ifrowthreelineone\rowthreelineonefalse
+\newif\ifrowthreelinetwo\rowthreelinetwofalse
+\newif\ifrowthreelinethree\rowthreelinethreefalse
+\newif\ifrowthreelinefour\rowthreelinefourfalse
 \newif\iffontsizeset\fontsizesetfalse
 \newif\iffontnameset\fontnamesetfalse
 \newif\iffonttimesset\fonttimessetfalse
@@ -50,6 +77,15 @@
 \DeclareOption{tight}{\npstighttrue}               % Smaller paragraph spacing 
 \DeclareOption{index}{\npsindextrue}               % have a keyword index page
 \DeclareOption{acronym}{\npsacronymtrue}           % Use the acronym package
+\DeclareOption{fivemembers}{\NPSdissertationfivememberstrue}    % five PhD 
+%committee members 
+\DeclareOption{advisoralone}{\NPSdissertationfivememberstrue\NPSdissertationadvisoralonetrue}
+    % whether to 
+%list the top person alone
+%\DeclareOption{fivemembersadvisoralone}{\NPSdissertationfivememberstrue 
+%\NPSdissertationfivemembersadvisoralonetrue} % use advisors 1,3,4,5 and 6
+\DeclareOption{advisornotalone}{\NPSdissertationfivememberstrue 
+\NPSdissertationadvisornotalonetrue} % use advisors 1,2,3,4,5
 
 \DeclareOption{10pt}{
    \fontsizesettrue
@@ -153,6 +189,9 @@
   \renewcommand*\familydefault{\ttdefault} %% base font of the document is typewriter style
 \fi
 
+% The NPS Template uses many packages to provide a rich set of features.
+% Optional packages exist at the end; read through them and uncomment
+% as necessary to include.
 % Bring in the modern LaTeX packages; look at CTAN to see what each of
 % these does.  Each package has a user's manual to reference for assistance.
 \usepackage[utf8x]{inputenc}    % accented letters in tex files allowed
@@ -170,7 +209,7 @@
 \usepackage[old298]{nps_sf298}  % Bring in SF298 for the documentation page
 \usepackage{latexsym}           % gives \Box
 \usepackage{graphicx}           % it's better
-\usepackage{multirow}           % for table cells with multiple row   
+\usepackage{multirow}           % for table cells with multiple row
 \usepackage{pifont}             % fancy characters
 \usepackage{remreset}           % prevent footnotes from being reset at each chapter
 \usepackage{color}
@@ -184,17 +223,37 @@
 \usepackage{cite}                   % for [5-8] reference style
 \usepackage{amsmath,amsfonts}       % for many types of math equations
 \usepackage{url}            % nice handling of URLs
+%\usepackage{epstopdf}            % to use .eps files for figures
+%\usepackage{bm}            % bold math if you need bold greek letters
+%\usepackage{glossaries}        % See 
+%%http://en.wikibooks.org/wiki/LaTeX/Glossary
 % The following package allows for very nice graphics and figures
 % proper usage requires additional information located at:
 % http://asymptote.sourceforge.net/
 % See gallery at this URL for examples
 %\usepackage{asymptote}              % for graphics
 
+% Provides \FloatBarrier which keeps figures in the same section. LaTeX 
+%sometimes moves them to fill up pages.
+% See 
+%http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/placeins/placeins-doc.pdf
+%\usepackage{placeins}
 
-% The mcode package must be separately downloaded
+% The mcode package must be separately downloaded, so
 % we include it in the directory. It is turned off by default.
-% If you turn it on, please make your own copy of npsreport.cls,
-% because mcode.sty is not included in the standard LaTeX release
+% The easiest way to include a .sty file is to place it in the same folder
+% as this .cls file.  However, if you include it in your LaTeX installation
+% folder, a manual installation step must be performed:
+% Important note: when you install a .sty file into your LaTeX
+% distribution, you need to update the FNDB for LaTeX to
+% recognize the new files exist.
+% MiKTeX users do:
+%   Run Start - Programs - MiKTeX 2.9 - Maintainance (Admin) - Settings
+%   (Admin)
+%   Then click the "Refresh FNDB" button
+% Other distributions (MacTeX, TeX Live, etc)
+%   Try mktexlsr or texhash on the command prompt
+%
 %\usepackage[numbered]{mcode}        % matlab code
 
 
@@ -210,6 +269,7 @@
 % Here are some commands that will help you make more attractive LaTeX
 % Notice that \etal is italicized, but not e.g., etc. , or i.e.
 % Please see p. 5, Section VI, para. 3, of The IEEE Editorial Style Manual
+%\newcommand{\checkmark}{\Pisymbol{pzd}{52}}
 \newcommand{\eg}{e.g.,\xspace}
 \newcommand{\ie}{i.e.,\xspace}
 \newcommand{\etc}{etc.\xspace}
@@ -361,6 +421,93 @@
 % Some useful defines
 \newcommand{\tablefont}{\sffamily\fontsize{9}{10}\selectfont}
 
+%% Dissertation code
+%\NPSdissertationfivemembersfalse % assume 6 members unless specified 
+%%\dissertationfivememberstrue
+
+\gdef\@advisorOne{\@thesisadvisor}
+\gdef\@advisorTwo{\@committeechair}
+\gdef\@advisorThree{advisorThree default}
+\gdef\@advisorFour{advisorFour default}
+\gdef\@advisorFive{advisorFive default}
+\gdef\@advisorSix{advisorSix default}
+
+\def\NPSsignaturefontsizenormal{
+  \def\dissfont{\normalsize }
+  \dissertationfontsettrue
+}
+\def\NPSsignaturefontsizesmall{
+  \def\dissfont{\small }
+  \dissertationfontsettrue
+}
+\def\NPSsignaturefontsizefootnote{
+  \def\dissfont{\footnotesize }
+  \dissertationfontsettrue
+}
+
+% creates a default dissertation font size of normal (12 pt) for the signature 
+%page.
+\ifdissertationfontset
+\else
+  \NPSsignaturefontsizenormal
+\fi
+
+% The following are the Title lines for each dissertation committee member.
+% Four lines create the macros to use and the next four fill in default values.
+\def\advisorOneLineOne#1{\rowonelineonetrue\gdef\@advisorOneLineOne{#1}}
+\def\advisorOneLineTwo#1{\rowonelinetwotrue\gdef\@advisorOneLineTwo{#1}}
+\def\advisorOneLineThree#1{\rowonelinethreetrue\gdef\@advisorOneLineThree{#1}}
+\def\advisorOneLineFour#1{\rowonelinefourtrue\gdef\@advisorOneLineFour{#1}}
+\gdef\@advisorOneLineOne{Dissertation Advisor}
+\gdef\@advisorOneLineTwo{}
+\gdef\@advisorOneLineThree{}
+\gdef\@advisorOneLineFour{}
+
+\def\advisorTwoLineOne#1{\rowonelineonetrue\gdef\@advisorTwoLineOne{#1}}
+\def\advisorTwoLineTwo#1{\rowonelinetwotrue\gdef\@advisorTwoLineTwo{#1}}
+\def\advisorTwoLineThree#1{\rowonelinethreetrue\gdef\@advisorTwoLineThree{#1}}
+\def\advisorTwoLineFour#1{\rowonelinefourtrue\gdef\@advisorTwoLineFour{#1}}
+\gdef\@advisorTwoLineOne{Dissertation Committee Chair}
+\gdef\@advisorTwoLineTwo{}
+\gdef\@advisorTwoLineThree{}
+\gdef\@advisorTwoLineFour{}
+
+\def\advisorThreeLineOne#1{\rowtwolineonetrue\gdef\@advisorThreeLineOne{#1}}
+\def\advisorThreeLineTwo#1{\rowtwolinetwotrue\gdef\@advisorThreeLineTwo{#1}}
+\def\advisorThreeLineThree#1{\rowtwolinethreetrue\gdef\@advisorThreeLineThree{#1}}
+\def\advisorThreeLineFour#1{\rowtwolinefourtrue\gdef\@advisorThreeLineFour{#1}}
+\gdef\@advisorThreeLineOne{Advisor}
+\gdef\@advisorThreeLineTwo{}
+\gdef\@advisorThreeLineThree{}
+\gdef\@advisorThreeLineFour{}
+
+\def\advisorFourLineOne#1{\rowtwolineonetrue\gdef\@advisorFourLineOne{#1}}
+\def\advisorFourLineTwo#1{\rowtwolinetwotrue\gdef\@advisorFourLineTwo{#1}}
+\def\advisorFourLineThree#1{\rowtwolinethreetrue\gdef\@advisorFourLineThree{#1}}
+\def\advisorFourLineFour#1{\rowtwolinefourtrue\gdef\@advisorFourLineFour{#1}}
+\gdef\@advisorFourLineOne{Advisor}
+\gdef\@advisorFourLineTwo{}
+\gdef\@advisorFourLineThree{}
+\gdef\@advisorFourLineFour{}
+
+\def\advisorFiveLineOne#1{\rowthreelineonetrue\gdef\@advisorFiveLineOne{#1}}
+\def\advisorFiveLineTwo#1{\rowthreelinetwotrue\gdef\@advisorFiveLineTwo{#1}}
+\def\advisorFiveLineThree#1{\rowthreelinethreetrue\gdef\@advisorFiveLineThree{#1}}
+\def\advisorFiveLineFour#1{\rowthreelinefourtrue\gdef\@advisorFiveLineFour{#1}}
+\gdef\@advisorFiveLineOne{Advisor}
+\gdef\@advisorFiveLineTwo{}
+\gdef\@advisorFiveLineThree{}
+\gdef\@advisorFiveLineFour{}
+
+\def\advisorSixLineOne#1{\rowthreelineonetrue\gdef\@advisorSixLineOne{#1}}
+\def\advisorSixLineTwo#1{\rowthreelinetwotrue\gdef\@advisorSixLineTwo{#1}}
+\def\advisorSixLineThree#1{\rowthreelinethreetrue\gdef\@advisorSixLineThree{#1}}
+\def\advisorSixLineFour#1{\rowthreelinefourtrue\gdef\@advisorSixLineFour{#1}}
+\gdef\@advisorSixLineOne{Advisor}
+\gdef\@advisorSixLineTwo{}
+\gdef\@advisorSixLineThree{}
+\gdef\@advisorSixLineFour{}
+%% End dissertation code
 
 % Support for the Authorindex
 % Authorindex
@@ -820,11 +967,16 @@
 }
 
 % LP -  bring in definitions for the disseratation signature page identifications
-\def\comitteechair#1{\gdef\@comitteechair{#1}}
+\def\committeechair#1{\gdef\@comitteechair{#1}} % fixes a typo to be easier on 
+%the user.
+\def\comitteechair#1{\gdef\@committeechair{#1}} % this is the original one. 
+%Just for backwards compatibility.
 \def\advisorOne#1{\gdef\@advisorOne{#1}}
 \def\advisorTwo#1{\gdef\@advisorTwo{#1}}
 \def\advisorThree#1{\gdef\@advisorThree{#1}}
 \def\advisorFour#1{\gdef\@advisorFour{#1}}
+\def\advisorFive#1{\gdef\@advisorFive{#1}}
+\def\advisorSix#1{\gdef\@advisorSix{#1}}
 \def\assocprovost#1{\gdef\@assocprovost{#1}}
 
 \def\NPSthesistitle{
@@ -864,46 +1016,135 @@
      \newcommand{\sigspace}{1.5pc}
       \vspace{\sigspace}
       \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-      \cline{2-3}
-        Author: & \@author & &\\
-      \end{tabular}
-
+      %\cline{2-3}
+      {\dissfont Author:} & {\dissfont \@author} & &\\
+       \end{tabular}
+      
+      \ifNPSdissertationadvisoralone % committee has 5 members, show advisor 
+      %alone on the top
+        \vspace{\sigspace}
+        \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
+        %\cline{2-2}
+           {\dissfont Approved by:} & {\dissfont \@advisorOne}    &     & \\
+        \ifrowonelineone
+            & {\dissfont \@advisorOneLineOne} &     & \\
+        \fi
+        \ifrowonelinetwo
+            & {\dissfont \@advisorOneLineTwo} &     & \\
+        \fi
+        \ifrowonelinethree
+            & {\dissfont \@advisorOneLineThree} &     & \\
+        \fi
+         \ifrowonelinefour
+            & {\dissfont \@advisorOneLineFour} &     & \\
+        \fi
+        \end{tabular}                             
+      \else % dissertationadvisoralone, committee has 6 members
+          \vspace{\sigspace}
+        \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
+        %\cline{2-2}
+        %\cline{4-4}
+           {\dissfont Approved by:} & {\dissfont \@advisorOne}    &     & 
+           {\dissfont \@advisorTwo} \\
+          \ifrowonelineone
+            & {\dissfont \@advisorOneLineOne} &     & {\dissfont 
+            \@advisorTwoLineOne} \\
+        \fi
+        \ifrowonelinetwo
+            & {\dissfont \@advisorOneLineTwo} &     & 
+            {\dissfont\@advisorTwoLineTwo} \\
+        \fi
+        \ifrowonelinethree
+            & {\dissfont \@advisorOneLineThree} &     & {\dissfont 
+            \@advisorTwoLineThree} \\
+        \fi
+        \ifrowonelinefour
+            & {\dissfont \@advisorOneLineFour} &     & {\dissfont 
+            \@advisorTwoLineFour} \\
+        \fi
+        \end{tabular}
+      \fi
+      
       \vspace{\sigspace}
       \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-      \cline{2-2}
-      \cline{4-4}
-      Approved by: & \@thesisadvisor       &    & \@comitteechair \\
-                   & Dissertation Advisor  &    & Dissertation Committee Chair \\
+      %\cline{2-2}
+      %\cline{4-4}
+            & {\dissfont \@advisorThree}    &     & {\dissfont \@advisorFour} \\
+      \ifrowtwolineone
+            & {\dissfont \@advisorThreeLineOne} &     & {\dissfont 
+            \@advisorFourLineOne} \\
+      \fi
+      \ifrowtwolinetwo
+            & {\dissfont \@advisorThreeLineTwo} &     & {\dissfont 
+            \@advisorFourLineTwo} \\
+      \fi
+      \ifrowtwolinethree
+            & {\dissfont \@advisorThreeLineThree} & & {\dissfont 
+            \@advisorFourLineThree} \\
+      \fi
+       \ifrowtwolinefour
+            & {\dissfont \@advisorThreeLineFour} &     & {\dissfont 
+            \@advisorFourLineFour} \\
+      \fi
       \end{tabular}
 
-      \vspace{\sigspace}
+      \ifNPSdissertationadvisornotalone % committee has 5 members, advisorTwo 
+      %is used, so don't use advisorSix
+        \vspace{\sigspace}
+        \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
+        %\cline{2-2}
+            & {\dissfont \@advisorFive}    &     & \\
+        \ifrowthreelineone
+            & {\dissfont \@advisorFiveLineOne} &     & \\
+        \fi
+        \ifrowthreelinetwo
+            & {\dissfont \@advisorFiveLineTwo} &     & \\
+        \fi
+        \ifrowthreelinethree
+            & {\dissfont \@advisorFiveLineThree} &     & \\
+        \fi
+         \ifrowthreelinefour
+            & {\dissfont \@advisorFiveLineFour} &     & \\
+        \fi
+        \end{tabular}
+      \else % dissertationfivemembers, committee has 6 members
+          \vspace{\sigspace}
+        \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
+        %\cline{2-2}
+        %\cline{4-4}
+            & {\dissfont \@advisorFive}    &     & {\dissfont \@advisorSix} \\
+          \ifrowthreelineone
+            & {\dissfont \@advisorFiveLineOne} &     & {\dissfont 
+            \@advisorSixLineOne} \\
+        \fi
+        \ifrowthreelinetwo
+            & {\dissfont \@advisorFiveLineTwo} &     & 
+            {\dissfont\@advisorSixLineTwo} \\
+        \fi
+        \ifrowthreelinethree
+            & {\dissfont \@advisorFiveLineThree} &     & {\dissfont 
+            \@advisorSixLineThree} \\
+        \fi
+        \ifrowthreelinefour
+            & {\dissfont \@advisorFiveLineFour} &     & {\dissfont 
+            \@advisorSixLineFour} \\
+        \fi
+        \end{tabular}
+      \fi
+      
+      \vspace{\sigspace}                         
       \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-      \cline{2-2}
-      \cline{4-4}
-            & \@advisorOne  &   & \@advisorTwo\\
-            & Advisor   &       & Advisor\\
+      %\cline{2-4}                                                 
+      {\dissfont Approved by:} & {\dissfont \@departmentchair} & & \\
+      & \multicolumn{2}{l}{{\dissfont Chair, \@department}} & \\
       \end{tabular}
-
-      \vspace{\sigspace}
-      \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-      \cline{2-2}
-      \cline{4-4}
-            & \@advisorThree    &   & \@advisorFour\\
-            & Advisor       &   & Advisor\\
-      \end{tabular}
-
+      
       \vspace{\sigspace}
       \begin{tabular}{p{1in}p{2in}p{0.25in}p{1.75in}}
-      \cline{2-4}
-       Approved by: & \@departmentchair  \\
-            & \multicolumn{2}{l}{Chair, \@department} & \\
-      \end{tabular}
-
-      \vspace{\sigspace}
-      \begin{tabular}{p{1in}p{2in}p{0.25in}p{1.75in}}
-      \cline{2-4}
-      Approved by: & \@assocprovost & &\\
-                       & \multicolumn{2}{l}{Associate Provost for Academic Affairs} \\
+      %\cline{2-4}
+      {\dissfont Approved by:} & {\dissfont \@assocprovost} & & \\
+      & \multicolumn{2}{l}{{\dissfont Associate Provost for Academic Affairs}} 
+      & \\
       \end{tabular}
   \else  
     \iftwoadvisors
