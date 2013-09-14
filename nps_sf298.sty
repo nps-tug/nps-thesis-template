@@ -32,8 +32,11 @@
 \IfFileExists{totpages.sty}{%
   \usepackage{totpages}
   \newcounter{sf@page}}{}
+\newcommand\twodigits[1]{%
+   \ifnum#1<10 0#1\else #1\fi
+}
 \newcommand\ReportDate[1]{\renewcommand\sf@ReportDate{#1}}
-\newcommand\sf@ReportDate{\number\day--\number\month--\number\year}
+\newcommand\sf@ReportDate{\twodigits{\number\day}--\twodigits{\number\month}--\number\year}
 \newcommand\ReportType[1]{\renewcommand\sf@ReportType{#1}}
 \newcommand\sf@ReportType{\relax}
 \newcommand\DatesCovered[1]{\renewcommand\sf@DatesCovered{#1}}
