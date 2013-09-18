@@ -162,13 +162,23 @@
   \LoadClass{report}             % inherit from article so we can have
 \fi
 
-\usepackage[letterpaper,lmargin=1.10in,rmargin=1.10in,hoffset=.0in,tmargin=1in,bmargin=1.5in]{geometry}
-\footskip = .5in                % margin goes from the page number
+%% Page geometry
+\usepackage[letterpaper,showframe]{geometry} % use 'showframe' for debugging
+\newgeometry{includeheadfoot,            % headers and footers aren't in margins
+             right=1.25in,left=1.25in,   % right/left margins
+             top=1in,bottom=1.25in,      % top/bottom margins
+             footskip=.25in,             % pg nums in footer need breathing room
+             marginparwidth=0pt,         % no marginal paragraphs
+             marginparsep=0pt,           % no marginal paragraphs
+             head=30pt,headsep=0pt,hoffset=0pt}
+\usepackage{fancyhdr}           % puts chapters names in footers
+\fancypagestyle{plain}{\lhead{}\rhead{}}  % ToC/ToF/etc use \thispagestyle{plain}
+
+%% Font selection
 \usepackage[T1]{fontenc}        % http://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc
 \usepackage{url}                % make\url work (be nice have [lowtidle])
 \usepackage{eurosym}
 
-%% Font selection
 \iffontnameset
   % Font name is set
 \else
@@ -199,7 +209,6 @@
 \usepackage{tabularx}           % tables that expand to with width requested
 \usepackage{titletoc}           % adds toc commands
 \usepackage{titlesec}           % complete replacement for titles
-\usepackage{fancyhdr}           % puts chapters names in footers
 \usepackage{ccaption}           % control captions
 \usepackage{setspace}           % enabled \doublespacing, \onehalfspacing, etc.
 \usepackage{multicol}           % multiple columns; good for you!
@@ -994,22 +1003,18 @@
   \thispagestyle{fancy}
   \begin{center}
     \textbf{\@distribution}
-
     \vfill
     \textbf{\MakeUppercase{\@title}}
-
     \vfill
     \@author~\\
     \@rank~\\
     \@prevdegrees\\
-
     \iftwoauthors
       \vspace{1pc}
       \@authortwo~\\
       \@ranktwo~\\
       \@prevdegreestwo
     \fi
-
     \vfill
     Submitted in partial fulfillment of the\\
     requirements for the degree of\\
@@ -1230,6 +1235,8 @@
     \fi
     \fi
   \fi
+  \vfill
+  \hrulefill
   \cleardoublepage
 }
 
@@ -1265,6 +1272,7 @@
   \addcontentsline{toc}{chapter}{Executive Summary}
   \chapter*{Executive Summary\ULABEL}
 \fi
+  \thispagestyle{fancy}
   \onehalfspacing
   #1
 }
@@ -1277,6 +1285,7 @@
   \addcontentsline{toc}{chapter}{Acknowledgements}
   \chapter*{Acknowledgements\ULABEL}
 \fi
+  \thispagestyle{fancy}
   \onehalfspacing
   #1
 }
