@@ -163,7 +163,7 @@
 \fi
 
 %% Page geometry
-\usepackage[letterpaper,showframe]{geometry} % use 'showframe' for debugging
+\usepackage[letterpaper]{geometry} % use 'showframe' for debugging
 \newgeometry{includeheadfoot,            % headers and footers aren't in margins
              right=1.25in,left=1.25in,   % right/left margins
              top=1in,bottom=1.25in,      % top/bottom margins
