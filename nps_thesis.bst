@@ -178,7 +178,7 @@ FUNCTION {default.name.latex.cmd}{ "" }
 % The default URL prefix.
 FUNCTION {default.name.url.prefix}{ "[Online]. Available:" }
 
-% Related to 'classification' entry
+% Related to 'classification' of bibliographic entries
 FUNCTION {default.classification.show}{ #0 } % 0 is off, #1 is on
 FUNCTION {default.classification.unmarked}{ "(U)" }
 
@@ -344,6 +344,8 @@ ENTRY
     CTLname_format_string
     CTLname_latex_cmd
     CTLname_url_prefix
+    CTLclassification_show
+    CTLclassification_unmarked
     classification
   }
   {}
@@ -375,7 +377,8 @@ INTEGERS { is.use.number.for.article
            max.num.names.before.forced.et.al
            num.names.shown.with.forced.et.al
            is.use.alt.interword.spacing
-           is.dash.repeated.names}
+           is.dash.repeated.names
+           classification.show}
 
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -390,7 +393,8 @@ STRINGS { bibinfo
           ALTinterwordstretchfactor
           name.format.string
           name.latex.cmd
-          name.url.prefix}
+          name.url.prefix
+          classification.unmarked}
 
 
 
@@ -411,6 +415,8 @@ FUNCTION {initialize.controls}
   default.name.format.string 'name.format.string :=
   default.name.latex.cmd 'name.latex.cmd :=
   default.name.url.prefix 'name.url.prefix :=
+  default.classification.show 'classification.show :=
+  default.classification.unmarked 'classification.unmarked :=
 }
 
 
@@ -1959,6 +1965,23 @@ FUNCTION {format.url}
 
 
 
+%% Classification marking
+
+FUNCTION {format.classification}
+{ classification empty$
+    { classification.show
+        { "\;\textbf{" classification.unmarked * "}" * }
+        { "" }
+      if$
+    }
+    { classification.show
+        { "\;\textbf{" classification * "}" * }
+        { "" }
+      if$
+    }
+  if$
+}
+
 
 %%%%%%%%%%%%%%%%%%%%
 %% ENTRY HANDLERS %%
@@ -1982,6 +2005,7 @@ FUNCTION {article}
   format.date "year" output.warn
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2006,6 +2030,7 @@ FUNCTION {book}
   format.number output
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2023,6 +2048,7 @@ FUNCTION {booklet}
   format.date output
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2040,6 +2066,7 @@ FUNCTION {electronic}
   format.address "address" bibinfo.check output
   format.note output
   format.url output
+  format.classification output
   fin.entry
   empty.entry.warn
   if.url.std.interword.spacing
@@ -2063,6 +2090,7 @@ FUNCTION {inbook}
   format.pages output
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2084,6 +2112,7 @@ FUNCTION {incollection}
   format.pages output
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2110,6 +2139,7 @@ FUNCTION {inproceedings}
   format.pages output
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2127,6 +2157,7 @@ FUNCTION {manual}
   format.date output
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2144,6 +2175,7 @@ FUNCTION {mastersthesis}
   format.date "year" output.warn
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2162,6 +2194,7 @@ FUNCTION {misc}
   format.date output
   format.note output
   format.url output
+  format.classification output
   fin.entry
   empty.entry.warn
   if.url.std.interword.spacing
@@ -2178,6 +2211,7 @@ FUNCTION {patent}
   format.patent.date output
   format.note output
   format.url output
+  format.classification output
   fin.entry
   empty.entry.warn
   if.url.std.interword.spacing
@@ -2197,6 +2231,7 @@ FUNCTION {periodical}
   format.date "year" output.warn
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2214,6 +2249,7 @@ FUNCTION {phdthesis}
   format.date "year" output.warn
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2236,6 +2272,7 @@ FUNCTION {proceedings}
   if$
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2253,6 +2290,7 @@ FUNCTION {standard}
   format.date output
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2271,6 +2309,7 @@ FUNCTION {techreport}
   format.date "year" output.warn
   format.note output
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2285,6 +2324,7 @@ FUNCTION {unpublished}
   format.date output
   format.note "note" output.warn
   format.url output
+  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2386,7 +2426,21 @@ FUNCTION {IEEEtranBSTCTL}
       'name.url.prefix :=
     }
   if$
-
+  CTLclassification_show
+  empty$
+    { skip$ }
+    { CTLclassification_show
+      string.to.integer
+      'classification.show :=
+    }
+  if$
+  CTLclassification_unmarked
+  missing$
+    { skip$ }
+    { CTLclassification_unmarked
+      'classification.unmarked :=
+    }
+  if$
 
   num.names.shown.with.forced.et.al max.num.names.before.forced.et.al >
     { "CTLnames_show_etal cannot be greater than CTLmax_names_forced_etal in " cite$ * warning$ 

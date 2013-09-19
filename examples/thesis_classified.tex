@@ -7,7 +7,17 @@
 % Put extra packages you may need to customize your thesis
 %
 \usepackage{doc,lipsum}  % provides \BibTex and \lipsum macros, for demos
-\usepackage[retainorgcmds]{IEEEtrantools} % provides bstctlcite
+
+% provides bstctlcite (needed to control bib options, to add markings)
+\makeatletter
+\def\bstctlcite{\@ifnextchar[{\@bstctlcite}{\@bstctlcite[@auxout]}}
+\def\@bstctlcite[#1]#2{\@bsphack
+  \@for\@citeb:=#2\do{%
+    \edef\@citeb{\expandafter\@firstofone\@citeb}%
+    \if@filesw\immediate\write\csname #1\endcsname{\string\citation{\@citeb}}\fi}%
+  \@esphack}
+\makeatother
+
 
 \title{[Title (U)]}
 
@@ -158,6 +168,8 @@ DoD office) (date of determination) or higher DoD authority.]}
 % Start layout for the NPS body
 \NPSbody
 
+% Activiates classification markings for bibliographies
+\bstctlcite{NPS:BSTctl}
 
 % CHAPTERS
 % You have two options on how to structure your thesis:
@@ -181,8 +193,7 @@ DoD office) (date of determination) or higher DoD authority.]}
 % REFERENCES
 % List all your BibTeX reference source files (ending in *.bib extension)
 %
-\NPSbibliography{thesis,classified_refs_meta}
-\bstctlcite{NPS:BSTcontrol}   % control 'activiates' classification markings
+\NPSbibliography{classified_refs_meta,thesis}
 
 %
 % This is the official end of the thesis.
