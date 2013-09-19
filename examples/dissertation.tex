@@ -2,10 +2,11 @@
 % report style. Feel free to use the options explained in the technical
 % report NPS-CS-11-011, included under the doc/ directory.
 \documentclass[twoside,dissertation,fivemembers,advisoralone]{npsreport}
-% For Ph.D. committees with 5 members:
-% use fivemembers and one of the following:
-%   advisoralone - use advisors 1, 3, 4, 5, 6
-%   advisornotalone - use advisors 1, 2, 3, 4, 5 
+
+% Default is a PhD committee with 6 members
+% Additional Options:
+% 'fivemembers': if you only have five members in your committee
+% 'advisoralone': committee memberOne (advisor) is alone on the first row
 
 %
 % Put extra packages you may need to customize your thesis
@@ -33,47 +34,29 @@
 % Comment out blank entries! 
 %
 \thesisadvisor{[Primary Advisor]}
-\advisorOne{[Dr.\ Advisor One]}
-\advisorOneLineOne{Professor, Department of}
-\advisorOneLineTwo{Computer Science}
-%\advisorOneLineThree{}
-%\advisorOneLineFour{}
-\advisorTwo{[Dr.\ Advisor Two]}
-\advisorTwoLineOne{Assistant Professor, }
-\advisorTwoLineTwo{Department of Electrical}
-\advisorTwoLineThree{ and Computer Engineering}
-%\advisorTwoLineFour{}
-\advisorThree{[Dr.\ Advisor Three]}
-\advisorThreeLineOne{Professor, Department of}
-\advisorThreeLineTwo{Computer Science}
-%\advisorThreeLineThree{}
-%\advisorThreeLineFour{}
-\advisorFour{[Dr.\ Advisor Four]}
-\advisorFourLineOne{Professor, Department of}
-\advisorFourLineTwo{Computer Science}
-%\advisorFourLineThree{}
-%\advisorFourLineFour{}
-\advisorFive{[Dr.\ Advisor Five]}
-\advisorFiveLineOne{Professor, Department of}
-\advisorFiveLineTwo{Computer Science}
-%\advisorFiveLineThree{}
-%\advisorFiveLineFour{}
-\advisorSix{[Dr.\ Advisor Six]}
-\advisorSixLineOne{Professor, Department of}
-\advisorSixLineTwo{Computer Science}
-%\advisorSixLineThree{}
-%\advisorSixLineFour{}
+%\memberOne{[Advisor One]} % by default, thesisadvisor
+\memberOneTitleLine{Professor of [Department]\\
+                    Dissertation Supervisor}
 
-%\comitteechair{[Dr.\ Committee Char]}
-\departmentchair{[Dr.\ Department Chair]}
-\assocprovost{[Dr.\ Associate Provost]}
+\committeechair{[Committee Chair]}
+%\memberTwo{[Advisor Two]} % by default, committee chair
+\memberTwoTitleLine{Professor of [Dept Two]\\
+                    Dissertation Committee Chair}
 
-% Signature page font size
-% If your signature page font size needs to be smaller, use one of these
-%\NPSsignaturefontsizesmall 
-%\NPSsignaturefontsizefootnote
-% If everything will still not fit, may need to edit the \vfill entries
-% in npsreport.cls 
+\memberThree{[Advisor Three]}
+\memberThreeTitleLine{Professor of [Dept Three]}
+
+\memberFour{[Advisor Four]}
+\memberFourTitleLine{Professor of [Dept Four]}
+
+\memberFive{[Advisor Five]}
+\memberFiveTitleLine{Professor of [Very Very Long Dept Five]}
+
+\memberSix{[Advisor Six]}
+\memberSixTitleLine{Professor of [Dept Six]}
+
+\departmentchair{[Department Chair]}
+\assocprovost{[Associate Provost]}
 
 % See Thesis processor's release form for approved distribution statements.
 \distribution{Approved for public release; distribution is unlimited}

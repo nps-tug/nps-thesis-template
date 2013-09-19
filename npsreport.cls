@@ -35,9 +35,8 @@
 \newif\ifnpssinglespace\npssinglespacefalse
 \newif\ifclassified\classifiedfalse
 \newif\ifnpsdissertation\npsdissertationfalse
-\newif\ifNPSdissertationfivemembers\NPSdissertationfivemembersfalse
-\newif\ifNPSdissertationadvisoralone\NPSdissertationadvisoralonefalse
-\newif\ifNPSdissertationadvisornotalone\NPSdissertationadvisornotalonefalse
+\newif\iffivemembers\fivemembersfalse
+\newif\ifadvisoralone\advisoralonefalse
 \newif\ifdissertationfontset\dissertationfontsetfalse
 \newif\ifrowonelineone\rowonelineonefalse
 \newif\ifrowonelinetwo\rowonelinetwofalse
@@ -77,15 +76,8 @@
 \DeclareOption{tight}{\npstighttrue}               % Smaller paragraph spacing 
 \DeclareOption{index}{\npsindextrue}               % have a keyword index page
 \DeclareOption{acronym}{\npsacronymtrue}           % Use the acronym package
-\DeclareOption{fivemembers}{\NPSdissertationfivememberstrue}    % five PhD 
-%committee members 
-\DeclareOption{advisoralone}{\NPSdissertationfivememberstrue\NPSdissertationadvisoralonetrue}
-    % whether to 
-%list the top person alone
-%\DeclareOption{fivemembersadvisoralone}{\NPSdissertationfivememberstrue 
-%\NPSdissertationfivemembersadvisoralonetrue} % use advisors 1,3,4,5 and 6
-\DeclareOption{advisornotalone}{\NPSdissertationfivememberstrue 
-\NPSdissertationadvisornotalonetrue} % use advisors 1,2,3,4,5
+\DeclareOption{fivemembers}{\fivememberstrue}      % five member PhD committee
+\DeclareOption{advisoralone}{\advisoralonetrue}    % list the top person alone
 
 \DeclareOption{10pt}{
    \fontsizesettrue
@@ -429,94 +421,6 @@
 
 % Some useful defines
 \newcommand{\tablefont}{\sffamily\fontsize{9}{10}\selectfont}
-
-%% Dissertation code
-%\NPSdissertationfivemembersfalse % assume 6 members unless specified 
-%%\dissertationfivememberstrue
-
-\gdef\@advisorOne{\@thesisadvisor}
-\gdef\@advisorTwo{\@committeechair}
-\gdef\@advisorThree{advisorThree default}
-\gdef\@advisorFour{advisorFour default}
-\gdef\@advisorFive{advisorFive default}
-\gdef\@advisorSix{advisorSix default}
-
-\def\NPSsignaturefontsizenormal{
-  \def\dissfont{\normalsize }
-  \dissertationfontsettrue
-}
-\def\NPSsignaturefontsizesmall{
-  \def\dissfont{\small }
-  \dissertationfontsettrue
-}
-\def\NPSsignaturefontsizefootnote{
-  \def\dissfont{\footnotesize }
-  \dissertationfontsettrue
-}
-
-% creates a default dissertation font size of normal (12 pt) for the signature 
-%page.
-\ifdissertationfontset
-\else
-  \NPSsignaturefontsizenormal
-\fi
-
-% The following are the Title lines for each dissertation committee member.
-% Four lines create the macros to use and the next four fill in default values.
-\def\advisorOneLineOne#1{\rowonelineonetrue\gdef\@advisorOneLineOne{#1}}
-\def\advisorOneLineTwo#1{\rowonelinetwotrue\gdef\@advisorOneLineTwo{#1}}
-\def\advisorOneLineThree#1{\rowonelinethreetrue\gdef\@advisorOneLineThree{#1}}
-\def\advisorOneLineFour#1{\rowonelinefourtrue\gdef\@advisorOneLineFour{#1}}
-\gdef\@advisorOneLineOne{Dissertation Advisor}
-\gdef\@advisorOneLineTwo{}
-\gdef\@advisorOneLineThree{}
-\gdef\@advisorOneLineFour{}
-
-\def\advisorTwoLineOne#1{\rowonelineonetrue\gdef\@advisorTwoLineOne{#1}}
-\def\advisorTwoLineTwo#1{\rowonelinetwotrue\gdef\@advisorTwoLineTwo{#1}}
-\def\advisorTwoLineThree#1{\rowonelinethreetrue\gdef\@advisorTwoLineThree{#1}}
-\def\advisorTwoLineFour#1{\rowonelinefourtrue\gdef\@advisorTwoLineFour{#1}}
-\gdef\@advisorTwoLineOne{Dissertation Committee Chair}
-\gdef\@advisorTwoLineTwo{}
-\gdef\@advisorTwoLineThree{}
-\gdef\@advisorTwoLineFour{}
-
-\def\advisorThreeLineOne#1{\rowtwolineonetrue\gdef\@advisorThreeLineOne{#1}}
-\def\advisorThreeLineTwo#1{\rowtwolinetwotrue\gdef\@advisorThreeLineTwo{#1}}
-\def\advisorThreeLineThree#1{\rowtwolinethreetrue\gdef\@advisorThreeLineThree{#1}}
-\def\advisorThreeLineFour#1{\rowtwolinefourtrue\gdef\@advisorThreeLineFour{#1}}
-\gdef\@advisorThreeLineOne{Advisor}
-\gdef\@advisorThreeLineTwo{}
-\gdef\@advisorThreeLineThree{}
-\gdef\@advisorThreeLineFour{}
-
-\def\advisorFourLineOne#1{\rowtwolineonetrue\gdef\@advisorFourLineOne{#1}}
-\def\advisorFourLineTwo#1{\rowtwolinetwotrue\gdef\@advisorFourLineTwo{#1}}
-\def\advisorFourLineThree#1{\rowtwolinethreetrue\gdef\@advisorFourLineThree{#1}}
-\def\advisorFourLineFour#1{\rowtwolinefourtrue\gdef\@advisorFourLineFour{#1}}
-\gdef\@advisorFourLineOne{Advisor}
-\gdef\@advisorFourLineTwo{}
-\gdef\@advisorFourLineThree{}
-\gdef\@advisorFourLineFour{}
-
-\def\advisorFiveLineOne#1{\rowthreelineonetrue\gdef\@advisorFiveLineOne{#1}}
-\def\advisorFiveLineTwo#1{\rowthreelinetwotrue\gdef\@advisorFiveLineTwo{#1}}
-\def\advisorFiveLineThree#1{\rowthreelinethreetrue\gdef\@advisorFiveLineThree{#1}}
-\def\advisorFiveLineFour#1{\rowthreelinefourtrue\gdef\@advisorFiveLineFour{#1}}
-\gdef\@advisorFiveLineOne{Advisor}
-\gdef\@advisorFiveLineTwo{}
-\gdef\@advisorFiveLineThree{}
-\gdef\@advisorFiveLineFour{}
-
-\def\advisorSixLineOne#1{\rowthreelineonetrue\gdef\@advisorSixLineOne{#1}}
-\def\advisorSixLineTwo#1{\rowthreelinetwotrue\gdef\@advisorSixLineTwo{#1}}
-\def\advisorSixLineThree#1{\rowthreelinethreetrue\gdef\@advisorSixLineThree{#1}}
-\def\advisorSixLineFour#1{\rowthreelinefourtrue\gdef\@advisorSixLineFour{#1}}
-\gdef\@advisorSixLineOne{Advisor}
-\gdef\@advisorSixLineTwo{}
-\gdef\@advisorSixLineThree{}
-\gdef\@advisorSixLineFour{}
-%% End dissertation code
 
 % Support for the Authorindex
 % Authorindex
@@ -985,197 +889,151 @@
   \MakeRptDocPage
 }
 
-% LP -  bring in definitions for the disseratation signature page identifications
-\def\committeechair#1{\gdef\@comitteechair{#1}} % fixes a typo to be easier on 
-%the user.
-\def\comitteechair#1{\gdef\@committeechair{#1}} % this is the original one. 
-%Just for backwards compatibility.
-\def\advisorOne#1{\gdef\@advisorOne{#1}}
-\def\advisorTwo#1{\gdef\@advisorTwo{#1}}
-\def\advisorThree#1{\gdef\@advisorThree{#1}}
-\def\advisorFour#1{\gdef\@advisorFour{#1}}
-\def\advisorFive#1{\gdef\@advisorFive{#1}}
-\def\advisorSix#1{\gdef\@advisorSix{#1}}
+% Definitions for the dissertation signature page identifications
+\newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\raggedright #1}}
+\def\committeechair#1{\gdef\@committeechair{#1}}
 \def\assocprovost#1{\gdef\@assocprovost{#1}}
+
+% Dissertation committee members
+\def\@memberOne{\@thesisadvisor}
+\def\@memberTwo{\@committeechair}
+\def\@memberThree{}
+\def\@memberFour{}
+\def\@memberFive{}
+\def\@memberSix{}
+
+\def\memberOne#1{\gdef\@memberOne{#1}}
+\def\memberTwo#1{\gdef\@memberTwo{#1}}
+\def\memberThree#1{\gdef\@memberThree{#1}}
+\def\memberFour#1{\gdef\@memberFour{#1}}
+\def\memberFive#1{\gdef\@memberFive{#1}}
+\def\memberSix#1{\gdef\@memberSix{#1}}
+
+% Title lines for each dissertation committee member.
+\def\@memberOneTitleLine{Dissertation Supervisor}
+\def\@memberTwoTitleLine{Dissertation Committee Chair}
+\def\@memberThreeTitleLine{}
+\def\@memberFourTitleLine{}
+\def\@memberFiveTitleLine{}
+\def\@memberSixTitleLine{}
+
+\def\memberOneTitleLine#1{\gdef\@memberOneTitleLine{#1}}
+\def\memberTwoTitleLine#1{\gdef\@memberTwoTitleLine{#1}}
+\def\memberThreeTitleLine#1{\gdef\@memberThreeTitleLine{#1}}
+\def\memberFourTitleLine#1{\gdef\@memberFourTitleLine{#1}}
+\def\memberFiveTitleLine#1{\gdef\@memberFiveTitleLine{#1}}
+\def\memberSixTitleLine#1{\gdef\@memberSixTitleLine{#1}}
+
 
 \def\NPSthesistitle{
   \setcounter{page}{3}          % do not reset to page 1
   \thispagestyle{fancy}
   \begin{center}
-    \textbf{\@distribution}
-    \vfill
-    \textbf{\MakeUppercase{\@title}}
-    \vfill
+    \textbf{\@distribution}\\
+    \vspace{\bigskipamount}\vfill
+    \textbf{\MakeUppercase{\@title}}\\
+    \vspace{\bigskipamount}\vfill
     \@author~\\
     \@rank~\\
     \@prevdegrees\\
     \iftwoauthors
-      \vspace{1pc}
+      \vspace{1.5\medskipamount}
       \@authortwo~\\
       \@ranktwo~\\
-      \@prevdegreestwo
+      \@prevdegreestwo\\
     \fi
-    \vfill
+    \vspace{\bigskipamount}\vfill
     Submitted in partial fulfillment of the\\
     requirements for the degree of\\
-    \vfill
+    \vspace{\bigskipamount}\vfill
     \textbf{\MakeUppercase{\@degree}}\\
-    \vfill
+    \vspace{\medskipamount}
     from the\\
-    \vfill
+    \vspace{1.5\medskipamount}
     \textbf{NAVAL POSTGRADUATE SCHOOL}\\
     \textbf{\@date}
   \end{center}
 
+  %% dissertation:
   \ifnpsdissertation 
      \newcommand{\sigspace}{1.5pc}
-      \vspace{\sigspace}
-      \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-      %\cline{2-3}
-      {\dissfont Author:} & {\dissfont \@author} & &\\
-       \end{tabular}
-      
-      \ifNPSdissertationadvisoralone % committee has 5 members, show advisor 
-      %alone on the top
-        \vspace{\sigspace}
-        \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-        %\cline{2-2}
-           {\dissfont Approved by:} & {\dissfont \@advisorOne}    &     & \\
-        \ifrowonelineone
-            & {\dissfont \@advisorOneLineOne} &     & \\
-        \fi
-        \ifrowonelinetwo
-            & {\dissfont \@advisorOneLineTwo} &     & \\
-        \fi
-        \ifrowonelinethree
-            & {\dissfont \@advisorOneLineThree} &     & \\
-        \fi
-         \ifrowonelinefour
-            & {\dissfont \@advisorOneLineFour} &     & \\
-        \fi
-        \end{tabular}                             
-      \else % dissertationadvisoralone, committee has 6 members
-          \vspace{\sigspace}
-        \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-        %\cline{2-2}
-        %\cline{4-4}
-           {\dissfont Approved by:} & {\dissfont \@advisorOne}    &     & 
-           {\dissfont \@advisorTwo} \\
-          \ifrowonelineone
-            & {\dissfont \@advisorOneLineOne} &     & {\dissfont 
-            \@advisorTwoLineOne} \\
-        \fi
-        \ifrowonelinetwo
-            & {\dissfont \@advisorOneLineTwo} &     & 
-            {\dissfont\@advisorTwoLineTwo} \\
-        \fi
-        \ifrowonelinethree
-            & {\dissfont \@advisorOneLineThree} &     & {\dissfont 
-            \@advisorTwoLineThree} \\
-        \fi
-        \ifrowonelinefour
-            & {\dissfont \@advisorOneLineFour} &     & {\dissfont 
-            \@advisorTwoLineFour} \\
-        \fi
-        \end{tabular}
-      \fi
-      
-      \vspace{\sigspace}
-      \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-      %\cline{2-2}
-      %\cline{4-4}
-            & {\dissfont \@advisorThree}    &     & {\dissfont \@advisorFour} \\
-      \ifrowtwolineone
-            & {\dissfont \@advisorThreeLineOne} &     & {\dissfont 
-            \@advisorFourLineOne} \\
-      \fi
-      \ifrowtwolinetwo
-            & {\dissfont \@advisorThreeLineTwo} &     & {\dissfont 
-            \@advisorFourLineTwo} \\
-      \fi
-      \ifrowtwolinethree
-            & {\dissfont \@advisorThreeLineThree} & & {\dissfont 
-            \@advisorFourLineThree} \\
-      \fi
-       \ifrowtwolinefour
-            & {\dissfont \@advisorThreeLineFour} &     & {\dissfont 
-            \@advisorFourLineFour} \\
-      \fi
-      \end{tabular}
 
-      \ifNPSdissertationadvisornotalone % committee has 5 members, advisorTwo 
-      %is used, so don't use advisorSix
-        \vspace{\sigspace}
-        \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-        %\cline{2-2}
-            & {\dissfont \@advisorFive}    &     & \\
-        \ifrowthreelineone
-            & {\dissfont \@advisorFiveLineOne} &     & \\
-        \fi
-        \ifrowthreelinetwo
-            & {\dissfont \@advisorFiveLineTwo} &     & \\
-        \fi
-        \ifrowthreelinethree
-            & {\dissfont \@advisorFiveLineThree} &     & \\
-        \fi
-         \ifrowthreelinefour
-            & {\dissfont \@advisorFiveLineFour} &     & \\
-        \fi
-        \end{tabular}
-      \else % dissertationfivemembers, committee has 6 members
-          \vspace{\sigspace}
-        \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-        %\cline{2-2}
-        %\cline{4-4}
-            & {\dissfont \@advisorFive}    &     & {\dissfont \@advisorSix} \\
-          \ifrowthreelineone
-            & {\dissfont \@advisorFiveLineOne} &     & {\dissfont 
-            \@advisorSixLineOne} \\
-        \fi
-        \ifrowthreelinetwo
-            & {\dissfont \@advisorFiveLineTwo} &     & 
-            {\dissfont\@advisorSixLineTwo} \\
-        \fi
-        \ifrowthreelinethree
-            & {\dissfont \@advisorFiveLineThree} &     & {\dissfont 
-            \@advisorSixLineThree} \\
-        \fi
-        \ifrowthreelinefour
-            & {\dissfont \@advisorFiveLineFour} &     & {\dissfont 
-            \@advisorSixLineFour} \\
-        \fi
-        \end{tabular}
-      \fi
-      
-      \vspace{\sigspace}                         
-      \begin{tabular}{p{1in}p{2in}p{0.25in}p{2in}}
-      %\cline{2-4}                                                 
-      {\dissfont Approved by:} & {\dissfont \@departmentchair} & & \\
-      & \multicolumn{2}{l}{{\dissfont Chair, \@department}} & \\
-      \end{tabular}
-      
-      \vspace{\sigspace}
-      \begin{tabular}{p{1in}p{2in}p{0.25in}p{1.75in}}
-      %\cline{2-4}
-      {\dissfont Approved by:} & {\dissfont \@assocprovost} & & \\
-      & \multicolumn{2}{l}{{\dissfont Associate Provost for Academic Affairs}} 
-      & \\
-      \end{tabular}
-  \else  
-    \iftwoadvisors
-      \newcommand{\sigspace}{.4in}
-
+      \vfill
       \begin{tabbing}
-       \hspace{2.5in}\=\\[\sigspace]       % Set the tabs
+      \hspace{1.1in} \= \hspace{2.4in} \= \\      % Set the tabs
+
+      Author: \> \@author \\[\sigspace]
+
+      %% Row 1:
+      % process member 1
+      \ifadvisoralone
+      Approved by: \> \@memberOne \\
+                   \> \NPScommitteebox{\@memberOneTitleLine} \\[\sigspace]
+      \else
+      % process member 1 and 2
+      Approved by: \> \@memberOne
+                   \> \@memberTwo \\
+                   \> \NPScommitteebox{\@memberOneTitleLine} \>
+                      \NPScommitteebox{\@memberTwoTitleLine} \\[\sigspace]
+      \fi
+      %% Row 2:
+      \ifadvisoralone
+      % process member 2 and 3
+                   \> \@memberTwo
+                   \> \@memberThree \\
+                   \> \NPScommitteebox{\@memberTwoTitleLine} \>
+                      \NPScommitteebox{\@memberThreeTitleLine} \\[\sigspace]
+      \else
+      % process member 3 and 4
+                   \> \@memberThree
+                   \> \@memberFour \\
+                   \> \NPScommitteebox{\@memberThreeTitleLine} \>
+                      \NPScommitteebox{\@memberFourTitleLine} \\[\sigspace]
+      \fi
+      %% Row 3:
+      \ifadvisoralone
+      % process member 4 and 5
+                   \> \@memberFour
+                   \> \@memberFive \\
+                   \> \NPScommitteebox{\@memberFourTitleLine} \>
+                      \NPScommitteebox{\@memberFiveTitleLine} \\[\sigspace]
+      \else
+      \iffivemembers
+      % process member 5 and done
+                   \> \@memberFive \\
+                   \> \NPScommitteebox{\@memberFiveTitleLine} \\[\sigspace]
+      \else
+      % process member 5 and 6
+                   \> \@memberFive
+                   \> \@memberSix \\
+                   \> \NPScommitteebox{\@memberFiveTitleLine} \> %
+                      \NPScommitteebox{\@memberSixTitleLine} \\[\sigspace]
+      \fi
+      \fi
+      Approved by: \> \@departmentchair \\
+                   \> Chair, \@department \\[\sigspace]
+
+      Approved by: \> \@assocprovost \\
+                   \> Associate Provost for Academic Affairs \\
+      \end{tabbing}
+  %% thesis:
+  \else
+    %% co-advisors
+    \iftwoadvisors
+      \newcommand{\sigspace}{1.5pc}
+
+      \vfill
+      \begin{tabbing}
+      \hspace{1.1in}\=\\       % Set the tabs
 
       \iftwoauthors
-      \hspace{.5in} Authors: \> \@author \\[\sigspace]
+      Authors: \> \@author \\[\sigspace]
                \> \@authortwo\\[\sigspace]
       \else
-      \hspace{.5in} Author: \> \@author \\[\sigspace]
+      Author: \> \@author \\[\sigspace]
       \fi
   
-      \hspace{.5in} Approved by:   \> \@thesisadvisorone \\
+      Approved by:   \> \@thesisadvisorone \\
                      \> Thesis Co-Advisor \\[\sigspace]
 
                      \> \@thesisadvisortwo \\
@@ -1185,20 +1043,22 @@
                      \>  Chair, \@department \\
       \end{tabbing}
     \else
+    %% co-advisors + reader
     \iftwoadvisorsreader
-      \newcommand{\sigspace}{.4in}
+      \newcommand{\sigspace}{1.5pc}
 
+      \vfill
       \begin{tabbing}
-       \hspace{2.5in}\=\\[\sigspace]       % Set the tabs
+      \hspace{1.1in}\=\\       % Set the tabs
 
       \iftwoauthors
-      \hspace{.5in} Authors: \> \@author \\[\sigspace]
+      Authors: \> \@author \\[\sigspace]
                \> \@authortwo\\[\sigspace]
       \else
-      \hspace{.5in} Author: \> \@author \\[\sigspace]
+      Author: \> \@author \\[\sigspace]
       \fi
 
-      \hspace{.5in} Approved by:   \> \@thesisadvisorone \\
+      Approved by:   \> \@thesisadvisorone \\
                      \> Thesis Co-Advisor \\[\sigspace]
 
                      \> \@thesisadvisortwo \\
@@ -1210,20 +1070,22 @@
                      \> \@departmentchair \\
                      \>  Chair, \@department \\
       \end{tabbing}
+    %% advisor + reader
     \else
-      \newcommand{\sigspace}{.5in}
+      \newcommand{\sigspace}{1.5pc}
 
+      \vfill
       \begin{tabbing}
-       \hspace{2.5in}\=\\[\sigspace]       % Set the tabs
+      \hspace{1.1in}\=\\       % Set the tabs
 
       \iftwoauthors
-      \hspace{.5in} Authors: \> \@author \\[\sigspace]
+      Authors: \> \@author \\[\sigspace]
                \> \@authortwo\\[\sigspace]
       \else
-      \hspace{.5in} Author: \> \@author \\[\sigspace]
+      Author: \> \@author \\[\sigspace]
       \fi
 
-      \hspace{.5in} Approved by:   \> \@thesisadvisor \\
+      Approved by:   \> \@thesisadvisor \\
                      \> Thesis Advisor \\[\sigspace]
 
                      \> \@secondreader \\
@@ -1235,8 +1097,6 @@
     \fi
     \fi
   \fi
-  \vfill
-  \hrulefill
   \cleardoublepage
 }
 
