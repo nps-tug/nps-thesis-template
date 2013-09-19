@@ -212,28 +212,8 @@
     \vfill
     \vss}%
     
-  \newpage
   \if@twoside
     \null
-
-% NPS - SLG ADD
- \vspace*{\fill} 
- \thispagestyle{empty}  % Without this, we get two page numbers?
- \begin{center} 
-   THIS PAGE INTENTIONALLY LEFT BLANK\\
- \vspace{\fill} 
- \end{center} 
- \begin{picture}(0,0)(0,0)
-   \put(230,-36){ii}
- \end{picture}
-   \begin{picture}(0,0)
-   \put(0,-108){\makebox(432, 100)[t]{% bottom one
-       \sf\@securitybanner}}
-%   \put(0,540){\makebox(432, 100)[t]{%				% Removed TOP marking (per new FOUO guidance)
-%       \sf\@securitybanner}}
-   \end{picture}
-    \newpage
-% NPS end
 
   \fi
   \global\let\ReportDate\relax

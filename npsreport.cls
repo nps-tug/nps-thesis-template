@@ -447,6 +447,24 @@
   \fi
 \fi
 
+\usepackage{afterpage}
+\newenvironment{smark}[1][U]%
+{\thispagestyle{fancy}
+  \rhead{} %
+  \lhead{} %
+\ifclassified % leave classified headers and footers alone
+\else
+  \chead{} %
+  \cfoot{\textsf{\@securitybanner} \\ \thepage} %
+\fi
+  #1}
+{ \ifclassified % leave classified headers and footers alone
+  \else
+   \afterpage{\cfoot{\thepage}}
+  \fi
+}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
 %%% Common NPS requirements
@@ -700,7 +718,11 @@
 % See http://www.ctan.org/tex-archive/macros/latex/contrib/fancyhdr/fancyhdr.pdf
 \newcommand{\thisPageIntentionallyLeftBlank}{
   \ifnpstwoside
-    \lhead{}\chead{}\rhead{}            % remove the headings 
+    \ifclassified               % leave classified headers and footers alone
+    \lhead{}\rhead{}            % remove the headings
+    \else
+    \lhead{}\chead{}\rhead{}    % remove the headings
+    \fi
     \vspace*{\fill} 
     \begin{center} 
       THIS PAGE INTENTIONALLY LEFT BLANK 
@@ -711,7 +733,7 @@
 }
 
 
-\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else 
+\def\cleardoublepage{\clearpage\if@twoside \ifodd \c@page \else
  \thispagestyle{fancy}
  \thisPageIntentionallyLeftBlank
  \if@twocolumn\hbox{}\newpage\fi\fi\fi
@@ -739,10 +761,18 @@
   % starts, because the \NPScover command appears first
   \pagestyle{fancy}
   \rhead{}
-  \chead{}                              % Removing "\textsf{\@securitybanner}" from top banner
+\ifclassified
+  \chead{\textsf{\@securitybanner}}
+\else
+  \chead{}
+\fi
   \lhead{}
   \renewcommand{\headrulewidth}{0pt}
+\ifclassified
   \cfoot{\textsf{\@securitybanner} \\ \thepage}
+\else
+  \cfoot{\thepage}
+\fi
   \renewcommand{\sf@ExtraPages}{2}                        % include for the NPS cover
   %
   % The first page; but note --- it's a title page, so it doesn't use
@@ -874,6 +904,7 @@
   \Abstract{\@abstract}
   \SponsoringAgencySF{\@sponsoringagency}
   \MakeRptDocPage
+  \cleardoublepage
 }
 
 % Definitions for the dissertation signature page identifications

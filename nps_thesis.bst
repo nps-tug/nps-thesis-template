@@ -178,6 +178,10 @@ FUNCTION {default.name.latex.cmd}{ "" }
 % The default URL prefix.
 FUNCTION {default.name.url.prefix}{ "[Online]. Available:" }
 
+% Related to 'classification' entry
+FUNCTION {default.classification.show}{ #0 } % 0 is off, #1 is on
+FUNCTION {default.classification.unmarked}{ "(U)" }
+
 
 % Other controls that cannot be accessed via IEEEtranBSTCTL entry type.
 
@@ -340,6 +344,7 @@ ENTRY
     CTLname_format_string
     CTLname_latex_cmd
     CTLname_url_prefix
+    classification
   }
   {}
   { label }

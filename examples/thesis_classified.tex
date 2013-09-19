@@ -1,0 +1,204 @@
+% This starts the document; the "npsreport" style is really a modified
+% report style. Feel free to use the options explained in the technical
+% report NPS-CS-11-011, included under the doc/ directory.
+\documentclass[twoside,thesis,classified]{npsreport}
+
+%
+% Put extra packages you may need to customize your thesis
+%
+\usepackage{doc,lipsum}  % provides \BibTex and \lipsum macros, for demos
+\usepackage[retainorgcmds]{IEEEtrantools} % provides bstctlcite
+
+\title{[Title (U)]}
+
+% Student info
+\author{[Author Name]}
+\rank{[Rank, Service]}
+\degree{Master of Science in [Degree]}
+\degreeabbreviation{MS}   % Should be MS, MBA or MA
+\prevdegrees{[B.S., Undergrad Degree, My Old School, Year]} % previous degree
+
+% Department info
+\department{Department of [Department]}
+\thesisadvisor{[Primary Advisor]}
+\secondreader{[Second Reader]}
+\departmentchair{[Dr.\ Department Chair]}
+
+% The date you are graduating:
+\degreedate{[Month Year]}
+
+% See Thesis processor's release form for approved distribution statements.
+\distribution{[Further dissemination only as directed by (inserting controlling
+DoD office) (date of determination) or higher DoD authority.]}
+
+% Your abstract.  New paragraphs start after an empty line.
+\abstract{
+\begin{smark}[(U)]
+  \lipsum[1] % example text, remove me
+\end{smark}
+}
+
+% Security Banner
+\securitybanner{F//MM//SPECIAL//TOM FOOLERY}
+\declassifydate{1-APR-2099}
+% The banner marking for the document and all pages shall be the overall 
+% classification of the compilation. The overall classification shall be 
+% marked conspicuously at the top and bottom of each page and on the outside 
+% of the front and back covers. (DoDM 5200.01-V2, Feb 24, 2012)
+
+%
+% Mandatory fields for the SF298.
+%
+\ReportType{Master's Thesis}
+\ReportDate{MM-DD-YYY} 		% for a thesis, graduation date
+\DatesCovered{2102-06-01 to 2104-10-31}
+\SponsoringAgency{Department of the Navy}
+
+%``By definition, information must be unclassified in order to be designated FOUO'.' 
+% from (DoDM 5200.01-V4, Feb 24, 2012)
+\ReportClassification{Fun}
+\AbstractClassification{Jolly}
+\PageClassification{Amusing}
+\AbstractLimitation{Fun}
+
+%
+% Optional fields for the SF298.
+%
+\RPTpreparedFor{}
+\SponsoringNotation{}
+\ContractNumber{}
+\GrantNumber{}
+\ProgramElementNumber{}
+\TaskNumber{}
+\WorkUnitNumber{}
+\POReportNumber{}
+\Acronyms{}
+\SMReportNumber{}
+\SubjectTerms{}
+% "Each document determined to contain FOUO information shall identify the
+% originating agency or office. This information shall be clear and complete enough to allow
+% someone receiving the document to contact the office if questions or problems about the
+% designation or markings arise."
+% from (DoDM 5200.01-V4, Feb 24, 2012)
+\ResponsiblePerson{}
+\RPTelephone{}
+\SignatureOne{}
+\SignatureTwo{}
+\SupplementaryNotes{The views expressed in this document are those of
+  the author and do not reflect the official policy or position of the
+  Department of Defense or the U.S. Government. %
+  IRB Protocol Number: N/A % if you need to note an IRB Protocol
+}
+
+% Optional. Prevents footnotes from being reset at each chapter
+% Comment this out to have them reset with each chapter.
+\makeatletter
+\@removefromreset{footnote}{chapter}
+\makeatother
+
+%
+% Your thesis begins here
+%
+\begin{document}
+
+\NPScover                  % Cover page
+%\NPSsignature             % NPS signature page, for tech reports
+\NPSsftne                  % SF298 form
+\NPSthesistitle            % Title page
+\NPSabstractpage           % Abstract Page
+\NPSfrontmatter            % NPS front matter follows
+
+% This changes the chaptermark and includes the various tables
+% It must be here.
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}}
+
+%
+% If you don't need one of these, comment it out.
+%
+\NPStableOfContents
+\NPSlistOfFigures
+\NPSlistOfTables
+
+\NPSlistOfAcronyms{
+\begin{description}
+\item[A] Amusing
+\item[DOD] Department of Deference\footnote{(U) May also appear DoD for historical reasons.}
+\item[F] Fun
+\item[J] Jolly
+\item[MM] Mickey Mouse
+\item[RBRB] Really Big Rubber Band
+\item[PC] Pinhole Camera
+\item[U] Unfunny
+\end{description}
+}
+
+%
+% Put Executive summary here.
+% New paragraphs start after an empty line.
+%
+\NPSexecsummary{
+\begin{smark}[(F//MM)]  \lipsum[1]
+\end{smark}
+
+\begin{smark}[(F//MM)]  \lipsum[2]
+\end{smark}
+}
+
+%
+% Put acknowledgements here.
+% New paragraphs start after an empty line.
+%
+\NPSacknowledgements{
+\begin{smark}[(F//MM)] I dedicate this thesis to Tom Cruise. Remember,
+  ``in the event that you are unsuccessful, the Agency will disavow
+  you and your mission.'' 
+\end{smark}
+}
+
+% Start layout for the NPS body
+\NPSbody
+
+
+% CHAPTERS
+% You have two options on how to structure your thesis:
+% a) A single file. All chapters, sections, etc. go in this file.
+%    This can make navigating your thesis a little more difficult.
+% b) Use multiple files.  One chapter per file is recommended.
+%    This breaks your thesis up into logical units to edit.
+%
+\input{chapter_class_marking}
+%
+% (include other chapters here...)
+%
+
+% APPENDICES
+% You have two recommended options for your appendix:
+% a) A single appendix (with a single TOC entry)
+% b) Multiple appendices. Look under the examples directory for a demo of
+%   multiple appendices.
+%
+
+% REFERENCES
+% List all your BibTeX reference source files (ending in *.bib extension)
+%
+\NPSbibliography{thesis,classified_refs_meta}
+\bstctlcite{NPS:BSTcontrol}   % control 'activiates' classification markings
+
+%
+% This is the official end of the thesis.
+%
+\NPSend        
+
+% DISTRIBUTION LIST
+% The list is automatically properly numbered
+% and already populated with the mandatory recipients.
+%
+\NPSdistribution{Initial Distribution List}
+\begin{enumerate}
+\item (U) Defense Technical Information Center\\Ft. Belvoir, Virginia
+\item (U) Dudly Knox Library\\Naval Postgraduate School\\Monterey, California
+\end{enumerate}
+
+
+\end{document}
+
