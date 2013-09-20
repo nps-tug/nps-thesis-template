@@ -162,7 +162,7 @@
   \LoadClass{report}             % inherit from article so we can have
 \fi
 
-\usepackage[letterpaper,lmargin=1.10in,rmargin=1.10in,hoffset=.0in,tmargin=1in,bmargin=1.5in]{geometry}
+\usepackage[letterpaper,lmargin=1.25in,rmargin=1.25in,hoffset=.0in,tmargin=1in,bmargin=1in]{geometry}
 \footskip = .5in                % margin goes from the page number
 \usepackage[T1]{fontenc}        % http://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc
 \usepackage{url}                % make\url work (be nice have [lowtidle])

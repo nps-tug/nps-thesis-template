@@ -32,8 +32,11 @@
 \IfFileExists{totpages.sty}{%
   \usepackage{totpages}
   \newcounter{sf@page}}{}
+\newcommand\twodigits[1]{%
+   \ifnum#1<10 0#1\else #1\fi
+}
 \newcommand\ReportDate[1]{\renewcommand\sf@ReportDate{#1}}
-\newcommand\sf@ReportDate{\number\day--\number\month--\number\year}
+\newcommand\sf@ReportDate{\twodigits{\number\day}--\twodigits{\number\month}--\number\year}
 \newcommand\ReportType[1]{\renewcommand\sf@ReportType{#1}}
 \newcommand\sf@ReportType{\relax}
 \newcommand\DatesCovered[1]{\renewcommand\sf@DatesCovered{#1}}
@@ -118,8 +121,8 @@
   \setlength{\baselineskip}{#2}%
   \setlength{\normalbaselineskip}{\baselineskip}%
   #1
-  \spaceskip=\fontdimen2\font % space between words (\raggedright)
-  \xspaceskip=\fontdimen2\font
+  %\spaceskip=\fontdimen2\font % space between words (\raggedright)
+  %\xspaceskip=\fontdimen2\font
   \advance\xspaceskip by\fontdimen7\font}
 \newcommand{\sf@strut}{\rule{0pt}{7pt}}
 \DeclareFixedFont{\sf@titlefontA}{OT1}{\sfdefault}{bx}{n}{\@xivpt}
@@ -199,16 +202,14 @@
     \advance\@tempskipa\headsep
     \advance\@tempskipa\baselineskip
     \vskip-\@tempskipa
-    \hbox to 0pt{%
-      \@tempskipa\oddsidemargin
-      \advance\@tempskipa 42pt
-      \hskip-\@tempskipa
+    \vskip 0.35in  % this corrects the top margin to be at 1in
+    \vfill
   \ifsf@oldform
-      \sf@drawoldform
+      \resizebox{\textwidth}{!}{\sf@drawoldform}
   \else
-      \sf@drawform
+      \resizebox{\textwidth}{!}{\sf@drawform}
   \fi
-      \hss}%
+    \vfill
     \vss}%
     
   \newpage
@@ -318,11 +319,8 @@
   \global\let\MakeRptDocPage\relax}
 \def\sf@parbox(#1,#2)#3{%
   \makebox(0,0)[bl]{%
-    \vbox to #1\unitlength{%
-      \vss
-      \noindent
-      \parbox{#2\unitlength}{\raggedright#3}%
-    \vfil}}}
+      \parbox[c][#1\unitlength]{#2\unitlength}{\noindent #3}%
+    }}
 \newcommand\sf@drawform{%
   \sf@setentryfont
   \setlength{\unitlength}{1bp}
@@ -370,8 +368,8 @@
       \sf@settitlefontB\shortstack[c]{%
         Form Approved\\[-2pt]%
         OMB No. 0704--0188}}}
-    \put(  3,635){\makebox(533, 42){%
-      \sf@settitlefontC\parbox{533bp}{\raggedright
+    \put(  3,635){\makebox(530, 42){%
+      \sf@settitlefontC\parbox{533bp}{
       The public reporting burden for this collection of information
       is estimated to average 1 hour per response, including the
       time for reviewing instructions, searching existing data
@@ -529,8 +527,8 @@
           \vfil}}}
     \else
       \put(  4,255){\sf@parbox( 38,532){\sf@DistributionStatement}}
-      \put(  4,217){\sf@parbox( 25,532){\sf@SupplementaryNotes}}
-      \put(  4, 95){\sf@parbox(110,533){\sf@Abstract}}
+      \put(  4,217){\sf@parbox( 25,529){\sf@SupplementaryNotes}}
+      \put(  4, 95){\sf@parbox(110,529){\sf@Abstract}}
       \put(  4, 51){\sf@parbox( 36,533){\sf@SubjectTerms}}
     \fi
     \put( 30, 13){\makebox(0,0){\sf@ReportClassification}}
@@ -547,12 +545,13 @@
 \newcommand\sf@drawoldform{%
   \sf@setentryfont
   \setlength{\unitlength}{1bp}
+  %\LeftShift[100pt]
   \begin{picture}(539,707)(\sf@LeftShift,\sf@DownShift)
     % Draw blank form
-    \linethickness{1bp}%
+    \linethickness{1.25pt}%
     \put(  0,  0){\framebox(539,707){}}
     % Horizontal lines
-    \linethickness{0.5bp}%
+    \linethickness{1.25pt}%
     \put(  0,687){\line(1,0){539}}
     \put(  0,635){\line(1,0){539}}
     \put(  0,611){\line(1,0){539}}
@@ -575,8 +574,8 @@
       \sf@settitlefontB\shortstack[c]{%
         Form Approved OMB No.~0704--0188}}}
 
-    \put(  3,635){\makebox(533, 50){%
-      \sf@settitlefontF\parbox{533bp}{\raggedright
+    \put(  3,635){\makebox(529, 50){%
+      \sf@settitlefontF\parbox{533bp}{
       Public reporting burden for this collection of information
       is estimated to average 1 hour per response, including the
       time for reviewing instruction, searching existing data
@@ -657,13 +656,13 @@
     % FIELD 11
     \put(  0,342){\makebox(539, 30)[tl]{%
       \sf@settitlefontE\sf@strut 11.\ SUPPLEMENTARY NOTES}}
-    \put(  4,340){\sf@parbox( 25,532){\sf@SupplementaryNotes}}
+    \put(  4,340){\sf@parbox( 25,529){\sf@SupplementaryNotes}}
 
     % FIELD 12
     \put(  0,300){\makebox(539, 30)[tl]{%
       \sf@settitlefontE\sf@strut
       12a.\ DISTRIBUTION / AVAILABILITY STATEMENT}}
-    \put(  4,300){\sf@parbox( 25,532){\sf@DistributionStatement}}
+    \put(  4,300){\sf@parbox( 25,350){\sf@DistributionStatement}}
     \put(360,330){\line(0,-1){30}}
     \put(360,300){\makebox(180, 30)[tl]{%
       \sf@settitlefontE\shortstack[l]{%
@@ -674,7 +673,7 @@
     \put(  0,95){\makebox(539,200)[tl]{%
       \sf@settitlefontE\sf@strut 13.\ ABSTRACT
       \sf@settitlefontF (maximum 200 words)}}
-    \put(  4, 95){\sf@parbox(260,533){\sf@Abstract}}
+      \put(  4, 95){\sf@parbox(260,529){\sf@Abstract}}
 
     % FIELD 14
     \put(  0, 48){\makebox(450, 46)[tl]{%
@@ -687,7 +686,7 @@
       \sf@settitlefontE\shortstack[l]{%
         \sf@strut 15.\ NUMBER OF\\[-2pt]
         \sf@strut\phantom{15.\ }PAGES}}}
-    \put(512, 78){\makebox(0,0){\large\sf@NumberPages}}
+    \put(512, 78){\makebox(0,0){\sf@NumberPages}}
 
     % FIELD 16
     \put(450, 70){\line(1,0){90}}
