@@ -1444,6 +1444,7 @@
 \fi
   \def\listacronymname{List of Acronyms and Abbreviations}
   \thispagestyle{fancy}
+  \onehalfspacing
   #1
   \cleardoublepage
 }
@@ -1458,7 +1459,10 @@
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
   \def\listacronymname{List of Acronyms and Abbreviations}
-  \thispagestyle{fancy}\input{#1}\cleardoublepage
+  \thispagestyle{fancy}
+  \onehalfspacing
+  \input{#1}
+  \cleardoublepage
 }
 
 \def\bibname{\textbf{REFERENCES\ULABEL}}
