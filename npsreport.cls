@@ -1379,6 +1379,9 @@
   \chapter*{#1}
 \fi
   \singlespacing    % reduce extra line breaks between entries
+  \newenvironment{distributionlist}
+    {\begin{enumerate}\itemsep \baselineskip}
+    {\end{enumerate}}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
