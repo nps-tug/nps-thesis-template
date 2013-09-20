@@ -788,9 +788,9 @@
   \appendix                       % Appendix mode
   \clearpage
 \ifnpsarticle
-  \addcontentsline{toc}{section}{Appendices}  % Insert ``Appendices'' into TOC
+  \cftaddtitleline{toc}{section}{Appendices}{} % Insert ``Appendices'' into TOC
 \else
-  \addcontentsline{toc}{chapter}{Appendices}  % Insert ``Appendices'' into TOC
+  \cftaddtitleline{toc}{chapter}{Appendices}{} % Insert ``Appendices'' into TOC
   \def\chaptername{Appendix}  % not sure why this is needed, but it is
 \fi
 }
@@ -1262,7 +1262,7 @@
 \ifnpsarticle
   \begin{center}\textbf{\large{Executive Summary\ULABEL}}\end{center}
 \else
-  \addcontentsline{toc}{chapter}{Executive Summary}
+  %\addcontentsline{toc}{chapter}{Executive Summary}
   \chapter*{Executive Summary\ULABEL}
 \fi
   \onehalfspacing
@@ -1274,7 +1274,7 @@
 \ifnpsarticle
   \begin{center}\textbf{\large{Acknowledgements\ULABEL}}\end{center}
 \else
-  \addcontentsline{toc}{chapter}{Acknowledgements}
+  %\addcontentsline{toc}{chapter}{Acknowledgements}
   \chapter*{Acknowledgements\ULABEL}
 \fi
   \onehalfspacing
@@ -1411,7 +1411,7 @@
   \addcontentsline{toc}{section}{List of Figures}
   \section*{\listfigurename\ULABEL}
 \else
-  \addcontentsline{toc}{chapter}{List of Figures}
+  %\addcontentsline{toc}{chapter}{List of Figures}
   \chapter*{\listfigurename\ULABEL}
 \fi
   \def\listfigurename{}
@@ -1422,10 +1422,10 @@
 \newcommand{\NPSlistOfTables}{
   \lhead{}\rhead{}
 \ifnpsarticle
-  \addcontentsline{toc}{section}{List of Tables}
+  %\addcontentsline{toc}{section}{List of Tables}
   \section*{\listtablename\ULABEL}
 \else
-  \addcontentsline{toc}{chapter}{List of Tables}
+  %\addcontentsline{toc}{chapter}{List of Tables}
   \chapter*{\listtablename\ULABEL}
 \fi
   \def\listtablename{}
@@ -1437,10 +1437,10 @@
   \lhead{}\rhead{}
 \ifnpsarticle
   \section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
-  \addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
+  %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
 \else
   \chapter*{List of Acronyms and Abbreviations\ULABEL}
-  \addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+  %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
   \def\listacronymname{List of Acronyms and Abbreviations}
   \thispagestyle{fancy}
@@ -1452,10 +1452,10 @@
   \lhead{}\rhead{}
 \ifnpsarticle
   \section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
-  \addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
+  %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
 \else
   \chapter*{List of Acronyms and Abbreviations\ULABEL}
-  \addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+  %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
   \def\listacronymname{List of Acronyms and Abbreviations}
   \thispagestyle{fancy}\input{#1}\cleardoublepage
