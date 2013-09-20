@@ -19,6 +19,7 @@ ALL += thesis_mult_appendix.pdf
 ALL += thesis_author_advisor_reader.pdf thesis_twoauthor.pdf
 ALL += thesis_coadvisors.pdf thesis_coadvisors_reader.pdf
 ALL += thesis_twoauthor_coadvisors_reader.pdf
+ALL += thesis_classified.pdf thesis_fouo.pdf
 
 all: $(ALL)
 
