@@ -890,7 +890,8 @@
 }
 
 % Definitions for the dissertation signature page identifications
-\newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\raggedright #1}}
+\newcommand{\NPSsigfont}{\normalsize}
+\newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\NPSsigfont \raggedright #1}}
 \def\committeechair#1{\gdef\@committeechair{#1}}
 \def\assocprovost#1{\gdef\@assocprovost{#1}}
 
@@ -959,6 +960,7 @@
      \newcommand{\sigspace}{1.5pc}
 
       \vfill
+      \NPSsigfont
       \begin{tabbing}
       \hspace{1.1in} \= \hspace{2.4in} \= \\      % Set the tabs
 
@@ -1016,6 +1018,7 @@
       Approved by: \> \@assocprovost \\
                    \> Associate Provost for Academic Affairs \\
       \end{tabbing}
+      \normalsize
   %% thesis:
   \else
     %% co-advisors
