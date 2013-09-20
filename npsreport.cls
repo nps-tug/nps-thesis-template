@@ -878,7 +878,7 @@
 
 % Definitions for the dissertation signature page identifications
 \newcommand{\NPSsigfont}{\normalsize}
-\newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\NPSsigfont \raggedright #1}}
+\newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\raggedright #1}}
 \def\committeechair#1{\gdef\@committeechair{#1}}
 \def\assocprovost#1{\gdef\@assocprovost{#1}}
 
