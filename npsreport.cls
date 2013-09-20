@@ -315,8 +315,8 @@
 % Provide reasonable defaults
 \department{Computer Science}
 \departmentchair{Peter Denning}
-\researchchair{Jeffrey Paduan}
-\president{Daniel T. Oliver}
+\researchchair{Jeffrey D. Paduan}
+\president{Ronald A. Route}
 \provost{Douglas A. Hensler}
 
 % If you are getting two degrees, use \and between the names.
