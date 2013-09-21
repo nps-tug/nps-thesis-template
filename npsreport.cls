@@ -450,8 +450,7 @@
 
 \newenvironment{smark}[1][U]%
 {\thispagestyle{fancy}
-  \rhead{} %
-  \lhead{} %
+  \rhead{} \lhead{} %
 \ifclassified % leave classified headers and footers alone
 \else
   \chead{} %
@@ -713,11 +712,7 @@
 \fi
 }
 
-
-% handle THIS PAGE INTENTIONALLY LEFT BLANK if in twopage mode
-% See http://www.ctan.org/tex-archive/macros/latex/contrib/fancyhdr/fancyhdr.pdf
-\newcommand{\thisPageIntentionallyLeftBlank}{
-  \ifnpstwoside
+\newcommand{\thisPageIntentionallyLeftBlankForced}{
     \ifclassified               % leave classified headers and footers alone
     \lhead{}\rhead{}            % remove the headings
     \else
@@ -729,9 +724,15 @@
     \end{center} 
     \vspace*{\fill} 
     \newpage 
-  \fi
 }
 
+% handle THIS PAGE INTENTIONALLY LEFT BLANK if in twopage mode
+% See http://www.ctan.org/tex-archive/macros/latex/contrib/fancyhdr/fancyhdr.pdf
+\newcommand{\thisPageIntentionallyLeftBlank}{
+  \ifnpstwoside
+    \thisPageIntentionallyLeftBlankForced
+  \fi
+}
 
 \def\cleardoublepage{\clearpage\if@twoside \ifodd \c@page \else
  \thispagestyle{fancy}
@@ -763,9 +764,7 @@
   % 'myheadings' has page numbers; used for SF298
   %
   \fancypagestyle{myheadings}{
-    \rhead{}
-    \lhead{}
-    \chead{}
+    \rhead{} \chead{} \lhead{}
     \renewcommand{\headrulewidth}{0pt}
     \cfoot{\thepage}
   }
@@ -773,8 +772,7 @@
   % 'fancy' and 'plain' styles have security marking, etc
   %
   \pagestyle{fancyplain}
-  \rhead{}
-  \lhead{}
+  \rhead{} \lhead{}
 \ifclassified
   \chead{\textsf{\@securitybanner} \\ \vspace{1em}}
 \else
@@ -918,7 +916,6 @@
   \DistributionStatement{\@distribution}
   \Abstract{\@abstract}
   \SponsoringAgencySF{\@sponsoringagency}
-  \thispagestyle{myheadings}
   \MakeRptDocPage
   \thispagestyle{myheadings}
   \cleardoublepage
@@ -962,6 +959,8 @@
 
 
 \def\NPSthesistitle{
+  % this page is always (iii), so force skip (used in non-twoside mode)
+  \ifnum \c@page < 3 \thisPageIntentionallyLeftBlankForced \fi
   \setcounter{page}{3}          % do not reset to page 1
   \thispagestyle{fancy}
   \begin{center}
