@@ -202,48 +202,15 @@
 \usepackage{remreset}           % prevent footnotes from being reset at each chapter
 \usepackage{color}
 \usepackage[table]{xcolor}
-\usepackage{paralist}       % {compactenum} {compactitem} environments
-\usepackage{enumitem}       % No extra space before lists
+\usepackage{paralist}           % {compactenum} {compactitem} environments
+\usepackage{enumitem}           % No extra space before lists
 \setlist{nolistsep}
 
-%These packages recommended by students
-\usepackage{float}                  % reimplementation of float package
-\usepackage{cite}                   % for [5-8] reference style
-\usepackage{amsmath,amsfonts}       % for many types of math equations
-\usepackage{url}            % nice handling of URLs
-%\usepackage{epstopdf}            % to use .eps files for figures
-%\usepackage{bm}            % bold math if you need bold greek letters
-%\usepackage{glossaries}        % See 
-%%http://en.wikibooks.org/wiki/LaTeX/Glossary
-% The following package allows for very nice graphics and figures
-% proper usage requires additional information located at:
-% http://asymptote.sourceforge.net/
-% See gallery at this URL for examples
-%\usepackage{asymptote}              % for graphics
-
-% Provides \FloatBarrier which keeps figures in the same section. LaTeX 
-%sometimes moves them to fill up pages.
-% See 
-%http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/placeins/placeins-doc.pdf
-%\usepackage{placeins}
-
-% The mcode package must be separately downloaded, so
-% we include it in the directory. It is turned off by default.
-% The easiest way to include a .sty file is to place it in the same folder
-% as this .cls file.  However, if you include it in your LaTeX installation
-% folder, a manual installation step must be performed:
-% Important note: when you install a .sty file into your LaTeX
-% distribution, you need to update the FNDB for LaTeX to
-% recognize the new files exist.
-% MiKTeX users do:
-%   Run Start - Programs - MiKTeX 2.9 - Maintainance (Admin) - Settings
-%   (Admin)
-%   Then click the "Refresh FNDB" button
-% Other distributions (MacTeX, TeX Live, etc)
-%   Try mktexlsr or texhash on the command prompt
-%
-%\usepackage[numbered]{mcode}        % matlab code
-
+% These packages recommended by students
+\usepackage{float}              % reimplementation of float package
+\usepackage{cite}               % for [5-8] reference style
+\usepackage{amsmath,amsfonts}   % for many types of math equations
+\usepackage{url}                % nice handling of URLs
 
 \pagenumbering{roman}
 
