@@ -1313,7 +1313,8 @@
   \chapter*{\listfigurename\ULABEL}
 \fi
   \def\listfigurename{}
-  \thispagestyle{fancy}\vspace{-1in}\listoffigures\cleardoublepage
+  \listoffigures
+  \cleardoublepage
 }
 
 \newcommand{\NPSlistOfTables}{
