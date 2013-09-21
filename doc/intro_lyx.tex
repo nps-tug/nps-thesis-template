@@ -1,0 +1,107 @@
+\NPSappendixTOC{The NPS LyX Template}
+The NPS LyX Dissertation Template was developed by CDR Michael
+Bilzor is available for use with LyX. The template can be obtained from
+\url{http://simson.net/npsthesis/lyxthesis.zip}.   The remainder of
+this section was written by CDR Bilzor and describes using the
+template.
+
+Using the NPS LyX Dissertation Template
+
+\section*{Get \LaTeX}
+Download and install, if necessary, a \LaTeX{} installation package. For
+Mac, I recommend using Mac\TeX{} - it includes some extras like BibDesk
+and gives you a good basic \LaTeX{} 
+editor. (\url{http://www.tug.org/mactex/2009/})
+
+\section*{Get LyX}
+Download it, install it, and tell it about your \LaTeX{}
+  installation. (If the lack of a spell-checker is bugging you, an
+  easy way to add one is via MacPorts (http://www.macports.org/) -
+  once a package like aspell has been ported in, you can point LyX to
+  it and it'll use it).
+
+\section*{Editing your SF298}
+
+Unfortunately the SF298 files provided by the \LaTeX{} system do not
+work with LyX without modification. You therefore need to modify the
+SF298 style file or use the one we have modified for you.
+
+\subsection*{Option 1: modify the standard sf298 file (permanent fix)}
+
+There are no Windows-specific directions for this task, but it has
+been tested on MacOS and Ubuntu.
+
+Find the copy of your \LaTeX{} distro's |sf298.sty| file:
+
+\begin{description}
+\item[MacOS]  	|/usr/local/texlive/2010/texmf-dist/tex/latex/sf298/sf298.sty|
+\item[Ubuntu]   |/usr/share/texmf-texlive/tex/latex/sf298/sf298.sty|
+\end{description}
+
+These files are read-only, and may be hidden. To make the file
+read-write, do a chmod at the command line (Unix gurus), or use Get
+Info (Command-I) from the Finder and click the lock icon; you'll be
+prompted for the admin password and can then make canges to the
+permissions.
+
+(The template includes  a modified copy of the |sf298.sty| file in the
+|/styles| folder, in case you just want to set permissions, delete the
+old one, and replace it with this one).
+
+Open |sf298.sty| in a text editor (I recommend TextWrangler for Mac; I've
+had issues with standard text editor in saving the file, but
+TextWrangler was obedient).
+
+Locate and comment out the following line (as shown below, now with a \% at the beginning):
+
+\begin{Verbatim}
+%\ExecuteOptions{config,nofloatlongboxes}
+\end{Verbatim}
+
+Skip the next line, then comment out the following three lines as shown:
+
+\begin{Verbatim}
+%\if Y\sf@config
+%  \InputIfFileExists{sf298.cfg}{}{}
+%\fi
+\end{Verbatim}
+
+Save the file and exit. Lyx will default to using the \LaTeX{}
+distribution copy of |sf298.sty| unless you explicitly point it to the
+location of a different copy of |sf298.sty| in your |\usepackage|
+statement. Unmodified, you will get at least two errors compiling the
+NPS dissertation file.  With |sf298.sty| modified, it will now compile
+the NPS \LaTeX{} dissertation format without the errors.
+
+\subsection*{Option 2: use the custom-named nps\_sf298 style file and keep a copy of it in your dissertation's working directory (easy fix).}
+
+Open up the \LaTeX{} Preamble in LyX, using Document/Settings.  Once
+there, change the statement |\usepackage{sf298}| to
+|\usepackage{nps_sf298}|, and be sure there is always a copy of
+|nps_sf298.sty| in your dissertation's working directory.
+
+Open up the Template.  The file is called |Sample_nps_phd.lyx|.  It uses
+the files in the |/images| directory, as well as the bibliography file
+|Sample.bib|.  Typeset a PDF file to check it out.  If everything works,
+you can use this as a template and edit your dissertation using the
+LyX editor.
+
+Notes: 
+\begin{itemize}
+\item This template takes most of the formatting from the |npsphd.cls|
+  file (from Prof.\ Simson Garfinkel and MAJ Rob Harder), and adds
+  the necessary parts into a LyX field called ``\LaTeX{} Preamble,'' which
+  is accessible under document settings. The basic class is "report",
+  and the master fonts are set to Times New Roman. To add more style
+  files, add |\usepackage| statements to the ones already in the
+  Preamble.
+
+\item Be sure that the fields you use for Title, Name, etc. exactly match where they're entered in the document in multiple places (i.e., in the sf298 fields).
+
+\item Sections like the Abstract, Acknowledgments, etc. are implemented as unnumbered chapters (chapter* in the pulldown).
+
+\item |hyperref| support is available through the native LyX GUI interface.
+
+\item The document class in LyX is just ``report,'' and all the customization comes from the \LaTeX{} preamble. LyX has a way to create what it calls a ``layout'' which is LyX-speak for a locally-defined custom \LaTeX{} document class. I haven't done this, but it's probably a good ``future work'' project.
+
+\end{itemize}

@@ -1,0 +1,118 @@
+%%
+%% techreport.tex:
+%% 
+%% The source code for the NPS report that describes the LaTeX style
+%%
+
+\documentclass[twoside,singlespace,twoauthors]{npsreport}
+
+%% Security Banners and classification:
+%% These can go anywhere, but it is useful to have them at the top
+%% to remind you what kind of report you are creating
+\ReportClassification{Unclassified}
+\AbstractClassification{Unclassified}
+\PageClassification{Unclassified}
+\distribution{Approved for public release; distribution is unlimited}
+%\distribution{}
+\securitybanner{}
+
+%% Hyperref adds PDF metadata
+%% TAKE THIS OUT if it causes problems.
+%% Specifically, remove if you are using xelatex
+\usepackage[pdftex,
+  pdftitle={\@title}, 
+  pdfauthor={\@author},
+  pdfkeywords={\@SubjectTerms},
+  pdfpagemode=UseOutlines,
+  bookmarks,
+  bookmarksopen=false,
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black,
+  urlbordercolor=white,
+  linkbordercolor=white,
+  citebordercolor=white,
+  filebordercolor=white,
+  menubordercolor=white,
+  runbordercolor=white]{hyperref}	% understand PDF refs
+ \usepackage[all]{hypcap}               % must follow hyperref
+
+%% Allow the courier to be made bold:
+%% http://www.macfreek.nl/mindmaster/LaTeX_Bold_Typewriter_Font
+\renewcommand{\ttdefault}{pcr}
+
+\begin{document}
+\title{The New NPS \LaTeX\ Report and Thesis Format}
+\author{Simson L.\ Garfinkel}
+\authortwo{Travis W. Axtell}
+\abstract{This report introduces the NPS \LaTeX{} templates
+  that can be used to produce a master's thesis, a
+  Ph.D.\ dissertation, or a technical report. The template can produce
+  documents that are unclassified, For Official Use Only (FOUO), or classified. Additional information on using \LaTeX\,is also provided.}
+\POReportNumber{NPS-CS-11-011}
+\ReportType{Technical Report}
+\DatesCovered{2008-01-01---2011-09-31}
+\SubjectTerms{NPS Thesis, NPS Technical Report}
+\SupplementaryNotes{The views expressed in this report are those of the
+  author and do not reflect the official policy or position of the
+  Department of Defense or the U.S. Government.}
+\SponsoringNotation{}
+\SponsoringAgency{Department of the Navy}
+\SignatureOne{}  %\SignatureOne{\includegraphics[width=2in]{signature_slg}}
+\SignatureTwo{}  %\SignatureTwo{\includegraphics[width=2in]{signature_twa}}
+
+%% These four statements bring in the front  matter
+%% They are needed for all NPS reports, theses, and so on
+
+\NPScover                       % pretty NPS cover page
+\NPSsignature                   % NPS signature page
+\NPSsftne                       % NPS SF298
+\NPStableOfContents             % Optional; we want it
+%\NPSlistOfFigures
+%\NPSlistOfTables
+%\NPSlistOfAcronyms
+%\NPSlistOfAcronymsFromFile{acronyms}
+\NPSbody                        % Set up for NPS Body
+
+%% Some useful stuff that we do locally
+\DefineShortVerb{\|}            % makes |foo| a verbatim command
+
+
+%% These bring in the report sections we have created
+%% Chapters
+\include{intro_latex}
+\include{intro_template}
+\include{intro_writing}
+%\include{intro_graphing}
+
+%% Appendices
+\include{intro_lyx}
+
+%% finally a bibliography
+\bibliographystyle{plain}
+\bibliography{npsreport}
+
+%% DOD reports have a distribution list. 
+%% We put it here.
+
+\chapter*{Initial Distribution List}
+\singlespace
+\begin{enumerate}
+\item Defense Technical Information Center\\Ft. Belvoir, Virginia
+\item Dudly Knox Library\\Naval Postgraduate School\\Monterey, California
+%%\item Your department chair\\Naval Postgraduate School\\Monterey, California
+%%\item Your advisor\\Naval Postgraduate School\\Monterey, California
+%%\item Your 2nd reader/coadvisor\\Naval Postgraduate School\\Monterey, California
+%%\item Yourself\\Naval Postgraduate School\\Monterey, California
+\end{enumerate}
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% If you are using ispell in LaTeX, local spellings are put here.
+%%
+
+% LocalWords:  

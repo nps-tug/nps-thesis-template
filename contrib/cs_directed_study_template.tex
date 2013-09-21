@@ -1,0 +1,114 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Directed Study Request Form Template
+%
+% This is a Latex template for the Directed Study Request Form.  It is 
+% based on the paper copy provided by the CS department, last acquired
+% June 2012.
+%
+% This should be built using the Makefile in the domex-report directory
+% and adding directedstudy-template.pdf (or the saved title) to the 
+% ALL variable.
+%
+% Track Changes
+% 2012-07-13 : Created (kmfoster)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+\usepackage{url}
+\usepackage{ulem}
+\usepackage{paralist}
+\usepackage[letterpaper,hmargin=1in,vmargin=1in]{geometry}
+\usepackage{bibentry}
+\usepackage{framed}
+\usepackage{titling}
+
+\begin{document}
+\posttitle{\par\end{center}}
+\setlength{\droptitle}{-10pt}
+\newcommand{\sigspace}{\uline{\hspace{2in}}}
+\newcommand{\datespace}{\uline{\hspace{.75in}}}
+\newcommand{\shortspace}{\uline{\hspace{.75in}}}
+\newcommand{\longspace}{\uline{\hspace{2in}}}
+\newcommand{\HRule}{\rule{\linewidth}{0.1mm}}
+\newcommand{\HRuleThick}{\rule{\linewidth}{0.3mm}}
+\pagenumbering{gobble}
+%\thispagestyle{empty}
+%\title{Naval Postgraduate School \\
+%  Directed Study Request Form}
+%\date{}
+%\author{}
+%\maketitle
+\begin{centering}
+\Large Naval Postgraduate School\\                                                                                 
+\Large Directed Study Request Form\\
+\end{centering}
+
+\begin{framed}
+  \noindent Proposals for directed study are to be jointly developed by the student and sponsoring faculfy
+  member, then routed for approval through the Academic Associate, Department Chair, and
+  Program Officer. The student will submit a signed form to the Registrar's Office NOT LATER
+  THAN THE SECOND WEEK of the quarter in which the directed study is desired. The
+  Regishar's Office will enter the directed study information into PYTHON upon receipt.
+\end{framed}
+
+\noindent Print or type the requested information:\\
+\\
+Today's Date: [DATE] \\
+Directed Study Requested for Academic Year: [YEAR] Quarter: [QUARTER] \\
+(Academic years start in October. For example, October through December in 2001 is considered academic year 2002, quarter l.)\\
+\\
+I. \underline{STUDENT INFORMATION}\\
+Student Name (Last, First Middle): [LAST], [FIRST] [MIDDLE] \\
+Curriculum \#: [CURRICULUM NUM] \\
+\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For COURSE INFORMATION, there are many sections
+% that request information.  Fill as many of the sections
+% in as possible via this form.  For the sections that
+% will be filled in by hand, use one of the space 
+% commands (i.e. \shortspace) to print a blank underlined
+% space.
+%
+% Some underlined blank spaces were added on the template 
+% to match the look of the original form.  Please remove the 
+% lines as needed after form has been complted.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+II. \underline{COURSE INFORMATION}\\
+Course Number: \shortspace \hfill Course Name: [COURSE NAME] \\ 
+Credit Hours (Lecture/Lab): [LECTURE HOURS] / [LAB HOURS] \hfill Mark One: Pass/Fail [X] Graded [X] \\ 
+Professor's Name: [PROF NAME] \hfill Professor's Phone Number: [PROF NUMBER] \\
+Course Description: [COURSE DESCRIPTION] \\
+\HRule \\
+\HRule \\
+\HRule \\
+\HRule \\
+\HRule \\
+\HRule \\
+Reasons(s) for Directed Study: [REASONS ] \\
+\HRule \\
+\\
+II. \underline{COURSE LOAD} \\
+Other Courses to be Taken During Quarter (list course number and lecture/lab credit hours):\\
+CS0810 (0/8), CS3690 (4/1), [MODIFY AND ADD COURSES AS NEEDED] \\
+\HRule \\
+Total Hours: Lecture [LEC HOURS] Lab [LAB HOURS] \hfill Will this be an overload? Yes [X] No [X] \\
+\\
+IV. \underline{APPROVAL SIGNATURES} \\
+\begin{tabular}{lll}
+Professor: & \sigspace & Date: \datespace \\
+Academic Associate: & \sigspace & Date: \datespace \\
+Department Chairman: & \sigspace & Date: \datespace \\
+Program Officer: & \sigspace & Date: \datespace \\
+Associate Provost (as required): & \sigspace & Date: \datespace \\
+\end{tabular}
+\\
+\\
+\\
+\\
+\\
+\HRuleThick \\
+Registrar's Use Only: \\
+Segment Assigned by PYTHON: \hfill Form Date November 2011\\
+\end{document}
+
+
+

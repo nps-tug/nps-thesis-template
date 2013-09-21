@@ -1,0 +1,1365 @@
+\chapter{Introduction to \LaTeX}
+\LaTeX{} is a text formatting system created by Leslie Lamport in the early 1980s\cite{latex}. The program is based on the \TeX{} text formatting system created by Donald Knuth in 1978\cite{tex}. With 
+\LaTeX{} you author your document by editing a text input file using a
+program such as EMACS, |vim|, or another editor. You then give
+this input file to \LaTeX{} (or, more accurately, to a program such as
+|pdflatex| or |xelatex|). \LaTeX{} then transforms your
+input file(s) into an Adobe Portable Document Format (PDF) file.
+
+Although most documents at NPS are prepared with
+Microsoft\textregistered{} Word, \LaTeX{} is widely used outside of
+NPS in the sciences to create conference papers, journal articles, and
+even full-length books. \LaTeX{} is especially popular in computer
+science. With the NPS template you can use \LaTeX{} to produce an NPS
+thesis that is consistent with NPS formatting requirements. Because
+\LaTeX{} provides for automated formatting, automatic updating of
+references, and the ability to directly embed experimental results,
+many students who write technical documents at NPS that use \LaTeX{}
+find that they save time---even when they take into account the time
+that they spend learning to use \LaTeX{} in the first place!
+
+\section{Reasons to use \LaTeX}
+There are many reasons to use \LaTeX{} for preparing
+a technical document:
+
+\begin{itemize}
+\item Formatting for paragraphs, quotations, lists, tables, and other
+  elements is performed automatically. You can easily make changes to
+  formatting and have them reflected throughout your document.  The
+  numbers used for numbered sections are automatically updated when
+  new material is added or removed. As a result, formatting is more
+  consistent with \LaTeX{} than with Microsoft Word.
+
+\item References within your document to numbered chapters,
+  appendices, sections, figures, tables, equations and references are
+  updated automatically each time a |.pdf| file is produced, assuring
+  that they are  correct.
+
+\item The Bib\TeX{} system produces consistent citations and
+  bibliography. References are pulled from a bibliographic database
+  that is separately maintained and can be shared between many documents. Records for the bibliographic
+  database can be downloaded from many online services, helping to
+  assure that they are consistent. The citation format is maintained 
+  separately from the citation contents, making it easy to change
+  citation styles when submitting to different conferences or journals.  
+\item \LaTeX{} allows you to directly include other files at the time
+  that the |.pdf| file is created. This makes it easy to automatically
+  incorporate the results of experiments in tabular or graphical form,
+  without having to manually copy results.  Source code for programs
+  can be included with pretty syntax from the original files, and line
+  numbers can be automatically displayed as desired. 
+\item |pdflatex|, the version of \LaTeX{} we recommend at NPS, also
+  allows you to embed other files as attachments within your |.pdf| file. This makes it
+  easy to preserve  experimental data, spreadsheets, or other
+  information in the final file that is distributed to sponsors and archived. 
+\item Because the \LaTeX{} input file is plain ASCII, you can store
+  your document using a revision control system such as
+  Subversion (SVN)\cite{subversion}. This allows multiple people to work on
+  the same document at the same time; Subversion automatically merges
+  the changes together.  If you save your thesis work daily, it is possible
+  retrieve previous revisions of your thesis and undo changes or
+  mistakes---even many months after the fact.
+\item \LaTeX{} is free software and runs on PCs, Macs, and Unix
+  systems. This means that you can produce your documents on
+  practically every computer you have, without having to purchase
+  anything else.
+\end{itemize}
+
+NPS has developed this template for preparing NPS reports and theses. If
+you are using \LaTeX{} at NPS, there are many reasons for using the
+template:
+
+\begin{itemize}
+\item The template has been in use since 2007. Numerous NPS
+  faculty members have worked with the NPS Thesis Processor to assure
+  that the documents produced are acceptable for student and faculty
+  use.
+\item The template supports the creation of unclassified, For Official Use Only (FOUO), and
+  classified documents. In particular, the template supports
+  classification labels for paragraphs, captions, and references.
+\item The cover page, signature page, and Standard Form 298 are automatically generated.
+\item Combined with the Subversion, the template makes it possible for students
+  and their advisors to collaborate on a document without the need to pass files back and forth. 
+\end{itemize}
+
+
+\section{The Purpose of this Document}
+
+This document does not duplicate the depth of information
+available elsehwere on \LaTeX{},
+but does provide you with the minimum amount of information required to use \LaTeX{}
+to produce a master's thesis or technical report at NPS.
+
+If you wish to learn more about \LaTeX, there are many good reference
+books and online tutorials for \LaTeX{}.
+
+We recommend these online resources:
+\begin{enumerate}
+\item \url{http://en.wikibooks.org/wiki/LaTeX}, a wikibook that
+  discusses many aspects of \LaTeX.
+\item \url{http://www.ctan.org/}, the Comprehensive \TeX{} Archive
+  Network, a collection of modules and documentation for extending \LaTeX{}.
+\item \url{http://en.wikipedia.org/wiki/Comparison_of_TeX_editors}, a
+  web page on Wikipedia that discusses different programs available for editing \LaTeX{} input files.
+\item \url{http://tex.stackexchange.com/}, a question-and-answer website for \TeX{} and \LaTeX{} problems.
+\end{enumerate}
+
+We also recommend these books. They are expensive, but worth if it if
+you wish to become a \LaTeX{} master.
+\begin{enumerate}
+\item Guide to \LaTeX{} (4th Edition), by Patrick W. Daly. This is the
+  comprehensive \LaTeX{} reference which will provide you with an
+  astounding amount of \LaTeX-related information. Do not read
+  Lamport's original book, as it is quite out of date.
+\item The \LaTeX{} Companion (Tools and Techniques for Computer
+  Typsetting), by Frank Mittelbach, Michel Gossens, Johannes Braams,
+  David Carlisle and Chris Rowley.
+\item The \LaTeX{} Graphics Companion, by Michael Gossens, Frank
+  Mittelbach, Sebastian Rahtz, and Denis Roegel.
+\end{enumerate}
+
+\section{Installation}
+Before you can use \LaTeX{}, you will need to install two critical
+pieces of software:
+\begin{enumerate}
+\item The \LaTeX{} system itself.
+\item A program for editing the \verb+.tex+ input files.
+\end{enumerate}
+
+Here once again there are many options. For both \LaTeX{}
+and text editors there are both free  and commercial
+distributions. This document makes specific recommendations that were
+known to work as of the document's date of publication. You are free
+to explore on your own as well.
+
+\subsection{Installation on MacOS 10.5 and above}
+
+The easiest way to get \LaTeX{} operational on a Mac is
+ to download an installer for the most recent distribution
+ from the \TeX Users's Group (TUG) at \url{http://www.tug.org/mactex}. 
+
+TUG's Mac\TeX{} distribution will install \LaTeX{} in the
+\verb+/usr/texbin/pdflatex+ directory and will update your startup files to
+include this directory in your path. If you chose this strategy, be
+sure to click ``Customize'' in the installer and select  all of
+the optional packages for installation.
+
+You can also install the program from sources using the MacPorts or Fink installer system, but this is not recommended. 
+
+If you are using \LaTeX{} on a Mac, you should consider downloading
+and using \emph{LaTeXiT}, an open-source program that allows you to type
+\LaTeX{} math and create PDFs for embedding in other applications. The
+created PDFs have the source \LaTeX{} code embedded, so you can re-edit
+them in LaTeXiT using the Mac ``Services'' feature.  You may also consider the
+commercial program \emph{Latexian}, which allows you to type a
+\LaTeX{} document in one window
+and see the PDF update in another window as you type.
+
+\subsection{Installing on Linux}
+For most Linux systems a complete \LaTeX{} distribution 
+can be downloaded as part of the |texlive-latex3| package. This
+package can be downloaded in source from the \url{http://tug.org/}
+website and compiled locally, or installed directly using a package
+management command. In either case you will need to the installation
+as the superuser; this is typically done with the |sudo| command.
+
+For Debian and Ubuntu Linux, use the |apt-get| command:
+
+\begin{Verbatim}
+% sudo apt-get install texlive-latex3
+\end{Verbatim}
+
+For RedHat and Centos, use the |yum| command:
+
+\begin{Verbatim}
+% sudo yum install texlive-latex3
+\end{Verbatim}
+
+We have noticed that the install command occasionally fails. If it
+fails for you, try it again two or three more times. If that still
+does not work, you will need to download and install from source.
+
+While the Fedora distribution includes an old version of
+\TeX Live from 2007, we don't advise using it.  Fortunately, there is
+an ongoing official project keeping an up-to-date release of \TeX
+Live available for Fedora.  Directions for installing it are at
+\url{http://fedoraproject.org/wiki/Features/TeXlive}.  Eventually,
+this release will be merged back to the main Fedora distribution.
+
+\subsection{Installation on Microsoft Windows}
+\TeX Live is the most up-to-date distribution for Windows and can
+be downloaded from \url{htp://www.tug.org/texlive/}.  The
+distribution includes the {\TeX}Works editor for working with
+\LaTeX{} documents.  You can also use the {\TeX}lipse plugins for
+the Eclipse IDE at \url{http://texlipse.sourceforge.net/}.
+
+Another of the popular distributions for Microsoft Windows machines
+is called MiK\TeX, which can be downloaded from
+\url{http://www.miktex.org/}.  In most cases, this distribution of
+\LaTeX{} will automatically download additional packages if needed.
+At this time, Mik\TeX is lagging \TeX Live in frequency of updates.
+
+\subsection{Creating classified documents}
+If you are producing a classified thesis, you should ask a
+system administrator at the STBL or SCIF to provide you with a
+\LaTeX{} installation on a computer authorized to handle classified
+information. With appropriate approvals you can alternatively set up an
+installation on a stand-alone machine.
+In the event that you are missing a package to create your thesis, the |.sty| files can be copied from the package on the CTAN website into your thesis directory.  A system administrator should be consulted on the file transfer process.  
+
+\section{Additional Applications for \LaTeX{} }
+
+In addition to downloading and installing \LaTeX, you will need an
+editor for editing the |.tex| input files. These programs are
+sometimes called \emph{front ends}, although the term is imprecise and
+probably incorrect. You can use \emph{any} editor for editing a |.tex|
+file, even Microsoft Word. Indeed, most of the front ends for \LaTeX{} 
+are really just text editors with syntax highlighting, although some
+will automatically compile your document and even jump to errors in
+the input file when they are encountered.
+
+\subsection{Selection of an Editor}
+Text editors offer a variety of features.  Some are easier for beginners,
+ such as Notepad++, LEd, and TeXnicCenter.  Advanced editors for skilled users
+ include emacs, vim, and Texlipse.  A thorough comparison of editors 
+ is available at
+ \url{http://en.wikipedia.org/wiki/Comparison_of_TeX_editors}.  Learning about the various
+ features of the text editors can help you to dramatically improve your writing efficiency.
+
+If you are running \LaTeX{} on MacOS, you already have a powerful editor
+installed on your computer: EMACS, which can be run from within the
+Macintosh Terminal application. You can run the tutorial for EMACS by
+starting Terminal, typing |emacs| and enter at the command prompt, and
+then typing control-h followed by a ``|t|'' to start the tutorial.
+
+\subsection{LyX: An alternative \LaTeX{} system}
+
+LyX is a program that provides a WYSIWYG (What You See Is What
+  You Get) graphical user interface for \LaTeX. Instead of editing the
+|.tex| file directly, however, you edit an intermediate form which is
+a restricted set of \LaTeX. LyX then runs \LaTeX{} for you and
+produces the results.
+
+While LyX is easier to use than \LaTeX, it does not have the power or
+the flexibility.
+
+LyX is free and open source and actively supported. LyX provides a GUI interface for floating figures and tables,
+formatting, fonts, labels, chapters, sections, subsections, math
+equations, tables, and much more.  It also has built-in features for
+supporting Bib\TeX{} bibliographies, citations, and cross-references,
+and generally supports anything that can be done with \LaTeX{}.
+
+LyX can be downloaded from  \url{http://www.lyx.org/} and is available
+for Linux, MacOS and Windows.  If you want spell-checking, you will
+also need to install the \emph{aspell} package. 
+
+An NPS thesis and dissertation template developed by CDR Michael
+Bilzor is available for use with LyX. It can be be obtained from
+\url{http://simson.net/npsthesis/lyxthesis.zip}.  
+
+Further information about the LyX template can be found in the Appendix.
+
+
+\section{Running \LaTeX}\label{runninglatex}
+The \LaTeX{} system is actually a set of programs. For creating a thesis at NPS you will use several programs:
+
+\begin{description}
+\item{\texttt{pdflatex}} This program reads the input file (\eg
+  |thesis.tex|) and produces a |.pdf| file (\eg |thesis.pdf|)
+  as an output. This program also produces a number of intermediate
+  files (|thesis.aux|, |thesis.bbl|, |thesis.toc|,
+  \etc).
+\item{\texttt{xelatex}} is a version of \LaTeX designed to process
+  Unicode used in non-Roman languages. In some cases packages that are
+  designed to work with \LaTeX will not work with \texttt{xelatex},
+  which is why we do not recommend using it unless you have no other choice.
+\item{\texttt{latex}} This is an older version of the |pdflatex|
+  program that produces |.dvi| files. The |.dvi| file must then be
+  transformed into either a |.ps| or a |.pdf| file. In practice you
+  should not run |latex| unless you need to use a special graphics
+  module called |PStricks|. That module is beyond the scope of this document.
+\item{\texttt{bibtex}} This program reads the |thesis.bbl| file and
+  produces a bibliography in a file called |thesis.bst| which
+  includes the bibliography. The |thesis.bst| then gets read the
+  next time |pdflatex| is run.
+\item{\texttt{authorindex.pl}} This is a program in perl that produces the
+  author index from the |thesis.bbl| file. The authorindex is
+  saved in the file |thesis.ain|.
+\item{\texttt{fixerrors.py}} It turns out that there is a bug in Bib\TeX{}
+  which causes URLs longer than 53 characters to be improperly
+  split. This program unsplits them. It also will correct |authorindex| errors.  You do not need to use this
+  program if you do not have these errors.
+\end{description}
+
+If you are processing a file \emph{thesis.tex} to create a
+\emph{thesis.pdf} file, you will typically execute these commands in
+this order:
+
+\begin{enumerate}
+\item |pdflatex thesis|
+\item |bibtex thesis|
+\item |python fixerrors.py thesis|
+\item |pdflatex thesis|
+\item |pdflatex thesis|
+\end{enumerate}
+
+The first run of |pdflatex| creates the file |thesis.aux| (and any
+other |.aux| files that might be needed).  A PDF file is also created,
+but if you have any backwards references in your document the PDF file
+will contain incorrect references. The subsequent runs read
+these |.aux| files and generate correct back-references. Some editors, such as {\TeX}lipse, will run these commands as needed on behalf of the user.  Each command has a |thesis| argument, which is
+ referring to the file |thesis.tex| without the |.tex| file extension.
+ In rare cases it may be necessary to delete the |.aux| files and
+ re-run the |pdflatex| command from the beginning.
+
+\section{Basic \LaTeX{} formatting}
+Here is a simple \LaTeX{} document:
+\begin{Verbatim}
+\documentclass{article}
+\begin{document}
+Hello World!
+\end{document}
+\end{Verbatim}
+
+Normally with \LaTeX{}, you just type text and leave a blank line between
+each paragraph. \LaTeX{} then formats it into beautiful
+paragraphs. \LaTeX{} will ignore the space at the beginning of each line.
+
+Here is a slightly more complex document:
+
+\begin{Verbatim}
+\documentclass{article}
+\begin{document}
+In December 1951, in a move virtually unparalleled in the history of
+academe, the Postgraduate School moved lock, stock and wind tunnel
+across the nation, establishing its current campus in Monterey,
+Calif. 
+     The coast-to-coast move involved 500 students, about 100
+     faculty and staff and thousands of pounds of books and 
+     research equipment. Rear Adm.\ Ernest Edward Herrmann 
+     supervised the move that  pumped new vitality into the
+     Navy's efforts to advance naval science and technology.
+
+% This is comment. Nobody will see it.
+
+Today the school, known as the ``Naval Postgraduate School,'' is the
+Navy's preeminent institution of graduate education and advanced
+research. Approximately 1 in 10 of the students are in the top 10\% of
+their classes.
+\end{document}
+\end{Verbatim}
+
+
+\LaTeX{} will format the above text into a document that looks  like this:
+
+\fbox{
+\begin{minipage}{6in}
+\setlength{\parindent}{2pc}
+In December 1951, in a move virtually unparalleled in the history of
+academe, the Postgraduate School moved lock, stock and wind tunnel
+across the nation, establishing its current campus in Monterey,
+Calif. The coast-to-coast move involved 500 students, about 100
+faculty and staff and thousands of pounds of books and research
+equipment. Rear Adm.\ Ernest Edward Herrmann supervised the move that
+pumped new vitality into the Navy's efforts to advance naval science
+and technology.\\
+\\
+\indent Today the school, known as the ``Naval Postgraduate School,'' is the
+Navy's preeminent institution of graduate education and advanced research.
+Approximately 1 in 10 of the students are in the top 10\% of
+their classes.
+\end{minipage}
+}
+
+This sample document illustrates a few important points about \LaTeX:
+\begin{itemize}
+  \item \LaTeX{} will automatically
+  re-wrap your text as necessary to format the paragraphs. Indention is determined by the style of the current document, not by whether or not you actually indent the paragraph.
+\item \LaTeX{} ignores space at the beginning of lines; breaks between
+  paragraphs are marked with blank lines.
+\item What you type is not what you get!  In particular, opening
+  double quote marks are typed as two backquotes (\verb+``+) and closing
+  double quote marks are entered as two apostrophes (\verb+''+). You will
+  also note that the period following Rear Adm.\ Ernest Edward
+  Herrmann's name is followed by a backslash (\verb+\+) and a space, rather
+  than just a space. This tells \LaTeX{} that the period does not mark
+  the end of a sentence.
+\item Commands begin with a backslash (|\|) and contain only uppercase
+  and lowercase letters.
+\item A command can have zero or more arguments. The arguments are
+  enclosed within braces (|{}|). The |\documentclass| command begins
+  the document; its argument is the kind of document you are making. 
+\item The |\begin| command introduces an \emph{environment}. Every
+  document has at last one environment, the |document|
+  environment. Every |\begin| must have a matching |\end| that names
+  the same environment. Environments can be nested.
+\item Comments can be embedded in your document with a percent sign
+  (|%|). Anything after the percent sign will not print. To print a
+  percent sign, prefix it with a backslash (|\%|).
+\end{itemize}
+
+\section{Typing Special Characters}
+This section provides information on how to type special characters in
+\LaTeX. In each section we will have a table that shows what to type
+and how it displays in your final |.pdf| file.  If the above text were
+put into a table, it would look like this:
+
+\begin{center}
+\begin{tabular}{l|l||l|l}
+Typed & Displayed & Typed & Displayed \\\hline
+|``|  & ``        & |''|  & '' \\
+\end{tabular}
+\end{center}
+
+The left entry of the table is the backquotes, which shares the tilde key on the US keyboard.
+The right entry is the single quotes, which shares the double quote marks key.
+
+\subsection{Typing Quotes}
+
+To type quotes, you should not use the double-quote character. Instead,
+use the back quote (|`|) and the forward quote (|'|)
+to type quotes:
+
+\begin{center}
+\begin{tabular}{l|l||l|l}
+Typed               & Displayed & Typed   & Displayed\\\hline
+|don't|             & don't     &  |3'2''|  & 3'2''\\
+|``this''|          & ``this''  & |`is'|  & `is' \\
+|``\,`special'\,''| & ``\,`special'\,'' \\
+\end{tabular}
+\end{center}
+
+
+\subsection{Controlled Special Characters}\label{special}
+
+Unlike Microsoft Word and other programs, \LaTeX{} uses special
+characters embedded in your text to control formatting. The most
+common of these characters is the backslash ($\backslash$). All of
+special characters are listed below:
+
+\begin{center}
+\begin{tabular}{c|p{4in}}
+Special Character & Why it is special\\
+\hline
+|\|      & Introduces a command\\
+\verb|{| & Introduces arguments in commands or the start of a group\\
+\verb|}| & Closes arguments in commands or the end of a group\\
+|%|      & The comment character; \LaTeX{} ignores the rest of the line\\
+|#|      & Used for parameter substitution inside macros\\
+|~|      & Enters a hard, non-breaking space\\
+|&|      & Used for delimiting columns in a table \\
+\verb|$| & Turns on/off math mode (see \S\ref{math})\\
+|_|      & Used for subscript in math mode\\
+|^|      & Used for superscript in math mode\\
+\end{tabular}
+\end{center}
+
+To enter the special characters into your
+document you must use a special sequence that begins with a
+backslash. Most (but not all) of these special sequences are the
+character itself. If you are curious, inside \LaTeX{}, each of these
+sequences is implemented as a command that causes \LaTeX{} to output the
+character that has been quoted:
+
+\begin{center}
+\begin{tabular}{l|l||l|l}
+Typed  & Displayed & Typed          & Displayed\\\hline
+|\$|   & \$        & |\&|           &    \&   \\
+|\{|   & \{        & |\}|           &    \}   \\
+|\%|   & \%        & |\_|           &    \_   \\
+|\#|   & \#        & |\^{}|         &    \^{} \\
+|\~{}| & \~{}      & |$\backslash$| & $\backslash$ \\
+\end{tabular}
+\end{center}
+
+
+\subsection{Accented, Dotless and Slashed Vowels}
+With \LaTeX{} most accented vowls are entered with a combining accent character and a
+vowel, although some (such as the angstrom symbol) are not, as shown below:
+
+\begin{center}
+\begin{tabular}{l|l||l|l}
+Typed    & Displayed & Typed   & Displayed\\\hline
+|\'{o}|  & \'{o}     & |\~{o}| & \~{o} \\
+|\'{o}|  & \'{o}     & |\={o}| & \={o} \\
+|\^{o}|  & \^{o}     & |\.{o}| & \.{o} \\
+|\"{o}|  & \"{o}     & |\d{o}| & \d{o} \\
+|\c{o}|  & \c{o}     & |\u{o}| & \u{o} \\
+|\b{o}|  & \b{o} \\
+|\aa|    & \aa       & |\AA|   & \AA \\
+|\i|     & \i        & |\j|    & \j \\
+|\o|     & \o        & |\O|    & \O \\
+|\ae|    & \ae       & |\AE|   & \AE \\
+|\oe|    & \oe       & |\OE|   & \OE \\
+|\v{o}|  & \v{o}     & |\H{o}| & \H{o} \\
+|\t{oo}| & \t{oo} \\
+\end{tabular}
+\end{center}
+
+Note that |\i| displays a dotless i while |\j| displays a dotless
+j. Some fonts do not have some of these characters, and display a
+black box instead.
+
+\subsection{Symbols}
+\LaTeX{} has literally hundreds of symbols that you can include in
+your document. These symbols  include the copyright symbol, currency symbols, foreign language characters, and many more.  
+The symbols are placed in documents using macros, allowing 
+a plain text document to support a large variety of non-standard text characters.  A
+complete guide to the available symbols in \LaTeX{} is available online at 
+\url{http://mirror.ctan.org/info/symbols/comprehensive/symbols-letter.pdf} .
+
+Here are some of the most common symbols you are likely to need for an
+NPS document:
+
+\begin{center}
+\begin{tabular}{l|l||l|l}
+Typed & Displayed & Typed & Displayed\\\hline
+|\l|     & \l    & |\L|         & \L \\
+|\S|     & \S    & |\ss|        & \ss \\
+|\P|     & \P    & |\pounds|    & \pounds \\
+|?`|     & ?`    & |\copyright| & \copyright \\
+|!`|     & !`    & |\texttrademark| & \texttrademark\\
+|\euro|  & \euro & |\textregistered| & \textregistered\\
+|\dag|   & \dag  & |\ddag| & \ddag \\
+\end{tabular}
+\end{center}
+
+(Note: The |\euro| command requires that the command
+|\usepackage{eurosym}| be part of the document's \emph{preamble} (the
+part before the |\begin{document}|). It is included as part of the
+|npsreport.cls| file.)
+
+\section{Fonts}
+Like Microsoft Word, \LaTeX{} makes it easy to alter font, size, face,
+and weight of text. But unlike Word, these changes are typically done
+in a structured manner that lends itself to creating documents that
+have consistent font usage throughout. 
+
+\subsection{Changing Font Size}
+Although \LaTeX{} allows you to use fonts of any size, the built-in
+templates provides eleven built-in sizes. These sizes automatically
+adjust depending on if you are creating a document with 12-point font
+(NPS standard), 11-point font, or 10-point font. 
+
+When you change the font size, that change stays in effect until you
+change it again. You can confine your font change by placing the text
+you want resized within braces, sometimes called a \emph{group} or a
+\emph{block}, as shown in the examples in the
+following table:
+
+\begin{center}
+\begin{tabular}{llll}
+Size          & Point Size & Typed & Displayed  \\\hline
+|\tiny|       &  6 & |{\tiny This is tiny}| & {\tiny This is tiny}\\
+|\scriptsize| &  8 & |{\scriptsize scriptsize}| & {\scriptsize scriptsize} \\\
+|\footnotesize| & 10 & |{\footnotesize footnotesize}| & {\footnotesize footnotesize} \\\
+|\small|        & 11 & |{\small This is small}| & {\small This is small} \\\\\
+|\normalsize|   & 12 & |{\normalsize normalsize}| & {\normalsize  normalsize} \\\\\\\
+|\large|        & 14 & |{\large This is large}| & {\large This is large} \\\\\\\
+|\Large|        & 17 & |{\Large Large}| & {\Large Large} \\\\\\\
+|\LARGE|        & 20 & |{\LARGE LARGE}| & {\LARGE LARGE} \\\\\\\
+|\huge|         & 25 & |{\huge huge}| & {\huge huge} \\\\\\\
+|\Huge|         & 25 & |{\Huge Huge}| & {\Huge Huge} \\\\\\\
+\end{tabular}
+\end{center}
+
+Notice that with the NPS template there is no difference between
+|\huge| and |\Huge|.
+
+You can also pick an arbitrary size by using the |\fontsize| and
+|\selectfont| commands. The |\fontsize| command takes two arguments:
+the size of the font and the size of the leading, or the amount of
+space between lines. First the size is selected with the
+|\fontsize{i}{j}| command where |i| and |j| are expressed in points
+(there are 72.27 points in an inch). Next the font is selected with the |\selectfont| command, as shown below:
+
+\begin{center}
+\begin{tabular}{l|l}
+Typed & Displayed  \\\hline
+|{\fontsize{4}{5}\selectfont very tiny}|& {\fontsize{4}{5}\selectfont very tiny}\\
+|{\fontsize{64}{64}\selectfont Big}|& {\fontsize{64}{64}\selectfont Big}\\
+\end{tabular}
+\end{center}
+
+\subsection{Changing Font Style}
+\LaTeX{} provides these macros for selecting font styles:
+
+\begin{center}
+\begin{tabular}{l|l}
+Typed                                  & Displayed\\\hline
+|\textrm{This is Roman}|               & \textrm{This is Roman} \\
+|\textbf{This is bold}|                & \textbf{This is bold}\\
+|\texttt{This is typewriter}|          & \texttt{This is typewriter}\\
+|\textsc{This is small capitals}|      & \textsc{This is small capitals}\\
+|\textsl{This is slanted}|             & \textsl{This is slanted}\\
+|\textsf{This is sans serif}|          & \textsf{This is sans serif}\\
+|\textit{Italics}|                     & \textit{Italics}\\
+|\emph{This is emphasized}|            & \emph{This is emphasized}\\
+|$\cal CALLIGRAPHICS$|                 & $\cal CALLIGRAPHICS$\\
+|{\boldmath $\cal BOLD CALIGRAPHICS$}| & {\boldmath $\cal BOLD CALIGRAPHICS$}\\
+\end{tabular}
+\end{center}
+
+Notice that the last two are surrounded by dollar signs as they require math mode (see \S\ref{math}).
+
+If you just want to put something into italics, you should use
+|\emph{text}|, which will produce \emph{text}. The reason to use
+|\emph{}| and not |\textit{}| is that |\emph{}| will nest as
+necessary.  For example, this:
+
+\begin{center}
+\begin{Verbatim}
+\emph{You can even \emph{emphasize} a word within a sentence
+that is emphasized.}
+\end{Verbatim}
+\end{center}
+
+typesets as this:
+
+\begin{center}
+\emph{You can even \emph{emphasize} a word within a sentence that is emphasized.}
+\end{center}
+
+As you should in general avoid underlining text, we will not show you
+how to do it in this document.
+
+\subsection{Choosing an Arbitrary Font}
+There are many ways that you can request arbitrary fonts for small
+sections of your document, but they are all beyond the scope of this
+article. It is also possible to embed arbitrary Unicode within a
+\LaTeX{} document, either by using the Unicode-aware version of
+\LaTeX{} called \raisebox{-3pt}{\includegraphics[height=12pt]{images/xelatex}} (|xelatex|), or by saving your Unicode characters in a |.pdf| file and
+including that file with the |\includegraphics{}| command (as we
+did with the \raisebox{-3pt}{\includegraphics[height=12pt]{images/xelatex}} logo).
+
+If you want to change the font for an entire document, please refer to the
+\LaTeX{} Font Catalogue at \url{http://www.tug.dk/FontCatalogue/}
+which provides documentation and examples.  To change the font of the
+NPS template, refer to \S\ref{thesisprologue}.
+
+\section{Math}\label{math}
+
+Typsetting mathematics is one of the primary design goals of
+\LaTeX. The program  has more features for typsetting math
+than typsetting text. There is also a powerful set of mathematical
+extensions by the American Mathematical Society called |amsmath|. 
+For more detailed information, please see:
+
+\begin{itemize}
+\item The \LaTeX{} wikibook,
+  \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}.  
+\item The User's guide for the \texttt{amsmath} package is available at:
+\url{ftp://ftp.ams.org/ams/doc/amsmath/amsldoc.pdf}
+\item The short math guide, available at
+  \url{http://tinyurl.com/63w3mnu}.
+\end{itemize}
+
+What follows here is necessarily very brief. 
+
+\subsection{Math Mode}
+To typset math you must enter math mode. There are two easy ways to
+enter math mode. 
+
+\begin{itemize}
+\item You can put your math between two dollar signs. For example,
+  entering |$1+1=2$| in your document will produce $1+1=2$.
+\item You can put the equation on a line by itself in an \emph{equation}
+  environment (\eg between |\begin{equation}| and |\end{equation}|
+  commands). An equation environment creates a block that is typeset in
+  math mode and includes a numbered equation. For example, this:
+\begin{Verbatim}
+\begin{equation}
+1+1=2
+\end{equation}
+\end{Verbatim}
+
+produces this:
+
+\begin{equation}
+1+1=2
+\end{equation}
+\end{itemize}
+
+Math mode can also be used in paragraphs to add special math characters, such as the $\pi$ symbol (using |$\pi$| here).
+In fact, many of the symbols that \LaTeX{} displays can only be
+displayed while in math mode.
+
+\subsection{Simple Math in Math Mode}
+As the examples above show, you can type simple math in
+math mode and get what you want. In general, variables (the letters a
+through z), the plus (|+|), minus (|-|) and equals (|=|) all 
+typeset properly when you type them between dollar signs.  But there are some caveats:
+
+\begin{itemize}
+\item If you wish to typeset a multiplication symbol, use |\times| instead
+of an asterisk (|*|).
+\item If you wish to typeset division, use |\div| to enter a division
+  symbol or the |\frac| command to create a fraction. Do not use |/|
+  for division. 
+\item Spaces are ignored in math mode. If you want a space, you
+  probably should use multiple equations, with each equation
+  in math mode but with a non-math mode space between them.
+\end{itemize}
+
+The table below shows some examples:
+
+\begin{center}
+\begin{tabular}{l|l|l}
+Typed                   & Displayed & Comments \\\hline
+|$1+2=3$|               & $1+2=3$ \\
+|$10 * 10 = 100$|       & $10 * 10 = 100$  & {\small Don't use asterisks for multiplication.}\\
+|$10\times10=100$|      & $10\times10=100$ & Spaces don't matter\\
+|$10  \times  10  =  100$|      & $10  \times  10  =  100$\\
+|$a=3$|                 & $a=3$\\
+|$a=f/m$|               & $a=f/m$ & {\small Don't use the slash for division.}\\
+|$a=f \div m$|          & $a=f \div m$\\
+|$a=\frac{f}{m}$|       & $a=\frac{f}{m}$\\
+|$f(x)=3x$|             & $f(x)=3x$\\
+|$a=2b$ and $a+2=b+4$|  & \multicolumn{2}{l}{$a=2b$ and $a+2=b+4$}\\
+\end{tabular}
+\end{center}
+
+Use math mode when you need to enter math---it's worth the effort. For example, consider a function of t. You can certainly type this
+without math mode---witness f(t)---but doesn't it look much better
+when dollar signs are placed around the symbol, like this: $f(t)$? Math
+mode adds clarity.
+
+If you wish to discuss an important equation in your document,
+use the \emph{equation}
+environment.  This environment sets your equation off from the body
+text and gives it a number.
+
+Using the equation environment, this:
+
+\begin{Verbatim}
+\begin{equation}
+a = 1+2
+\end{equation}
+\end{Verbatim}
+
+typesets as:
+
+\begin{equation}
+a = 1+2
+\end{equation}
+
+
+
+\subsection{Superscripts and subscripts}
+In math mode the caret (|^|) is used for superscript and the
+underbar (|_|) is used for subscript (this is why the characters are
+special). The commands only superscript or subscript the following
+character; if you want to superscript or subscript multiple characters
+you need to make them a group by enclosing them in braces.
+
+Here are some examples:
+
+\begin{center}
+\begin{tabular}{l|l}
+Typed                   & Displayed\\\hline
+|$a^2+b^2=c^2$|         & $a^2+b^2=c^2$\\
+|$2^{16}=65,535$|       & $2^{16}=65,535$\\
+|$N_A$ is Avogadro's constant| & $N_A$ is Avogadro's constant \\
+|$A^{B^C}$|             & $A^{B^C}$\\
+|$A^{B^{C^D}}$|             & $A^{B^{C^D}}$\\
+|$a_k$ and $b_k$|       & $a_k$ and $b_k$         \\
+|$a_k$ and $b_k$|               & $a_k$ and $b_k$ \\
+\end{tabular}
+\end{center}
+
+\subsection{Combining Symbols in Groups}
+
+Many math symbols use subscripts and superscripts to determine
+placement of specific equation elements.  This includes |\int| which is used to create integrals
+and |\sum| which is used to create sums. Below are some examples with the Fourier series.
+
+\begin{center}
+\begin{tabular}{l|l}
+Typed                   & Displayed\\\hline
+\\
+\verb|$a_k=\frac{1}{\pi}|                  & $a_k = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)cos(kx)dx$\\
+\verb|\int_{-\pi}^{\pi}f(x)cos(kx)dx$|      & \\[4pt]
+\hline
+\\
+\verb|$b_k=\frac{1}{\pi}|                  & $b_k = \frac{1}{\pi}\int^{\pi}_{-\pi}f(x)\sin(kx)dx$\\
+\verb|\int^{\pi}_{-\pi}f(x)\sin(kx)dx$|      & \\[4pt]
+\hline
+\\
+\verb|$f(x)=\sum_{k=-\infty}^{\infty}| & $f(x)=\sum_{k=-\infty}^{\infty}c_k e^{-jkx}$\\
+\verb|c_k e^{-jkx}$|                 & \\[4pt]
+\end{tabular}
+\end{center}
+
+The |\sum| and |\int| symbols display these elements differently in an \emph{equation} environment:
+
+\begin{equation}
+f(x)=\frac{a_0}{2} + \sum_{n=1}^{\infty}\left[a_k \cos(kx) + b_k \sin(kx)\right]
+\label{fourier}
+\end{equation}
+
+We used this code to type \eqnref{fourier}:
+\begin{Verbatim}
+\begin{equation}
+f(x)=\frac{a_0}{2} + \sum_{n=1}^{\infty}
+    \left[a_k \cos(kx) + b_k \sin(kx)\right]
+\label{fourier}
+\end{equation}
+\end{Verbatim}
+
+There are several important math mode conclusions to draw from these examples:
+\begin{itemize}
+  \item Simple one letter subscripts and superscripts do not need to be enclosed by curly braces, but multiple character ones must.
+  \item Subscripts and superscripts in math mode are to the right of
+    the sum and integral characters; however, in the equation
+    environment they are above and below.  In the other uses
+    (exponentials, \etc), the results are the same in either mode.
+  \item The order of appearance of subscript than superscript or vice versa does not change the results.
+\end{itemize}
+
+
+The |amsmath| package has additional environments, symbols and
+commands such as provisions for non-numbered,
+multiple-lined and aligned equations. Its user guide is an
+excellent reference and provides many examples.
+
+Although math mode may seem cumbersome at first, its syntax does become second nature and very sophisticated equations can be generated, if needed.
+Consult the user manuals and references provided in \S\ref{math}.
+
+\subsection{Parenthesis and Brackets}
+You can use regular parentheses in math mode, but they do not stack nicely:
+
+\begin{center}
+\begin{tabular}{l|l}
+Typed                   & Displayed\\\hline
+|$((1))$| & $((1))$\\
+|$[((1))]$| & $[((1))]$
+\end{tabular}
+\end{center}
+
+
+You probably want the outer brackets and parenthesis to be bigger than
+the inner ones. You can do that using the |\left| and |\right|
+commands.  Following these macros is another character, such as a
+parenthesis or bracket.  
+These macros place the correctly sized
+specified character into the equation.  They will automatically get
+bigger as necessary, especially in the \emph{equation} environment.
+
+For example, here is what you get with the conventional parenthesis:
+\begin{Verbatim}
+\begin{equation}
+A = ( \sum_{i=1}^{10}i\times\sin(i) )
+\end{equation}
+\end{Verbatim}
+
+\begin{equation}
+A = ( \sum_{i=1}^{10}i\times\sin(i) )
+\end{equation}
+
+And here is an example using |\left| and |\right|:
+
+\begin{Verbatim}
+\begin{equation}
+A = \left( \sum_{i=1}^{10}i\times\sin(i) \right)
+\end{equation}
+\end{Verbatim}
+
+\begin{equation}
+A = \left( \sum_{i=1}^{10}i\times\sin(i) \right)
+\end{equation}
+
+This example  seems silly, but shows  how powerful
+|\left| and |\right|  are:
+
+\begin{Verbatim}
+\begin{equation}
+\left(\frac{
+    \left(\frac{1}{2}\right)}{
+    \left(\frac{3}{4}\right)
+}\right)
+\end{equation}
+\end{Verbatim}
+
+Produces this:
+
+\begin{equation}
+\left(\frac{
+    \left(\frac{1}{2}\right)}{
+    \left(\frac{3}{4}\right)
+}\right)
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Spacing, Frameboxes, and Centering}
+\LaTeX{} has a number of commands for controlling space, creating
+boxes, and centering text.
+
+\subsection{Controlling Spaces}
+
+You can use these commands for controlling how much space is inserted
+between words:
+
+\begin{center}
+\begin{tabular}{l|l}
+Typed                                 & Displayed\\\hline
+|\,| (a slash followed by a comma)    & produces\,a\,small\,space. \\
+|\ | (a slash followed by a space)    & produces\ a\ standard\ word\ space. \\
+|\@| (a slash followed by an at sign) & produces an intersentence space. \\
+\end{tabular}
+\end{center}
+
+
+The small space and standard word space are used between the words in the right column.  An intersentence space is needed to correct the following error where a sentence ends in a capital letter.
+
+\subsection{Suppressing Orphans and Widows}
+When typesetting, paragraphs that have
+their last line on the following page are called \emph{orphans}, and
+paragraphs that begin at the bottom of a page with a single line are
+called \emph{widows}. Orphans and widows are considered
+ugly. Microsoft Word can be programmed to prevent widows and orphans
+by requiring that all paragraphs have at least 2, 3 or 4 lines on a
+page. Microsoft Word achieves this desired result by inserting spaces
+between paragraphs to balance out the page as necessary. \LaTeX{} has
+no automatic control over orphans and widows. It is one of the major
+failings of the system.
+
+NPS students working on their Master's thesis are frequently
+instructed by the Thesis Processor to modify their document so that
+there are no widows or orphans. One way to achieve such a
+result is to rewrite the text by inserting sentences or removing
+them. This may seem excessive to you. Another way you can control
+widows and orphans is by manually adding or removing space, or by
+stretching a page to allow additional lines on it.
+
+You can force a blank line using |\\| and have the option to force a
+specific length using |\\[3pt]|:
+\begin{center}
+\begin{tabular}{l|l}
+Typed        & Displayed\\\hline
+|This is\\|  & This is\\
+|an example.| & an example.\\
+\\
+|This is\\[3pt]|  & This is\\[3pt]
+|an example.| & an example.
+\end{tabular}
+\end{center}
+
+You can add or remove space on a page with the |\enlargethispage| command. For
+example, to squeeze another line onto the current page, insert this
+command onto the page:
+
+\begin{verbatim}
+    \enlargethispage{1pc}
+\end{verbatim}
+
+This command is useful when you need to manually enlarge a
+page so that the last line of a paragraph can fit on the present page
+without being pushed to the next page. 
+
+You can shorten a page by a line, forcing a widow onto the next page:
+
+\begin{verbatim}
+    \enlargethispage{-1pc}
+\end{verbatim}
+
+
+These commands are also useful when writing a conference paper that
+needs to fit within a certain page length.
+
+\subsection{Frameboxes and Centering}
+
+You can draw a box around text with:
+
+|\framebox[width]{textstring}|
+
+The |[width]| parameter is optional. Without it, the box defaults to
+the minimum size necessary to hold the \texttt{textstring}.
+
+Here are is an example to show what we mean. This text:
+
+\begin{Verbatim}
+\framebox{This is an important statement.}\\
+\framebox[15pc]{This is an important statement.}\\
+\framebox[30pc]{This is an important statement.}
+\end{Verbatim}
+
+will typeset as this:
+
+\framebox{This is an important statement.}\\
+\framebox[15pc]{This is an important statement.}\\
+\framebox[30pc]{This is an important statement.}
+
+If you provide a space that is too small, the results will be ugly:
+
+\begin{Verbatim}
+\framebox[5pc]{This is an important statement.}
+\end{Verbatim}
+
+\framebox[5pc]{This is an important statement.}
+
+You can center any text, table, figure, \etc with the \emph{center} environment, using the following:
+
+\begin{Verbatim}
+\begin{center}
+\framebox{$a^2 + b^2 = c^2$}
+\end{center}
+\end{Verbatim}
+
+Produces this:
+
+\begin{center}
+\framebox{$a^2 + b^2 = c^2$}
+\end{center}
+
+If you are entering a number of equations in your document, you may
+want to use the \texttt{equation} environment, which will provide
+numbered equations:
+
+\begin{Verbatim}
+\begin{equation}
+a^2 + b^2 = c^2
+\end{equation}
+\end{Verbatim}
+\begin{equation}
+a^2 + b^2 = c^2
+\end{equation}
+
+Unlike many things in \LaTeX, the \emph{framebox} and \emph{equation}
+environments cannot be readily combined. That's because |\fbox| turns
+off math mode, so you need to manually turn it back on.
+
+Type this:
+
+\begin{Verbatim}
+\begin{equation}
+\fbox{$a^2 + b^2 = c^2$}
+\end{equation}
+\end{Verbatim}
+
+
+To produce this:
+
+\begin{equation}
+\fbox{$a^2 + b^2 = c^2$}
+\end{equation}
+
+
+
+\section{Lists}
+
+There are three kinds of lists that you may wish to make:
+
+\begin{description}
+\item[description] lists are used for definitions, where a  short phrase is bolded and the remainder text is the standard font (like this list).
+ \item[enumerate] lists are lists where each item is numbered and the
+  ordering is relevant, like the steps of a recipe. 
+\item[itemize] lists are lists where each item is of equal
+  importance.
+\end{description}
+
+Lists are implemented as \LaTeX{} environments, which means that they
+begin with a |\begin{|\emph{listname}|}| and end with an
+|\end{|\emph{listname}|}|.
+
+\begin{minipage}{.45\textwidth}
+\begin{Verbatim}
+\begin{description}
+\item[Earth] Third Planet.
+\item[Mars] Fourth Planet.
+\item[Venus] Second Planet.
+\end{description}
+\end{Verbatim}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\begin{description}
+\item[Earth] Third Planet.
+\item[Mars] Fourth Planet.
+\item[Venus] Second Planet.
+\end{description}
+\end{minipage}
+
+
+\begin{minipage}{.45\textwidth}
+\begin{Verbatim}
+\begin{enumerate}
+\item Wake up.
+\item Go to work.
+\item Go home.
+\item Go to sleep.
+\item Repeat.
+\end{enumerate}
+\end{Verbatim}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\begin{enumerate}
+\item Wake up.
+\item Go to work.
+\item Go home.
+\item Go to sleep.
+\item Repeat.
+\end{enumerate}
+\end{minipage}
+
+\begin{minipage}{.45\textwidth}
+\begin{Verbatim}
+\begin{itemize}
+\item Hamburgers
+\item Hotdogs
+\item Chips
+\end{itemize}
+\end{Verbatim}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\begin{itemize}
+\item Hamburgers
+\item Hotdogs
+\item Chips
+\end{itemize}
+\end{minipage}
+
+
+\section{Labels and Captions}\label{sec:labels}
+Labels are hidden markers in your |.tex| files created by the
+|\label{name}| command.  These markers are never shown directly in the
+output files.  However, correctly placing these markers in your file
+allows you to reference chapters, appendices, sections, figures,
+tables and equations.  You may wish to give your marker names prefixes
+such as \texttt{chap:}, \texttt{sec:}, \texttt{fig:}, \texttt{tab:}
+and \texttt{eqn:} to logically identify the labels.
+
+Captions are the text that appears below a figure or table to provide
+context for the information presented.  Captions are indicated by the
+command \verb|\caption{Sentence.}| Sometimes longer captions can look
+poorly in the Lists of Figures and Tables, so a caption for the table
+can also be specified by using
+\verb|\caption[Short Sentence.]{Longer Sentence.}|
+
+\section{Tables}
+Tables provide a valuable means to display data in an organized
+manner.  Using tables in \LaTeX{} is easy once the syntax is
+understood, although tables can be incredibly complex as well.  To see
+plenty of examples and explanation of options, visit
+\url{http://en.wikibooks.org/wiki/LaTeX/Tables}. There are also
+\emph{many} add-on packages which provide additional functionality.
+
+Here is a very simple table:
+
+\begin{Verbatim}
+\begin{center}
+\begin{tabular}{cc}
+Shape & Sides \\
+\hline
+Triangle & 3 \\
+Square & 4 \\
+\end{tabular}
+\end{center}
+\end{Verbatim}
+
+Produces this:
+
+\begin{center}
+\begin{tabular}{cc}
+Shape & Sides \\
+\hline
+Triangle & 3 \\
+Square & 4 \\
+\end{tabular}
+\end{center}
+
+This table has six things we have not seen before:
+
+\begin{enumerate}
+\item The |{cc}| is the table format specifier. Each ``c'' represents
+  a column that is centered.
+\item The |&| is used to separate columns of the table.
+\item The |\\| is used to separate rows of the table.
+\item The |\hline| is used to draw a horizontal line.
+\item The table is drawn in a |tabular| environment.
+\item The |center| environment is used to center the table.
+\end{enumerate}
+
+Here is a slightly more complex table:
+
+\begin{Verbatim}
+\begin{center}
+\begin{tabular}{lcr}
+Left Justified & Center Justified & Right Justified \\
+\hline
+Each & Column & Entry \\
+Spaces      & Do not    & Matter \\
+But         & May       & Assist you. \\
+\end{tabular}
+\end{center}
+\end{Verbatim}
+
+And here is how it formats:
+
+\begin{center}
+\begin{tabular}{|lcr}
+Left Justified & Center Justified & Right Justified \\
+\hline
+Each & Column & Entry \\
+Spaces      & Do not    & Matter \\
+But         & May       & Assist you. \\
+\end{tabular}
+\end{center}
+
+This table has three columns as identified by the format specification
+|lcr|. The first column is left-justified (``l''), the middle column
+is center justified (``c'') and the third column is right justified
+(``r''). The left side of the table has a vertical bar due to the pipe character (\verb+|+).  The |\hline| macro causes a horizontal line to be drawn across the table. 
+Columns are indicated by the ampersands (|&|) and the amount of spaces used are not important.  Thus, the spaces can be used to ensure your columns line up in your |.tex| file the way the table is intended to print.
+An empty cell is just ampersands separated by a space.
+To start a new row of the table, use the double backslash (|\\|); this can be done at the end of the current row.
+
+Below is a more complex table:
+
+
+\begin{Verbatim}
+\begin{center}
+\begin{table}
+\begin{tabular}[t]{|l||r|r|r|r|r|r|r|}
+\hline
+Pulse  & Pulse  & PRF & Duty  & Coupler & Power & Average & Peak  \\
+Width  & Length &     & Cycle & Losses  & Meter & Power   & Power \\
+\hline
+Long & $1.0 * 10^{-6} s $ & 750 Hz & $7.0 * 10^{-4} $ & 
+       49.1 dB & 3.4 dBm & 52.5 dBm & 73 dBm \\
+& & & 31.075 dB & & & & 43 dBW \\
+& & & & & & & 227.7 kW \\
+\hline
+Medium & $3.0 * 10^{-7} s $ & 1200 Hz & $2.0 * 10^{-4} $ & 
+         49.1 dB & 0 dBm & 49.1 dBm & 83 dBm \\
+& & & 34.29 dB & & & & 53 dBW \\
+& & & & & & & 218.27 kW \\
+\hline
+Short & $1.0 * 10^{-7} s $ & 2400 Hz & $1.9 * 10^{-4} $ & 
+        49.1 dB & -1 dBm & 48.1 dBm & 83 dBm \\
+& & & 35.05 dB & & & & 53 dBW \\
+& & & & & & & 206 kW \\
+\hline
+\end{tabular}
+\end{center}
+\end{Verbatim}
+
+And here is the formatted table:
+
+\begin{center}
+\begin{tabular}[t]{|l||r|r|r|r|r|r|r|}
+\hline
+Pulse  & Pulse  & PRF & Duty  & Coupler & Power & Average & Peak  \\
+Width  & Length &     & Cycle & Losses  & Meter & Power   & Power \\
+\hline
+Long & $1.0 * 10^{-6} s $ & 750 Hz & $7.0 * 10^{-4} $ &
+       49.1 dB & 3.4 dBm & 52.5 dBm & 73 dBm \\
+& & & 31.075 dB & & & & 43 dBW \\
+& & & & & & & 227.7 kW \\
+\hline
+Medium & $3.0 * 10^{-7} s $ & 1200 Hz & $2.0 * 10^{-4} $ &
+         49.1 dB & 0 dBm & 49.1 dBm & 83 dBm \\
+& & & 34.29 dB & & & & 53 dBW \\
+& & & & & & & 218.27 kW \\
+\hline
+Short & $1.0 * 10^{-7} s $ & 2400 Hz & $1.9 * 10^{-4} $ & 
+        49.1 dB & -1 dBm & 48.1 dBm & 83 dBm \\
+& & & 35.05 dB & & & & 53 dBW \\
+& & & & & & & 206 kW \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Graphics}
+This section briefly describes how to embed graphics in a \LaTeX{} document. For alternative
+treatments we recommend H\"oppner's  ``Strategies for including graphics in \LaTeX{} documents''\cite{strategies}, and the book \emph{The LaTeX Graphics Companion}\cite{graphics-companion}.
+
+Graphics are embedded using the |\includegraphics| command. It looks like this:
+
+\begin{Verbatim}
+       \includegraphics[options]{filename}
+\end{Verbatim}
+
+Typical options that you can use are |width=XX| or |height=XX|. For example, to include an image, have it centered, and scale it to 3 inches, use this:
+
+\begin{Verbatim}
+\begin{figure}
+    \begin{center}
+	\includegraphics[width=3in]{imagedirectory/file}
+	\caption{Caption of the important figure.}
+	\label{fig:importantfigure}
+    \end{center}
+\end{figure}
+\end{Verbatim}
+
+The |imagedirectory/file| notation indicates the images are in a subdirectory of |imagedirectory| and the file name is |file|.  The file extensions (|.jpg|, \etc) are optional. 
+
+\emph{Note: \LaTeX{} does not properly include graphics that have
+  periods in their filenames in addition to the period that is used to
+  denote the file type!} 
+
+There are two kinds graphics that you can include in a \LaTeX{}
+document: 
+\begin{description}
+\item[Vector graphics] are excellent for printing purposes.  These images
+ show up nicely on the computer screen and paper.  The computer renders these dynamically.  Several tools to generate vector graphics include |Inkscape| and
+ \texttt{asymptote}. In general, you should convert vector graphics to a |.pdf| file and embed it in your document using |\includegraphics|.
+\item[Raster graphics] include |.bmp|, |.jpg|, |.png|, and |.gif| images.  Formats without compression, including |.bmp| files
+ generally will make your thesis file much larger.  Some of these images show up poorly or 
+ pixelated in print copy.  You should convert these files to |.jpg| or |.png| and embed them in your document with |\includegraphics|.
+\end{description}
+
+Grahpics can also be created with R, gnuplot, matplotlib, or the
+asymptote package.
+
+Specific macros for including graphics provided by the |npsreport|
+template are discussed in \secref{graphics}.
+
+\section{Bib\TeX{} and Citations}
+Bibliography and citation are important in your thesis.  Each department has different expectations
+on citation styles.  Even if you select the wrong style initially, changing the format to the correct
+option is only a one-line change for \LaTeX{}---unlike a complete nightmare for Microsoft Word users.
+
+See \url{http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management} and
+ \\ \url{http://stefaanlippens.net/bibentry} for more information on BiB\TeX.
+ 
+Many common citation reference organizers and websites output Bib\TeX{} formatted citations in |.bib| files.  This is a time saver,
+as rather than retyping information, you can download the |.bib| file and copy its contents into your thesis master |.bib| file.
+The master |.bib| file contains all of your citations, even ones that you have not yet cited.  When you reference these citations in your thesis, Bib\TeX{} can 
+generate the references list for you.  To cite a specific reference use the \verb|\cite{name}| command.  After your first run of |pdflatex|, you follow with the |bibtex| command 
+as in \S\ref{runninglatex}. 
+
+\section{Going Further}
+You are now on your way to becoming a \LaTeX{} expert and will find that many of the \LaTeX{} modules are already installed with your \LaTeX{}. 
+You may find the following packages useful:
+
+\begin{description}
+\item[multirow] Allows a single table cell to extend to multiple
+rows.
+
+\item[ifthen]  Allows you to put conditions in your thesis. It is a
+bit easier than using the |if| that's built in to \TeX.
+
+\item[acronym]  A great package for automatically generating acronym lists.
+It can track the usage of acronyms to correctly use the long name of the acronym
+on its first use.
+
+\item[makeidx]  For creating an index of key words and phrases in your document and what page the keywords appear on.
+
+\item[mcode]  Places a MATLAB .m file contents directly into the output.  The
+package performs syntax highlighting and line numbering if desired.  This package is not in the CTAN
+and documentation may be obtained from the MATLAB Central website at \url{http://tinyurl.com/3wgcufr}.
+
+\end{description}
+
+In learning about \LaTeX{}, you are likely to do searches on the Internet, learn
+about a new package, and want to learn more about it. You will
+probably be surprised to find that many of these packages are already
+part of your \LaTeX{} distribution. In most cases, the documentation for
+the packages is already on your hard drive as a |.pdf| file.  We
+recommend reading package documentation; the documentation frequently
+has better information than the random pages you may find by using Google.
+

@@ -1,0 +1,171 @@
+\chapter{Helpful Writing Tips for Your Report or Thesis}
+This chapter discusses elements of writing and style that are helpful
+when writing a report or thesis at NPS. This chapter is based on a
+publication that was distributed by the NPS Thesis Processor in 2009.
+
+\section{English Grammar Tips}
+\begin{enumerate}
+\item Punctuation (periods and commas) go inside quotation marks. 
+\item When using \ie \eg or \etc always put
+  a comma before and after, \emph{e.g.}, like this. You can also use
+  the |\ie|, |\eg| and |\etc| macros that the thesis template provides.
+\item Master's degree has an apostrophe and Postgraduate is one word. 
+\item If you use ``however,'' make sure there's a comma before and after,
+  unless you start a sentence with it. However, it's best not to start a sentence
+  with ``however.'' And while we are on the subject, you should try to avoid 
+  starting a sentence with ``and'' or ``because.'' 
+\item When typing a date, do not use ``st'' or ``th.'' Instead, just
+  note the date: July 4, 1776, is Independence Day. Commas go 
+  after Month/date, year. No comma between month/yr. 
+\item Spell out numbers 1 through 9 as one to nine.  Larger numbers remain as digits.  
+\item Capitalize C in Chapter, F in Figure and T in Table when
+  referring to chapters, figures or tables in the text and use roman
+  numerals vs numbers or spelling out, etc. for chapters. Even
+  better, use the referencing commands described in \secvref{refcommands}.
+\item Footnote numbers go outside the punctuation. 
+\item Ibid cannot be the first footnote on the page.
+\item When typing equations in text and when using ``where'' or ``if,''
+  \etc and it's not a new paragraph the word starts at the margin.
+\item When inserting symbols, use the proper symbols commands.  Avoid trying to
+  include the character directly in the |.tex| file.
+\item Avoid writing in the first person!
+\item Avoid dangling participles.  Wrong: Substituting (12) into (14) gives...;
+  Correct: Substituting (12) into (14), we get...
+\item Contractions are not used in formal writing.  Cannot is one word.
+\item Chapters, figures and tables do not show things.  Instead, things are shown
+  or illustrated in figures and tables.  Things are discussed in chapters or sections.
+\end{enumerate}
+
+\section{Additional Writing Tips}
+\begin{enumerate}
+\item Displayed equations must be numbered, part of a sentence and properly punctuated.  This means
+  your equation may have a period as the last character to indicate the sentence has ended. 
+\item In-line equations in paragraphs must be simple and use ``/'' to indicate division.
+\item All figure captions should be complete sentences with a period at the end of the caption.
+\item Figures and tables should display the units associated with quantities being displayed.
+\item Axes in figures should be clearly labeled with quantities and units.
+\item Discuss all figures and tables in your thesis.
+\item Acronyms need to be defined in the acronyms list, in the abstract, in the executive
+  summary, and the first time they are used in the thesis.  They do not need to be
+  defined for every chapter.
+\item The introduction should provide the background that allows the reader to
+  understand why he or she should be interested in the problem.  Provide a
+  discussion of related work with references.  State clearly and explicitly the
+  goal(s) or objective(s) of your work.  Discuss how your work differs from the
+  previous works.
+\item Abstracts briefly summarize the work and help the reader to ascertain the purpose
+  of the thesis.  An abstract may include the problem at hand, the technique used to solve
+  the problem, and indicate the conclusion of the results.
+\item Some departments require an an additional section called the Executive Summary.
+  It is more comprehensive than the abstract and generally 2-10 pages in length.  The
+  Executive Summary must stand alone from the rest of the document.  Figures and tables
+  are numbered independently from the thesis content and do not appear in the List of
+  Figures or List of Tables.  Additionally, references in the Executive Summary are
+  independent from the thesis and there is a separate list of references at the
+  end of the Executive Summary.   
+\item Conclusions summarize the results obtained in your research and emphasize
+  your original contributions.  Recommended future work should include any new
+  questions arising from your research.
+\end{enumerate}
+
+\section{\LaTeX{} Tips}
+\begin{enumerate}
+\item Do not use ``*'' or ``x'' to indicate multiplication.  $X=YZ$ is sufficient.
+\item If you must use multiplication, please do so using |\times| in
+  math mode. That is, type |$X=Y\times Z$| to produce $X=Y\times Z$.
+\item Use the \LaTeX{} \verb|\begin{figure}| and \verb|\begin{table}| environment to
+  create floating figures and tables. Use the |\caption| command
+  to create your captions. Label your captions with the
+  |\label{marker}| command inside the caption itself. Captions are shown
+  in the paper as text.  Labels are internal \LaTeX{} identifiers that can
+  be referenced with the |\ref{marker}| reference command.
+\item Do not split text around a figure or table.  Write complete paragraphs,
+  since \LaTeX{} will place figures in your document to efficiently use the paper.  
+\item When there is more than one reference, put them both into the 
+  \verb|\cite| command: \\ \verb|\cite{john1,john2,john3}|.  The additional \texttt{cite} package
+  can improve the multiple citations result from [6,7,8] to [6-8].
+\item Make sure there's at least one and a half lines of text at the
+  top of the page---if \LaTeX{} gives you a hard time, you may need to
+  add or remove text so that everything works out properly.
+\item Don't use math mode as a general italics---use |\emph{}|. 
+\item Do not make tables too wide in columns or they can be drawn off the right-side of the paper.
+\item Use automatic numbering and lettering by using the appropriate environments, such as
+  \texttt{enumerate}, \texttt{itemize} or \texttt{list}.
+\item There can only be one |label| entry for a section, figure, \etc.  Trying to have more than one will
+  cause a problem in the automatic numbering.  If you need to troubleshoot numbering, look in the generated |.toc| files.
+\end{enumerate}
+
+\section{NPS Thesis Tips}
+
+When writing your thesis, the sections should be in this order:
+\begin{enumerate}
+  \item Table of Contents
+  \item List of Figures*
+  \item List of Tables*
+  \item List of Acronyms*
+  \item Executive Summary*
+  \item Acknowledgements*
+  \item Chapters
+  \item Appendices
+  \item Author Index*
+  \item Index*
+  \item References
+  \item Initial Distribution List
+\end{enumerate}
+
+The starred items do not appear in Table of contents.  Not all theses
+will have an index, but that can be generated automatically with
+\LaTeX{}.  If your thesis only has one appendix, then it is not
+lettered, but just referred to as the appendix.  If you have multiple
+appendices, then they are lettered.  If you do not have any tables,
+then the list of tables is not included.  This also applies to list of
+figures and acronyms.  The Executive Summary is required by the
+Electrical Engineering, Systems Engineering, and Operations Research
+departments.
+
+\section{Initial Distribution List Recipients}
+Each thesis contains a list at the end of the original recipients of the thesis.  You may 
+add additional names to this list for professional or personal reasons.  When you submit your
+thesis, you will provide an email address for the individuals on the list, and they will 
+receive an email when the thesis has been posted.
+
+\begin{enumerate}
+  \item Defense Technical Information Center\\Ft. Belvoir, Virginia
+  \item Dudly Knox Library\\Naval Postgraduate School\\Monterey, California
+  \item Your department chair\\Naval Postgraduate School\\Monterey, California
+  \item Your advisor\\Naval Postgraduate School\\Monterey, California
+  \item Your 2nd reader/coadvisor\\Naval Postgraduate School\\Monterey, California
+  \item Each author\\Naval Postgraduate School\\Monterey, California\\
+    
+  \textit{Marine officer students are required to show:}
+
+  \item Marine Corps Representative\\Naval Postgraduate School\\Monterey, California
+  \item Directory, Training and Education, MCCDC, Code C46\\Quantico, Virginia
+  \item Marine Corps Tactical System Support Activity (Attn: Operations
+    Officer)\\Camp Pendleton, California\\
+
+  \textit{Officer students in the Operations Research Program are also required
+    to show:}
+
+  \item Director, Studies and Analysis Division, MCCDC, Code C45\\
+    Quantico, Virginia\\
+
+  \textit{Officer students in the Space Ops/Space Engineering Program or in the
+    Information Warfare/Information Systems and Operations are also
+    required to show:}
+
+  \item Head, Information Operations and Space Integration Branch,\\
+    PLI/PP\&O/HQMC, Washington, DC
+\end{enumerate}
+
+\section{Documentation Submitted with Thesis}
+The Thesis Processors will require some additional forms to accept
+your thesis and give you a green card.  These forms are available on
+their website at \url{http://www.nps.edu/research/research1.html}.
+
+\begin{itemize}
+  \item Thesis release form
+  \item Thesis color page request form
+  \item Special Abstract
+  \item Completed Signature Page
+\end{itemize}

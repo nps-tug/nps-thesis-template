@@ -1,0 +1,25 @@
+\documentclass[twoside,thesis,authorindex,index]{npsreport} 
+\usepackage{pdfpages}
+\usepackage{embedfile}
+\usepackage{graphicx}
+\begin{document}
+\includepdf[pages=1-1,picturecommand={
+  \put(80,700){\today}
+  \put(350,700){Computer Science}
+  \put(150,670){\begin{minipage}{6in}{Simson Garfinkel\\Mike Shick}\end{minipage}}
+  \put(150,610){\begin{minipage}{6in}{The Document Title}\end{minipage}}
+  \put(320,510){Publisher}
+  \put(320,490){Event}
+  \put(320,470){Anticipated Audience}
+  \put(100,400){\oval(100,22)}
+  \put(120,150){\oval(120,22)}
+}]{NPS_Public_Release_Review_Form}
+\includepdf[pages=2-2,picturecommand={
+  \put(80,90){Responsible Author's Name}
+  %\put(300,70){\includegraphics[width=2in]{signature_slg}}
+  \put(500,90){\today}
+  \put(50,700){\Pisymbol{pzd}{52}}
+  \put(50,650){\Pisymbol{pzd}{52}}
+  \put(50,550){\Pisymbol{pzd}{52}}
+}]{NPS_Public_Release_Review_Form}
+\end{document}
