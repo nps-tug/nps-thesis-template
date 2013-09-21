@@ -1363,3 +1363,15 @@ the packages is already on your hard drive as a |.pdf| file.  We
 recommend reading package documentation; the documentation frequently
 has better information than the random pages you may find by using Google.
 
+If, however, you do need to download a \LaTeX{} style or package file manually, 
+the easiest way to include a |.sty|, |.cls| or similar file is to place it in the same folder as your current document.  If you choose to place it in your LaTeX installation folder (perhaps to use on many documents), a manual installation step must be performed for your \LaTeX{} distribution:
+
+MiKTeX users perform:
+\begin{enumerate}
+  \item |Click Start - Programs - MiKTeX 2.9 - | \\ 
+    |Maintainance (Admin) - Settings (Admin)|
+  \item After the dialog opens, click the |Refresh FNDB| button.
+\end{enumerate}
+
+Other distributions (MacTeX, TeX Live, etc), should try |mktexlsr| or |texhash| on the command prompt (you may need to run this command as the root user).
+
