@@ -1968,7 +1968,10 @@ FUNCTION {format.url}
 %% Classification marking
 
 FUNCTION {format.classification}
-{ classification empty$
+{
+  fin.entry
+  if$
+  classification empty$
     { classification.show
         { "\;\textbf{" classification.unmarked * "}" * }
         { "" }
@@ -1979,7 +1982,8 @@ FUNCTION {format.classification}
         { "" }
       if$
     }
-  if$
+    if$
+    punct.no 'this.status.punct :=
 }
 
 

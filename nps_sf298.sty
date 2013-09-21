@@ -195,22 +195,14 @@
   \setcounter{page}{1}%
   \thispagestyle{empty}
   \vbox to 0pt{%
-    \@tempskipa 34pt
-    \advance\@tempskipa\voffset
-    \advance\@tempskipa\topmargin
-    \advance\@tempskipa\headheight
-    \advance\@tempskipa\headsep
-    \advance\@tempskipa\baselineskip
-    \vskip-\@tempskipa
-    \vskip 0.35in  % this corrects the top margin to be at 1in
     \vfill
   \ifsf@oldform
-      \resizebox{\textwidth}{!}{\sf@drawoldform}
+    \resizebox{\textwidth}{!}{\sf@drawoldform}
   \else
-      \resizebox{\textwidth}{!}{\sf@drawform}
+    \resizebox{\textwidth}{!}{\sf@drawform}
   \fi
     \vfill
-    \vss}%
+}
     
   \if@twoside
     \null

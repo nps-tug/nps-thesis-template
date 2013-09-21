@@ -150,8 +150,6 @@
              marginparwidth=0pt,         % no marginal paragraphs
              marginparsep=0pt,           % no marginal paragraphs
              head=30pt,headsep=0pt,hoffset=0pt}
-\usepackage{fancyhdr}           % puts chapters names in footers
-\fancypagestyle{plain}{\lhead{}\rhead{}}  % ToC/ToF/etc use \thispagestyle{plain}
 
 %% Font selection
 \usepackage[T1]{fontenc}        % http://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc
@@ -188,6 +186,7 @@
 \usepackage{tabularx}           % tables that expand to with width requested
 \usepackage{titletoc}           % adds toc commands
 \usepackage{titlesec}           % complete replacement for titles
+\usepackage{fancyhdr}           % puts chapters names in footers
 \usepackage{ccaption}           % control captions
 \usepackage{setspace}           % enabled \doublespacing, \onehalfspacing, etc.
 \usepackage{multicol}           % multiple columns; good for you!
@@ -202,8 +201,9 @@
 \usepackage{remreset}           % prevent footnotes from being reset at each chapter
 \usepackage{color}
 \usepackage{xcolor}
-\usepackage{paralist}       % {compactenum} {compactitem} environments
-\usepackage{enumitem}       % No extra space before lists
+\usepackage{paralist}           % {compactenum} {compactitem} environments
+\usepackage{enumitem}           % No extra space before lists
+\usepackage{afterpage}          % to implement \smark marking macro
 \setlist{nolistsep}
 
 %These packages recommended by students
@@ -447,7 +447,7 @@
   \fi
 \fi
 
-\usepackage{afterpage}
+
 \newenvironment{smark}[1][U]%
 {\thispagestyle{fancy}
   \rhead{} %
@@ -762,7 +762,7 @@
   \pagestyle{fancy}
   \rhead{}
 \ifclassified
-  \chead{\textsf{\@securitybanner}}
+  \chead{\textsf{\@securitybanner} \\ \vspace{1em}}
 \else
   \chead{}
 \fi
@@ -856,10 +856,10 @@
   \ifclassified 
      \enlargethispage{3pc}
      \vspace{-1pc}
-     \begin{tabular}{p{1in}p{4in}p{1in}}
+     \begin{tabular}{p{1.1in}p{3.4in}p{1.1in}}
      & \center \textbf{\footnotesize DESTRUCTION NOTICE} & \\
      {\footnotesize Classified by: Multiple Sources. Declassify on \@declassifydate } &
-     {\small For classified documents follow the procedure in
+     {\footnotesize For classified documents follow the procedure in
      DoD 5220.22m Industrial Security Manual or DoD 5220.1R Information
      Security Program Regulation (Ch. 17 of OPNAVINST 5510.1)} &
      {\footnotesize Copy \_\_\_\_ of \_\_\_\_ copies. This document contains 
@@ -945,6 +945,7 @@
 
 
 \def\NPSthesistitle{
+  \let\ps@plain\ps@fancy
   \setcounter{page}{3}          % do not reset to page 1
   \thispagestyle{fancy}
   \begin{center}
@@ -1277,15 +1278,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Special Commands Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\NPSSecurityStamp}{
-  \begin{picture}(1,1)
-  \put(0,75){\begin{minipage}{6.5in}\begin{center}{\textsf{\@securitybanner}}\end{center}\end{minipage}}
-   % top
-  \put(0,-590){\begin{minipage}{6.5in}\begin{center}{\textsf{\@securitybanner}}\end{center}\end{minipage}}
-   % bot
-  \end{picture}
-}
-
 \newcommand{\NPStableOfContents}{
 \ifnpsarticle
   \section*{\contentsname\ULABEL}
@@ -1294,7 +1286,6 @@
 \fi
   \lhead{}\rhead{}
   \def\contentsname{}           % clear, because it will be in the header
-  \NPSSecurityStamp
   \thispagestyle{fancy}\vspace{-1in}\tableofcontents\cleardoublepage
 }
 
@@ -1308,7 +1299,6 @@
   \chapter*{\listfigurename\ULABEL}
 \fi
   \def\listfigurename{}
-  \NPSSecurityStamp
   \thispagestyle{fancy}\vspace{-1in}\listoffigures\cleardoublepage
 }
 
@@ -1322,7 +1312,6 @@
   \chapter*{\listtablename\ULABEL}
 \fi
   \def\listtablename{}
-  \NPSSecurityStamp
   \thispagestyle{fancy}\vspace{-1in}\listoftables\cleardoublepage
 }
 
