@@ -201,7 +201,7 @@
 \usepackage{pifont}             % fancy characters
 \usepackage{remreset}           % prevent footnotes from being reset at each chapter
 \usepackage{color}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{paralist}       % {compactenum} {compactitem} environments
 \usepackage{enumitem}       % No extra space before lists
 \setlist{nolistsep}
