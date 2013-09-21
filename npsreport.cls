@@ -757,23 +757,38 @@
 %============================================
 
 \def\NPScover{
-  % these commands are the first commands that run when printing
-  % starts, because the \NPScover command appears first
-  \pagestyle{fancy}
+%% These commands are the first commands that run when printing
+%% starts, because the \NPScover command appears first
+  %
+  % 'myheadings' has page numbers; used for SF298
+  %
+  \fancypagestyle{myheadings}{
+    \rhead{}
+    \lhead{}
+    \chead{}
+    \renewcommand{\headrulewidth}{0pt}
+    \cfoot{\thepage}
+  }
+  %
+  % 'fancy' and 'plain' styles have security marking, etc
+  %
+  \pagestyle{fancyplain}
   \rhead{}
+  \lhead{}
 \ifclassified
   \chead{\textsf{\@securitybanner} \\ \vspace{1em}}
 \else
   \chead{}
 \fi
-  \lhead{}
   \renewcommand{\headrulewidth}{0pt}
 \ifclassified
   \cfoot{\textsf{\@securitybanner} \\ \thepage}
 \else
   \cfoot{\thepage}
 \fi
-  \renewcommand{\sf@ExtraPages}{2}                        % include for the NPS cover
+  %
+  %
+  \renewcommand{\sf@ExtraPages}{2}  % include for the NPS cover
   %
   % The first page; but note --- it's a title page, so it doesn't use
   % this page style
@@ -903,7 +918,9 @@
   \DistributionStatement{\@distribution}
   \Abstract{\@abstract}
   \SponsoringAgencySF{\@sponsoringagency}
+  \thispagestyle{myheadings}
   \MakeRptDocPage
+  \thispagestyle{myheadings}
   \cleardoublepage
 }
 
@@ -945,7 +962,6 @@
 
 
 \def\NPSthesistitle{
-  \let\ps@plain\ps@fancy
   \setcounter{page}{3}          % do not reset to page 1
   \thispagestyle{fancy}
   \begin{center}
@@ -1154,7 +1170,6 @@
   %\addcontentsline{toc}{chapter}{Executive Summary}
   \chapter*{Executive Summary\ULABEL}
 \fi
-  \thispagestyle{fancy}
   \onehalfspacing
   #1
 }
@@ -1167,7 +1182,6 @@
   %\addcontentsline{toc}{chapter}{Acknowledgements}
   \chapter*{Acknowledgements\ULABEL}
 \fi
-  \thispagestyle{fancy}
   \onehalfspacing
   #1
 }
@@ -1286,7 +1300,8 @@
 \fi
   \lhead{}\rhead{}
   \def\contentsname{}           % clear, because it will be in the header
-  \thispagestyle{fancy}\vspace{-1in}\tableofcontents\cleardoublepage
+  \tableofcontents
+  \cleardoublepage
 }
 
 \newcommand{\NPSlistOfFigures}{
@@ -1312,7 +1327,8 @@
   \chapter*{\listtablename\ULABEL}
 \fi
   \def\listtablename{}
-  \thispagestyle{fancy}\vspace{-1in}\listoftables\cleardoublepage
+  \listoftables
+  \cleardoublepage
 }
 
 \newcommand{\NPSlistOfAcronyms}[1]{
@@ -1325,7 +1341,6 @@
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
   \def\listacronymname{List of Acronyms and Abbreviations}
-  \thispagestyle{fancy}
   \onehalfspacing
   #1
   \cleardoublepage
@@ -1341,7 +1356,6 @@
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
   \def\listacronymname{List of Acronyms and Abbreviations}
-  \thispagestyle{fancy}
   \onehalfspacing
   \input{#1}
   \cleardoublepage
