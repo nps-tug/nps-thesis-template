@@ -422,7 +422,7 @@
 
 % Table of contents control
 \def\contentsname{Table of Contents}
-\usepackage{tocloft}            % TOC Control
+\usepackage[subfigure]{tocloft}            % TOC Control
 \setlength\cftparskip{2ex}
 \ifnpsarticle
 \else
