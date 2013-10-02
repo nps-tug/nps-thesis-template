@@ -1260,12 +1260,12 @@
 
 \newcommand{\NPSdistribution}[1]{
 \ifnpsarticle
-  \addcontentsline{toc}{section}{#1}
   \section*{#1}
+  \addcontentsline{toc}{section}{#1}
 \else
-  \addcontentsline{toc}{chapter}{#1}
   \def\chaptername{#1}
   \chapter*{#1}
+  \addcontentsline{toc}{chapter}{#1}
 \fi
   \singlespacing    % reduce extra line breaks between entries
   \newenvironment{distributionlist}
