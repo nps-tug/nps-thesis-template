@@ -13,6 +13,31 @@
 %
 \usepackage{doc,lipsum} % provides \BibTex and \lipsum macros, for demos
 
+%
+% For Example: you might find one of these useful:
+
+%\usepackage{epstopdf}        % to use .eps files for figures
+%\usepackage{bm}              % bold math if you need bold greek letters
+%\usepackage{glossaries}      % see http://en.wikibooks.org/wiki/LaTeX/Glossary
+%\usepackage{asymptote}       % for graphics
+% The asymptote package allows for very nice graphics and figures
+% Proper usage requires additional information located at:
+% http://asymptote.sourceforge.net/
+% See the gallery at this URL for examples
+
+%\usepackage{placeins}        % float placement
+% Provides \FloatBarrier which keeps figures/tables in the same section.
+% LaTeX sometimes moves them to fill up pages.
+% http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/placeins/placeins-doc.pdf
+
+%\usepackage[numbered]{mcode} % matlab code
+% The mcode package must be separately downloaded.
+% http://www.mathworks.com/matlabcentral/fileexchange/8015-m-code-latex-package
+
+%\usepackage{flafter}         % float placement
+% Ensures that figures/tables do not appear in the document before
+% they are referenced in the text.
+
 
 \title{[Title]}
 
@@ -116,9 +141,9 @@
 \begin{document}
 
 \NPScover                  % Cover page
-%\NPSsignature             % NPS signature page, for tech reports
 \NPSsftne                  % SF298 form
-\NPSthesistitle            % Title page
+%\NPSsignature             % Tech Report page (iii): signature page
+\NPSthesistitle            % Thesis page (iii): title page
 \NPSabstractpage           % Abstract Page
 \NPSfrontmatter            % NPS front matter follows
 
