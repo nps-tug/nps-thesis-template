@@ -981,7 +981,7 @@
 
       \vfill
       \begin{tabbing}
-      \hspace{1.1in}\=\\       % Set the tabs
+      \hspace{1.5in}\=\\       % Set the tabs
 
       \iftwoauthors
       Authors: \> \@author \\[\sigspace]
@@ -1006,7 +1006,7 @@
 
       \vfill
       \begin{tabbing}
-      \hspace{1.1in}\=\\       % Set the tabs
+      \hspace{1.5in}\=\\       % Set the tabs
 
       \iftwoauthors
       Authors: \> \@author \\[\sigspace]
@@ -1033,7 +1033,7 @@
 
       \vfill
       \begin{tabbing}
-      \hspace{1.1in}\=\\       % Set the tabs
+      \hspace{1.5in}\=\\       % Set the tabs
 
       \iftwoauthors
       Authors: \> \@author \\[\sigspace]
