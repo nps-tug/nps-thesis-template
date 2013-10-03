@@ -207,11 +207,12 @@
 \usepackage{enumitem}           % No extra space before lists
 \setlist{nolistsep}
 
-% These packages recommended by students
 \usepackage{float}              % reimplementation of float package
 \usepackage{cite}               % for [5-8] reference style
 \usepackage{amsmath,amsfonts}   % for many types of math equations
 \usepackage{url}                % nice handling of URLs
+\usepackage{subfigure}          % needs to be before tocloft, to avoid conflict
+\usepackage[subfigure]{tocloft} % TOC Control
 
 \pagenumbering{roman}
 
@@ -423,7 +424,6 @@
 
 % Table of contents control
 \def\contentsname{Table of Contents}
-\usepackage[subfigure]{tocloft}            % TOC Control
 \setlength\cftparskip{2ex}
 \ifnpsarticle
   \setlength\cftbeforetoctitleskip{40pt}
