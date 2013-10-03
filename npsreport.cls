@@ -1183,6 +1183,9 @@
 }
 
 \newcommand{\NPSsignature}{
+  % this page is always (iii), so force skip (used in non-twoside mode)
+  \ifnum \c@page < 3 \thisPageIntentionallyLeftBlankForced \fi
+  \setcounter{page}{3}          % do not reset to page 1
   \begin{center}
   \textbf{NAVAL POSTGRADUATE SCHOOL\\Monterey, California 93943-5000}
   \end{center}
