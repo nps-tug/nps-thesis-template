@@ -13,7 +13,7 @@ export BIBINPUTS := $(BIBINPUTS):$(NPSREPORT)
 
 ALL := dissertation.pdf
 ALL += technical_report.pdf
-ALL += technical_report_many_authors technical_report_chapters.pdf
+ALL += technical_report_many_authors.pdf technical_report_chapters.pdf
 ALL += cs_thesis_proposal.pdf
 ALL += thesis_mult_appendix.pdf
 ALL += thesis_author_advisor_reader.pdf thesis_twoauthor.pdf

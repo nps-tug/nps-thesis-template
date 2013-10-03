@@ -194,6 +194,7 @@
 \usepackage{fancyvrb}           % a better verbatim
 \usepackage{varioref}           % provides \vref - smart referencing
 \usepackage{xspace}             % provides \xspace
+\usepackage{xifthen}            % if-then-else macro for empty fields
 \usepackage[old298]{nps_sf298}  % Bring in SF298 for the documentation page
 \usepackage{latexsym}           % gives \Box
 \usepackage{graphicx}           % it's better
@@ -425,6 +426,9 @@
 \usepackage[subfigure]{tocloft}            % TOC Control
 \setlength\cftparskip{2ex}
 \ifnpsarticle
+  \setlength\cftbeforetoctitleskip{40pt}
+  \setlength\cftbeforeloftitleskip{40pt}
+  \setlength\cftbeforelottitleskip{40pt}
 \else
   \setlength\cftchapindent{-3pt}
 \fi
@@ -527,7 +531,12 @@
 \else
 % New NPS
   \typeout{Using new NPS thesis design}
+
+  \ifnpsarticle
+  \setcounter{tocdepth}{3}  % put sections and subsections in TOC for articles
+  \else
   \setcounter{tocdepth}{1}  % only put chapters and sections in the TOC
+  \fi
 
   % These were in the {document}
   % Specify our spacings --- Turns out that we want to do this
@@ -569,37 +578,54 @@
   %
   % table of contents
   %
-
-  \ifnpsarticle
-    \def\SECTIONBOLDFACE{\bf}
-    \def\ARTICLESPACE{-1.0ex}
-  \else
-    \def\SECTIONBOLDFACE{} 
-    \def\ARTICLESPACE{-1.8ex}
-  \fi
-
+  \def\SECTIONBOLDFACE{}
+  \def\ARTICLESPACE{-1.8ex}
   \contentsmargin{2.55em}
   \dottedcontents{section}[1.5em]{}{2.3em}{1pc}
-  \titlecontents{section}                                 % section
+
+  \ifnpsarticle
+    \titlecontents{section}                                 % section
+            [25pt]                                    % left
+            {\vspace{-0.2ex}}                         % above
+            {\SECTIONBOLDFACE\contentslabel{2.3em}}   % before with label
+            {\hspace*{-2.3em}}                        % before without label
+            {\titlerule*[1pc]{.}\contentspage}        % filler and page
+
+    \titlecontents{subsection}                              % subsection
+            [42pt]                                    % left
+            {\vspace{-1.8ex}}                         % above
+            {\contentslabel{3.1em}}                   % before with label
+            {\hspace*{-2.3em}}                        % before without label
+            {\titlerule*[1pc]{.}\contentspage}        % filler and page
+
+    \titlecontents{subsubsection}                           % subsubsection
+            [42pt]                                    % left
+            {\vspace{-1.8ex}}                         % above
+            {\contentslabel{3.1em}}                   % before with label
+            {\hspace*{-2.3em}}                        % before without label
+            {\titlerule*[1pc]{.}\contentspage}        % filler and page
+  \else
+    \titlecontents{section}                                 % section
             [25pt]                                    % left
             {\vspace{-1.2ex}}                         % above
             {\SECTIONBOLDFACE\contentslabel{2.3em}}   % before with label
             {\hspace*{-2.3em}}                        % before without label
             {\titlerule*[1pc]{.}\contentspage}        % filler and page
 
-  \titlecontents{subsection}                              % section
+    \titlecontents{subsection}                              % subsection
             [25pt]                                    % left
             {\vspace{-1.8ex}}                         % above
             {\contentslabel{2.3em}}                   % before with label
             {\hspace*{-2.3em}}                        % before without label
             {\titlerule*[1pc]{.}\contentspage}        % filler and page
 
-  \titlecontents{subsubsection}                           % subsection
+    \titlecontents{subsubsection}                           % subsubsection
             [52pt]                                    % left
             {\vspace{-1.8ex}}                         % above
             {\contentslabel{2.3em}}                   % before with label
             {\hspace*{-2.3em}}                        % before without label
             {\titlerule*[1pc]{.}\contentspage}        % filler and page
+  \fi
 
   \newcommand{\NPSend}{
     \ifnpsauthorindex
@@ -639,12 +665,12 @@
   \appendix                       % Appendix mode
   \clearpage
 \ifnpsarticle
-  \addcontentsline{toc}{section}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
   \section*{Appendix:~#1}
+  \addcontentsline{toc}{section}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
 \else
-  \addcontentsline{toc}{chapter}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
   \def\chaptername{Appendix}  % not sure why this is needed, but it is
   \chapter*{Appendix:~#1}
+  \addcontentsline{toc}{chapter}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
 \fi
 }
 
@@ -785,10 +811,12 @@
 
   \textbf{\small \@distribution}\\
 
-  \ifnpsthesis
-  \@RPTpreparedFor     %used for technical reports funded by a sponsor          
-                       % define \RPTpreparedFor in main tex file when needed
-  \fi
+  % define \RPTpreparedFor when needed in you tex file
+  \ifthenelse{\equal{\@RPTpreparedFor}{}}{}{%
+    \vspace{\smallskipamount}
+    Prepared for: \@RPTpreparedFor
+  }
+
   \vfill
   \ifclassified 
      \enlargethispage{3pc}
@@ -809,8 +837,8 @@
            \arabic{nps@page}}}
      pages.}
      \end{tabular}
- \fi
-\textsf{\@securitybanner}
+  \fi
+  \textsf{\@securitybanner}
   \end{center}
   \vfill
   \end{titlepage}
@@ -1086,12 +1114,13 @@
 \ifnpsarticle
   \begin{center}\textbf{\large{Executive Summary\ULABEL}}\end{center}
 \else
-  %\addcontentsline{toc}{chapter}{Executive Summary}
   \chapter*{Executive Summary\ULABEL}
+  %\addcontentsline{toc}{chapter}{Executive Summary}
 \fi
   \thispagestyle{fancy}
   \onehalfspacing
   #1
+  \cleardoublepage
 }
 
 
@@ -1099,57 +1128,58 @@
 \ifnpsarticle
   \begin{center}\textbf{\large{Acknowledgements\ULABEL}}\end{center}
 \else
-  %\addcontentsline{toc}{chapter}{Acknowledgements}
   \chapter*{Acknowledgements\ULABEL}
+  %\addcontentsline{toc}{chapter}{Acknowledgements}
 \fi
   \thispagestyle{fancy}
   \onehalfspacing
   #1
+  \cleardoublepage
 }
 
 \newcommand{\NPSsignature}{
-  \thispagestyle{empty}
-  \renewcommand{\sf@ExtraPages}{4}      % include for the NPS cover
   \begin{center}
   \textbf{NAVAL POSTGRADUATE SCHOOL\\Monterey, California 93943-5000}
   \end{center}
 
-  \begin{tabular}{p{2.5in}p{2.5in}}
-  \@president & \@provost \\
-  President   & \mbox{Executive Vice President and Provost} \\
-  \\
-  \\
-  \multicolumn{2}{p{6.25in}}{\@SponsoringNotation}\\
-  \\
-  \multicolumn{2}{p{6.25in}}{\@distribution}\\
-  \\
-  This report was prepared by:\\
-  \\
-  \\
-  \\
-  \\
-  \@SignatureOne   & \iftwoauthors \@SignatureTwo \fi \\[-2pc]
-  \rule{2in}{1pt}  & \iftwoauthors \rule{2in}{1pt} \fi\\
-  \@author         & \iftwoauthors \@authortwo \fi\\
-  \@rank           & \iftwoauthors \@ranktwo \fi\\
-  \\
+  \begin{tabbing}
+  \hspace{3.5in} \= \hspace{2.5in} \= \\      % set the tabs
+  \@president   \>   \@provost \\
+  President     \>   \mbox{Provost}
+  \end{tabbing}
+
+  \ifthenelse{\NOT\equal{\@SponsoringNotation}{}}{%
+    The report entitled ``\@title'' was \@SponsoringNotation
+  }{}
+
+  \vspace{\medskipamount}
+  {\bf \@distribution}
+  \vfill
+
+  \newcommand{\sigspace}{1.5pc}
+  \textbf{This report was prepared by:}
+  \begin{tabbing}
+  \hspace{3.5in} \= \hspace{2.5in} \= \\      % set the tabs
+  \\[\sigspace]
+  \@SignatureOne     \> \iftwoauthors \@SignatureTwo \fi \\[-2pc]
+  \rule{2.5in}{1pt}  \> \iftwoauthors \rule{2.5in}{1pt} \fi \\
+  \@author           \> \iftwoauthors \@authortwo \fi \\
+  \@rank             \> \iftwoauthors \@ranktwo \fi \\[\sigspace]
+
   \ifthreeauthors
-  \@SignatureThree & \iffourauthors \@SignatureFour \fi \\[-2pc]
-  \rule{2in}{1pt}  & \iffourauthors \rule{2in}{1pt} \fi\\
-  \@authorthree    & \iffourauthors \@authorfour \fi\\
-  \@rankthree      & \iffourauthors \@rankfour \fi\\
+  \\[\sigspace]
+  \@SignatureThree   \> \iffourauthors \@SignatureFour \fi \\[-2pc]
+  \rule{2.5in}{1pt}  \> \iffourauthors \rule{2.5in}{1pt} \fi \\
+  \@authorthree      \> \iffourauthors \@authorfour \fi \\
+  \@rankthree        \> \iffourauthors \@rankfour \fi \\[\sigspace]
   \fi
 
-  \\
-  \\
-  Reviewed by: & Released by:\\
-  \\
-  \\
-  \\
-  \rule{2in}{1pt} & \rule{2in}{1pt}\\
-  \@departmentchair        & \@researchchair\\
-  Chairman of \@department & \mbox{Vice President and Dean of Research}
-  \end{tabular}
+  {\bf Reviewed by:} \> {\bf Released by:} \\[\sigspace]
+  \\ \vspace{1.5\bigskipamount}
+  \rule{2.5in}{1pt}  \> \rule{2.5in}{1pt} \\
+  \@departmentchair\xspace, Chairman  \> \@researchchair \\
+  \@department       \> \mbox{Dean of Research} \\
+  \end{tabbing}
   \newpage
   \thisPageIntentionallyLeftBlank
 }
@@ -1197,12 +1227,12 @@
 
 \newcommand{\NPSdistribution}[1]{
 \ifnpsarticle
-  \addcontentsline{toc}{section}{#1}
   \section*{#1}
+  \addcontentsline{toc}{section}{#1}
 \else
-  \addcontentsline{toc}{chapter}{#1}
   \def\chaptername{#1}
   \chapter*{#1}
+  \addcontentsline{toc}{chapter}{#1}
 \fi
   \singlespacing    % reduce extra line breaks between entries
   \newenvironment{distributionlist}
@@ -1224,7 +1254,8 @@
 
 \newcommand{\NPStableOfContents}{
 \ifnpsarticle
-  \section*{\contentsname\ULABEL}
+  %\section*{\contentsname\ULABEL}
+  \begin{center}\textbf{\large{\contentsname\ULABEL}}\end{center}
 \else
   \chapter*{\contentsname\ULABEL}
 \fi
@@ -1237,11 +1268,12 @@
 \newcommand{\NPSlistOfFigures}{
   \lhead{}\rhead{}
 \ifnpsarticle
-  \addcontentsline{toc}{section}{List of Figures}
-  \section*{\listfigurename\ULABEL}
+  %\section*{\listfigurename\ULABEL}
+  %\addcontentsline{toc}{section}{List of Figures}
+  \begin{center}\textbf{\large{\listfigurename\ULABEL}}\end{center}
 \else
-  %\addcontentsline{toc}{chapter}{List of Figures}
   \chapter*{\listfigurename\ULABEL}
+  %\addcontentsline{toc}{chapter}{List of Figures}
 \fi
   \def\listfigurename{}
   \NPSSecurityStamp
@@ -1251,11 +1283,12 @@
 \newcommand{\NPSlistOfTables}{
   \lhead{}\rhead{}
 \ifnpsarticle
+  %\section*{\listtablename\ULABEL}
   %\addcontentsline{toc}{section}{List of Tables}
-  \section*{\listtablename\ULABEL}
+  \begin{center}\textbf{\large{\listtablename\ULABEL}}\end{center}
 \else
-  %\addcontentsline{toc}{chapter}{List of Tables}
   \chapter*{\listtablename\ULABEL}
+  %\addcontentsline{toc}{chapter}{List of Tables}
 \fi
   \def\listtablename{}
   \NPSSecurityStamp
@@ -1265,8 +1298,9 @@
 \newcommand{\NPSlistOfAcronyms}[1]{
   \lhead{}\rhead{}
 \ifnpsarticle
-  \section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
+  %\section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
   %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
+  \begin{center}\textbf{\large{List of Acronyms and Abbreviations\ULABEL}}\end{center}
 \else
   \chapter*{List of Acronyms and Abbreviations\ULABEL}
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
@@ -1281,8 +1315,10 @@
 \newcommand{\NPSlistOfAcronymsFromFile}[1]{
   \lhead{}\rhead{}
 \ifnpsarticle
-  \section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
+  %\section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
   %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
+  \begin{center}\textbf{\large{List of Acronyms and Abbreviations\ULABEL}}\end{center}
+
 \else
   \chapter*{List of Acronyms and Abbreviations\ULABEL}
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
