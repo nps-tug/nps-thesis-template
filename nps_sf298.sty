@@ -32,6 +32,11 @@
 \IfFileExists{totpages.sty}{%
   \usepackage{totpages}
   \newcounter{sf@page}}{}
+
+%turn on for debugging
+%\newcommand\debugbox[1]{\framebox{#1}}
+\newcommand\debugbox[1]{#1}
+
 \newcommand\twodigits[1]{%
    \ifnum#1<10 0#1\else #1\fi
 }
@@ -545,185 +550,347 @@
 \newcommand\sf@drawoldform{%
   \sf@setentryfont
   \setlength{\unitlength}{1bp}
-  %\LeftShift[100pt]
+
   \begin{picture}(539,707)(\sf@LeftShift,\sf@DownShift)
-    % Draw blank form
-    \linethickness{1.25pt}%
-    \put(  0,  0){\framebox(539,707){}}
-    % Horizontal lines
-    \linethickness{1.25pt}%
-    \put(  0,687){\line(1,0){539}}
-    \put(  0,635){\line(1,0){539}}
-    \put(  0,611){\line(1,0){539}}
-    \put(  0,540){\line(1,0){360}}
-    \put(  0,491){\line(1,0){539}}
-    \put(  0,431){\line(1,0){539}}
-    \put(  0,372){\line(1,0){539}}
-    \put(  0,330){\line(1,0){539}}
-    \put(  0,300){\line(1,0){539}}
-    \put(  0, 95){\line(1,0){539}}
-    \put(  0, 48){\line(1,0){539}}
 
-    % START OF FIELDS
-    \put(  0,687){\makebox(350, 20){%
-      \sf@settitlefontA REPORT DOCUMENTATION PAGE}}
+    % HEADER FIELDS
+    \newsavebox{\formtitleSF}
+    \savebox{\formtitleSF}{\debugbox{%
+        \parbox[t]{354bp}{%
+         \sf@settitlefontA
+         \centering
+         REPORT DOCUMENTATION PAGE}}}
 
-    \put(360,707){\line(0,-1){ 20}}
+    \newsavebox{\formnumberSF}
+    \savebox{\formnumberSF}{\debugbox{%
+        \parbox[t]{175bp}{%
+         \sf@settitlefontB
+         \centering
+         Form Approved OMB No.~0704--0188}}}
 
-    \put(357,687){\makebox(180, 20){%
-      \sf@settitlefontB\shortstack[c]{%
-        Form Approved OMB No.~0704--0188}}}
-
-    \put(  3,635){\makebox(529, 50){%
-      \sf@settitlefontF\parbox{533bp}{
-      Public reporting burden for this collection of information
-      is estimated to average 1 hour per response, including the
-      time for reviewing instruction, searching existing data
-      sources, gathering and maintaining the data needed, and
-      completing and reviewing the collection of information.
-      Send comments regarding this burden estimate or any other
-      aspect of this collection of information, including
-      suggestions for reducing this burden to Washington headquarters
-      Services, Directorate for Information Operations and Reports,
-      1215 Jefferson Davis Highway, Suite 1204, Arlington, VA
-      22202--4302, and to the Office of Management and Budget,
-      Paperwork Reduction Project (0704-0188) Washington DC 20503.}}}
+    \newsavebox{\formnoticeSF}
+    \savebox{\formnoticeSF}{\debugbox{%
+        \parbox[t]{529bp}{%
+        \sf@settitlefontF\sf@strut%
+        Public reporting burden for this collection of information
+        is estimated to average 1 hour per response, including the
+        time for reviewing instruction, searching existing data
+        sources, gathering and maintaining the data needed, and
+        completing and reviewing the collection of information.
+        Send comments regarding this burden estimate or any other
+        aspect of this collection of information, including
+        suggestions for reducing this burden to Washington headquarters
+        Services, Directorate for Information Operations and Reports,
+        1215 Jefferson Davis Highway, Suite 1204, Arlington, VA
+        22202--4302, and to the Office of Management and Budget,
+        Paperwork Reduction Project (0704-0188) Washington DC 20503.}}}
 
     % FIELD 1
-    \put(  0,611){\makebox(144, 24)[tl]{%
-      \sf@settitlefontE\sf@strut 1.\ AGENCY USE ONLY
-      \sf@settitlefontF (Leave Blank)}}
+    \newsavebox{\oneSF}
+    \savebox{\oneSF}{\debugbox{%
+        \sf@settitlefontE\sf@strut
+        1.\ AGENCY USE ONLY
+        \sf@settitlefontF (Leave Blank)}}
 
     % FIELD 2
-    \put(180,635){\line(0,-1){ 24}}
-    \put(180,611){\makebox(110, 24)[tl]{%
-      \sf@settitlefontE\sf@strut 2.\ REPORT DATE}}
-    \put(185,614){\makebox(0,0)[bl]{\sf@ReportDate}}
-    \put(290,635){\line(0,-1){ 24}}
+    \newsavebox{\twoSF}
+    \newsavebox{\twoboxSF}
+    \savebox{\twoSF}{\debugbox{%
+        \sf@settitlefontE\sf@strut
+        2.\ REPORT DATE}}
+    \savebox{\twoboxSF}{\debugbox{%
+        \parbox[t]{100bp}{%
+        \centering
+        \sf@ReportDate}}}
 
     % FIELD 3
-    \put(290,611){\makebox(249, 24)[tl]{%
-      \sf@settitlefontE\sf@strut 3.\ REPORT TYPE AND DATES COVERED}}
-    \put(295,614){\makebox(0,0)[bl]{\sf@ReportType\qquad\sf@DatesCovered}}
+    \newsavebox{\threeSF}
+    \newsavebox{\threeboxSF}
+    \savebox{\threeSF}{\debugbox{%
+        \sf@settitlefontE\sf@strut
+        3.\ REPORT TYPE AND DATES COVERED}}
+    \savebox{\threeboxSF}{\debugbox{%
+        \sf@ReportType\qquad\sf@DatesCovered}}
 
     % FIELD 4
-    \put(  0,540){\makebox(360,70)[tl]{%
-      \sf@settitlefontE\sf@strut 4.\ TITLE AND SUBTITLE}}
-    \put(  4,544){\sf@parbox( 70,350){\sf@Title}}
-    \put(360,611){\line(0,-1){180}}
+    \newsavebox{\fourSF}
+    \newsavebox{\fourboxSF}
+    \savebox{\fourSF}{\debugbox{%
+        \parbox[t]{354bp}{%
+        \sf@settitlefontE\sf@strut
+        4.\ TITLE AND SUBTITLE}}}
+    \savebox{\fourboxSF}{\debugbox{%
+        \parbox[t]{354bp}{%
+        \sf@Title}}}
 
     % FIELD 5
-    \put(360,581){\makebox(179, 30)[tl]{%
-      \sf@settitlefontE\sf@strut 5.\ FUNDING NUMBERS}}
-    \put(364,585){\makebox(0,0)[bl]{\sf@ContractNumber}}
-    \put(364,555){\makebox(0,0)[bl]{\sf@GrantNumber}}
-    \put(364,525){\makebox(0,0)[bl]{\sf@ProgramElementNumber}}
+    \newsavebox{\fiveSF}
+    \newsavebox{\fiveboxSF}
+    \savebox{\fiveSF}{\debugbox{%
+        \parbox[t]{175bp}{%
+        \sf@settitlefontE\sf@strut
+        5.\ FUNDING NUMBERS}}}
+    \savebox{\fiveboxSF}{\debugbox{%
+        \sf@settitlefontE\shortstack[l]{%
+        \sf@strut \sf@ContractNumber\\[-2pt]
+        \sf@strut \sf@GrantNumber\\[-2pt]
+        \sf@strut \sf@ProgramElementNumber}}}
 
     % FIELD 6
-    \put(  0,490){\makebox(360, 50)[tl]{%
-      \sf@settitlefontE\sf@strut 6.\ AUTHOR(S)}}
-    \put(  4,494){\sf@parbox( 50,350){\sf@Author}}
+    \newsavebox{\sixSF}
+    \newsavebox{\sixboxSF}
+    \savebox{\sixSF}{\debugbox{%
+        \parbox[t]{354bp}{%
+        \sf@settitlefontE\sf@strut
+        6.\ AUTHOR(S)}}}
+    \savebox{\sixboxSF}{\debugbox{%
+        \parbox[t]{354bp}{%
+        \sf@Author}}}
 
     % FIELD 7
-    \put(  0,430){\makebox(359, 60)[tl]{%
-      \sf@settitlefontE\sf@strut
-      7.\ PERFORMING ORGANIZATION NAME(S) AND ADDRESS(ES)}}
-    \put( 20,454){\makebox(0,0)[l]{%
-      \parbox{355bp}{\raggedright\sf@PerformingOrg}}}
+    \newsavebox{\sevenSF}
+    \newsavebox{\sevenboxSF}
+    \savebox{\sevenSF}{\debugbox{%
+        \parbox[t]{354bp}{%
+        \sf@settitlefontE\sf@strut
+        7.\ PERFORMING ORGANIZATION NAME(S) AND ADDRESS(ES)}}}
+    \savebox{\sevenboxSF}{\debugbox{%
+        \parbox[t]{354bp}{%
+        \raggedright\sf@PerformingOrg}}}
 
     % FIELD 8
-    \put(360,430){\makebox(180, 60)[tl]{%
-      \sf@settitlefontE\shortstack[l]{%
+    \newsavebox{\eightSF}
+    \newsavebox{\eightboxSF}
+    \savebox{\eightSF}{\debugbox{%
+        \sf@settitlefontE\shortstack[l]{%
         \sf@strut 8.\ PERFORMING ORGANIZATION REPORT\\[-2pt]
         \sf@strut\phantom{8.\ }NUMBER}}}
-    \put(370,434){\sf@parbox( 46,176){\sf@POReportNumber}}
+    \savebox{\eightboxSF}{\debugbox{%
+        \parbox[c]{175bp}{%
+        \sf@POReportNumber}}}
 
     % FIELD 9
-    \put(  0,370){\makebox(359, 60)[tl]{%
-      \sf@settitlefontE\sf@strut
-      9.\ SPONSORING / MONITORING AGENCY NAME(S) AND ADDRESS(ES)}}
-    \put( 20,394){\makebox(0,0)[l]{%
-      \parbox{355bp}{\raggedright \sf@SponsoringAgency}}}
+    \newsavebox{\nineSF}
+    \newsavebox{\nineboxSF}
+    \savebox{\nineSF}{\debugbox{%
+        \parbox[t]{354bp}{%
+        \sf@settitlefontE\sf@strut
+        9.\ SPONSORING / MONITORING AGENCY NAME(S) AND ADDRESS(ES)}}}
+    \savebox{\nineboxSF}{\debugbox{%
+        \parbox[t]{354bp}{%
+        \raggedright
+        \sf@SponsoringAgency}}}
 
     % FIELD 10
-    \put(360,431){\line(0,-1){59}}
-    \put(360,371){\makebox(180, 60)[tl]{%
-      \sf@settitlefontE\shortstack[l]{%
+    \newsavebox{\tenSF}
+    \newsavebox{\tenboxSF}
+    \savebox{\tenSF}{\debugbox{%
+        \sf@settitlefontE\shortstack[l]{%
         \sf@strut 10.\ SPONSORING / MONITORING\\[-2pt]
         \sf@strut\phantom{10.\ }AGENCY REPORT NUMBER}}}
-    \put(370,372){\sf@parbox( 46,176){\sf@SMReportNumber}}
+    \savebox{\tenboxSF}{\debugbox{%
+        \parbox[c]{175bp}{%
+        \sf@SMReportNumber}}}
 
     % FIELD 11
-    \put(  0,342){\makebox(539, 30)[tl]{%
-      \sf@settitlefontE\sf@strut 11.\ SUPPLEMENTARY NOTES}}
-    \put(  4,340){\sf@parbox( 25,529){\sf@SupplementaryNotes}}
+    \newsavebox{\elevenSF}
+    \newsavebox{\elevenboxSF}
+    \savebox{\elevenSF}{\debugbox{%
+        \parbox[t]{529bp}{%
+        \sf@settitlefontE\sf@strut
+        11.\ SUPPLEMENTARY NOTES}}}
+    \savebox{\elevenboxSF}{\debugbox{%
+        \parbox[t]{529bp}{%
+        \frenchspacing
+        \sf@SupplementaryNotes}}}
 
     % FIELD 12
-    \put(  0,300){\makebox(539, 30)[tl]{%
-      \sf@settitlefontE\sf@strut
-      12a.\ DISTRIBUTION / AVAILABILITY STATEMENT}}
-    \put(  4,300){\sf@parbox( 25,350){\sf@DistributionStatement}}
-    \put(360,330){\line(0,-1){30}}
-    \put(360,300){\makebox(180, 30)[tl]{%
-      \sf@settitlefontE\shortstack[l]{%
-        \sf@strut 12b.\ DISTRIBUTION CODE}}}
-    \put(370,302){\sf@parbox( 30,176){}}
+    \newsavebox{\twelveaSF}
+    \newsavebox{\twelveaboxSF}
+    \newsavebox{\twelvebSF}
+    \newsavebox{\twelvebboxSF}
+    \savebox{\twelveaSF}{\debugbox{%
+        \parbox[t]{354bp}{%
+        \sf@settitlefontE\sf@strut
+        12a.\ DISTRIBUTION / AVAILABILITY STATEMENT}}}
+    \savebox{\twelveaboxSF}{\debugbox{%
+        \parbox[t]{354bp}{%
+        \frenchspacing\sf@DistributionStatement}}}
+    \savebox{\twelvebSF}{\debugbox{%
+        \parbox[t]{175bp}{%
+        \sf@settitlefontE\sf@strut
+        12b.\ DISTRIBUTION CODE}}}
+    \savebox{\twelvebboxSF}{\debugbox{%
+        \parbox[t]{175bp}{}}}
 
     % FIELD 13
-    \put(  0,95){\makebox(539,200)[tl]{%
-      \sf@settitlefontE\sf@strut 13.\ ABSTRACT
-      \sf@settitlefontF (maximum 200 words)}}
-      \put(  4, 95){\sf@parbox(260,529){\sf@Abstract}}
+    \newsavebox{\thirteenSF}
+    \newsavebox{\thirteenboxSF}
+    \savebox{\thirteenSF}{\debugbox{%
+        \parbox[t]{529bp}{%
+        \sf@settitlefontE\sf@strut 
+        13.\ ABSTRACT
+        \sf@settitlefontF (maximum 200 words)}}}
+    \savebox{\thirteenboxSF}{\debugbox{%
+        \parbox[t]{529bp}{%
+        \frenchspacing\sf@Abstract}}}
 
     % FIELD 14
-    \put(  0, 48){\makebox(450, 46)[tl]{%
-      \sf@settitlefontE\sf@strut 14.\ SUBJECT TERMS}}
-    \put(  4, 51){\sf@parbox( 36,533){\sf@SubjectTerms}}
+    \newsavebox{\fourteenSF}
+    \newsavebox{\fourteenboxSF}
+    \savebox{\fourteenSF}{\debugbox{%
+        \parbox[t]{440bp}{%
+        \sf@settitlefontE\sf@strut 14.\ SUBJECT TERM}}}
+    \savebox{\fourteenboxSF}{\debugbox{%
+        \parbox[t]{440bp}{%
+        \sf@SubjectTerms}}}
 
     % FIELD 15
-    \put(450, 95){\line(0,-1){ 48}}
-    \put(450, 70){\makebox( 86, 23)[tl]{%
-      \sf@settitlefontE\shortstack[l]{%
-        \sf@strut 15.\ NUMBER OF\\[-2pt]
+    \newsavebox{\fifteenSF}
+    \newsavebox{\fifteenboxSF}
+    \savebox{\fifteenSF}{\debugbox{%
+        \sf@settitlefontE\shortstack[l]{%
+        \sf@strut 15.\ NUMBER OF\\
         \sf@strut\phantom{15.\ }PAGES}}}
-    \put(512, 78){\makebox(0,0){\sf@NumberPages}}
+    \savebox{\fifteenboxSF}{\debugbox{%
+        \parbox[t]{35bp}{%
+        \centering
+        \sf@NumberPages}}}
 
     % FIELD 16
-    \put(450, 70){\line(1,0){90}}
-    \put(450, 47){\makebox( 86, 23)[tl]{%
-      \sf@settitlefontE\shortstack[l]{%
-        \sf@strut 16.\ PRICE CODE}}}
+    \newsavebox{\sixteenSF}
+    \savebox{\sixteenSF}{\debugbox{%
+        \sf@settitlefontE
+        \sf@strut 16.\ PRICE CODE}}
 
-    % FIELD 17-19
-    \put(  0,  0){\makebox( 150, 48)[tl]{%
-      \sf@settitlefontE\shortstack[l]{%
+    % FIELD 17
+    \newsavebox{\seventeenSF}
+    \newsavebox{\seventeenboxSF}
+    \savebox{\seventeenSF}{\debugbox{%
+        \parbox[t]{140bp}{%
+        \sf@settitlefontE\shortstack[l]{%
         \sf@strut 17.\ SECURITY\\[-2pt]
         \sf@strut\phantom{17.\ }CLASSIFICATION OF\\[-2pt]
-        \sf@strut\phantom{17.\ }REPORT}}}
-    \put( 60, 13){\makebox(0,0){\sf@ReportClassification}}
-    \put(150, 48){\line(0,-1){ 48}}
-    \put(150,  0){\makebox( 150, 48)[tl]{%
-      \sf@settitlefontE\shortstack[l]{%
+        \sf@strut\phantom{17.\ }REPORT}}}}
+    \savebox{\seventeenboxSF}{\debugbox{%
+        \parbox[t]{140bp}{%
+        \centering
+        \sf@ReportClassification}}}
+
+    % FIELD 18
+    \newsavebox{\eighteenSF}
+    \newsavebox{\eighteenboxSF}
+    \savebox{\eighteenSF}{\debugbox{%
+        \parbox[t]{140bp}{%
+        \sf@settitlefontE\shortstack[l]{%
         \sf@strut 18.\ SECURITY\\[-2pt]
         \sf@strut\phantom{18.\ }CLASSIFICATION OF THIS\\[-2pt]
-        \sf@strut\phantom{18.\ }PAGE}}}
-    \put(210, 13){\makebox(0,0){\sf@AbstractClassification}}
-    \put(300, 48){\line(0,-1){ 48}}
-    \put(300,  0){\makebox( 150, 48)[tl]{%
-      \sf@settitlefontE\shortstack[l]{%
+        \sf@strut\phantom{18.\ }PAGE}}}}
+    \savebox{\eighteenboxSF}{\debugbox{%
+        \parbox[t]{140bp}{%
+        \centering
+        \sf@PageClassification}}}
+
+    % FIELD 19
+    \newsavebox{\nineteenSF}
+    \newsavebox{\nineteenboxSF}
+    \savebox{\nineteenSF}{\debugbox{%
+        \parbox[t]{140bp}{%
+        \sf@settitlefontE\shortstack[l]{%
         \sf@strut 19.\ SECURITY\\[-2pt]
         \sf@strut\phantom{19.\ }CLASSIFICATION OF\\[-2pt]
-        \sf@strut\phantom{19.\ }ABSTRACT}}}
-    \put(360, 13){\makebox(0,0){\sf@PageClassification}}
+        \sf@strut\phantom{19.\ }ABSTRACT}}}}
+    \savebox{\nineteenboxSF}{\debugbox{%
+        \parbox[t]{140bp}{%
+        \centering
+        \sf@AbstractClassification}}}
 
     % FIELD 20
-    \put(450, 48){\line(0,-1){ 48}}
-    \put(450,  0){\makebox( 86, 48)[tl]{%
-      \sf@settitlefontE\shortstack[l]{%
+    \newsavebox{\twentySF}
+    \newsavebox{\twentyboxSF}
+    \savebox{\twentySF}{\debugbox{%
+        \parbox[t]{85bp}{%
+        \sf@settitlefontE\shortstack[l]{%
         \sf@strut 20.\ LIMITATION OF\\[-2pt]
-        \sf@strut\phantom{20.\ }ABSTRACT}}}
-    \put(490, 13){\makebox(0,0){\sf@AbstractLimitation}}
+        \sf@strut\phantom{20.\ }ABSTRACT\\[-2pt]
+        \sf@strut\phantom{20.\ } }}}}
+    \savebox{\twentyboxSF}{\debugbox{%
+        \parbox[t]{85bp}{%
+        \centering
+        \sf@AbstractLimitation}}}
 
+    %
+    % DRAW FORM
+    %
+    \linethickness{1.25pt}
+    \put(  0,  0){\framebox(539,707){}}
+
+    % HEADER
+    \put(  3,693){\usebox{\formtitleSF}}
+    \put(360,707){\line(0,-1){ 20}}
+    \put(360,693){\usebox{\formnumberSF}}
+    \put(  0,687){\line(1,0){539}}
+    \put(  3,677){\usebox{\formnoticeSF}}
+    \put(  0,635){\line(1,0){539}}
+    % FIELDS
+    \put(  3,625){\usebox{\oneSF}}
+    \put(180,635){\line(0,-1){ 24}}
+    \put(180,625){\usebox{\twoSF}}
+    \put(185,614){\usebox{\twoboxSF}}
+    \put(290,635){\line(0,-1){ 24}}
+    \put(290,625){\usebox{\threeSF}}
+    \put(295,614){\usebox{\threeboxSF}}
+    \put(  0,611){\line(1,0){539}}
+    \put(  4,600){\usebox{\fourSF}}
+    \put(  4,585){\usebox{\fourboxSF}}
+    \put(360,611){\line(0,-1){219}}
+    \put(364,600){\usebox{\fiveSF}}
+    \put(364,570){\usebox{\fiveboxSF}}
+    \put(  0,540){\line(1,0){360}}
+    \put(  4,530){\usebox{\sixSF}}
+    \put(  4,515){\usebox{\sixboxSF}}
+    \put(  0,491){\line(1,0){539}}
+    \put(  4,480){\usebox{\sevenSF}}
+    \put( 16,460){\usebox{\sevenboxSF}}
+    \put(360,470){\usebox{\eightSF}}
+    \put(360,460){\usebox{\eightboxSF}}
+    \put(  0,440){\line(1,0){539}}
+    \put(  4,430){\usebox{\nineSF}}
+    \put( 16,410){\usebox{\nineboxSF}}
+    \put(360,420){\usebox{\tenSF}}
+    \put(360,410){\usebox{\tenboxSF}}
+    \put(  0,392){\line(1,0){539}}
+    \put(  4,380){\usebox{\elevenSF}}
+    \put(  4,360){\usebox{\elevenboxSF}}
+    \put(  0,340){\line(1,0){539}}
+    \put(  4,330){\usebox{\twelveaSF}}
+    \put(  4,315){\usebox{\twelveaboxSF}}
+    \put(360,340){\line(0,-1){88}}
+    \put(364,330){\usebox{\twelvebSF}}
+    \put(364,315){\usebox{\twelvebboxSF}}
+    \put(  0,252){\line(1,0){539}}
+    \put(  4,240){\usebox{\thirteenSF}}
+    \put(  4,220){\usebox{\thirteenboxSF}}
+    \put(  0, 88){\line(1,0){539}}
+    \put(  4, 78){\usebox{\fourteenSF}}
+    \put(  4, 66){\usebox{\fourteenboxSF}}
+    \put(450, 88){\line(0,-1){48}}
+    \put(450, 69){\usebox{\fifteenSF}}
+    \put(500, 67){\usebox{\fifteenboxSF}}
+    \put(450, 63){\line(1,0){90}}
+    \put(450, 55){\usebox{\sixteenSF}}
+    \put(  0, 40){\line(1,0){539}}
+    \put(  4, 15){\usebox{\seventeenSF}}
+    \put(  4,  3){\usebox{\seventeenboxSF}}
+    \put(152, 15){\usebox{\eighteenSF}}
+    \put(152,  3){\usebox{\eighteenboxSF}}
+    \put(302, 15){\usebox{\nineteenSF}}
+    \put(302,  3){\usebox{\nineteenboxSF}}
+    \put(452, 15){\usebox{\twentySF}}
+    \put(452,  3){\usebox{\twentyboxSF}}
+    \put(150, 40){\line(0,-1){ 40}}
+    \put(300, 40){\line(0,-1){ 40}}
+    \put(450, 40){\line(0,-1){ 40}}
     % FOOTER
     \put(10,-10){\makebox(40,17)[bl]{\sf@titlefontE NSN 7540-01-280-5500}}
     \put(415,-17){\makebox(123, 17)[bl]{%
