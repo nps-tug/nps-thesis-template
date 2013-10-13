@@ -1238,6 +1238,7 @@
   \doublespacing
 }
 
+% This is a legacy command for compatibility.  The newer command is below.
 \newcommand{\NPSdistribution}[1]{
 \ifnpsarticle
   \section*{#1}
@@ -1246,6 +1247,25 @@
   \def\chaptername{#1}
   \chapter*{#1}
   \addcontentsline{toc}{chapter}{#1}
+\fi
+  \singlespacing    % reduce extra line breaks between entries
+  \newenvironment{distributionlist}
+    {\begin{enumerate}\itemsep \baselineskip}
+    {\end{enumerate}}
+}
+
+\newcommand{\NPSdistributionlist}{
+\ifnpstraditional
+\def\distrolistname{\textbf{INITIAL DISTRIBUTION LIST}}
+\else
+  \def\distrolistname{Initial Distribution List}
+\fi
+\ifnpsarticle
+  \section*{\distrolistname\ULABEL}
+  \addcontentsline{toc}{section}{Initial Distribution List}
+\else
+  \chapter*{\distrolistname\ULABEL}
+  \addcontentsline{toc}{chapter}{Initial Distribution List}
 \fi
   \singlespacing    % reduce extra line breaks between entries
   \newenvironment{distributionlist}
