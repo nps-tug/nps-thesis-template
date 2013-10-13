@@ -480,6 +480,7 @@
   \def\contentsname{\textbf{TABLE OF CONTENTS}}
   \def\listfigurename{\textbf{LIST OF FIGURES}}
   \def\listtablename{\textbf{LIST OF TABLES}}
+  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
   \def\bibname{\textbf{LIST OF REFERENCES}}
   \def\indexname{\textbf{INDEX\ULABEL}}
   \def\abstractname{ABSTRACT}
@@ -1296,16 +1297,21 @@
 }
 
 \newcommand{\NPSlistOfAcronyms}[1]{
+\ifnpstraditional
+  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
+\else
+   \def\listacronymname{List of Acronyms and Abbreviations}
+\fi
   \lhead{}\rhead{}
 \ifnpsarticle
   %\section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
   %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
-  \begin{center}\textbf{\large{List of Acronyms and Abbreviations\ULABEL}}\end{center}
+  \begin{center}\textbf{\large{\listacronymname\ULABEL}}\end{center}
 \else
-  \chapter*{List of Acronyms and Abbreviations\ULABEL}
+  \chapter*{\listacronymname\ULABEL}
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
-  \def\listacronymname{List of Acronyms and Abbreviations}
+  \def\listacronymname{}
   \thispagestyle{fancy}
   \onehalfspacing
   #1
@@ -1313,17 +1319,22 @@
 }
 
 \newcommand{\NPSlistOfAcronymsFromFile}[1]{
+\ifnpstraditional
+  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
+\else
+   \def\listacronymname{List of Acronyms and Abbreviations}
+\fi
   \lhead{}\rhead{}
 \ifnpsarticle
   %\section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
   %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
-  \begin{center}\textbf{\large{List of Acronyms and Abbreviations\ULABEL}}\end{center}
+  \begin{center}\textbf{\large{\listacronymname\ULABEL}}\end{center}
 
 \else
-  \chapter*{List of Acronyms and Abbreviations\ULABEL}
+  \chapter*{\listacronymname\ULABEL}
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
-  \def\listacronymname{List of Acronyms and Abbreviations}
+  \def\listacronymname{}
   \thispagestyle{fancy}
   \onehalfspacing
   \input{#1}
