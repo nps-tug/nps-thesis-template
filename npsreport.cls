@@ -1353,8 +1353,11 @@
   \cleardoublepage
 }
 
-\def\bibname{\textbf{REFERENCES\ULABEL}}
-
+\ifnpstraditional
+  \def\bibname{\textbf{REFERENCES\ULABEL}}
+\else
+  \def\bibname{References\ULABEL}
+\fi
 
 
 %
