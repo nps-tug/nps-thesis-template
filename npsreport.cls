@@ -130,7 +130,7 @@
   \typeout{*********************************************}
   \typeout{******** MAKING CLASSIFIED THESIS ***********}
   \typeout{*********************************************}
-  \def\ULABEL{ (U) }
+  \def\ULABEL{(U)\xspace}
 \else
   \def\ULABEL{}
 \fi
@@ -260,6 +260,8 @@
 % 
 
 \def\declassifydate#1{\gdef\@declassifydate{#1}} \gdef\@declassifydate{}
+\def\classifiedby#1{\gdef\@classifiedby{#1}} \gdef\@classifiedby{}
+\def\classifiedfrom#1{\gdef\@classifiedfrom{#1}} \gdef\@classifiedfrom{Multiple Sources}
 \def\degreedate#1{\date{#1}}
 \def\prevdegrees#1{\gdef\@prevdegrees{#1}}
 \def\@prevdegrees{}
@@ -417,21 +419,38 @@
 \fi
 
 
-\newenvironment{smark}[1][U]%
-{\thispagestyle{fancy}
-  \rhead{} \lhead{} %
+%
+% Macros for security marking
+%
+
+\newcommand{\smarkthispage}{
+ \thispagestyle{fancy}
 \ifclassified % leave classified headers and footers alone
 \else
   \chead{} %
-  \cfoot{\textsf{\@securitybanner} \\ \thepage} %
+  \cfoot{\thepage \\ \@securitybanner}
+  \afterpage{\cfoot{\thepage}}
 \fi
-  #1}
-{ \ifclassified % leave classified headers and footers alone
-  \else
-   \afterpage{\cfoot{\thepage}}
-  \fi
 }
 
+\newenvironment{smark}[1][(U)]%
+{ \smarkthispage  #1 %
+}
+{ \smarkthispage
+}
+
+\newcommand{\smarkfigtemp}{UNCLASSIFIED}
+\newenvironment{smarkenv}[2][\textwidth]
+{
+  \smarkthispage
+  \begin{minipage}{#1}
+  \renewcommand{\smarkfigtemp}{#2}
+  \begin{center} \smarkfigtemp \end{center}\vspace{-1em}
+}
+{ \vspace{-1em}\begin{center} \smarkfigtemp \end{center}
+  \end{minipage}
+  \smarkthispage
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -505,7 +524,7 @@
   \def\chaptername{CHAPTER}
   \def\appendixname{APPENDIX}
   \def\partname{PART}
-  \def\distribname{INITIAL DISTRIBUTION LIST\ULABEL}
+  \def\distribname{\ULABEL INITIAL DISTRIBUTION LIST}
 
   \fancyhead{}                  % clear all header fields
 
@@ -733,7 +752,7 @@
  \if@twocolumn\hbox{}\newpage\fi\fi\fi
 } 
 \def\cleardoublepageEmpty{\clearpage\if@twoside \ifodd\c@page\else 
- \thispagestyle{empty}   
+ \thispagestyle{blankmarked}
  \thisPageIntentionallyLeftBlank
  \if@twocolumn\hbox{}\newpage\fi\fi\fi
 } 
@@ -753,30 +772,55 @@
 \def\NPScover{
 %% These commands are the first commands that run when printing
 %% starts, because the \NPScover command appears first
-  %
-  % 'myheadings' has page numbers; used for SF298
-  %
-  \fancypagestyle{myheadings}{
-    \rhead{} \chead{} \lhead{}
-    \renewcommand{\headrulewidth}{0pt}
-    \cfoot{\thepage}
-  }
-  %
-  % 'fancy' and 'plain' styles have security marking, etc
-  %
+
+
+  %%
+  %% 'fancy' and 'plain' - classified marking, page numbers
+  %% used: everywhere
   \pagestyle{fancyplain}
-  \rhead{} \lhead{}
-\ifclassified
-  \chead{\textsf{\@securitybanner} \\ \vspace{1em}}
-\else
-  \chead{}
-\fi
-  \renewcommand{\headrulewidth}{0pt}
-\ifclassified
-  \cfoot{\textsf{\@securitybanner} \\ \thepage}
-\else
-  \cfoot{\thepage}
-\fi
+    \rhead{} \lhead{}
+    \renewcommand{\headrulewidth}{0pt}
+ \ifclassified
+    \chead{\vspace{-1em}\@securitybanner \\ \vspace{1em}}
+    \cfoot{\thepage \\ \@securitybanner}
+ \else
+    \chead{}
+    \cfoot{\thepage}
+ \fi
+  %%
+  %% 'marked' - classified markings, page numbers
+  %% used: SF298
+  \fancypagestyle{plainpage}{
+    \rhead{} \lhead{}
+    \renewcommand{\headrulewidth}{0pt}
+ \ifclassified
+    \chead{\vspace{-1em}\@securitybanner \\ \vspace{1em}}
+    \cfoot{\thepage \\ \@securitybanner}
+ \else
+    \chead{}
+    \cfoot{\thepage}
+ \fi
+  }
+  %%
+  %% 'frontmarked' - classified markings, FOUO marking, no page numbers
+  %% used: front cover
+  \fancypagestyle{frontmarked}{
+ \ifclassified
+    \chead{\vspace{-1em}\@securitybanner \\ \vspace{1em}}
+ \fi
+    \cfoot{\vspace{2pc}\@securitybanner}
+  }
+  %%
+  %% 'blankmarked' - classified markings, no page numbers
+  %% used: this page left intentionally blank
+  \fancypagestyle{blankmarked}{
+ \ifclassified
+    \chead{\vspace{-1em}\@securitybanner \\ \vspace{1em}}
+    \cfoot{\vspace{1pt}\@securitybanner}
+ \else
+    \cfoot{}
+ \fi
+  }
   %
   %
   \renewcommand{\sf@ExtraPages}{2}  % include for the NPS cover
@@ -785,6 +829,7 @@
   % this page style
   %
   \begin{titlepage}
+  \thispagestyle{frontmarked}
   \vfill
   \textbf{\sf@POReportNumber}   % if not defined, will be blank
   \begin{center}
@@ -851,26 +896,30 @@
         \fi
     \end{minipage}
   }
-
-  \textbf{\small \@distribution}\\
+  \parbox{\textwidth}{\centering \singlespacing \bf \small \@distribution} \\
 
   % define \RPTpreparedFor when needed in you tex file
   \ifthenelse{\equal{\@RPTpreparedFor}{}}{}{%
     \vspace{\smallskipamount}
     Prepared for: \@RPTpreparedFor
   }
-
   \vfill
   \ifclassified 
-     \enlargethispage{3pc}
-     \vspace{-1pc}
-     \begin{tabular}{p{1.1in}p{3.4in}p{1.1in}}
-     & \center \textbf{\footnotesize DESTRUCTION NOTICE} & \\
-     {\footnotesize Classified by: Multiple Sources. Declassify on \@declassifydate } &
-     {\footnotesize For classified documents follow the procedure in
+    \enlargethispage{4pc}
+    \smallskip
+    \begin{tabular}{ccc}
+    \multicolumn{3}{c}{\textbf{\footnotesize DESTRUCTION NOTICE}}\\[-2pc]
+    \parbox[t]{1.6in}{\singlespacing \scriptsize
+     Classified by: \@classifiedby. Derived from: \@classifiedfrom.
+     Declassify on \@declassifydate
+    } &
+    \parbox[t]{3.0in}{\singlespacing \scriptsize
+     For classified documents follow the procedure in
      DoD 5220.22m Industrial Security Manual or DoD 5220.1R Information
-     Security Program Regulation (Ch. 17 of OPNAVINST 5510.1)} &
-     {\footnotesize Copy \_\_\_\_ of \_\_\_\_ copies. This document contains 
+     Security Program Regulation (Ch. 17 of OPNAVINST 5510.1)
+    } &
+    \parbox[t]{1.0in}{\singlespacing \scriptsize
+     Copy \_\_\_\_ of \_\_\_\_ copies. This document contains
      \newcounter{nps@page}{}
          {\@ifundefined{r@TotPages}%
           {{\bf ??}}%
@@ -878,10 +927,10 @@
            \addtocounter{nps@page}{-\value{TotPages}}
            \addtocounter{nps@page}{\sf@ExtraPages}
            \arabic{nps@page}}}
-     pages.}
-     \end{tabular}
+     pages.
+    }
+    \end{tabular}
   \fi
-  \textsf{\@securitybanner}
   \end{center}
   \vfill
   \end{titlepage}
@@ -892,7 +941,6 @@
 \def\NPSsftne{
   % Fill in items for the SF298
   \pagenumbering{roman}        % because they are weird
-  \thispagestyle{empty}         % we will insert it manually
   \Title{\@title}
   \iffourauthors
     \Author{\@author, \@authortwo, \@authorthree, \@authorfour}
@@ -912,7 +960,7 @@
   \Abstract{\@abstract}
   \SponsoringAgencySF{\@sponsoringagency}
   \MakeRptDocPage
-  \thispagestyle{myheadings}
+  \thispagestyle{plainpage}
   \cleardoublepage
 }
 
@@ -957,7 +1005,7 @@
   % this page is always (iii), so force skip (used in non-twoside mode)
   \ifnum \c@page < 3 \thisPageIntentionallyLeftBlankForced \fi
   \setcounter{page}{3}          % do not reset to page 1
-  \thispagestyle{fancy}
+  \smarkthispage
   \begin{center}
     \textbf{\@distribution}\\
     \vspace{\bigskipamount}\vfill
@@ -1135,7 +1183,7 @@
 \newif\ifNPSabstractWasPrinted\NPSabstractWasPrintedfalse
 \def\NPSabstractpage{
   \begin{center}
-  \textbf{{\large ABSTRACT\ULABEL}}\\
+  \textbf{{\large\ULABEL ABSTRACT}}\\
   \end{center}
   \begin{minipage}{\textwidth}
   \vspace{2pc}
@@ -1159,9 +1207,9 @@
 
 \newcommand{\NPSexecsummary}[1]{
 \ifnpsarticle
-  \begin{center}\textbf{\large{Executive Summary\ULABEL}}\end{center}
+  \begin{center}\textbf{\large{\ULABEL Executive Summary}}\end{center}
 \else
-  \chapter*{Executive Summary\ULABEL}
+  \chapter*{\ULABEL Executive Summary}
   %\addcontentsline{toc}{chapter}{Executive Summary}
 \fi
   \onehalfspacing
@@ -1172,9 +1220,9 @@
 
 \newcommand{\NPSacknowledgements}[1]{
 \ifnpsarticle
-  \begin{center}\textbf{\large{Acknowledgements\ULABEL}}\end{center}
+  \begin{center}\textbf{\large{\ULABEL Acknowledgements}}\end{center}
 \else
-  \chapter*{Acknowledgements\ULABEL}
+  \chapter*{\ULABEL Acknowledgements}
   %\addcontentsline{toc}{chapter}{Acknowledgements}
 \fi
   \onehalfspacing
@@ -1252,7 +1300,7 @@
   \ifNPSabstractWasPrinted
     % do not print the abstract
   \else
-    \begin{center}\textbf{\abstractname\ULABEL}\end{center}
+    \begin{center}\textbf{\ULABEL \abstractname}\end{center}
     \begin{quotation}
     \@abstract
     \end{quotation}
@@ -1265,9 +1313,9 @@
   \raggedright      % don't automatically full justify bibliographic references
   \singlespacing    % reduce extra line breaks between entries
 \ifnpsarticle
-  \addcontentsline{toc}{section}{References}
+  \addcontentsline{toc}{section}{\ULABEL References}
 \else
-  \addcontentsline{toc}{chapter}{References}
+  \addcontentsline{toc}{chapter}{\ULABEL References}
 \fi
   \bibliography{#1}
   \doublespacing
@@ -1293,10 +1341,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\NPStableOfContents}{
 \ifnpsarticle
-  %\section*{\contentsname\ULABEL}
-  \begin{center}\textbf{\large{\contentsname\ULABEL}}\end{center}
+  %\section*{\ULABEL \contentsname}
+  \begin{center}\textbf{\large{\ULABEL \contentsname}}\end{center}
 \else
-  \chapter*{\contentsname\ULABEL}
+  \chapter*{\ULABEL \contentsname}
 \fi
   \lhead{}\rhead{}
   \def\contentsname{}           % clear, because it will be in the header
@@ -1307,11 +1355,11 @@
 \newcommand{\NPSlistOfFigures}{
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{\listfigurename\ULABEL}
+  %\section*{\ULABEL \listfigurename}
   %\addcontentsline{toc}{section}{List of Figures}
-  \begin{center}\textbf{\large{\listfigurename\ULABEL}}\end{center}
+  \begin{center}\textbf{\large{\ULABEL \listfigurename}}\end{center}
 \else
-  \chapter*{\listfigurename\ULABEL}
+  \chapter*{\ULABEL \listfigurename}
   %\addcontentsline{toc}{chapter}{List of Figures}
 \fi
   \def\listfigurename{}
@@ -1322,11 +1370,11 @@
 \newcommand{\NPSlistOfTables}{
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{\listtablename\ULABEL}
+  %\section*{\ULABEL \listtablename}
   %\addcontentsline{toc}{section}{List of Tables}
-  \begin{center}\textbf{\large{\listtablename\ULABEL}}\end{center}
+  \begin{center}\textbf{\large{\ULABEL \listtablename}}\end{center}
 \else
-  \chapter*{\listtablename\ULABEL}
+  \chapter*{\ULABEL \listtablename}
   %\addcontentsline{toc}{chapter}{List of Tables}
 \fi
   \def\listtablename{}
@@ -1337,11 +1385,11 @@
 \newcommand{\NPSlistOfAcronyms}[1]{
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
+  %\section*{\ULABEL List of Acronyms and Abbreviations}\vspace{1pc}
   %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
-  \begin{center}\textbf{\large{List of Acronyms and Abbreviations\ULABEL}}\end{center}
+  \begin{center}\textbf{\large{\ULABEL List of Acronyms and Abbreviations}}\end{center}
 \else
-  \chapter*{List of Acronyms and Abbreviations\ULABEL}
+  \chapter*{\ULABEL List of Acronyms and Abbreviations}
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
   \def\listacronymname{List of Acronyms and Abbreviations}
@@ -1353,21 +1401,20 @@
 \newcommand{\NPSlistOfAcronymsFromFile}[1]{
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
-  %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
-  \begin{center}\textbf{\large{List of Acronyms and Abbreviations\ULABEL}}\end{center}
-
+  %\section*{\ULABEL List of Acronyms and Abbreviations}\vspace{1pc}
+  %\addcontentsline{toc}{section}{\ULABEL List of Acronyms and Abbreviations}
+  \begin{center}\textbf{\large{\ULABEL List of Acronyms and Abbreviations}}\end{center}
 \else
-  \chapter*{List of Acronyms and Abbreviations\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+  \chapter*{\ULABEL List of Acronyms and Abbreviations}
+  %\addcontentsline{toc}{chapter}{\ULABEL List of Acronyms and Abbreviations}
 \fi
-  \def\listacronymname{List of Acronyms and Abbreviations}
+  \def\listacronymname{\ULABEL List of Acronyms and Abbreviations}
   \onehalfspacing
   \input{#1}
   \cleardoublepage
 }
 
-\def\bibname{\textbf{REFERENCES\ULABEL}}
+\def\bibname{\textbf{\ULABEL REFERENCES}}
 
 
 

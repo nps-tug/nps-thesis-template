@@ -19,7 +19,7 @@
 \makeatother
 
 
-\title{[Title (U)]}
+\title{[(U) Title]}
 
 % Student info
 \author{[Author Name]}
@@ -38,19 +38,23 @@
 \degreedate{[Month Year]}
 
 % See Thesis processor's release form for approved distribution statements.
-\distribution{[Further dissemination only as directed by (inserting controlling
-DoD office) (date of determination) or higher DoD authority.]}
+\distribution{[Some Appropriate Distribution statement. Something like:
+Distribution authorized to U.S. Government Agencies and their Contractors
+(fill in reason) (date of determination). Other requests for this document
+must be referred to President, Code 261, Naval Postgraduate School, Monterey,
+CA 93943-5000 via the Defense Technical Information Center, 8725 John J.
+Kingman Rd., STE 0944, Ft. Belvoir, VA 22060-6218.]}
 
 % Your abstract.  New paragraphs start after an empty line.
-\abstract{
-\begin{smark}[(U)]
-  \lipsum[1] % example text, remove me
-\end{smark}
+\abstract{%
+(U) \lipsum[1]
 }
 
 % Security Banner
 \securitybanner{F//MM//SPECIAL//TOM FOOLERY}
-\declassifydate{1-APR-2099}
+\declassifydate{[1-APR-2099]}
+\classifiedby{[Someone]}
+\classifiedfrom{[Multiple Sources]}
 % The banner marking for the document and all pages shall be the overall 
 % classification of the compilation. The overall classification shall be 
 % marked conspicuously at the top and bottom of each page and on the outside 
@@ -97,7 +101,7 @@ DoD office) (date of determination) or higher DoD authority.]}
 \SupplementaryNotes{The views expressed in this document are those of
   the author and do not reflect the official policy or position of the
   Department of Defense or the U.S. Government. %
-  IRB Protocol Number: N/A % if you need to note an IRB Protocol
+  IRB Protocol Number: N/A. % if you need to note an IRB Protocol or N/A
 }
 
 % Optional. Prevents footnotes from being reset at each chapter
@@ -131,14 +135,14 @@ DoD office) (date of determination) or higher DoD authority.]}
 
 \NPSlistOfAcronyms{
 \begin{description}
-\item[A] Amusing
-\item[DOD] Department of Deference\footnote{(U) May also appear DoD for historical reasons.}
-\item[F] Fun
-\item[J] Jolly
-\item[MM] Mickey Mouse
-\item[RBRB] Really Big Rubber Band
-\item[PC] Pinhole Camera
-\item[U] Unfunny
+\item[(U) A] Amusing
+\item[(U) DOD] Department of Deference\footnote{(U) May also appear DoD for historical reasons.}
+\item[(U) F] Fun
+\item[(U) J] Jolly
+\item[(U) MM] Mickey Mouse
+\item[(U) RBRB] Really Big Rubber Band
+\item[(U) PC] Pinhole Camera
+\item[(U) U] Unfunny
 \end{description}
 }
 
@@ -147,11 +151,9 @@ DoD office) (date of determination) or higher DoD authority.]}
 % New paragraphs start after an empty line.
 %
 \NPSexecsummary{
-\begin{smark}[(F//MM)]  \lipsum[1]
-\end{smark}
+(F//MM) \lipsum[1]
 
-\begin{smark}[(F//MM)]  \lipsum[2]
-\end{smark}
+(F//MM) \lipsum[2]
 }
 
 %
@@ -159,10 +161,9 @@ DoD office) (date of determination) or higher DoD authority.]}
 % New paragraphs start after an empty line.
 %
 \NPSacknowledgements{
-\begin{smark}[(F//MM)] I dedicate this thesis to Tom Cruise. Remember,
-  ``in the event that you are unsuccessful, the Agency will disavow
-  you and your mission.'' 
-\end{smark}
+(F//MM) I dedicate this thesis to Tom Cruise. Remember,
+``in the event that you are unsuccessful, the Agency will disavow
+you and your mission.''
 }
 
 % Start layout for the NPS body
@@ -205,12 +206,23 @@ DoD office) (date of determination) or higher DoD authority.]}
 % The list is automatically properly numbered
 % and already populated with the mandatory recipients.
 %
-\NPSdistribution{Initial Distribution List}
-\begin{enumerate}
-\item (U) Defense Technical Information Center\\Ft. Belvoir, Virginia
-\item (U) Dudly Knox Library\\Naval Postgraduate School\\Monterey, California
-\end{enumerate}
-
+\NPSdistribution{(U) Initial Distribution List}
+\begin{distributionlist}
+\item Defense Technical Information Center\\Ft. Belvoir, Virginia
+\item Dudley Knox Library\\Naval Postgraduate School\\Monterey, California
+%
+%---- Other entries are no longer needed, because of Special Abstract Form
+% Marine Corps students are required to show:
+%\item Marine Corps Representative\\Naval Postgraduate School\\Monterey, California
+%\item Directory, Training and Education, MCCDC, Code C46\\Quantico, Virginia
+%\item Marine Corps Tactical System Support Activity (Attn: Operations Officer)\\Camp Pendleton, California
+%
+% Officer students in the Operations Research Program are also required to show:
+%\item Director, Studies and Analysis Division, MCCDC, Code C45\\ Quantico, Virginia
+%
+% Officer students in the Space Ops/Space Engineering Program or in the Information Warfare/Information Systems and Operations are also required to show:
+%\item Head, Information Operations and Space Integration Branch,\\ PLI/PP\&O/HQMC, Washington, DC
+\end{distributionlist}
 
 \end{document}
 

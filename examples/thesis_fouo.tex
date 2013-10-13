@@ -28,14 +28,15 @@
 \degreedate{[Month Year]}
 
 % See Thesis processor's release form for approved distribution statements.
-\distribution{["For Official Use Only" is a control statement that is
-independent from the distribution statement on the cover page of your
-thesis. In other words, FOUO is in addition to the distribution statement.]}
+\distribution{[Some approved distribution statement. ``For Official Use Only'' is
+a control statement that is independent from the distribution statement.
+In other words, FOUO is in addition to the distribution statement and not itself
+a distribution statement.]}
 
 % Your abstract.  New paragraphs start after an empty line.
-\abstract{
+\abstract{%
 \begin{smark}[(FEUO)]
-  \lipsum[1] % example text, remove me
+\lipsum[1]
 \end{smark}
 }
 
@@ -50,15 +51,15 @@ thesis. In other words, FOUO is in addition to the distribution statement.]}
 %
 \ReportType{Master's Thesis}
 \ReportDate{MM-DD-YYY} 		% for a thesis, graduation date
-\DatesCovered{2102-06-01 to 2104-10-31}
+\DatesCovered{MM-DD-YYYY to MM-DD-YYYY}
 \SponsoringAgency{Department of the Navy}
 
 %``By definition, information must be unclassified in order to be designated FOUO'.' 
 % from (DoDM 5200.01-V4, Feb 24, 2012)
-\ReportClassification{Unclassified}
-\AbstractClassification{Unclassified}
-\PageClassification{Unclassified}
-\AbstractLimitation{FEUO}
+\ReportClassification{Unclassified//FEUO}
+\AbstractClassification{Unclassified//FEUO}
+\PageClassification{Unclassified//FEUO}
+\AbstractLimitation{UL} % UL = Unclassified / Limited distribution
 
 %
 % Optional fields for the SF298.
@@ -86,7 +87,7 @@ thesis. In other words, FOUO is in addition to the distribution statement.]}
 \SupplementaryNotes{The views expressed in this document are those of
   the author and do not reflect the official policy or position of the
   Department of Defense or the U.S. Government. %
-  IRB Protocol Number: N/A % if you need to note an IRB Protocol
+  IRB Protocol Number: N/A. % if you need to note an IRB Protocol or N/A
 }
 
 % Optional. Prevents footnotes from being reset at each chapter
@@ -123,16 +124,16 @@ thesis. In other words, FOUO is in addition to the distribution statement.]}
 % Put Executive summary here.
 % New paragraphs start after an empty line.
 %
-\NPSexecsummary{
-  \lipsum[1-4] % example text; remove me
+\NPSexecsummary{%
+\lipsum[1-4] % example text; remove me
 }
 
 %
 % Put acknowledgements here.
 % New paragraphs start after an empty line.
 %
-\NPSacknowledgements{
-  \lipsum[1-3] % example text; remove me
+\NPSacknowledgements{%
+\lipsum[1-3] % example text; remove me
 }
 
 % Start layout for the NPS body
@@ -146,8 +147,8 @@ thesis. In other words, FOUO is in addition to the distribution statement.]}
 % b) Use multiple files.  One chapter per file is recommended.
 %    This breaks your thesis up into logical units to edit.
 %
-\input{chapter1}
 \input{chapter_fouo_marking}
+\input{chapter1}
 %
 % (include other chapters here...)
 %
@@ -179,7 +180,7 @@ thesis. In other words, FOUO is in addition to the distribution statement.]}
 % and already populated with the mandatory recipients.
 %
 \NPSdistribution{Initial Distribution List}
-\begin{enumerate}
+\begin{distributionlist}
 \item Defense Technical Information Center\\Ft. Belvoir, Virginia
 \item Dudley Knox Library\\Naval Postgraduate School\\Monterey, California
 %
@@ -194,7 +195,7 @@ thesis. In other words, FOUO is in addition to the distribution statement.]}
 %
 % Officer students in the Space Ops/Space Engineering Program or in the Information Warfare/Information Systems and Operations are also required to show:
 %\item Head, Information Operations and Space Integration Branch,\\ PLI/PP\&O/HQMC, Washington, DC
-\end{enumerate}
+\end{distributionlist}
 
 
 \end{document}

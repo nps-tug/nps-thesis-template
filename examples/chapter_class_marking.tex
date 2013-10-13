@@ -4,7 +4,7 @@
 % So, its unneeded effort. Just mark the paragraphs manually.
 %
 
-\chapter{Introduction to the Classified Thesis (U)}
+\chapter{(U) Introduction to the Classified Thesis}
 
 (U) This paragraph is not classified. These are not the droids you are
 looking for. Move along. 
@@ -12,7 +12,9 @@ looking for. Move along.
 (F) This paragraph is classified F for fun.
 
 \begin{figure}[h]
+\begin{smarkenv}{(F//MM)}
 \framebox[\textwidth]{\parbox{\textwidth}{\lipsum[1]}} % example figure (text in a box)
+\end{smarkenv}
 \caption{[(U) Figure Name]}
 \end{figure}
 
@@ -44,11 +46,12 @@ IEEEexample:softonline,IEEEexample:miscgermanreg,IEEEexample:bluebookstandard
 }.
 
 
-\section{Yet Another Section (U)}
+\section{(U) Yet Another Section}
 
-(F) \lipsum[1] % remove me
+(F) \lipsum[1]
 
 \begin{table}
+\begin{smarkenv}[\textwidth]{(UNCLASSIFIED)}
 \begin{center}
 \begin{tabular}{ l c r }
   1 & 2 & 3 \\
@@ -56,5 +59,6 @@ IEEEexample:softonline,IEEEexample:miscgermanreg,IEEEexample:bluebookstandard
   7 & 8 & 9 \\
 \end{tabular}
 \end{center}
+\end{smarkenv}
 \caption{(U) [Table Name]}
 \end{table}

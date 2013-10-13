@@ -1969,21 +1969,30 @@ FUNCTION {format.url}
 
 FUNCTION {format.classification}
 {
-  fin.entry
+  classification.show
+  { this.to.prev.status
+    this.status.std
+  }
+  {}
   if$
+
   classification empty$
-    { classification.show
-        { "\;\textbf{" classification.unmarked * "}" * }
-        { "" }
-      if$
-    }
-    { classification.show
-        { "\;\textbf{" classification * "}" * }
-        { "" }
-      if$
-    }
-    if$
-    punct.no 'this.status.punct :=
+  { classification.show
+	{ classification.unmarked }
+	{ "" }
+	if$
+  }
+  { classification.show
+	{ classification }
+	{ "" }
+	if$
+  }
+  if$
+
+  classification.show
+  { punct.no 'this.status.punct := }
+  {}
+  if$
 }
 
 
@@ -2001,6 +2010,7 @@ FUNCTION {article}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.journal "journal" bibinfo.check "journal" output.warn
   format.volume output
@@ -2009,7 +2019,6 @@ FUNCTION {article}
   format.date "year" output.warn
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2023,6 +2032,7 @@ FUNCTION {book}
     { format.authors output.nonnull }
   if$
   name.or.dash
+  format.classification output
   format.book.title.edition output
   format.series output
   author empty$
@@ -2034,7 +2044,6 @@ FUNCTION {book}
   format.number output
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2045,6 +2054,7 @@ FUNCTION {booklet}
   if.url.alt.interword.spacing
   format.authors output
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.howpublished "howpublished" bibinfo.check output
   format.organization "organization" bibinfo.check output
@@ -2052,7 +2062,6 @@ FUNCTION {booklet}
   format.date output
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2064,13 +2073,13 @@ FUNCTION {electronic}
   format.authors output
   name.or.dash
   format.date.electronic output
+  format.classification output
   format.article.title.electronic output
   format.howpublished "howpublished" bibinfo.check output
   format.organization "organization" bibinfo.check output
   format.address "address" bibinfo.check output
   format.note output
   format.url output
-  format.classification output
   fin.entry
   empty.entry.warn
   if.url.std.interword.spacing
@@ -2085,6 +2094,7 @@ FUNCTION {inbook}
     { format.authors output.nonnull }
   if$
   name.or.dash
+  format.classification output
   format.book.title.edition output
   format.series output
   format.address.publisher.date output
@@ -2094,7 +2104,6 @@ FUNCTION {inbook}
   format.pages output
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2105,6 +2114,7 @@ FUNCTION {incollection}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.in.booktitle.edition "booktitle" output.warn
   format.series output
@@ -2116,7 +2126,6 @@ FUNCTION {incollection}
   format.pages output
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2127,6 +2136,7 @@ FUNCTION {inproceedings}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.in.booktitle "booktitle" output.warn
   format.series output
@@ -2143,7 +2153,6 @@ FUNCTION {inproceedings}
   format.pages output
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2154,6 +2163,7 @@ FUNCTION {manual}
   if.url.alt.interword.spacing
   format.authors output
   name.or.dash
+  format.classification output
   format.book.title.edition "title" output.warn
   format.howpublished "howpublished" bibinfo.check output 
   format.organization "organization" bibinfo.check output
@@ -2161,7 +2171,6 @@ FUNCTION {manual}
   format.date output
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2172,6 +2181,7 @@ FUNCTION {mastersthesis}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.master.thesis.type output.nonnull
   format.school "school" bibinfo.warn output
@@ -2179,7 +2189,6 @@ FUNCTION {mastersthesis}
   format.date "year" output.warn
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2190,6 +2199,7 @@ FUNCTION {misc}
   if.url.alt.interword.spacing
   format.authors output
   name.or.dash
+  format.classification output
   format.article.title output
   format.howpublished "howpublished" bibinfo.check output 
   format.organization "organization" bibinfo.check output
@@ -2198,7 +2208,6 @@ FUNCTION {misc}
   format.date output
   format.note output
   format.url output
-  format.classification output
   fin.entry
   empty.entry.warn
   if.url.std.interword.spacing
@@ -2210,12 +2219,12 @@ FUNCTION {patent}
   if.url.alt.interword.spacing
   format.authors output
   name.or.dash
+  format.classification output
   format.article.title output
   format.patent.nationality.type.number output
   format.patent.date output
   format.note output
   format.url output
-  format.classification output
   fin.entry
   empty.entry.warn
   if.url.std.interword.spacing
@@ -2227,6 +2236,7 @@ FUNCTION {periodical}
   if.url.alt.interword.spacing
   format.editors output
   name.or.dash
+  format.classification output
   format.book.title "title" output.warn
   format.series output
   format.volume output
@@ -2235,7 +2245,6 @@ FUNCTION {periodical}
   format.date "year" output.warn
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2246,6 +2255,7 @@ FUNCTION {phdthesis}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.phd.thesis.type output.nonnull
   format.school "school" bibinfo.warn output
@@ -2253,7 +2263,6 @@ FUNCTION {phdthesis}
   format.date "year" output.warn
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2264,6 +2273,7 @@ FUNCTION {proceedings}
   if.url.alt.interword.spacing
   format.editors output
   name.or.dash
+  format.classification output
   format.book.title "title" output.warn
   format.series output
   format.volume output
@@ -2276,7 +2286,6 @@ FUNCTION {proceedings}
   if$
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2287,6 +2296,7 @@ FUNCTION {standard}
   if.url.alt.interword.spacing
   format.authors output
   name.or.dash
+  format.classification output
   format.book.title "title" output.warn
   format.howpublished "howpublished" bibinfo.check output 
   format.organization.institution.standard.type.number output
@@ -2294,7 +2304,6 @@ FUNCTION {standard}
   format.date output
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2305,6 +2314,7 @@ FUNCTION {techreport}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.howpublished "howpublished" bibinfo.check output 
   format.institution "institution" bibinfo.warn output
@@ -2313,7 +2323,6 @@ FUNCTION {techreport}
   format.date "year" output.warn
   format.note output
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }
@@ -2324,11 +2333,11 @@ FUNCTION {unpublished}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.date output
   format.note "note" output.warn
   format.url output
-  format.classification output
   fin.entry
   if.url.std.interword.spacing
 }

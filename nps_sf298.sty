@@ -167,12 +167,6 @@
   \fi}
 \AtEndDocument{\sf@undefined}
 \newcommand\MakeRptDocPage{%
-  \newpage
-  \if@twoside\ifodd\c@page\else
-    \null
-    \thispagestyle{empty}%
-    \newpage
-  \fi\fi
   \sf@checkfield{ReportDate}
   \sf@checkfield{ReportType}
   \sf@checkfield{DatesCovered}
@@ -199,7 +193,6 @@
   \fi
   \setcounter{page}{1}%
   \vbox to 0pt{%
-    \vfill
   \ifsf@oldform
     \resizebox{\textwidth}{!}{\sf@drawoldform}
   \else
@@ -207,11 +200,6 @@
   \fi
     \vfill
 }
-    
-  \if@twoside
-    \null
-
-  \fi
   \global\let\ReportDate\relax
   \global\let\sf@ReportDate\relax
   \global\let\ReportType\relax
