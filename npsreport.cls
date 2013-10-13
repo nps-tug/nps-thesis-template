@@ -1112,12 +1112,18 @@
 }
 
 \newcommand{\NPSexecsummary}[1]{
-\ifnpsarticle
-  \begin{center}\textbf{\large{Executive Summary\ULABEL}}\end{center}
+\ifnpstraditional
+ \def\execsummaryname{\textbf{EXECUTIVE SUMMARY}}
 \else
-  \chapter*{Executive Summary\ULABEL}
+ \def\execsummaryname{Executive Summary}
+\fi
+\ifnpsarticle
+  \begin{center}\textbf{\large{\execsummaryname\ULABEL}}\end{center}
+\else
+  \chapter*{\execsummaryname\ULABEL}
   %\addcontentsline{toc}{chapter}{Executive Summary}
 \fi
+  \def\execsummaryname{}
   \thispagestyle{fancy}
   \onehalfspacing
   #1
@@ -1126,12 +1132,18 @@
 
 
 \newcommand{\NPSacknowledgements}[1]{
-\ifnpsarticle
-  \begin{center}\textbf{\large{Acknowledgements\ULABEL}}\end{center}
+\ifnpstraditional
+  \def\acknowledgementsname{\textbf{ACKNOWLEDGEMENTS}}
 \else
-  \chapter*{Acknowledgements\ULABEL}
+  \def\acknowledgementsname{Acknowledgements}
+\fi
+\ifnpsarticle
+  \begin{center}\textbf{\large{\acknowledgementsname\ULABEL}}\end{center}
+\else
+  \chapter*{\acknowledgementsname\ULABEL}
   %\addcontentsline{toc}{chapter}{Acknowledgements}
 \fi
+  \def\acknowledgementsname{}
   \thispagestyle{fancy}
   \onehalfspacing
   #1
