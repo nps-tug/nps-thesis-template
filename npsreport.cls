@@ -526,6 +526,14 @@
 
   \newcommand{\NPSend}{}             
 
+  \titlespacing*{\chapter}{0pt}{15pt plus 2ex}{.25in}
+  \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
+  \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
+  \titlespacing*{\subsubsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
+  \titlespacing*{\paragraph}{0pt}{0pt plus 2ex}{3pt}
+  \setlength{\parskip}{2ex}
+  \setlength{\parindent}{0pt}
+
   % 
   % End Traditional NPS
   %
@@ -1111,7 +1119,7 @@
   \singlespacing
 }
 
-\newcommand{\NPSexecsummary}[1]{
+\newcommand{\NPSexecsummary}[1]{%
 \ifnpstraditional
  \def\execsummaryname{\textbf{EXECUTIVE SUMMARY}}
 \else
@@ -1124,7 +1132,7 @@
   %\addcontentsline{toc}{chapter}{Executive Summary}
 \fi
   \def\execsummaryname{}
-  \thispagestyle{fancy}
+  %\thispagestyle{fancy}
   \onehalfspacing
   #1
   \cleardoublepage
