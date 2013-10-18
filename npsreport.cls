@@ -788,7 +788,7 @@
     \cfoot{\thepage}
  \fi
   %%
-  %% 'marked' - classified markings, page numbers
+  %% 'plainpage' - classified markings, page numbers
   %% used: SF298
   \fancypagestyle{plainpage}{
     \rhead{} \lhead{}
