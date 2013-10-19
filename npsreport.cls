@@ -503,7 +503,7 @@
   % Create all the heads and such
   % This is done with the titlesec package
   \titleformat{\chapter}[display] 
-              {\normalfont\Large\filcenter} % {fmt}
+              {\normalfont\bf\Large\filcenter} % {fmt}
               {\thechapter.\ }              % {label}
               {1pc}                         % {sep}
               {\vspace{-1in}\enlargethispage{-0.5in}}    % {before}
