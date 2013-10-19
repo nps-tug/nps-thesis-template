@@ -30,7 +30,7 @@ $(ALL): $(TEXFILES)
 #
 .tex.pdf:
 	$(LATEX) $(TEXOPTS) $*
-	-$(BIBTEX) $*
+	-$(BIBTEX) $(TEXOPTS) $*
 	$(LATEX) $(TEXOPTS) $*
 	$(LATEX) $(TEXOPTS) $*
 
