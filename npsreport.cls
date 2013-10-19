@@ -526,7 +526,7 @@
 
   \newcommand{\NPSend}{}             
 
-  \titlespacing*{\chapter}{0pt}{15pt plus 2ex}{.25in}
+  \titlespacing*{\chapter}{0pt}{15pt}{.25in}
   \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\subsubsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
@@ -558,7 +558,7 @@
   % ``The starred version kills the indention of the paragraph following the title.''
   % \titlespacing%{<command>}{<left>}{<beforesep>}{<aftersep>}[<right>]
 
-  \titlespacing*{\chapter}{0pt}{-.5in plus 2ex}{.25in}
+  \titlespacing*{\chapter}{0pt}{-.5in}{.25in}
   \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\subsubsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
