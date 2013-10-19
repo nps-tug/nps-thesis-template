@@ -788,20 +788,6 @@
     \cfoot{\thepage}
  \fi
   %%
-  %% 'plainpage' - classified markings, page numbers
-  %% used: SF298
-  \fancypagestyle{plainpage}{
-    \rhead{} \lhead{}
-    \renewcommand{\headrulewidth}{0pt}
- \ifclassified
-    \chead{\vspace{-1em}\@securitybanner \\ \vspace{1em}}
-    \cfoot{\thepage \\ \@securitybanner}
- \else
-    \chead{}
-    \cfoot{\thepage}
- \fi
-  }
-  %%
   %% 'frontmarked' - classified markings, FOUO marking, no page numbers
   %% used: front cover
   \fancypagestyle{frontmarked}{
@@ -960,7 +946,7 @@
   \Abstract{\@abstract}
   \SponsoringAgencySF{\@sponsoringagency}
   \MakeRptDocPage
-  \thispagestyle{plainpage}
+  \thispagestyle{plain}
   \cleardoublepage
 }
 
