@@ -665,11 +665,11 @@
   \appendix                       % Appendix mode
   \clearpage
 \ifnpsarticle
-  \section*{Appendix:~#1}
+  \section*{APPENDIX:~#1}
   \addcontentsline{toc}{section}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
 \else
   \def\chaptername{Appendix}  % not sure why this is needed, but it is
-  \chapter*{Appendix:~#1}
+  \chapter*{APPENDIX:~#1}
   \addcontentsline{toc}{chapter}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
 \fi
 }
