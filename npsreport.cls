@@ -1132,7 +1132,7 @@
   %\addcontentsline{toc}{chapter}{Executive Summary}
 \fi
   \def\execsummaryname{}
-  %\thispagestyle{fancy}
+  \thispagestyle{fancy}
   \onehalfspacing
   #1
   \cleardoublepage
