@@ -1213,7 +1213,6 @@
   %\addcontentsline{toc}{chapter}{Executive Summary}
 \fi
   \def\execsummaryname{}
-  \thispagestyle{fancy}
   \onehalfspacing
   #1
   \cleardoublepage
@@ -1233,7 +1232,6 @@
   %\addcontentsline{toc}{chapter}{Acknowledgements}
 \fi
   \def\acknowledgementsname{}
-  \thispagestyle{fancy}
   \onehalfspacing
   #1
   \cleardoublepage
@@ -1427,7 +1425,6 @@
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
   \def\listacronymname{}
-  \thispagestyle{fancy}
   \onehalfspacing
   #1
   \cleardoublepage
@@ -1450,7 +1447,6 @@
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
   \def\listacronymname{}
-  \thispagestyle{fancy}
   \onehalfspacing
   \input{#1}
   \cleardoublepage
