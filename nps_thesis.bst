@@ -2342,6 +2342,26 @@ FUNCTION {unpublished}
   if.url.std.interword.spacing
 }
 
+% This is in its own function, to get around common fn line length limits
+FUNCTION {ClassificationCTL}
+{
+  CTLclassification_show
+  empty$
+    { skip$ }
+    { CTLclassification_show
+      string.to.integer
+      'classification.show :=
+    }
+  if$
+  CTLclassification_unmarked
+  missing$
+    { skip$ }
+    { CTLclassification_unmarked
+      'classification.unmarked :=
+    }
+  if$
+}
+
 
 % The special entry type which provides the user interface to the
 % BST controls
@@ -2439,28 +2459,13 @@ FUNCTION {IEEEtranBSTCTL}
       'name.url.prefix :=
     }
   if$
-  CTLclassification_show
-  empty$
-    { skip$ }
-    { CTLclassification_show
-      string.to.integer
-      'classification.show :=
-    }
-  if$
-  CTLclassification_unmarked
-  missing$
-    { skip$ }
-    { CTLclassification_unmarked
-      'classification.unmarked :=
-    }
-  if$
-
   num.names.shown.with.forced.et.al max.num.names.before.forced.et.al >
     { "CTLnames_show_etal cannot be greater than CTLmax_names_forced_etal in " cite$ * warning$ 
       max.num.names.before.forced.et.al 'num.names.shown.with.forced.et.al :=
     }
     { skip$ }
   if$
+  ClassificationCTL
 }
 
 
