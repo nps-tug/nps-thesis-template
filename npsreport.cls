@@ -516,6 +516,7 @@
   \def\contentsname{\textbf{TABLE OF CONTENTS}}
   \def\listfigurename{\textbf{LIST OF FIGURES}}
   \def\listtablename{\textbf{LIST OF TABLES}}
+  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
   \def\bibname{\textbf{LIST OF REFERENCES}}
   \def\indexname{\textbf{INDEX\ULABEL}}
   \def\abstractname{ABSTRACT}
@@ -538,7 +539,7 @@
   % Create all the heads and such
   % This is done with the titlesec package
   \titleformat{\chapter}[display] 
-              {\normalfont\Large\filcenter} % {fmt}
+              {\normalfont\bf\Large\filcenter} % {fmt}
               {\thechapter.\ }              % {label}
               {1pc}                         % {sep}
               {\vspace{-1in}\enlargethispage{-0.5in}}    % {before}
@@ -560,6 +561,14 @@
   % \newcounter{figure}
 
   \newcommand{\NPSend}{}             
+
+  \titlespacing*{\chapter}{0pt}{15pt}{.25in}
+  \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
+  \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
+  \titlespacing*{\subsubsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
+  \titlespacing*{\paragraph}{0pt}{0pt plus 2ex}{3pt}
+  \setlength{\parskip}{2ex}
+  \setlength{\parindent}{0pt}
 
   % 
   % End Traditional NPS
@@ -585,7 +594,7 @@
   % ``The starred version kills the indention of the paragraph following the title.''
   % \titlespacing%{<command>}{<left>}{<beforesep>}{<aftersep>}[<right>]
 
-  \titlespacing*{\chapter}{0pt}{-.5in plus 2ex}{.25in}
+  \titlespacing*{\chapter}{0pt}{-.5in}{.25in}
   \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\subsubsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
@@ -1191,13 +1200,19 @@
   \singlespacing
 }
 
-\newcommand{\NPSexecsummary}[1]{
-\ifnpsarticle
-  \begin{center}\textbf{\large{\ULABEL Executive Summary}}\end{center}
+\newcommand{\NPSexecsummary}[1]{%
+\ifnpstraditional
+ \def\execsummaryname{\textbf{EXECUTIVE SUMMARY}}
 \else
-  \chapter*{\ULABEL Executive Summary}
+ \def\execsummaryname{Executive Summary}
+\fi
+\ifnpsarticle
+  \begin{center}\textbf{\large{\execsummaryname\ULABEL}}\end{center}
+\else
+  \chapter*{\execsummaryname\ULABEL}
   %\addcontentsline{toc}{chapter}{Executive Summary}
 \fi
+  \def\execsummaryname{}
   \onehalfspacing
   #1
   \cleardoublepage
@@ -1205,12 +1220,18 @@
 
 
 \newcommand{\NPSacknowledgements}[1]{
-\ifnpsarticle
-  \begin{center}\textbf{\large{\ULABEL Acknowledgements}}\end{center}
+\ifnpstraditional
+  \def\acknowledgementsname{\textbf{ACKNOWLEDGEMENTS}}
 \else
-  \chapter*{\ULABEL Acknowledgements}
+  \def\acknowledgementsname{Acknowledgements}
+\fi
+\ifnpsarticle
+  \begin{center}\textbf{\large{\acknowledgementsname\ULABEL}}\end{center}
+\else
+  \chapter*{\acknowledgementsname\ULABEL}
   %\addcontentsline{toc}{chapter}{Acknowledgements}
 \fi
+  \def\acknowledgementsname{}
   \onehalfspacing
   #1
   \cleardoublepage
@@ -1307,6 +1328,7 @@
   \doublespacing
 }
 
+% This is a legacy command for compatibility.  The newer command is below.
 \newcommand{\NPSdistribution}[1]{
 \ifnpsarticle
   \section*{#1}
@@ -1315,6 +1337,25 @@
   \def\chaptername{#1}
   \chapter*{#1}
   \addcontentsline{toc}{chapter}{#1}
+\fi
+  \singlespacing    % reduce extra line breaks between entries
+  \newenvironment{distributionlist}
+    {\begin{enumerate}\itemsep \baselineskip}
+    {\end{enumerate}}
+}
+
+\newcommand{\NPSdistributionlist}{
+\ifnpstraditional
+\def\distrolistname{\textbf{INITIAL DISTRIBUTION LIST}}
+\else
+  \def\distrolistname{Initial Distribution List}
+\fi
+\ifnpsarticle
+  \section*{\distrolistname\ULABEL}
+  \addcontentsline{toc}{section}{Initial Distribution List}
+\else
+  \chapter*{\distrolistname\ULABEL}
+  \addcontentsline{toc}{chapter}{Initial Distribution List}
 \fi
   \singlespacing    % reduce extra line breaks between entries
   \newenvironment{distributionlist}
@@ -1369,39 +1410,53 @@
 }
 
 \newcommand{\NPSlistOfAcronyms}[1]{
+\ifnpstraditional
+  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
+\else
+   \def\listacronymname{List of Acronyms and Abbreviations}
+\fi
   \lhead{}\rhead{}
 \ifnpsarticle
   %\section*{\ULABEL List of Acronyms and Abbreviations}\vspace{1pc}
   %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
-  \begin{center}\textbf{\large{\ULABEL List of Acronyms and Abbreviations}}\end{center}
+  \begin{center}\textbf{\large{\listacronymname\ULABEL}}\end{center}
 \else
-  \chapter*{\ULABEL List of Acronyms and Abbreviations}
+  \chapter*{\listacronymname\ULABEL}
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
-  \def\listacronymname{List of Acronyms and Abbreviations}
+  \def\listacronymname{}
   \onehalfspacing
   #1
   \cleardoublepage
 }
 
 \newcommand{\NPSlistOfAcronymsFromFile}[1]{
+\ifnpstraditional
+  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
+\else
+   \def\listacronymname{List of Acronyms and Abbreviations}
+\fi
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{\ULABEL List of Acronyms and Abbreviations}\vspace{1pc}
-  %\addcontentsline{toc}{section}{\ULABEL List of Acronyms and Abbreviations}
-  \begin{center}\textbf{\large{\ULABEL List of Acronyms and Abbreviations}}\end{center}
+  %\section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
+  %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
+  \begin{center}\textbf{\large{\listacronymname\ULABEL}}\end{center}
+
 \else
-  \chapter*{\ULABEL List of Acronyms and Abbreviations}
-  %\addcontentsline{toc}{chapter}{\ULABEL List of Acronyms and Abbreviations}
+  \chapter*{\listacronymname\ULABEL}
+  %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
 \fi
-  \def\listacronymname{\ULABEL List of Acronyms and Abbreviations}
+  \def\listacronymname{}
   \onehalfspacing
   \input{#1}
   \cleardoublepage
 }
 
-\def\bibname{\textbf{\ULABEL REFERENCES}}
-
+\ifnpstraditional
+  \def\bibname{\textbf{REFERENCES\ULABEL}}
+\else
+  \def\bibname{References\ULABEL}
+\fi
 
 
 %
