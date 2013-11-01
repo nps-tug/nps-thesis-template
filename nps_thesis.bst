@@ -2350,49 +2350,56 @@ FUNCTION {IEEEtranBSTCTL}
     { "** IEEEtran BST control entry " quote$ * cite$ * quote$ * " detected." *
       top$
     }
-    { skip$ } if$
+    { skip$ }
+  if$
   CTLuse_article_number
   empty$
     { skip$ }
     { CTLuse_article_number
       yes.no.to.int
       'is.use.number.for.article :=
-    } if$
+    }
+  if$
   CTLuse_paper
   empty$
     { skip$ }
     { CTLuse_paper
       yes.no.to.int
       'is.use.paper :=
-    } if$
+    }
+  if$
   CTLuse_forced_etal
   empty$
     { skip$ }
     { CTLuse_forced_etal
       yes.no.to.int
       'is.forced.et.al :=
-    } if$
+    }
+  if$
   CTLmax_names_forced_etal
   empty$
     { skip$ }
     { CTLmax_names_forced_etal
       string.to.integer
       'max.num.names.before.forced.et.al :=
-    } if$
+    }
+  if$
   CTLnames_show_etal
   empty$
     { skip$ }
     { CTLnames_show_etal
       string.to.integer
       'num.names.shown.with.forced.et.al :=
-    } if$
+    }
+  if$
   CTLuse_alt_spacing
   empty$
     { skip$ }
     { CTLuse_alt_spacing
       yes.no.to.int
       'is.use.alt.interword.spacing :=
-    } if$
+    }
+  if$
   CTLalt_stretch_factor
   empty$
     { skip$ }
@@ -2401,50 +2408,59 @@ FUNCTION {IEEEtranBSTCTL}
       "\renewcommand{\BIBentryALTinterwordstretchfactor}{"
       ALTinterwordstretchfactor * "}" *
       write$ newline$
-    } if$
+    }
+  if$
   CTLdash_repeated_names
   empty$
     { skip$ }
     { CTLdash_repeated_names
       yes.no.to.int
       'is.dash.repeated.names :=
-    } if$
+    }
+  if$
   CTLname_format_string
   empty$
     { skip$ }
     { CTLname_format_string
       'name.format.string :=
-    } if$
+    }
+  if$
   CTLname_latex_cmd
   empty$
     { skip$ }
     { CTLname_latex_cmd
       'name.latex.cmd :=
-    } if$
+    }
+  if$
   CTLname_url_prefix
   missing$
     { skip$ }
     { CTLname_url_prefix
       'name.url.prefix :=
-    } if$
+    }
+  if$
   CTLclassification_show
   empty$
     { skip$ }
     { CTLclassification_show
       string.to.integer
       'classification.show :=
-    } if$
+    }
+  if$
   CTLclassification_unmarked
   missing$
     { skip$ }
     { CTLclassification_unmarked
       'classification.unmarked :=
-    } if$
+    }
+  if$
+
   num.names.shown.with.forced.et.al max.num.names.before.forced.et.al >
     { "CTLnames_show_etal cannot be greater than CTLmax_names_forced_etal in " cite$ * warning$ 
       max.num.names.before.forced.et.al 'num.names.shown.with.forced.et.al :=
     }
-    { skip$ } if$
+    { skip$ }
+  if$
 }
 
 
