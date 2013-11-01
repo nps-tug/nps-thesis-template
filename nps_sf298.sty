@@ -167,12 +167,6 @@
   \fi}
 \AtEndDocument{\sf@undefined}
 \newcommand\MakeRptDocPage{%
-  \newpage
-  \if@twoside\ifodd\c@page\else
-    \null
-    \thispagestyle{empty}%
-    \newpage
-  \fi\fi
   \sf@checkfield{ReportDate}
   \sf@checkfield{ReportType}
   \sf@checkfield{DatesCovered}
@@ -198,49 +192,14 @@
           \renewcommand{\sf@NumberPages}{\arabic{sf@page}}}}
   \fi
   \setcounter{page}{1}%
-  \thispagestyle{empty}
   \vbox to 0pt{%
-    \@tempskipa 34pt
-    \advance\@tempskipa\voffset
-    \advance\@tempskipa\topmargin
-    \advance\@tempskipa\headheight
-    \advance\@tempskipa\headsep
-    \advance\@tempskipa\baselineskip
-    \vskip-\@tempskipa
-    \vskip 0.35in  % this corrects the top margin to be at 1in
-    \vfill
   \ifsf@oldform
-      \resizebox{\textwidth}{!}{\sf@drawoldform}
+    \resizebox{\textwidth}{!}{\sf@drawoldform}
   \else
-      \resizebox{\textwidth}{!}{\sf@drawform}
+    \resizebox{\textwidth}{!}{\sf@drawform}
   \fi
     \vfill
-    \vss}%
-    
-  \newpage
-  \if@twoside
-    \null
-
-% NPS - SLG ADD
- \vspace*{\fill} 
- \thispagestyle{empty}  % Without this, we get two page numbers?
- \begin{center} 
-   THIS PAGE INTENTIONALLY LEFT BLANK\\
- \vspace{\fill} 
- \end{center} 
- \begin{picture}(0,0)(0,0)
-   \put(230,-36){ii}
- \end{picture}
-   \begin{picture}(0,0)
-   \put(0,-108){\makebox(432, 100)[t]{% bottom one
-       \sf\@securitybanner}}
-%   \put(0,540){\makebox(432, 100)[t]{%				% Removed TOP marking (per new FOUO guidance)
-%       \sf\@securitybanner}}
-   \end{picture}
-    \newpage
-% NPS end
-
-  \fi
+}
   \global\let\ReportDate\relax
   \global\let\sf@ReportDate\relax
   \global\let\ReportType\relax

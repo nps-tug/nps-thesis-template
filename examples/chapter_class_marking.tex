@@ -1,0 +1,64 @@
+% For classified theses, there is no point in marking paragraph-level
+% entries with the \begin{smark}\end{smark} environment, as in FOUO
+% since we always mark with the overall document classification.
+% So, its unneeded effort. Just mark the paragraphs manually.
+%
+
+\chapter{(U) Introduction to the Classified Thesis}
+
+(U) This paragraph is not classified. These are not the droids you are
+looking for. Move along. 
+
+(F) This paragraph is classified F for fun.
+
+\begin{figure}[h]
+\begin{smarkenv}{(F//MM)}
+\framebox[\textwidth]{\parbox{\textwidth}{\lipsum[1]}} % example figure (text in a box)
+\end{smarkenv}
+\caption{[(U) Figure Name]}
+\end{figure}
+
+(F//MM) This is the beginning of your thesis. Always have text between every head
+and subhead. Here are some citations\footnote{(U) These citations were taken
+from the IEEEtran example bib file.} that demonstrate nearly every bib 
+style\footnote{(U) \lipsum[10]} that exists~\cite{IEEEhowto:IEEEtranpage,IEEEexample:shellCTANpage,
+IEEEexample:IEEEwebsite,IEEEexample:bibtexuser,IEEEexample:bibtexdesign,
+IEEEexample:tamethebeast,IEEEexample:bibtexguide,
+IEEEexample:article_typical,IEEEexample:articleetal,IEEEexample:conf_typical,
+IEEEexample:book_typical,IEEEexample:articlelargepages,
+IEEEexample:articledualmonths,IEEEexample:TBPmisc,IEEEexample:TBParticle,
+IEEEexample:bookwitheditor,IEEEexample:book,IEEEexample:bookwithseriesvolume,
+IEEEexample:inbook,IEEEexample:inbookpagesnote,IEEEexample:incollection,
+IEEEexample:incollectionwithseries,IEEEexample:incollection_chpp,
+IEEEexample:incollectionmanyauthors,
+IEEEexample:motmanualhowpub,IEEEexample:confwithadddays,
+IEEEexample:confwithvolume,IEEEexample:confwithpaper,
+IEEEexample:confwithpapertype,IEEEexample:presentedatconf,
+IEEEexample:masters,IEEEexample:masterstype,IEEEexample:phdurl,
+IEEEexample:techrep,IEEEexample:techreptype,IEEEexample:techreptypeii,
+IEEEexample:techrepstdsub,IEEEexample:unpublished,IEEEexample:electronhowinfo,
+IEEEexample:electronhowinfo2,IEEEexample:electronorgadd,IEEEexample:uspat,
+IEEEexample:jppat,IEEEexample:frenchpatreq,IEEEexample:periodical,
+IEEEexample:standard,IEEEexample:standardproposed,IEEEexample:draftasmisc,
+IEEEexample:miscforum,IEEEexample:whitepaper,IEEEexample:datasheet,
+IEEEexample:private,IEEEexample:miscrfc,IEEEexample:softmanual,
+IEEEexample:softonline,IEEEexample:miscgermanreg,IEEEexample:bluebookstandard
+}.
+
+
+\section{(U) Yet Another Section}
+
+(F) \lipsum[1]
+
+\begin{table}
+\begin{smarkenv}[\textwidth]{(UNCLASSIFIED)}
+\begin{center}
+\begin{tabular}{ l c r }
+  1 & 2 & 3 \\
+  4 & 5 & 6 \\
+  7 & 8 & 9 \\
+\end{tabular}
+\end{center}
+\end{smarkenv}
+\caption{(U) [Table Name]}
+\end{table}
