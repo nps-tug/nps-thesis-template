@@ -1,19 +1,19 @@
+%%
+%% npsreport.cls
+%% LaTeX class file for NPS Theses and Tech Reports
+%% Version 1.2
+%%
+%% NOTE:
+%% There is typically no reason to modify this file. If something
+%% appears broken, then look at latest style files available from the
+%% thesis processor: it might already be fixed in a newer version!
+%%
+%%*************************************************************************
+%
+% Based on:
 % New NPS thesis and report style for modern LaTeX
 % Simson L. Garfinkel, Dept. of Computer Science
-% Modification log:
-% 2011-sep-08 - slg - not many changes
-% 2011-jul-10 - slg additional packages added;  caption font changed
-%               to 11 on 12 rather 9 on 10
-% 2012-sep-22 - twa - improving comments, acronym package support
-% 2012-sep-24 - twa - improving dissertation signature page
-% Timeline for project: 
-% 
-
-% The majority of this file is not needed to be editted by the average user.
-% Things for everyone to look at below:
-%  - optional list of packages to include the ones appropriate for your 
-%    document
-%  - macros like sgraphic that can be used to create figures in your document
+%
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{npsreport}[2008/10/01]
