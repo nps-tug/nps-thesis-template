@@ -4,40 +4,33 @@
 LATEX=pdflatex
 BIBTEX=bibtex
 
+TEXFILES = $(shell find . \( -iname "*.tex" -o -name "*.bib" \) -type f -exec echo "{}" \; | sed 's| |\\ |' | tr '\n' ' ')
 
-#
-# Directives for legacy scripts
-#
-FIXERRORS=echo
-AUTHORINDEX=echo
-MAKEINDEX=echo
+# for Mac this includes the .. directory for necessary files
+NPSREPORT=$(shell pwd)/.
+export TEXINPUTS := $(TEXINPUTS):$(NPSREPORT)
+export BSTINPUTS := $(BSTINPUTS):$(NPSREPORT)
+export BIBINPUTS := $(BIBINPUTS):$(NPSREPORT)
 
-# if using the old nps-*.bst files, we need the fix error script:
-ifneq ($(wildcard fixerrors.py),)
-FIXERRORS=python fixerrors.py
+# for Windows this includes the .. directory for necessary files
+ifeq ($(OS),Windows_NT)
+    TEXOPTS = --include-directory=.
+else
+    TEXOPTS = 
 endif
-
-authors = 0
-# if we are using the authors option, we need these scripts
-ifeq ($(authors),1)
-AUTHORINDEX=perl authorindex.pl
-MAKEINDEX=makeindex
-endif
-
 
 #
 # Files
 #
+ifneq ($(wildcard thesis.tex),)
+  ALL += thesis.pdf
+endif
+
 COMMON = Makefile npsreport.cls nps_sf298.sty nps_thesis.bst
 RELEASE = acronyms.tex appendix1.tex chapter1.tex thesis.bib thesis.tex \
           contrib/*.tex contrib/*.pdf \
           nps_sf298.sty nps_thesis.bst npsreport.cls figs/nps_logo*.pdf \
           examples/*.tex doc/NPS-CS-11-011.pdf
-TEXFILES = $(shell find . \( -iname "*.tex" -o -name "*.bib" \) -type f -exec echo "{}" \; | sed 's| |\\ |' | tr '\n' ' ')
-
-ifneq ($(wildcard thesis.tex),)
-  ALL += thesis.pdf
-endif
 
 all: $(ALL)
 
@@ -47,14 +40,10 @@ $(ALL): $(TEXFILES) $(COMMON)
 # Build a pdf from a tex file
 #
 .tex.pdf:
-	$(LATEX) $*
-	-$(BIBTEX) $*
-	$(AUTHORINDEX) $*
-	$(MAKEINDEX) $*
-	$(FIXERRORS) $*
-	$(LATEX) $*
-	$(LATEX) $*
-	$(LATEX) $*
+	$(LATEX) $(TEXOPTS) $*
+	-$(BIBTEX) $(TEXOPTS) $*
+	$(LATEX) $(TEXOPTS) $*
+	$(LATEX) $(TEXOPTS) $*
 
 #
 # Clean routines

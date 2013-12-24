@@ -1,12 +1,9 @@
 .SUFFIXES: .tex .pdf 
 .PHONY: all clean distclean
 
-VPATH += ../
-
 LATEX=pdflatex
 BIBTEX=bibtex
 
-COMMON = Makefile npsreport.cls nps_sf298.sty nps_thesis.bst
 TEXFILES = $(shell find . \( -iname "*.tex" -o -name "*.bib" \) -type f -exec echo "{}" \; | sed 's| |\\ |' | tr '\n' ' ')
 
 # for Mac this includes the .. directory for necessary files
@@ -36,7 +33,7 @@ ALL += thesis_classified.pdf
 
 all: $(ALL)
 
-$(ALL): $(TEXFILES) $(COMMON)
+$(ALL): $(TEXFILES)
 
 #
 # Build a pdf from a tex file
