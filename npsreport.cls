@@ -1315,7 +1315,11 @@
 }
 
 \newcommand{\NPSbibliography}[1]{
+\ifnpsarticle
   \clearpage
+\else
+  \cleardoublepage
+\fi
   \bibliographystyle{nps_thesis}
   \raggedright      % don't automatically full justify bibliographic references
   \singlespacing    % reduce extra line breaks between entries
