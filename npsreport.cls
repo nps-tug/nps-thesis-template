@@ -564,8 +564,6 @@
   % \renewcommand{\thefigure}{\arabic{figure}}             
   % \newcounter{figure}
 
-  \newcommand{\NPSend}{}             
-
   \titlespacing*{\chapter}{0pt}{15pt}{.25in}
   \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
@@ -676,23 +674,27 @@
             {\titlerule*[1pc]{.}\contentspage}        % filler and page
   \fi
 
-  \newcommand{\NPSend}{
-    \ifnpsauthorindex
-      \chapter*{Referenced Authors}
-      %\addcontentsline{toc}{chapter}{Referenced Authors}
-      \begin{multicols}{3}
-        \printauthorindex
-      \end{multicols}
-    \fi
-    \ifnpsindex
-      \printindex
-    \fi
-   }
-
   % Sections will still be capped, but not in bold
   \def\bibname{List of References}
 \fi
-                
+
+
+%
+% NPSend
+%
+\newcommand{\NPSend}{
+\ifnpsauthorindex
+  \chapter*{Referenced Authors}
+  %\addcontentsline{toc}{chapter}{Referenced Authors}
+  \begin{multicols}{3}
+    \printauthorindex
+  \end{multicols}
+\fi
+\ifnpsindex
+  \printindex
+\fi
+}
+
 
 % Use this to change to appendix mode and insert ``Appendix'' into the Table of Contents
 % The appendix needs to also call \chapter{title} after this command and it will have another TOC entry.
