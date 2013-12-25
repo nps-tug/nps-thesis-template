@@ -460,14 +460,18 @@
 
 % Table of contents control
 \def\contentsname{Table of Contents}
+\setlength\cftbeforetoctitleskip{0pt}
+\setlength\cftbeforeloftitleskip{0pt}
+\setlength\cftbeforelottitleskip{0pt}
+\setlength\cftaftertoctitleskip{0pt}
+\setlength\cftafterloftitleskip{0pt}
+\setlength\cftafterlottitleskip{0pt}
 \setlength\cftparskip{2ex}
 \ifnpsarticle
-  \setlength\cftbeforetoctitleskip{40pt}
-  \setlength\cftbeforeloftitleskip{40pt}
-  \setlength\cftbeforelottitleskip{40pt}
 \else
   \setlength\cftchapindent{-3pt}
 \fi
+
 
 % This magic makes the word "Figure" appear in each line of the list of figures
 \newlength\figurelen             % 
@@ -1438,17 +1442,18 @@
 \ifnpstraditional
   \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
 \else
-   \def\listacronymname{List of Acronyms and Abbreviations}
+  \def\listacronymname{List of Acronyms and Abbreviations}
 \fi
   \lhead{}\rhead{}
 \ifnpsarticle
   %\section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
   %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
   \begin{center}\textbf{\large{\listacronymname\ULABEL}}\end{center}
-
+  \vspace{1ex}
 \else
   \chapter*{\listacronymname\ULABEL}
   %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+  \vspace{2ex}
 \fi
   \def\listacronymname{}
   \onehalfspacing
