@@ -255,9 +255,11 @@
 % Good pages on LaTeX:
 % http://www-h.eng.cam.ac.uk/help/tpl/textprocessing/extending_latex.html
 
+
+%*************************************************************************
 % Define the pieces that go on the title page, abstract, SF298, and
 % other pages. This is liberally borrowed from MIT Thesis guide
-% 
+%*************************************************************************
 
 \def\declassifydate#1{\gdef\@declassifydate{#1}} \gdef\@declassifydate{}
 \def\classifiedby#1{\gdef\@classifiedby{#1}} \gdef\@classifiedby{}
@@ -314,13 +316,6 @@
 \def\prevdegreesfour#1{\setbox0\hbox{#1} \gdef\@prevdegreesfour{#1}} \prevdegreesfour{}
 
 
-%
-% Security Banners
-%
-
-\def\securitybanner#1{\setbox0\hbox{#1} \gdef\@securitybanner{#1}}
-\securitybanner{}               % default is no banner
-
 % \distribution
 \def\distribution#1{\setbox0\hbox{#1}
   \gdef\@distribution{#1}}    
@@ -345,14 +340,10 @@
 \def\SignatureFour#1{\setbox0\hbox{#1}
   \gdef\@SignatureFour{#1}}    
 
-
-
 % \RPTpreparedFor
 \def\RPTpreparedFor#1{\setbox0\hbox{#1}
   \gdef\@RPTpreparedFor{#1}}    
 \RPTpreparedFor{}               % default is prepared for nobody
-
-
 
 % \abstract
 \newcommand{\NPSabstract}{cough}
@@ -380,9 +371,12 @@
 % Some useful defines
 \newcommand{\tablefont}{\sffamily\fontsize{9}{10}\selectfont}
 
+
+%*************************************************************************
+% Support for authorindex, index, acronym packages
+%*************************************************************************
+
 % Support for the Authorindex
-% Authorindex
-%
 \ifnpsauthorindex
   \usepackage[small]{authorindex}
   \let\cite=\aicite
@@ -419,9 +413,12 @@
 \fi
 
 
-%
+%*************************************************************************
 % Macros for security marking
-%
+%*************************************************************************
+
+\def\securitybanner#1{\setbox0\hbox{#1} \gdef\@securitybanner{#1}}
+\securitybanner{}               % default is no banner
 
 \newcommand{\smarkthispage}{
  \thispagestyle{fancy}
@@ -452,38 +449,13 @@
   \smarkthispage
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%% Common NPS requirements
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Table of contents control
-\def\contentsname{Table of Contents}
-\setlength\cftbeforetoctitleskip{0pt}
-\setlength\cftbeforeloftitleskip{0pt}
-\setlength\cftbeforelottitleskip{0pt}
-\setlength\cftaftertoctitleskip{0pt}
-\setlength\cftafterloftitleskip{0pt}
-\setlength\cftafterlottitleskip{0pt}
-\setlength\cftparskip{2ex}
-\ifnpsarticle
-\else
-  \setlength\cftchapindent{-3pt}
-\fi
 
 
-% This magic makes the word "Figure" appear in each line of the list of figures
-\newlength\figurelen             % 
-\settowidth\figurelen{Figure}
-\addtolength\cftfignumwidth{\figurelen}
-\renewcommand\cftfigpresnum{\hspace{-1.5pc}Figure }
-
-% This magic makes the word "Table" appear in each line of the list of tables
-\newlength\tablelen             % 
-\settowidth\tablelen{Table}
-\addtolength\cfttabnumwidth{\tablelen}
-\renewcommand\cfttabpresnum{\hspace{-1.5pc}Table }
+%*************************************************************************
+%
+% Basic Document Control Commands
+%
+%*************************************************************************
 
 
 %
@@ -496,6 +468,7 @@
   \def\tablename{Table}
   \def\chaptername{CHAPTER}
   \def\appendixname{APPENDIX}
+  \def\appendicesname{APPENDICES}
   \def\partname{PART}
   \def\contentsname{\textbf{TABLE OF CONTENTS}}
   \def\listfigurename{\textbf{LIST OF FIGURES}}
@@ -507,6 +480,9 @@
   \def\indexname{\textbf{\ULABELINDEX}}
   \def\bibname{\textbf{LIST OF REFERENCES}}
 \else
+  \def\appendixname{Appendix}
+  \def\appendicesname{Appendices}
+  \def\contentsname{Table of Contents}
   \def\listacronymname{List of Acronyms and Abbreviations}
   \def\distribname{Initial Distribution List}
   \def\acknowledgementsname{Acknowledgements}
@@ -515,11 +491,10 @@
 \fi
 
 
+%
+% Section Numbering and Labels
+%
 \ifnpstraditional
-%
-% Traditional NPS
-%
-  \typeout{Using traditional NPS thesis design}
   % Traditional numbering scheme
   \def\thepart          {\arabic{part}}
   \def\thechapter       {\Roman{chapter}}
@@ -545,40 +520,57 @@
     \def\thesubsection    {\alph{subsection}}%
     \def\thesubsubsection {\roman{subsubsection}}%
   }
+\fi
 
-  \fancyhead{}                  % clear all header fields
 
-  % Make traditional figures and tables not reset and not include the figure/table tag
-  \usepackage{chngcntr}
-  \@removefromreset{figure}{chapter}
-  \@removefromreset{table}{chapter}
-  \counterwithout{figure}{chapter}
-  \counterwithout{table}{chapter}
-
-  % Create all the heads and such
-  % This is done with the titlesec package
+%
+% Title Control
+% This is done with the titlesec package
+%
+\ifnpstraditional
   \titleformat{\chapter}[display] 
-              {\normalfont\bf\Large\filcenter} % {fmt}
-              {\thechapter.\ }              % {label}
-              {1pc}                         % {sep}
-              {\vspace{-1in}\enlargethispage{-0.5in}}    % {before}
-
+              {\normalfont\bf\Large\filcenter}         % {fmt}
+              {\thechapter.\ }                         % {label}
+              {1pc}                                    % {sep}
+              {\vspace{-1in}\enlargethispage{-0.5in}}  % {before}
   \titleformat{\section}[block] 
-              {\normalfont\Large} % {fmt}
-              {\thesection.\ }    % {label}
-              {1pc}               % {sep}
+              {\normalfont\Large}    % {fmt}
+              {\thesection.\ }       % {label}
+              {1pc}                  % {sep}
               {}%
-
   \titleformat{\subsection}[block] 
-              {\normalfont} % {fmt}
+              {\normalfont}                       % {fmt}
               {\hspace{.5in}\thesubsection.\ }    % {label}
-              {1pc}               % {sep}
+              {1pc}                               % {sep}
               {}%
+\else
+  % New, avant garde Titles (courtesy of titlesec)
+  \titleformat{\chapter}[display]
+              {\vskip 0\p@ \LARGE\filcenter\sffamily\titlerule[1pt]\vspace{1pt}\titlerule}
+              {\MakeUppercase{\chaptertitlename} \thechapter:} % label (not for * chapters)
+              {-1pc}           % sep
+              {}               % before
+              [\titlerule]     % after
+  \titleformat{\section}
+              {\normalfont\Large\bfseries}
+              {\thesection}
+              {1em}
+              {}%
+  \titleformat{\subsection}
+              {\normalfont\large\bfseries}
+              {\thesubsection}
+              {1em}
+              {}%
+  \titleformat{\subsubsection}
+              {\normalfont\normalsize\bfseries}
+              {\thesubsubsection}
+              {1em}
+              {}%
+\fi
 
-  % Control the way counters are printed
-  % \renewcommand{\thefigure}{\arabic{figure}}             
-  % \newcounter{figure}
-
+% ``The starred version kills the indention of the paragraph following the title.''
+% \titlespacing%{<command>}{<left>}{<beforesep>}{<aftersep>}[<right>]
+\ifnpstraditional
   \titlespacing*{\chapter}{0pt}{15pt}{.25in}
   \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
@@ -586,31 +578,7 @@
   \titlespacing*{\paragraph}{0pt}{0pt plus 2ex}{3pt}
   \setlength{\parskip}{2ex}
   \setlength{\parindent}{0pt}
-
-  % 
-  % End Traditional NPS
-  %
 \else
-% New NPS
-  \typeout{Using new NPS thesis design}
-
-  \ifnpsarticle
-  \setcounter{tocdepth}{3}  % put sections and subsections in TOC for articles
-  \else
-  \setcounter{tocdepth}{1}  % only put chapters and sections in the TOC
-  \fi
-
-  % These were in the {document}
-  % Specify our spacings --- Turns out that we want to do this
-  % after the first section is loaded
-  % \titlespacing
-  \titleformat{\section} {\normalfont\Large\bfseries}{\thesection}{1em}{} 
-  \titleformat{\subsection} {\normalfont\large\bfseries}{\thesubsection}{1em}{} 
-  \titleformat{\subsubsection} {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{} 
-
-  % ``The starred version kills the indention of the paragraph following the title.''
-  % \titlespacing%{<command>}{<left>}{<beforesep>}{<aftersep>}[<right>]
-
   \titlespacing*{\chapter}{0pt}{-.5in}{.25in}
   \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
@@ -618,28 +586,63 @@
   \titlespacing*{\paragraph}{0pt}{0pt plus 2ex}{3pt}
   \setlength{\parskip}{2ex}
   \setlength{\parindent}{0pt}
+\fi
 
-  % Caption Control:
+
+%
+% Figure / Table Caption Control
+%
+\ifnpstraditional
+  % Make traditional figures and tables not reset and not include the figure/table tag
+  \usepackage{chngcntr}
+  \@removefromreset{figure}{chapter}
+  \@removefromreset{table}{chapter}
+  \counterwithout{figure}{chapter}
+  \counterwithout{table}{chapter}
+\else
   % Put captions is a sanserif font, smaller, and tighter
-  %
   \captionnamefont{\sffamily\fontsize{11}{12}\selectfont}
   \captiontitlefont{\sffamily\fontsize{11}{12}\selectfont}
   \setlength{\abovecaptionskip}{5pt}
   \setlength{\belowcaptionskip}{0pt}
+\fi
 
-  %
-  % New, avant garde Titles (courtesy of titlesec)
-  % 
-  \titleformat{\chapter}[display]
-              {\vskip 0\p@ \LARGE\filcenter\sffamily\titlerule[1pt]\vspace{1pt}\titlerule}
-              {\MakeUppercase{\chaptertitlename} \thechapter:}     % label (not for * chapters)
-              {-1pc}  % sep
-              {}     % before
-              [\titlerule]     % after
 
-  %
-  % table of contents
-  %
+%
+% ToC, LoF, LoT Controls
+%
+\setlength\cftbeforetoctitleskip{0pt}
+\setlength\cftbeforeloftitleskip{0pt}
+\setlength\cftbeforelottitleskip{0pt}
+\setlength\cftaftertoctitleskip{0pt}
+\setlength\cftafterloftitleskip{0pt}
+\setlength\cftafterlottitleskip{0pt}
+\setlength\cftparskip{2ex}
+\ifnpsarticle
+\else
+  \setlength\cftchapindent{-3pt}
+\fi
+
+% This magic makes the word "Figure" appear in entries of LoF
+\newlength\figurelen             % 
+\settowidth\figurelen{Figure}
+\addtolength\cftfignumwidth{\figurelen}
+\renewcommand\cftfigpresnum{\hspace{-1.5pc}Figure }
+
+% This magic makes the word "Table" appear in entries of LoT
+\newlength\tablelen             % 
+\settowidth\tablelen{Table}
+\addtolength\cfttabnumwidth{\tablelen}
+\renewcommand\cfttabpresnum{\hspace{-1.5pc}Table }
+
+\ifnpstraditional
+\else
+  \ifnpsarticle
+  \setcounter{tocdepth}{3}  % put sections and subsections in TOC for articles
+  \else
+  \setcounter{tocdepth}{1}  % only put chapters and sections in the TOC
+  \fi
+
   \def\SECTIONBOLDFACE{}
   \def\ARTICLESPACE{-1.8ex}
   \contentsmargin{2.55em}
@@ -690,10 +693,16 @@
   \fi
 \fi
 
+\ifnpstight
+  \parskip 3pt
+  \parindent 1pc
+\fi
 
-%
-% NPSend
-%
+
+%*************************************************************************
+% Endmatter and Appendices
+%*************************************************************************
+
 \newcommand{\NPSend}{
 \ifnpsauthorindex
   \chapter*{Referenced Authors}
@@ -707,17 +716,16 @@
 \fi
 }
 
-
 % Use this to change to appendix mode and insert ``Appendix'' into the Table of Contents
 % The appendix needs to also call \chapter{title} after this command and it will have another TOC entry.
 \newcommand{\NPSappendix}{
   \appendix                       % Appendix mode
   \clearpage
 \ifnpsarticle
-  \addcontentsline{toc}{section}{Appendix}  % Insert ``Appendix'' into TOC
+  \addcontentsline{toc}{section}{\appendixname}  % Insert ``Appendix'' into TOC
 \else
-  \addcontentsline{toc}{chapter}{Appendix}  % Insert ``Appendix'' into TOC
-  \def\chaptername{Appendix}  % not sure why this is needed, but it is
+  \addcontentsline{toc}{chapter}{\appendixname}  % Insert ``Appendix'' into TOC
+  \def\chaptername{\appendixname}  % not sure why this is needed, but it is
 \fi
 }
 
@@ -729,11 +737,11 @@
   \clearpage
 \ifnpsarticle
   \section*{APPENDIX:~#1}
-  \addcontentsline{toc}{section}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
+  \addcontentsline{toc}{section}{\appendixname:~#1}  % Insert ``Appendix: Title'' into TOC
 \else
-  \def\chaptername{Appendix}  % not sure why this is needed, but it is
+  \def\chaptername{\appendixname}  % not sure why this is needed, but it is
   \chapter*{APPENDIX:~#1}
-  \addcontentsline{toc}{chapter}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
+  \addcontentsline{toc}{chapter}{\appendixname:~#1}  % Insert ``Appendix: Title'' into TOC
 \fi
 }
 
@@ -744,12 +752,17 @@
   \appendix                       % Appendix mode
   \clearpage
 \ifnpsarticle
-  \cftaddtitleline{toc}{section}{Appendices}{} % Insert ``Appendices'' into TOC
+  \cftaddtitleline{toc}{section}{\appendicesname}{} % Insert ``Appendices'' into TOC
 \else
-  \cftaddtitleline{toc}{chapter}{Appendices}{} % Insert ``Appendices'' into TOC
-  \def\chaptername{Appendix}  % not sure why this is needed, but it is
+  \cftaddtitleline{toc}{chapter}{\appendicesname}{} % Insert ``Appendices'' into TOC
+  \def\chaptername{\appendixname}  % not sure why this is needed, but it is
 \fi
 }
+
+
+%*************************************************************************
+% Macros for Blank Pages
+%*************************************************************************
 
 \newcommand{\thisPageIntentionallyLeftBlankForced}{
     \ifclassified               % leave classified headers and footers alone
@@ -777,30 +790,25 @@
  \thispagestyle{fancy}
  \thisPageIntentionallyLeftBlank
  \if@twocolumn\hbox{}\newpage\fi\fi\fi
-} 
+}
+
 \def\cleardoublepageEmpty{\clearpage\if@twoside \ifodd\c@page\else 
  \thispagestyle{blankmarked}
  \thisPageIntentionallyLeftBlank
  \if@twocolumn\hbox{}\newpage\fi\fi\fi
 } 
 
-\ifnpstight
-  \parskip 3pt
-  \parindent 1pc
-\fi
 
-
-
-%============================================
-% Now let's make the cover page
-%  HERE IS WHERE WE DRAW THE COVER PAGE
-%============================================
+%*************************************************************************
+% Cover Page
+%*************************************************************************
 
 \def\NPScover{
 %% These commands are the first commands that run when printing
 %% starts, because the \NPScover command appears first
-
-
+\ifnpstraditional
+  \fancyhead{}                  % clear all header fields
+\fi
   %%
   %% 'fancy' and 'plain' - classified marking, page numbers
   %% used: everywhere
@@ -951,6 +959,11 @@
   \cleardoublepageEmpty
 }
 
+
+%*************************************************************************
+% SF298
+%*************************************************************************
+
 \def\NPSsftne{
   % Fill in items for the SF298
   \pagenumbering{roman}        % because they are weird
@@ -976,6 +989,11 @@
   \thispagestyle{plain}
   \cleardoublepage
 }
+
+
+%*************************************************************************
+% Thesis Title Page
+%*************************************************************************
 
 % Definitions for the dissertation signature page identifications
 \newcommand{\NPSsigfont}{\normalsize}
@@ -1012,7 +1030,6 @@
 \def\memberFourTitleLine#1{\gdef\@memberFourTitleLine{#1}}
 \def\memberFiveTitleLine#1{\gdef\@memberFiveTitleLine{#1}}
 \def\memberSixTitleLine#1{\gdef\@memberSixTitleLine{#1}}
-
 
 \def\NPSthesistitle{
   % this page is always (iii), so force skip (used in non-twoside mode)
@@ -1218,33 +1235,6 @@
   \singlespacing
 }
 
-\newcommand{\NPSexecsummary}[1]{%
-\ifnpsarticle
-  \begin{center}\textbf{\large{\ULABEL\execsummaryname}}\end{center}
-\else
-  \chapter*{\ULABEL\execsummaryname}
-  %\addcontentsline{toc}{chapter}{\execsummaryname}
-\fi
-  \def\execsummaryname{}
-  \onehalfspacing
-  #1
-  \cleardoublepage
-}
-
-
-\newcommand{\NPSacknowledgements}[1]{
-\ifnpsarticle
-  \begin{center}\textbf{\large{\ULABEL\acknowledgementsname}}\end{center}
-\else
-  \chapter*{\ULABEL\acknowledgementsname}
-  %\addcontentsline{toc}{chapter}{\ULABEL\acknowledgementsname}
-\fi
-  \def\acknowledgementsname{}
-  \onehalfspacing
-  #1
-  \cleardoublepage
-}
-
 \newcommand{\NPSsignature}{
   % this page is always (iii), so force skip (used in non-twoside mode)
   \ifnum \c@page < 3 \thisPageIntentionallyLeftBlankForced \fi
@@ -1322,6 +1312,37 @@
   \fi
 }
 
+
+%*************************************************************************
+% Commands for Special Sections
+%*************************************************************************
+
+\newcommand{\NPSexecsummary}[1]{%
+\ifnpsarticle
+  \begin{center}\textbf{\large{\ULABEL\execsummaryname}}\end{center}
+\else
+  \chapter*{\ULABEL\execsummaryname}
+  %\addcontentsline{toc}{chapter}{\execsummaryname}
+\fi
+  \def\execsummaryname{}
+  \onehalfspacing
+  #1
+  \cleardoublepage
+}
+
+\newcommand{\NPSacknowledgements}[1]{
+\ifnpsarticle
+  \begin{center}\textbf{\large{\ULABEL\acknowledgementsname}}\end{center}
+\else
+  \chapter*{\ULABEL\acknowledgementsname}
+  %\addcontentsline{toc}{chapter}{\acknowledgementsname}
+\fi
+  \def\acknowledgementsname{}
+  \onehalfspacing
+  #1
+  \cleardoublepage
+}
+
 \newcommand{\NPSbibliography}[1]{
 \ifnpsarticle
   \clearpage
@@ -1358,7 +1379,13 @@
 
 \newcommand{\NPSdistributionlist}{
 \ifnpsarticle
-  \section*{\ULABEL\distribname}
+  \clearpage
+\else
+  \cleardoublepage
+\fi
+\ifnpsarticle
+  %\section*{\ULABEL\distribname}
+  \begin{center}\textbf{\large{\ULABEL\distribname}}\end{center}
   \addcontentsline{toc}{section}{\distribname}
 \else
   \chapter*{\ULABEL\distribname}
@@ -1370,9 +1397,6 @@
     {\end{enumerate}}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Special Commands Sections
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\NPStableOfContents}{
 \ifnpsarticle
   %\section*{\ULABEL\contentsname}
@@ -1451,9 +1475,11 @@
 }
 
 
-%
+
+%*************************************************************************
 % Simson Garfinkel's layout routines
 % From this PhD Thesis
+%*************************************************************************
 
 \newcommand{\minipagegraphic}[2]{
   \begin{minipage}{#1\textwidth}
