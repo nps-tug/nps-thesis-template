@@ -485,6 +485,36 @@
 \addtolength\cfttabnumwidth{\tablelen}
 \renewcommand\cfttabpresnum{\hspace{-1.5pc}Table }
 
+
+%
+% Section names
+%
+\ifnpstraditional
+  % Traditionally lots of things need to be in uppercase and bold
+  \def\abstractname{ABSTRACT}
+  \def\figurename{Figure}
+  \def\tablename{Table}
+  \def\chaptername{CHAPTER}
+  \def\appendixname{APPENDIX}
+  \def\partname{PART}
+  \def\contentsname{\textbf{TABLE OF CONTENTS}}
+  \def\listfigurename{\textbf{LIST OF FIGURES}}
+  \def\listtablename{\textbf{LIST OF TABLES}}
+  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
+  \def\distribname{\textbf{INITIAL DISTRIBUTION LIST}}
+  \def\acknowledgementsname{\textbf{ACKNOWLEDGEMENTS}}
+  \def\execsummaryname{\textbf{EXECUTIVE SUMMARY}}
+  \def\indexname{\textbf{\ULABELINDEX}}
+  \def\bibname{\textbf{LIST OF REFERENCES}}
+\else
+  \def\listacronymname{List of Acronyms and Abbreviations}
+  \def\distribname{Initial Distribution List}
+  \def\acknowledgementsname{Acknowledgements}
+ \def\execsummaryname{Executive Summary}
+  \def\bibname{References}
+\fi
+
+
 \ifnpstraditional
 %
 % Traditional NPS
@@ -515,21 +545,6 @@
     \def\thesubsection    {\alph{subsection}}%
     \def\thesubsubsection {\roman{subsubsection}}%
   }
-
-  % Traditionally lots of things need to be in uppercase and boldL
-  \def\contentsname{\textbf{TABLE OF CONTENTS}}
-  \def\listfigurename{\textbf{LIST OF FIGURES}}
-  \def\listtablename{\textbf{LIST OF TABLES}}
-  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
-  \def\bibname{\textbf{LIST OF REFERENCES}}
-  \def\indexname{\textbf{INDEX\ULABEL}}
-  \def\abstractname{ABSTRACT}
-  \def\figurename{Figure}
-  \def\tablename{Table}
-  \def\chaptername{CHAPTER}
-  \def\appendixname{APPENDIX}
-  \def\partname{PART}
-  \def\distribname{\ULABEL INITIAL DISTRIBUTION LIST}
 
   \fancyhead{}                  % clear all header fields
 
@@ -673,9 +688,6 @@
             {\hspace*{-2.3em}}                        % before without label
             {\titlerule*[1pc]{.}\contentspage}        % filler and page
   \fi
-
-  % Sections will still be capped, but not in bold
-  \def\bibname{List of References}
 \fi
 
 
@@ -1207,16 +1219,11 @@
 }
 
 \newcommand{\NPSexecsummary}[1]{%
-\ifnpstraditional
- \def\execsummaryname{\textbf{EXECUTIVE SUMMARY}}
-\else
- \def\execsummaryname{Executive Summary}
-\fi
 \ifnpsarticle
-  \begin{center}\textbf{\large{\execsummaryname\ULABEL}}\end{center}
+  \begin{center}\textbf{\large{\ULABEL\execsummaryname}}\end{center}
 \else
-  \chapter*{\execsummaryname\ULABEL}
-  %\addcontentsline{toc}{chapter}{Executive Summary}
+  \chapter*{\ULABEL\execsummaryname}
+  %\addcontentsline{toc}{chapter}{\execsummaryname}
 \fi
   \def\execsummaryname{}
   \onehalfspacing
@@ -1226,16 +1233,11 @@
 
 
 \newcommand{\NPSacknowledgements}[1]{
-\ifnpstraditional
-  \def\acknowledgementsname{\textbf{ACKNOWLEDGEMENTS}}
-\else
-  \def\acknowledgementsname{Acknowledgements}
-\fi
 \ifnpsarticle
-  \begin{center}\textbf{\large{\acknowledgementsname\ULABEL}}\end{center}
+  \begin{center}\textbf{\large{\ULABEL\acknowledgementsname}}\end{center}
 \else
-  \chapter*{\acknowledgementsname\ULABEL}
-  %\addcontentsline{toc}{chapter}{Acknowledgements}
+  \chapter*{\ULABEL\acknowledgementsname}
+  %\addcontentsline{toc}{chapter}{\ULABEL\acknowledgementsname}
 \fi
   \def\acknowledgementsname{}
   \onehalfspacing
@@ -1313,7 +1315,7 @@
   \ifNPSabstractWasPrinted
     % do not print the abstract
   \else
-    \begin{center}\textbf{\ULABEL \abstractname}\end{center}
+    \begin{center}\textbf{\ULABEL\abstractname}\end{center}
     \begin{quotation}
     \@abstract
     \end{quotation}
@@ -1330,9 +1332,9 @@
   \raggedright      % don't automatically full justify bibliographic references
   \singlespacing    % reduce extra line breaks between entries
 \ifnpsarticle
-  \addcontentsline{toc}{section}{\ULABEL References}
+  \addcontentsline{toc}{section}{\ULABEL\bibname}
 \else
-  \addcontentsline{toc}{chapter}{\ULABEL References}
+  \addcontentsline{toc}{chapter}{\ULABEL\bibname}
 \fi
   \bibliography{#1}
   \doublespacing
@@ -1355,17 +1357,12 @@
 }
 
 \newcommand{\NPSdistributionlist}{
-\ifnpstraditional
-\def\distrolistname{\textbf{INITIAL DISTRIBUTION LIST}}
-\else
-  \def\distrolistname{Initial Distribution List}
-\fi
 \ifnpsarticle
-  \section*{\distrolistname\ULABEL}
-  \addcontentsline{toc}{section}{Initial Distribution List}
+  \section*{\ULABEL\distribname}
+  \addcontentsline{toc}{section}{\distribname}
 \else
-  \chapter*{\distrolistname\ULABEL}
-  \addcontentsline{toc}{chapter}{Initial Distribution List}
+  \chapter*{\ULABEL\distribname}
+  \addcontentsline{toc}{chapter}{\distribname}
 \fi
   \singlespacing    % reduce extra line breaks between entries
   \newenvironment{distributionlist}
@@ -1378,10 +1375,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\NPStableOfContents}{
 \ifnpsarticle
-  %\section*{\ULABEL \contentsname}
-  \begin{center}\textbf{\large{\ULABEL \contentsname}}\end{center}
+  %\section*{\ULABEL\contentsname}
+  \begin{center}\textbf{\large{\ULABEL\contentsname}}\end{center}
 \else
-  \chapter*{\ULABEL \contentsname}
+  \chapter*{\ULABEL\contentsname}
 \fi
   \lhead{}\rhead{}
   \def\contentsname{}           % clear, because it will be in the header
@@ -1392,12 +1389,12 @@
 \newcommand{\NPSlistOfFigures}{
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{\ULABEL \listfigurename}
-  %\addcontentsline{toc}{section}{List of Figures}
-  \begin{center}\textbf{\large{\ULABEL \listfigurename}}\end{center}
+  %\section*{\ULABEL\listfigurename}
+  %\addcontentsline{toc}{section}{\listfigurename}
+  \begin{center}\textbf{\large{\ULABEL\listfigurename}}\end{center}
 \else
-  \chapter*{\ULABEL \listfigurename}
-  %\addcontentsline{toc}{chapter}{List of Figures}
+  \chapter*{\ULABEL\listfigurename}
+  %\addcontentsline{toc}{chapter}{\listfigurename}
 \fi
   \def\listfigurename{}
   \listoffigures
@@ -1407,12 +1404,12 @@
 \newcommand{\NPSlistOfTables}{
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{\ULABEL \listtablename}
-  %\addcontentsline{toc}{section}{List of Tables}
-  \begin{center}\textbf{\large{\ULABEL \listtablename}}\end{center}
+  %\section*{\ULABEL\listtablename}
+  %\addcontentsline{toc}{section}{\listtablename}
+  \begin{center}\textbf{\large{\ULABEL\listtablename}}\end{center}
 \else
-  \chapter*{\ULABEL \listtablename}
-  %\addcontentsline{toc}{chapter}{List of Tables}
+  \chapter*{\ULABEL\listtablename}
+  %\addcontentsline{toc}{chapter}{\listtablename}
 \fi
   \def\listtablename{}
   \listoftables
@@ -1420,19 +1417,14 @@
 }
 
 \newcommand{\NPSlistOfAcronyms}[1]{
-\ifnpstraditional
-  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
-\else
-   \def\listacronymname{List of Acronyms and Abbreviations}
-\fi
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{\ULABEL List of Acronyms and Abbreviations}\vspace{1pc}
-  %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
-  \begin{center}\textbf{\large{\listacronymname\ULABEL}}\end{center}
+  %\section*{\ULABEL\listacronymname}\vspace{1pc}
+  %\addcontentsline{toc}{section}{\listacronymname}
+  \begin{center}\textbf{\large{\ULABEL\listacronymname}}\end{center}
 \else
-  \chapter*{\listacronymname\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+  \chapter*{\ULABEL\listacronymname}
+  %\addcontentsline{toc}{chapter}{\listacronymname}
 \fi
   \def\listacronymname{}
   \onehalfspacing
@@ -1441,20 +1433,15 @@
 }
 
 \newcommand{\NPSlistOfAcronymsFromFile}[1]{
-\ifnpstraditional
-  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
-\else
-  \def\listacronymname{List of Acronyms and Abbreviations}
-\fi
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
-  %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
-  \begin{center}\textbf{\large{\listacronymname\ULABEL}}\end{center}
+  %\section*{\ULABEL\listacronymname}\vspace{1pc}
+  %\addcontentsline{toc}{section}{\listacronymname}
+  \begin{center}\textbf{\large{\ULABEL\listacronymname}}\end{center}
   \vspace{1ex}
 \else
-  \chapter*{\listacronymname\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+  \chapter*{\ULABEL\listacronymname}
+  %\addcontentsline{toc}{chapter}{\listacronymname}
   \vspace{2ex}
 \fi
   \def\listacronymname{}
@@ -1462,12 +1449,6 @@
   \input{#1}
   \cleardoublepage
 }
-
-\ifnpstraditional
-  \def\bibname{\textbf{REFERENCES\ULABEL}}
-\else
-  \def\bibname{References\ULABEL}
-\fi
 
 
 %
