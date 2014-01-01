@@ -315,10 +315,14 @@
 \def\rankfour#1{\setbox0\hbox{#1} \gdef\@rankfour{#1}} \rankfour{}
 \def\prevdegreesfour#1{\setbox0\hbox{#1} \gdef\@prevdegreesfour{#1}} \prevdegreesfour{}
 
-
 % \distribution
 \def\distribution#1{\setbox0\hbox{#1}
   \gdef\@distribution{#1}}    
+
+% \DistributionClause
+\def\DistributionClause#1{\setbox0\hbox{#1}
+  \gdef\@DistributionClause{#1}}
+\DistributionClause{Further distribution of all or part of this report is authorized.}
 
 % \SponsoringNotation
 \def\SponsoringNotation#1{\setbox0\hbox{#1}
@@ -1254,7 +1258,7 @@
   }{}
 
   \vspace{\medskipamount}
-  {\bf \@distribution}
+  {\bf \@DistributionClause}
   \vfill
 
   \newcommand{\sigspace}{1.5pc}
@@ -1275,6 +1279,7 @@
   \@rankthree        \> \iffourauthors \@rankfour \fi \\[\sigspace]
   \fi
 
+  \\[\sigspace]
   {\bf Reviewed by:} \> {\bf Released by:} \\[\sigspace]
   \\ \vspace{1.5\bigskipamount}
   \rule{2.5in}{1pt}  \> \rule{2.5in}{1pt} \\
