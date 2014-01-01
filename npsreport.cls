@@ -145,8 +145,8 @@
 \usepackage[letterpaper]{geometry} % use 'showframe' for debugging
 \newgeometry{includeheadfoot,            % headers and footers aren't in margins
              right=1.25in,left=1.25in,   % right/left margins
-             top=1in,bottom=1.25in,      % top/bottom margins
-             footskip=.25in,             % pg nums in footer need breathing room
+             top=1in,bottom=1in,         % top/bottom margins
+             footskip=.5in,              % pg nums in footer need breathing room
              marginparwidth=0pt,         % no marginal paragraphs
              marginparsep=0pt,           % no marginal paragraphs
              head=30pt,headsep=0pt,hoffset=0pt}
