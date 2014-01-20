@@ -18,31 +18,27 @@ Status
 For each release, the reports under `examples/` will be tested and then vetted 
 through the thesis processing office. The following options are supported:
 
-* dissertations, with the following options:
+* theses for dual degrees (two degrees, two departments, two chairs)
+* FOUO marking for theses and dissertations
+* theses and disserations, with the following options:
 
-|  Author | Advisor | Reader |
-|:-------:|:-------:|:------:|
-| 1       | 5       | -      |
-| 1       | 6       | -      |
-
-
-* theses, with the following options:
-
-|  Author | Advisor | Reader |
-|:-------:|:-------:|:------:|
-| 1       | 1       | 1      |
-| 1       | 2       | -      |
-| 1       | 2       | 1      |
-| 2       | 1       | 1      |
-| 2       | 2       | -      |
-| 2       | 2       | 1      |
+|  Author | Advisor | Reader | Type   |
+|:-------:|:-------:|:------:|:------:|
+| 1       | 1       | 1      | thesis |
+| 1       | 2       | -      | thesis |
+| 1       | 2       | 1      | thesis |
+| 2       | 1       | 1      | thesis |
+| 2       | 2       | -      | thesis |
+| 2       | 2       | 1      | thesis |
+| 1       | 5       | -      | dissertation |
+| 1       | 6       | -      | dissertation |
 
 
 ### Experimental 
 These were thought to work properly earlier, but not recently tested / vetted:
 
-* FOUO theses
-* Classified theses
+* Classified marking for theses and disserations
+* Traditional layout (looks more like the Word template)
 
 
 Development

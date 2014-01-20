@@ -262,13 +262,14 @@
 %*************************************************************************
 
 \def\declassifydate#1{\gdef\@declassifydate{#1}} \gdef\@declassifydate{}
-\def\classifiedby#1{\gdef\@classifiedby{#1}} \gdef\@classifiedby{}
+\def\classifiedby#1{\gdef\@classifiedby{#1}}     \gdef\@classifiedby{}
 \def\classifiedfrom#1{\gdef\@classifiedfrom{#1}} \gdef\@classifiedfrom{Multiple Sources}
 \def\degreedate#1{\date{#1}}
-\def\prevdegrees#1{\gdef\@prevdegrees{#1}}
-\def\@prevdegrees{}
+\def\prevdegrees#1{\gdef\@prevdegrees{#1}}       \def\@prevdegrees{}
 \def\department#1{\gdef\@department{#1}}
+\def\departmenttwo#1{\gdef\@departmenttwo{#1}}   \gdef\@departmenttwo{}
 \def\departmentchair#1{\gdef\@departmentchair{#1}}
+\def\departmentchairtwo#1{\gdef\@departmentchairtwo{#1}} \gdef\@departmentchairtwo{}
 \def\researchchair#1{\gdef\@researchchair{#1}}
 \def\president#1{\gdef\@president{#1}}
 \def\provost#1{\gdef\@provost{#1}}
@@ -280,15 +281,14 @@
 \president{Ronald A. Route}
 \provost{Douglas A. Hensler}
 
-% If you are getting two degrees, use \and between the names.
-\def\degree#1{\setbox0\hbox{#1}  %for side effect of setting \@degreeword
-  \gdef\@degree{#1}}
+% Single degree or dual degree options
+\def\degree#1{\gdef\@degree{#1}}
+\gdef\@degree{}
+\gdef\@degreeword{degree}
+\def\degreetwo#1{\gdef\@degreetwo{#1}\gdef\@degreeword{degrees}}
+\gdef\@degreetwo{}
 
-% \and is used inside the \degree argument to separate two degrees
-\def\and{\gdef\@degreeword{degrees} \par and \par}
-\def\@degreeword{degree}
-
-% Degree appreviation
+% Degree abbreviation
 \def\degreeabbreviation#1{\setbox0\hbox{#1}\gdef\@degreeabbreviation{#1}}
 
 % \rank
@@ -1056,9 +1056,14 @@
     \fi
     \vspace{\bigskipamount}\vfill
     Submitted in partial fulfillment of the\\
-    requirements for the degree of\\
+    requirements for the \@degreeword\ of\\
     \vspace{\bigskipamount}\vfill
     \textbf{\MakeUppercase{\@degree}}\\
+      \ifthenelse{\equal{\@degreetwo}{}}{}{%
+            \vspace{\smallskipamount}
+            and \\ \vspace{\smallskipamount}
+            \textbf{\MakeUppercase{\@degreetwo}}\\
+      }
     \vspace{\medskipamount}
     from the\\
     \vspace{1.5\medskipamount}
@@ -1154,7 +1159,13 @@
                      \> Thesis Co-Advisor \\[\sigspace]
 
                      \> \@departmentchair \\
-                     \>  Chair, \@department \\
+                     \>  Chair, \@department
+
+                  \ifthenelse{\equal{\@departmenttwo}{}}{\\}{ %
+                     \\[\sigspace]
+                     \> \@departmentchairtwo \\
+                     \> Chair, \@departmenttwo \\
+                  }
       \end{tabbing}
     \else
     %% co-advisors + reader
@@ -1182,7 +1193,13 @@
                      \> Second Reader \\[\sigspace]
 
                      \> \@departmentchair \\
-                     \>  Chair, \@department \\
+                     \>  Chair, \@department
+
+                  \ifthenelse{\equal{\@departmenttwo}{}}{\\}{ %
+                     \\[\sigspace]
+                     \> \@departmentchairtwo \\
+                     \> Chair, \@departmenttwo \\
+                  }
       \end{tabbing}
     %% advisor + reader
     \else
@@ -1206,7 +1223,13 @@
                      \> Second Reader \\[\sigspace]
 
                      \> \@departmentchair \\
-                     \>  Chair, \@department \\
+                     \>  Chair, \@department
+
+                  \ifthenelse{\equal{\@departmenttwo}{}}{\\}{ %
+                     \\[\sigspace]
+                     \> \@departmentchairtwo \\
+                     \> Chair, \@departmenttwo \\
+                  }
       \end{tabbing}
     \fi
     \fi
