@@ -1367,7 +1367,7 @@ FUNCTION {format.date.electronic}
     { swap$ 
         { pop$ }
         { "there's a month but no year in " cite$ * warning$
-        pop$ ")" * "(" swap$ *
+        pop$ ")." * "(" swap$ *
         this.to.prev.status
         punct.no 'this.status.punct :=
         space.normal 'this.status.space :=
@@ -1377,8 +1377,8 @@ FUNCTION {format.date.electronic}
       if$
     }
     { swap$ 
-        { swap$ pop$ ")" * "(" swap$ * }
-        { "(" swap$ * ", " * swap$ * ")" * }
+        { swap$ pop$ ")." * "(" swap$ * }
+        { "(" swap$ * ", " * swap$ * ")." * }
       if$
     this.to.prev.status
     punct.no 'this.status.punct :=
