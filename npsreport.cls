@@ -875,11 +875,11 @@
   \fi  
 
   % Print the box on the front page
-  % 2013-05-14: Changed box rule thickness to 1pt
   \setlength{\fboxrule}{1pt}
 
   \framebox[4.5in][c]{
     \begin{minipage}{4.45in}
+      \vspace{3pt}
       \centering
         \textbf{\MakeUppercase{\@title}}\\
         \vspace{1pc}
@@ -899,7 +899,7 @@
         \@date\\
         \vspace{1pc}
         \ifnpsthesis
-          \begin{tabularx}{4.45in}{lXl}
+          \begin{tabularx}{4.45in}{lXr}
             \ifnpsdissertation
                 Dissertation Supervisor: & & \@thesisadvisor \\
             \else
@@ -907,14 +907,14 @@
                     Thesis Co-Advisors: & \hspace{1in} & \@thesisadvisorone \\
                                         & \hspace{1in} & \@thesisadvisortwo \\
                 \else
-                        \iftwoadvisorsreader
-                        Thesis Co-Advisors: & \hspace{1in} & \@thesisadvisorone \\
-                                            & \hspace{1in} & \@thesisadvisortwo \\
-                        Second Reader: &  \hspace{1in} & \@secondreader  \\
-                        \else
-                        Thesis Advisor: & \hspace{1in} & \@thesisadvisor \\
-                        Second Reader: &  \hspace{1in} & \@secondreader  \\
-                        \fi
+                  \iftwoadvisorsreader
+                    Thesis Co-Advisors: & \hspace{1in} & \@thesisadvisorone \\
+                                        & \hspace{1in} & \@thesisadvisortwo \\
+                    Second Reader:      & \hspace{1in} & \@secondreader  \\
+                  \else
+                    Thesis Advisor:     & \hspace{1in} & \@thesisadvisor \\
+                    Second Reader:      & \hspace{1in} & \@secondreader  \\
+                  \fi
                 \fi
             \fi
           \end{tabularx}
