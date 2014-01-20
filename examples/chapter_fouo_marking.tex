@@ -24,9 +24,9 @@ marking, \ie \verb|(FOR OFFICIAL USE ONLY)|.
 
 \textbf{Note:} We cannot handle:
 \begin{itemize}
-\item A thesis with FOUO titles in Chapters, Sections, Subsections.
-\item A thesis with FOUO captions in Tables or Figures.
-\item A thesis with FOUO content in the References section.
+\item FOUO titles in Chapters, Sections, Subsections;
+\item FOUO captions in Tables or Figures;
+\item FOUO content in the References section.
 \end{itemize}
 These have auto-generated portions (ToC, LoF, LoT, Bibliography),
 and the macros are not ``smart'' enough to detect which of the
@@ -35,7 +35,7 @@ appropriately. If needed, the author will need to mark the lower
 pages of the report manually in these cases.
 
 \newpage
-\section{A Section with restricted content}
+\section{A Section with Restricted Content}
 
 \begin{smark}[(FEUO)]
 This paragraph is unclassified and has a FEUO restriction.
@@ -64,14 +64,21 @@ This is a new paragraph and is not marked.
 \lipsum[1-4]
 
 \begin{figure}
-\begin{smarkenv}{(FOR ENTERTAINMENT USE ONLY)}
+\begin{smarkenv}{(FEUO)}
 \framebox[\textwidth]{\parbox{\textwidth}{\lipsum[1]}}
 \end{smarkenv}
-\caption{[Figure with unrestriced caption, FEUO content]}
+\caption{[Figure with unrestriced caption, FEUO content]}\label{fig:mark}
 \end{figure}
 
-Because floats (figures, tables) may ``drift'' to a second
+Two special notes on marking floats (figures and tables):
+\begin{enumerate}
+\item When the float content is restricted, the marking abbreviation is
+used (see Figure~\ref{fig:mark}); this is an exception
+to the rules for marking classified figures or tables, where the
+marking is spelled out;
+\item Because floats may ``drift'' to a second
 page, the marking macros may sometimes mark the bottom portions
 of pages, even if they don't contain marked content. This can
 be corrected by adjusting the placement of the float, in most
 cases.
+\end{enumerate}
