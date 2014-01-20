@@ -259,7 +259,7 @@ FUNCTION {bbl.revision}{ "Rev." }
 FUNCTION {bbl.series}{ "ser." }
 FUNCTION {bbl.standard}{ "Std." }
 FUNCTION {bbl.techrep}{ "Tech. Rep." }
-FUNCTION {bbl.mthesis}{ "Master's thesis" }
+FUNCTION {bbl.mthesis}{ "master's thesis" }
 FUNCTION {bbl.phdthesis}{ "Ph.D. dissertation" }
 FUNCTION {bbl.st}{ "st" }
 FUNCTION {bbl.nd}{ "nd" }
