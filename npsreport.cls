@@ -194,7 +194,6 @@
 \usepackage{varioref}           % provides \vref - smart referencing
 \usepackage{xspace}             % provides \xspace
 \usepackage{xifthen}            % if-then-else macro for empty fields
-\usepackage[old298]{nps_sf298}  % Bring in SF298 for the documentation page
 \usepackage{latexsym}           % gives \Box
 \usepackage{graphicx}           % it's better
 \usepackage{multirow}           % for table cells with multiple row
@@ -206,6 +205,12 @@
 \usepackage{enumitem}           % No extra space before lists
 \usepackage{afterpage}          % to implement \smark marking macro
 \setlist{nolistsep}
+
+\ifnpsthesis
+\usepackage[old298]{nps_sf298}  % Bring in SF298 for the documentation page
+\else
+\usepackage{nps_sf298}          % Use newer SF298 for tech reports
+\fi
 
 \usepackage{float}              % reimplementation of float package
 \usepackage{cite}               % for [5-8] reference style
