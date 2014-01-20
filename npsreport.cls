@@ -446,9 +446,9 @@
   \smarkthispage
   \begin{minipage}{#1}
   \renewcommand{\smarkfigtemp}{#2}
-  \begin{center} \smarkfigtemp \end{center}\vspace{-1em}
-}
-{ \vspace{-1em}\begin{center} \smarkfigtemp \end{center}
+  {\par\noindent\nopagebreak\centering \smarkfigtemp \\ \vspace{6pt} }
+}{
+  \vspace{3pt} \par\noindent\nopagebreak\centering \smarkfigtemp
   \end{minipage}
   \smarkthispage
 }
