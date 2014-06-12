@@ -118,7 +118,7 @@
 \POReportNumber{}
 \Acronyms{}
 \SMReportNumber{}
-\SubjectTerms{}
+\SubjectTerms{[list of comma separated terms]}
 \ResponsiblePerson{}
 \RPTelephone{}
 \SignatureOne{}
@@ -135,25 +135,18 @@
 \@removefromreset{footnote}{chapter}
 \makeatother
 
-\usepackage[pdftex,
-  pdftitle={\@title}, 
-  pdfauthor={\@author},
-  pdfkeywords={\@SubjectTerms},
-  pdfpagemode=UseOutlines,
-  bookmarks,
-  bookmarksopen=false,
-  colorlinks,
-  citecolor=black,
-  filecolor=black,
-  linkcolor=black,
-  urlcolor=black,
-  urlbordercolor=white,
-  linkbordercolor=white,
-  citebordercolor=white,
-  filebordercolor=white,
-  menubordercolor=white,
-  runbordercolor=white]{hyperref}	% understand PDF refs; must be last
- \usepackage[all]{hypcap}
+% This code adds the hyperref package and uses the SF-298 form
+% subject terms (defined above) to populate the PDF metadata.
+% References and citations in your document will have clickable 
+% links as well.
+\makeatletter
+\usepackage[pdftex,               % use PDFTeX backend
+   pdfusetitle,                    % PDF metadata
+   pdfkeywords={\sf@SubjectTerms},          % ...
+   hidelinks                       % No colored links or borders
+]{hyperref}
+\usepackage[all]{hypcap}
+\makeatother
 
 %
 % Your thesis begins here
