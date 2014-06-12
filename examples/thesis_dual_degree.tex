@@ -1,7 +1,7 @@
 % This starts the document; the "npsreport" style is really a modified
 % report style. Feel free to use the options explained in the technical
 % report NPS-CS-11-011, included under the doc/ directory.
-\documentclass[singlespace]{npsreport}
+\documentclass[twoside,thesis]{npsreport}
 
 %
 % Put extra packages you may need to customize your thesis
@@ -40,27 +40,23 @@
 \author{[Author Name]}
 \rank{[Rank, Service]}    %\rank{Civilian} % if you don't have a rank
 \degree{Master of Science in [Degree]}
+\degreetwo{Master of Science in [Degree Two]}
 \degreeabbreviation{MS}   % Should be MS, MBA or MA
 \prevdegrees{[B.S., My Old School, Year]} % previous degree
 
 % Department info
-\department{Department of [Department]}
-%\thesisadvisor{[Primary Advisor]}
-%\secondreader{[Second Reader]}
+\department{Department of Dept-One}
+\departmenttwo{Department of Dept-Two}
+\thesisadvisor{[Primary Advisor]}
+\secondreader{[Second Reader]}
 \departmentchair{[Department Chair]}
+\departmentchairtwo{[Department Chair Two]}
 
 % The date you are graduating:
 \degreedate{[Month Year]}
 
 % See Thesis processor's release form for approved distribution statements.
 \distribution{Approved for public release; distribution is unlimited}
-
-% For Technical Report Signature Page:
-\SponsoringNotation{[prepared for Agency X and funded by Agency Y.]}
-\DistributionClause{Further distribution of all or part of this report is authorized.}
-% If the distribution statement is restricted (distribution codes B-F) use:
-% \DistributionClause{Further distribution of all or part of this report is subject to the Distribution Statement appearing on the front cover.}
-
 
 % Your abstract.  New paragraphs start after an empty line.
 \abstract{%
@@ -73,9 +69,9 @@
 %
 % Mandatory fields for the SF298.
 %
-\ReportType{Technical Report}
+\ReportType{Master's Thesis}
 \ReportDate{MM-DD-YYYY}         % for a thesis, graduation date
-\SponsoringAgency{[Sponsor]}    % really, for technical reports
+\SponsoringAgency{N/A}          % really, for technical reports
 \DatesCovered{MM-DD-YYYY to MM-DD-YYYY}
 \ReportClassification{Unclassified}
 \AbstractClassification{Unclassified}
@@ -84,12 +80,13 @@
 % Optional fields for the SF298.
 %
 \RPTpreparedFor{}
+\SponsoringNotation{}
 \ContractNumber{}
 \GrantNumber{}
 \ProgramElementNumber{}
 \TaskNumber{}
 \WorkUnitNumber{}
-\POReportNumber{NPS-XX-YY-ZZ}
+\POReportNumber{}
 \Acronyms{}
 \SMReportNumber{}
 \SubjectTerms{}
@@ -116,11 +113,14 @@
 
 \NPScover                  % Cover page
 \NPSsftne                  % SF298 form
-\NPSsignature              % Tech Report page (iii): signature page
-%\NPSthesistitle           % Thesis page (iii): title page
+%\NPSsignature             % Tech Report page (iii): signature page
+\NPSthesistitle            % Thesis page (iii): title page
 \NPSabstractpage           % Abstract Page
 \NPSfrontmatter            % NPS front matter follows
 
+% This changes the chaptermark and includes the various tables
+% It must be here.
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}}
 
 %
 % If you don't need one of these, comment it out.

@@ -41,22 +41,29 @@
 \authortwo{[Author Two]}
 \authorthree{[Author Three]}
 \authorfour{[Author Four]}
-\rank{[Rank]}
+\rank{[Rank, Service]}    %\rank{Civilian} % if you don't have a rank
 \degree{Master of Science in [Degree]}
 \degreeabbreviation{MS}   % Should be MS, MBA or MA
-\prevdegrees{[B.S., Undergrad Degree, My Old School, Year]} % previous degree
+\prevdegrees{[B.S., My Old School, Year]} % previous degree
 
 % Department info
 \department{Department of [Department]}
 %\thesisadvisor{[Primary Advisor]}
 %\secondreader{[Second Reader]}
-\departmentchair{[Dr.\ Department Chair]}
+\departmentchair{[Department Chair]}
 
 % The date you are graduating:
 \degreedate{[Month Year]}
 
 % See Thesis processor's release form for approved distribution statements.
 \distribution{Approved for public release; distribution is unlimited}
+
+% For Technical Report Signature Page:
+\SponsoringNotation{[prepared for Agency X and funded by Agency Y.]}
+\DistributionClause{Further distribution of all or part of this report is authorized.}
+% If the distribution statement is restricted (distribution codes B-F) use:
+% \DistributionClause{Further distribution of all or part of this report is subject to the Distribution Statement appearing on the front cover.}
+
 
 % Your abstract.  New paragraphs start after an empty line.
 \abstract{%
@@ -70,9 +77,9 @@
 % Mandatory fields for the SF298.
 %
 \ReportType{Technical Report}
-\ReportDate{MM-DD-YYYY} 		% for a thesis, graduation date
+\ReportDate{MM-DD-YYYY}         % for a thesis, graduation date
+\SponsoringAgency{[Sponsor]}    % really, for technical reports
 \DatesCovered{MM-DD-YYYY to MM-DD-YYYY}
-\SponsoringAgency{Department of the Navy}
 \ReportClassification{Unclassified}
 \AbstractClassification{Unclassified}
 \PageClassification{Unclassified}
@@ -80,7 +87,6 @@
 % Optional fields for the SF298.
 %
 \RPTpreparedFor{}
-\SponsoringNotation{[prepared for Agency X and funded by Agency Y.]}
 \ContractNumber{}
 \GrantNumber{}
 \ProgramElementNumber{}
@@ -187,7 +193,7 @@
 % The list is automatically properly numbered
 % and already populated with the mandatory recipients.
 %
-\NPSdistribution{Initial Distribution List}
+\NPSdistributionlist
 \begin{distributionlist}
 \item Defense Technical Information Center\\Ft. Belvoir, Virginia
 \item Dudley Knox Library\\Naval Postgraduate School\\Monterey, California

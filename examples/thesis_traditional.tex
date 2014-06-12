@@ -1,7 +1,7 @@
 % This starts the document; the "npsreport" style is really a modified
 % report style. Feel free to use the options explained in the technical
 % report NPS-CS-11-011, included under the doc/ directory.
-\documentclass[singlespace]{npsreport}
+\documentclass[twoside,thesis,traditional]{npsreport}
 
 %
 % Put extra packages you may need to customize your thesis
@@ -45,8 +45,8 @@
 
 % Department info
 \department{Department of [Department]}
-%\thesisadvisor{[Primary Advisor]}
-%\secondreader{[Second Reader]}
+\thesisadvisor{[Primary Advisor]}
+\secondreader{[Second Reader]}
 \departmentchair{[Department Chair]}
 
 % The date you are graduating:
@@ -55,16 +55,9 @@
 % See Thesis processor's release form for approved distribution statements.
 \distribution{Approved for public release; distribution is unlimited}
 
-% For Technical Report Signature Page:
-\SponsoringNotation{[prepared for Agency X and funded by Agency Y.]}
-\DistributionClause{Further distribution of all or part of this report is authorized.}
-% If the distribution statement is restricted (distribution codes B-F) use:
-% \DistributionClause{Further distribution of all or part of this report is subject to the Distribution Statement appearing on the front cover.}
-
-
 % Your abstract.  New paragraphs start after an empty line.
-\abstract{%
-\lipsum[1] % example text, remove me
+\abstract{
+  \lipsum[1] % example text, remove me
 }
 
 % Switch the below lines around, if FOUO
@@ -73,9 +66,9 @@
 %
 % Mandatory fields for the SF298.
 %
-\ReportType{Technical Report}
+\ReportType{Master's Thesis}
 \ReportDate{MM-DD-YYYY}         % for a thesis, graduation date
-\SponsoringAgency{[Sponsor]}    % really, for technical reports
+\SponsoringAgency{N/A}          % really, for technical reports
 \DatesCovered{MM-DD-YYYY to MM-DD-YYYY}
 \ReportClassification{Unclassified}
 \AbstractClassification{Unclassified}
@@ -89,7 +82,7 @@
 \ProgramElementNumber{}
 \TaskNumber{}
 \WorkUnitNumber{}
-\POReportNumber{NPS-XX-YY-ZZ}
+\POReportNumber{}
 \Acronyms{}
 \SMReportNumber{}
 \SubjectTerms{}
@@ -100,7 +93,7 @@
 \SupplementaryNotes{The views expressed in this document are those of
   the author and do not reflect the official policy or position of the
   Department of Defense or the U.S. Government. %
-  IRB Protocol Number: N/A. % if you need to note an IRB Protocol or N/A
+  IRB Protocol Number: N/A % if you need to note an IRB Protocol or N/A
 }
 
 % Optional. Prevents footnotes from being reset at each chapter
@@ -116,11 +109,14 @@
 
 \NPScover                  % Cover page
 \NPSsftne                  % SF298 form
-\NPSsignature              % Tech Report page (iii): signature page
-%\NPSthesistitle           % Thesis page (iii): title page
+%\NPSsignature             % Tech Report page (iii): signature page
+\NPSthesistitle            % Thesis page (iii): title page
 \NPSabstractpage           % Abstract Page
 \NPSfrontmatter            % NPS front matter follows
 
+% This changes the chaptermark and includes the various tables
+% It must be here.
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}}
 
 %
 % If you don't need one of these, comment it out.
@@ -134,16 +130,16 @@
 % Put Executive summary here.
 % New paragraphs start after an empty line.
 %
-\NPSexecsummary{%
-\lipsum[1-4] % example text; remove me
+\NPSexecsummary{
+  \lipsum[1-4] % example text; remove me
 }
 
 %
 % Put acknowledgements here.  
 % New paragraphs start after an empty line.
 %
-\NPSacknowledgements{%
-\lipsum[1-3] % example text; remove me
+\NPSacknowledgements{
+  \lipsum[1-3] % example text; remove me
 }
 
 % Start layout for the NPS body

@@ -1,19 +1,19 @@
+%%
+%% npsreport.cls
+%% LaTeX class file for NPS Theses and Tech Reports
+%% Version 1.3
+%%
+%% NOTE:
+%% There is typically no reason to modify this file. If something
+%% appears broken, then look at latest style files available from the
+%% thesis processor: it might already be fixed in a newer version!
+%%
+%%*************************************************************************
+%
+% Based on:
 % New NPS thesis and report style for modern LaTeX
 % Simson L. Garfinkel, Dept. of Computer Science
-% Modification log:
-% 2011-sep-08 - slg - not many changes
-% 2011-jul-10 - slg additional packages added;  caption font changed
-%               to 11 on 12 rather 9 on 10
-% 2012-sep-22 - twa - improving comments, acronym package support
-% 2012-sep-24 - twa - improving dissertation signature page
-% Timeline for project: 
-% 
-
-% The majority of this file is not needed to be editted by the average user.
-% Things for everyone to look at below:
-%  - optional list of packages to include the ones appropriate for your 
-%    document
-%  - macros like sgraphic that can be used to create figures in your document
+%
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{npsreport}[2008/10/01]
@@ -130,7 +130,7 @@
   \typeout{*********************************************}
   \typeout{******** MAKING CLASSIFIED THESIS ***********}
   \typeout{*********************************************}
-  \def\ULABEL{ (U) }
+  \def\ULABEL{(U)\xspace}
 \else
   \def\ULABEL{}
 \fi
@@ -145,13 +145,11 @@
 \usepackage[letterpaper]{geometry} % use 'showframe' for debugging
 \newgeometry{includeheadfoot,            % headers and footers aren't in margins
              right=1.25in,left=1.25in,   % right/left margins
-             top=1in,bottom=1.25in,      % top/bottom margins
-             footskip=.25in,             % pg nums in footer need breathing room
+             top=1in,bottom=1in,         % top/bottom margins
+             footskip=.5in,              % pg nums in footer need breathing room
              marginparwidth=0pt,         % no marginal paragraphs
              marginparsep=0pt,           % no marginal paragraphs
              head=30pt,headsep=0pt,hoffset=0pt}
-\usepackage{fancyhdr}           % puts chapters names in footers
-\fancypagestyle{plain}{\lhead{}\rhead{}}  % ToC/ToF/etc use \thispagestyle{plain}
 
 %% Font selection
 \usepackage[T1]{fontenc}        % http://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc
@@ -188,6 +186,7 @@
 \usepackage{tabularx}           % tables that expand to with width requested
 \usepackage{titletoc}           % adds toc commands
 \usepackage{titlesec}           % complete replacement for titles
+\usepackage{fancyhdr}           % puts chapters names in footers
 \usepackage{ccaption}           % control captions
 \usepackage{setspace}           % enabled \doublespacing, \onehalfspacing, etc.
 \usepackage{multicol}           % multiple columns; good for you!
@@ -195,7 +194,6 @@
 \usepackage{varioref}           % provides \vref - smart referencing
 \usepackage{xspace}             % provides \xspace
 \usepackage{xifthen}            % if-then-else macro for empty fields
-\usepackage[old298]{nps_sf298}  % Bring in SF298 for the documentation page
 \usepackage{latexsym}           % gives \Box
 \usepackage{graphicx}           % it's better
 \usepackage{multirow}           % for table cells with multiple row
@@ -205,7 +203,14 @@
 \usepackage[table]{xcolor}
 \usepackage{paralist}           % {compactenum} {compactitem} environments
 \usepackage{enumitem}           % No extra space before lists
+\usepackage{afterpage}          % to implement \smark marking macro
 \setlist{nolistsep}
+
+\ifnpsthesis
+\usepackage[old298]{nps_sf298}  % Bring in SF298 for the documentation page
+\else
+\usepackage{nps_sf298}          % Use newer SF298 for tech reports
+\fi
 
 \usepackage{float}              % reimplementation of float package
 \usepackage{cite}               % for [5-8] reference style
@@ -255,16 +260,21 @@
 % Good pages on LaTeX:
 % http://www-h.eng.cam.ac.uk/help/tpl/textprocessing/extending_latex.html
 
+
+%*************************************************************************
 % Define the pieces that go on the title page, abstract, SF298, and
 % other pages. This is liberally borrowed from MIT Thesis guide
-% 
+%*************************************************************************
 
 \def\declassifydate#1{\gdef\@declassifydate{#1}} \gdef\@declassifydate{}
+\def\classifiedby#1{\gdef\@classifiedby{#1}}     \gdef\@classifiedby{}
+\def\classifiedfrom#1{\gdef\@classifiedfrom{#1}} \gdef\@classifiedfrom{Multiple Sources}
 \def\degreedate#1{\date{#1}}
-\def\prevdegrees#1{\gdef\@prevdegrees{#1}}
-\def\@prevdegrees{}
+\def\prevdegrees#1{\gdef\@prevdegrees{#1}}       \def\@prevdegrees{}
 \def\department#1{\gdef\@department{#1}}
+\def\departmenttwo#1{\gdef\@departmenttwo{#1}}   \gdef\@departmenttwo{}
 \def\departmentchair#1{\gdef\@departmentchair{#1}}
+\def\departmentchairtwo#1{\gdef\@departmentchairtwo{#1}} \gdef\@departmentchairtwo{}
 \def\researchchair#1{\gdef\@researchchair{#1}}
 \def\president#1{\gdef\@president{#1}}
 \def\provost#1{\gdef\@provost{#1}}
@@ -276,15 +286,14 @@
 \president{Ronald A. Route}
 \provost{Douglas A. Hensler}
 
-% If you are getting two degrees, use \and between the names.
-\def\degree#1{\setbox0\hbox{#1}  %for side effect of setting \@degreeword
-  \gdef\@degree{#1}}
+% Single degree or dual degree options
+\def\degree#1{\gdef\@degree{#1}}
+\gdef\@degree{}
+\gdef\@degreeword{degree}
+\def\degreetwo#1{\gdef\@degreetwo{#1}\gdef\@degreeword{degrees}}
+\gdef\@degreetwo{}
 
-% \and is used inside the \degree argument to separate two degrees
-\def\and{\gdef\@degreeword{degrees} \par and \par}
-\def\@degreeword{degree}
-
-% Degree appreviation
+% Degree abbreviation
 \def\degreeabbreviation#1{\setbox0\hbox{#1}\gdef\@degreeabbreviation{#1}}
 
 % \rank
@@ -311,17 +320,14 @@
 \def\rankfour#1{\setbox0\hbox{#1} \gdef\@rankfour{#1}} \rankfour{}
 \def\prevdegreesfour#1{\setbox0\hbox{#1} \gdef\@prevdegreesfour{#1}} \prevdegreesfour{}
 
-
-%
-% Security Banners
-%
-
-\def\securitybanner#1{\setbox0\hbox{#1} \gdef\@securitybanner{#1}}
-\securitybanner{}               % default is no banner
-
 % \distribution
 \def\distribution#1{\setbox0\hbox{#1}
   \gdef\@distribution{#1}}    
+
+% \DistributionClause
+\def\DistributionClause#1{\setbox0\hbox{#1}
+  \gdef\@DistributionClause{#1}}
+\DistributionClause{Further distribution of all or part of this report is authorized.}
 
 % \SponsoringNotation
 \def\SponsoringNotation#1{\setbox0\hbox{#1}
@@ -343,14 +349,10 @@
 \def\SignatureFour#1{\setbox0\hbox{#1}
   \gdef\@SignatureFour{#1}}    
 
-
-
 % \RPTpreparedFor
 \def\RPTpreparedFor#1{\setbox0\hbox{#1}
   \gdef\@RPTpreparedFor{#1}}    
 \RPTpreparedFor{}               % default is prepared for nobody
-
-
 
 % \abstract
 \newcommand{\NPSabstract}{cough}
@@ -378,9 +380,12 @@
 % Some useful defines
 \newcommand{\tablefont}{\sffamily\fontsize{9}{10}\selectfont}
 
+
+%*************************************************************************
+% Support for authorindex, index, acronym packages
+%*************************************************************************
+
 % Support for the Authorindex
-% Authorindex
-%
 \ifnpsauthorindex
   \usepackage[small]{authorindex}
   \let\cite=\aicite
@@ -416,40 +421,89 @@
   \fi
 \fi
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%% Common NPS requirements
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Table of contents control
-\def\contentsname{Table of Contents}
-\setlength\cftparskip{2ex}
-\ifnpsarticle
-  \setlength\cftbeforetoctitleskip{40pt}
-  \setlength\cftbeforeloftitleskip{40pt}
-  \setlength\cftbeforelottitleskip{40pt}
+%*************************************************************************
+% Macros for security marking
+%*************************************************************************
+
+\def\securitybanner#1{\setbox0\hbox{#1} \gdef\@securitybanner{#1}}
+\securitybanner{}               % default is no banner
+
+\newcommand{\smarkthispage}{
+ \thispagestyle{fancy}
+\ifclassified % leave classified headers and footers alone
 \else
-  \setlength\cftchapindent{-3pt}
+  \chead{} %
+  \cfoot{\thepage \\ \@securitybanner}
+  \afterpage{\cfoot{\thepage}}
+\fi
+}
+
+\newenvironment{smark}[1][(U)]%
+{ \smarkthispage  #1 %
+}
+{ \smarkthispage
+}
+
+\newcommand{\smarkfigtemp}{UNCLASSIFIED}
+\newenvironment{smarkenv}[2][\textwidth]
+{
+  \smarkthispage
+  \begin{minipage}{#1}
+  \renewcommand{\smarkfigtemp}{#2}
+  {\par\noindent\nopagebreak\centering \smarkfigtemp \\ \vspace{6pt} }
+}{
+  \vspace{3pt} \par\noindent\nopagebreak\centering \smarkfigtemp
+  \end{minipage}
+  \smarkthispage
+}
+
+
+
+%*************************************************************************
+%
+% Basic Document Control Commands
+%
+%*************************************************************************
+
+
+%
+% Section names
+%
+\ifnpstraditional
+  % Traditionally lots of things need to be in uppercase and bold
+  \def\abstractname{ABSTRACT}
+  \def\figurename{Figure}
+  \def\tablename{Table}
+  \def\chaptername{CHAPTER}
+  \def\appendixname{APPENDIX}
+  \def\appendicesname{APPENDICES}
+  \def\partname{PART}
+  \def\contentsname{\textbf{TABLE OF CONTENTS}}
+  \def\listfigurename{\textbf{LIST OF FIGURES}}
+  \def\listtablename{\textbf{LIST OF TABLES}}
+  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
+  \def\distribname{\textbf{INITIAL DISTRIBUTION LIST}}
+  \def\acknowledgementsname{\textbf{ACKNOWLEDGEMENTS}}
+  \def\execsummaryname{\textbf{EXECUTIVE SUMMARY}}
+  \def\indexname{\textbf{\ULABELINDEX}}
+  \def\bibname{\textbf{LIST OF REFERENCES}}
+\else
+  \def\appendixname{Appendix}
+  \def\appendicesname{Appendices}
+  \def\contentsname{Table of Contents}
+  \def\listacronymname{List of Acronyms and Abbreviations}
+  \def\distribname{Initial Distribution List}
+  \def\acknowledgementsname{Acknowledgements}
+ \def\execsummaryname{Executive Summary}
+  \def\bibname{References}
 \fi
 
-% This magic makes the word "Figure" appear in each line of the list of figures
-\newlength\figurelen             % 
-\settowidth\figurelen{Figure}
-\addtolength\cftfignumwidth{\figurelen}
-\renewcommand\cftfigpresnum{\hspace{-1.5pc}Figure }
 
-% This magic makes the word "Table" appear in each line of the list of tables
-\newlength\tablelen             % 
-\settowidth\tablelen{Table}
-\addtolength\cfttabnumwidth{\tablelen}
-\renewcommand\cfttabpresnum{\hspace{-1.5pc}Table }
-
+%
+% Section Numbering and Labels
+%
 \ifnpstraditional
-%
-% Traditional NPS
-%
-  \typeout{Using traditional NPS thesis design}
   % Traditional numbering scheme
   \def\thepart          {\arabic{part}}
   \def\thechapter       {\Roman{chapter}}
@@ -475,109 +529,129 @@
     \def\thesubsection    {\alph{subsection}}%
     \def\thesubsubsection {\roman{subsubsection}}%
   }
+\fi
 
-  % Traditionally lots of things need to be in uppercase and boldL
-  \def\contentsname{\textbf{TABLE OF CONTENTS}}
-  \def\listfigurename{\textbf{LIST OF FIGURES}}
-  \def\listtablename{\textbf{LIST OF TABLES}}
-  \def\bibname{\textbf{LIST OF REFERENCES}}
-  \def\indexname{\textbf{INDEX\ULABEL}}
-  \def\abstractname{ABSTRACT}
-  \def\figurename{Figure}
-  \def\tablename{Table}
-  \def\chaptername{CHAPTER}
-  \def\appendixname{APPENDIX}
-  \def\partname{PART}
-  \def\distribname{INITIAL DISTRIBUTION LIST\ULABEL}
 
-  \fancyhead{}                  % clear all header fields
-
-  % Make traditional figures and tables not reset and not include the figure/table tag
-  \usepackage{chngcntr}
-  \@removefromreset{figure}{chapter}
-  \@removefromreset{table}{chapter}
-  \counterwithout{figure}{chapter}
-  \counterwithout{table}{chapter}
-
-  % Create all the heads and such
-  % This is done with the titlesec package
+%
+% Title Control
+% This is done with the titlesec package
+%
+\ifnpstraditional
   \titleformat{\chapter}[display] 
-              {\normalfont\Large\filcenter} % {fmt}
-              {\thechapter.\ }              % {label}
-              {1pc}                         % {sep}
-              {\vspace{-1in}\enlargethispage{-0.5in}}    % {before}
-
+              {\normalfont\bf\Large\filcenter}         % {fmt}
+              {\thechapter.\ }                         % {label}
+              {1pc}                                    % {sep}
+              {\vspace{-1in}\enlargethispage{-0.5in}}  % {before}
   \titleformat{\section}[block] 
-              {\normalfont\Large} % {fmt}
-              {\thesection.\ }    % {label}
-              {1pc}               % {sep}
+              {\normalfont\Large}    % {fmt}
+              {\thesection.\ }       % {label}
+              {1pc}                  % {sep}
               {}%
-
   \titleformat{\subsection}[block] 
-              {\normalfont} % {fmt}
+              {\normalfont}                       % {fmt}
               {\hspace{.5in}\thesubsection.\ }    % {label}
-              {1pc}               % {sep}
+              {1pc}                               % {sep}
               {}%
-
-  % Control the way counters are printed
-  % \renewcommand{\thefigure}{\arabic{figure}}             
-  % \newcounter{figure}
-
-  \newcommand{\NPSend}{}             
-
-  % 
-  % End Traditional NPS
-  %
 \else
-% New NPS
-  \typeout{Using new NPS thesis design}
+  % New, avant garde Titles (courtesy of titlesec)
+  \titleformat{\chapter}[display]
+              {\vskip 0\p@ \LARGE\filcenter\sffamily\titlerule[1pt]\vspace{1pt}\titlerule}
+              {\MakeUppercase{\chaptertitlename} \thechapter:} % label (not for * chapters)
+              {-1pc}           % sep
+              {}               % before
+              [\titlerule]     % after
+  \titleformat{\section}
+              {\normalfont\Large\bfseries}
+              {\thesection}
+              {1em}
+              {}%
+  \titleformat{\subsection}
+              {\normalfont\large\bfseries}
+              {\thesubsection}
+              {1em}
+              {}%
+  \titleformat{\subsubsection}
+              {\normalfont\normalsize\bfseries}
+              {\thesubsubsection}
+              {1em}
+              {}%
+\fi
 
-  \ifnpsarticle
-  \setcounter{tocdepth}{3}  % put sections and subsections in TOC for articles
-  \else
-  \setcounter{tocdepth}{1}  % only put chapters and sections in the TOC
-  \fi
-
-  % These were in the {document}
-  % Specify our spacings --- Turns out that we want to do this
-  % after the first section is loaded
-  % \titlespacing
-  \titleformat{\section} {\normalfont\Large\bfseries}{\thesection}{1em}{} 
-  \titleformat{\subsection} {\normalfont\large\bfseries}{\thesubsection}{1em}{} 
-  \titleformat{\subsubsection} {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{} 
-
-  % ``The starred version kills the indention of the paragraph following the title.''
-  % \titlespacing%{<command>}{<left>}{<beforesep>}{<aftersep>}[<right>]
-
-  \titlespacing*{\chapter}{0pt}{-.5in plus 2ex}{.25in}
+% ``The starred version kills the indention of the paragraph following the title.''
+% \titlespacing%{<command>}{<left>}{<beforesep>}{<aftersep>}[<right>]
+\ifnpstraditional
+  \titlespacing*{\chapter}{0pt}{15pt}{.25in}
   \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\subsubsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
   \titlespacing*{\paragraph}{0pt}{0pt plus 2ex}{3pt}
   \setlength{\parskip}{2ex}
   \setlength{\parindent}{0pt}
+\else
+  \titlespacing*{\chapter}{0pt}{-.5in}{.25in}
+  \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
+  \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
+  \titlespacing*{\subsubsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
+  \titlespacing*{\paragraph}{0pt}{0pt plus 2ex}{3pt}
+  \setlength{\parskip}{2ex}
+  \setlength{\parindent}{0pt}
+\fi
 
-  % Caption Control:
+
+%
+% Figure / Table Caption Control
+%
+\ifnpstraditional
+  % Make traditional figures and tables not reset and not include the figure/table tag
+  \usepackage{chngcntr}
+  \@removefromreset{figure}{chapter}
+  \@removefromreset{table}{chapter}
+  \counterwithout{figure}{chapter}
+  \counterwithout{table}{chapter}
+\else
   % Put captions is a sanserif font, smaller, and tighter
-  %
   \captionnamefont{\sffamily\fontsize{11}{12}\selectfont}
   \captiontitlefont{\sffamily\fontsize{11}{12}\selectfont}
   \setlength{\abovecaptionskip}{5pt}
   \setlength{\belowcaptionskip}{0pt}
+\fi
 
-  %
-  % New, avant garde Titles (courtesy of titlesec)
-  % 
-  \titleformat{\chapter}[display]
-              {\vskip 0\p@ \LARGE\filcenter\sffamily\titlerule[1pt]\vspace{1pt}\titlerule}
-              {\MakeUppercase{\chaptertitlename} \thechapter:}     % label (not for * chapters)
-              {-1pc}  % sep
-              {}     % before
-              [\titlerule]     % after
 
-  %
-  % table of contents
-  %
+%
+% ToC, LoF, LoT Controls
+%
+\setlength\cftbeforetoctitleskip{0pt}
+\setlength\cftbeforeloftitleskip{0pt}
+\setlength\cftbeforelottitleskip{0pt}
+\setlength\cftaftertoctitleskip{0pt}
+\setlength\cftafterloftitleskip{0pt}
+\setlength\cftafterlottitleskip{0pt}
+\setlength\cftparskip{2ex}
+\ifnpsarticle
+\else
+  \setlength\cftchapindent{-3pt}
+\fi
+
+% This magic makes the word "Figure" appear in entries of LoF
+\newlength\figurelen             % 
+\settowidth\figurelen{Figure}
+\addtolength\cftfignumwidth{\figurelen}
+\renewcommand\cftfigpresnum{\hspace{-1.5pc}Figure }
+
+% This magic makes the word "Table" appear in entries of LoT
+\newlength\tablelen             % 
+\settowidth\tablelen{Table}
+\addtolength\cfttabnumwidth{\tablelen}
+\renewcommand\cfttabpresnum{\hspace{-1.5pc}Table }
+
+\ifnpstraditional
+\else
+  \ifnpsarticle
+  \setcounter{tocdepth}{3}  % put sections and subsections in TOC for articles
+  \else
+  \setcounter{tocdepth}{1}  % only put chapters and sections in the TOC
+  \fi
+
   \def\SECTIONBOLDFACE{}
   \def\ARTICLESPACE{-1.8ex}
   \contentsmargin{2.55em}
@@ -626,24 +700,30 @@
             {\hspace*{-2.3em}}                        % before without label
             {\titlerule*[1pc]{.}\contentspage}        % filler and page
   \fi
-
-  \newcommand{\NPSend}{
-    \ifnpsauthorindex
-      \chapter*{Referenced Authors}
-      %\addcontentsline{toc}{chapter}{Referenced Authors}
-      \begin{multicols}{3}
-        \printauthorindex
-      \end{multicols}
-    \fi
-    \ifnpsindex
-      \printindex
-    \fi
-   }
-
-  % Sections will still be capped, but not in bold
-  \def\bibname{List of References}
 \fi
-                
+
+\ifnpstight
+  \parskip 3pt
+  \parindent 1pc
+\fi
+
+
+%*************************************************************************
+% Endmatter and Appendices
+%*************************************************************************
+
+\newcommand{\NPSend}{
+\ifnpsauthorindex
+  \chapter*{Referenced Authors}
+  %\addcontentsline{toc}{chapter}{Referenced Authors}
+  \begin{multicols}{3}
+    \printauthorindex
+  \end{multicols}
+\fi
+\ifnpsindex
+  \printindex
+\fi
+}
 
 % Use this to change to appendix mode and insert ``Appendix'' into the Table of Contents
 % The appendix needs to also call \chapter{title} after this command and it will have another TOC entry.
@@ -651,10 +731,10 @@
   \appendix                       % Appendix mode
   \clearpage
 \ifnpsarticle
-  \addcontentsline{toc}{section}{Appendix}  % Insert ``Appendix'' into TOC
+  \addcontentsline{toc}{section}{\appendixname}  % Insert ``Appendix'' into TOC
 \else
-  \addcontentsline{toc}{chapter}{Appendix}  % Insert ``Appendix'' into TOC
-  \def\chaptername{Appendix}  % not sure why this is needed, but it is
+  \addcontentsline{toc}{chapter}{\appendixname}  % Insert ``Appendix'' into TOC
+  \def\chaptername{\appendixname}  % not sure why this is needed, but it is
 \fi
 }
 
@@ -665,12 +745,12 @@
   \appendix                       % Appendix mode
   \clearpage
 \ifnpsarticle
-  \section*{Appendix:~#1}
-  \addcontentsline{toc}{section}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
+  \section*{APPENDIX:~#1}
+  \addcontentsline{toc}{section}{\appendixname:~#1}  % Insert ``Appendix: Title'' into TOC
 \else
-  \def\chaptername{Appendix}  % not sure why this is needed, but it is
-  \chapter*{Appendix:~#1}
-  \addcontentsline{toc}{chapter}{Appendix:~#1}  % Insert ``Appendix: Title'' into TOC
+  \def\chaptername{\appendixname}  % not sure why this is needed, but it is
+  \chapter*{APPENDIX:~#1}
+  \addcontentsline{toc}{chapter}{\appendixname:~#1}  % Insert ``Appendix: Title'' into TOC
 \fi
 }
 
@@ -681,67 +761,105 @@
   \appendix                       % Appendix mode
   \clearpage
 \ifnpsarticle
-  \cftaddtitleline{toc}{section}{Appendices}{} % Insert ``Appendices'' into TOC
+  \cftaddtitleline{toc}{section}{\appendicesname}{} % Insert ``Appendices'' into TOC
 \else
-  \cftaddtitleline{toc}{chapter}{Appendices}{} % Insert ``Appendices'' into TOC
-  \def\chaptername{Appendix}  % not sure why this is needed, but it is
+  \cftaddtitleline{toc}{chapter}{\appendicesname}{} % Insert ``Appendices'' into TOC
+  \def\chaptername{\appendixname}  % not sure why this is needed, but it is
 \fi
 }
 
 
-% handle THIS PAGE INTENTIONALLY LEFT BLANK if in twopage mode
-% See http://www.ctan.org/tex-archive/macros/latex/contrib/fancyhdr/fancyhdr.pdf
-\newcommand{\thisPageIntentionallyLeftBlank}{
-  \ifnpstwoside
-    \lhead{}\chead{}\rhead{}            % remove the headings 
+%*************************************************************************
+% Macros for Blank Pages
+%*************************************************************************
+
+\newcommand{\thisPageIntentionallyLeftBlankForced}{
+    \ifclassified               % leave classified headers and footers alone
+    \lhead{}\rhead{}            % remove the headings
+    \else
+    \lhead{}\chead{}\rhead{}    % remove the headings
+    \fi
     \vspace*{\fill} 
     \begin{center} 
       THIS PAGE INTENTIONALLY LEFT BLANK 
     \end{center} 
     \vspace*{\fill} 
     \newpage 
+}
+
+% handle THIS PAGE INTENTIONALLY LEFT BLANK if in twopage mode
+% See http://www.ctan.org/tex-archive/macros/latex/contrib/fancyhdr/fancyhdr.pdf
+\newcommand{\thisPageIntentionallyLeftBlank}{
+  \ifnpstwoside
+    \thisPageIntentionallyLeftBlankForced
   \fi
 }
 
-
-\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else 
+\def\cleardoublepage{\clearpage\if@twoside \ifodd \c@page \else
  \thispagestyle{fancy}
  \thisPageIntentionallyLeftBlank
  \if@twocolumn\hbox{}\newpage\fi\fi\fi
-} 
+}
+
 \def\cleardoublepageEmpty{\clearpage\if@twoside \ifodd\c@page\else 
- \thispagestyle{empty}   
+ \thispagestyle{blankmarked}
  \thisPageIntentionallyLeftBlank
  \if@twocolumn\hbox{}\newpage\fi\fi\fi
 } 
 
-\ifnpstight
-  \parskip 3pt
-  \parindent 1pc
-\fi
 
-
-
-%============================================
-% Now let's make the cover page
-%  HERE IS WHERE WE DRAW THE COVER PAGE
-%============================================
+%*************************************************************************
+% Cover Page
+%*************************************************************************
 
 \def\NPScover{
-  % these commands are the first commands that run when printing
-  % starts, because the \NPScover command appears first
-  \pagestyle{fancy}
-  \rhead{}
-  \chead{}                              % Removing "\textsf{\@securitybanner}" from top banner
-  \lhead{}
-  \renewcommand{\headrulewidth}{0pt}
-  \cfoot{\textsf{\@securitybanner} \\ \thepage}
-  \renewcommand{\sf@ExtraPages}{2}                        % include for the NPS cover
+%% These commands are the first commands that run when printing
+%% starts, because the \NPScover command appears first
+\ifnpstraditional
+  \fancyhead{}                  % clear all header fields
+\fi
+  %%
+  %% 'fancy' and 'plain' - classified marking, page numbers
+  %% used: everywhere
+  \pagestyle{fancyplain}
+    \rhead{} \lhead{}
+    \renewcommand{\headrulewidth}{0pt}
+ \ifclassified
+    \chead{\vspace{-1em}\@securitybanner \\ \vspace{1em}}
+    \cfoot{\thepage \\ \@securitybanner}
+ \else
+    \chead{}
+    \cfoot{\thepage}
+ \fi
+  %%
+  %% 'frontmarked' - classified markings, FOUO marking, no page numbers
+  %% used: front cover
+  \fancypagestyle{frontmarked}{
+ \ifclassified
+    \chead{\vspace{-1em}\@securitybanner \\ \vspace{1em}}
+ \fi
+    \cfoot{\vspace{2pc}\@securitybanner}
+  }
+  %%
+  %% 'blankmarked' - classified markings, no page numbers
+  %% used: this page left intentionally blank
+  \fancypagestyle{blankmarked}{
+ \ifclassified
+    \chead{\vspace{-1em}\@securitybanner \\ \vspace{1em}}
+    \cfoot{\vspace{1pt}\@securitybanner}
+ \else
+    \cfoot{}
+ \fi
+  }
+  %
+  %
+  \renewcommand{\sf@ExtraPages}{2}  % include for the NPS cover
   %
   % The first page; but note --- it's a title page, so it doesn't use
   % this page style
   %
   \begin{titlepage}
+  \thispagestyle{frontmarked}
   \vfill
   \textbf{\sf@POReportNumber}   % if not defined, will be blank
   \begin{center}
@@ -762,11 +880,11 @@
   \fi  
 
   % Print the box on the front page
-  % 2013-05-14: Changed box rule thickness to 1pt
   \setlength{\fboxrule}{1pt}
 
   \framebox[4.5in][c]{
     \begin{minipage}{4.45in}
+      \vspace{3pt}
       \centering
         \textbf{\MakeUppercase{\@title}}\\
         \vspace{1pc}
@@ -786,7 +904,7 @@
         \@date\\
         \vspace{1pc}
         \ifnpsthesis
-          \begin{tabularx}{4.45in}{lXl}
+          \begin{tabularx}{4.45in}{lXr}
             \ifnpsdissertation
                 Dissertation Supervisor: & & \@thesisadvisor \\
             \else
@@ -794,40 +912,44 @@
                     Thesis Co-Advisors: & \hspace{1in} & \@thesisadvisorone \\
                                         & \hspace{1in} & \@thesisadvisortwo \\
                 \else
-                        \iftwoadvisorsreader
-                        Thesis Co-Advisors: & \hspace{1in} & \@thesisadvisorone \\
-                                            & \hspace{1in} & \@thesisadvisortwo \\
-                        Second Reader: &  \hspace{1in} & \@secondreader  \\
-                        \else
-                        Thesis Advisor: & \hspace{1in} & \@thesisadvisor \\
-                        Second Reader: &  \hspace{1in} & \@secondreader  \\
-                        \fi
+                  \iftwoadvisorsreader
+                    Thesis Co-Advisors: & \hspace{1in} & \@thesisadvisorone \\
+                                        & \hspace{1in} & \@thesisadvisortwo \\
+                    Second Reader:      & \hspace{1in} & \@secondreader  \\
+                  \else
+                    Thesis Advisor:     & \hspace{1in} & \@thesisadvisor \\
+                    Second Reader:      & \hspace{1in} & \@secondreader  \\
+                  \fi
                 \fi
             \fi
           \end{tabularx}
         \fi
     \end{minipage}
   }
-
-  \textbf{\small \@distribution}\\
+  \parbox{\textwidth}{\centering \singlespacing \bf \small \@distribution} \\
 
   % define \RPTpreparedFor when needed in you tex file
   \ifthenelse{\equal{\@RPTpreparedFor}{}}{}{%
     \vspace{\smallskipamount}
     Prepared for: \@RPTpreparedFor
   }
-
   \vfill
   \ifclassified 
-     \enlargethispage{3pc}
-     \vspace{-1pc}
-     \begin{tabular}{p{1in}p{4in}p{1in}}
-     & \center \textbf{\footnotesize DESTRUCTION NOTICE} & \\
-     {\footnotesize Classified by: Multiple Sources. Declassify on \@declassifydate } &
-     {\small For classified documents follow the procedure in
+    \enlargethispage{4pc}
+    \smallskip
+    \begin{tabular}{ccc}
+    \multicolumn{3}{c}{\textbf{\footnotesize DESTRUCTION NOTICE}}\\[-2pc]
+    \parbox[t]{1.6in}{\singlespacing \scriptsize
+     Classified by: \@classifiedby. Derived from: \@classifiedfrom.
+     Declassify on \@declassifydate
+    } &
+    \parbox[t]{3.0in}{\singlespacing \scriptsize
+     For classified documents follow the procedure in
      DoD 5220.22m Industrial Security Manual or DoD 5220.1R Information
-     Security Program Regulation (Ch. 17 of OPNAVINST 5510.1)} &
-     {\footnotesize Copy \_\_\_\_ of \_\_\_\_ copies. This document contains 
+     Security Program Regulation (Ch. 17 of OPNAVINST 5510.1)
+    } &
+    \parbox[t]{1.0in}{\singlespacing \scriptsize
+     Copy \_\_\_\_ of \_\_\_\_ copies. This document contains
      \newcounter{nps@page}{}
          {\@ifundefined{r@TotPages}%
           {{\bf ??}}%
@@ -835,10 +957,10 @@
            \addtocounter{nps@page}{-\value{TotPages}}
            \addtocounter{nps@page}{\sf@ExtraPages}
            \arabic{nps@page}}}
-     pages.}
-     \end{tabular}
+     pages.
+    }
+    \end{tabular}
   \fi
-  \textsf{\@securitybanner}
   \end{center}
   \vfill
   \end{titlepage}
@@ -846,10 +968,14 @@
   \cleardoublepageEmpty
 }
 
+
+%*************************************************************************
+% SF298
+%*************************************************************************
+
 \def\NPSsftne{
   % Fill in items for the SF298
   \pagenumbering{roman}        % because they are weird
-  \thispagestyle{empty}         % we will insert it manually
   \Title{\@title}
   \iffourauthors
     \Author{\@author, \@authortwo, \@authorthree, \@authorfour}
@@ -869,7 +995,14 @@
   \Abstract{\@abstract}
   \SponsoringAgencySF{\@sponsoringagency}
   \MakeRptDocPage
+  \thispagestyle{plain}
+  \cleardoublepage
 }
+
+
+%*************************************************************************
+% Thesis Title Page
+%*************************************************************************
 
 % Definitions for the dissertation signature page identifications
 \newcommand{\NPSsigfont}{\normalsize}
@@ -907,10 +1040,11 @@
 \def\memberFiveTitleLine#1{\gdef\@memberFiveTitleLine{#1}}
 \def\memberSixTitleLine#1{\gdef\@memberSixTitleLine{#1}}
 
-
 \def\NPSthesistitle{
+  % this page is always (iii), so force skip (used in non-twoside mode)
+  \ifnum \c@page < 3 \thisPageIntentionallyLeftBlankForced \fi
   \setcounter{page}{3}          % do not reset to page 1
-  \thispagestyle{fancy}
+  \smarkthispage
   \begin{center}
     \textbf{\@distribution}\\
     \vspace{\bigskipamount}\vfill
@@ -927,9 +1061,14 @@
     \fi
     \vspace{\bigskipamount}\vfill
     Submitted in partial fulfillment of the\\
-    requirements for the degree of\\
+    requirements for the \@degreeword\ of\\
     \vspace{\bigskipamount}\vfill
     \textbf{\MakeUppercase{\@degree}}\\
+      \ifthenelse{\equal{\@degreetwo}{}}{}{%
+            \vspace{\smallskipamount}
+            and \\ \vspace{\smallskipamount}
+            \textbf{\MakeUppercase{\@degreetwo}}\\
+      }
     \vspace{\medskipamount}
     from the\\
     \vspace{1.5\medskipamount}
@@ -1025,7 +1164,13 @@
                      \> Thesis Co-Advisor \\[\sigspace]
 
                      \> \@departmentchair \\
-                     \>  Chair, \@department \\
+                     \>  Chair, \@department
+
+                  \ifthenelse{\equal{\@departmenttwo}{}}{\\}{ %
+                     \\[\sigspace]
+                     \> \@departmentchairtwo \\
+                     \> Chair, \@departmenttwo \\
+                  }
       \end{tabbing}
     \else
     %% co-advisors + reader
@@ -1053,7 +1198,13 @@
                      \> Second Reader \\[\sigspace]
 
                      \> \@departmentchair \\
-                     \>  Chair, \@department \\
+                     \>  Chair, \@department
+
+                  \ifthenelse{\equal{\@departmenttwo}{}}{\\}{ %
+                     \\[\sigspace]
+                     \> \@departmentchairtwo \\
+                     \> Chair, \@departmenttwo \\
+                  }
       \end{tabbing}
     %% advisor + reader
     \else
@@ -1077,7 +1228,13 @@
                      \> Second Reader \\[\sigspace]
 
                      \> \@departmentchair \\
-                     \>  Chair, \@department \\
+                     \>  Chair, \@department
+
+                  \ifthenelse{\equal{\@departmenttwo}{}}{\\}{ %
+                     \\[\sigspace]
+                     \> \@departmentchairtwo \\
+                     \> Chair, \@departmenttwo \\
+                  }
       \end{tabbing}
     \fi
     \fi
@@ -1088,7 +1245,7 @@
 \newif\ifNPSabstractWasPrinted\NPSabstractWasPrintedfalse
 \def\NPSabstractpage{
   \begin{center}
-  \textbf{{\large ABSTRACT\ULABEL}}\\
+  \textbf{{\large\ULABEL ABSTRACT}}\\
   \end{center}
   \begin{minipage}{\textwidth}
   \vspace{2pc}
@@ -1110,34 +1267,10 @@
   \singlespacing
 }
 
-\newcommand{\NPSexecsummary}[1]{
-\ifnpsarticle
-  \begin{center}\textbf{\large{Executive Summary\ULABEL}}\end{center}
-\else
-  \chapter*{Executive Summary\ULABEL}
-  %\addcontentsline{toc}{chapter}{Executive Summary}
-\fi
-  \thispagestyle{fancy}
-  \onehalfspacing
-  #1
-  \cleardoublepage
-}
-
-
-\newcommand{\NPSacknowledgements}[1]{
-\ifnpsarticle
-  \begin{center}\textbf{\large{Acknowledgements\ULABEL}}\end{center}
-\else
-  \chapter*{Acknowledgements\ULABEL}
-  %\addcontentsline{toc}{chapter}{Acknowledgements}
-\fi
-  \thispagestyle{fancy}
-  \onehalfspacing
-  #1
-  \cleardoublepage
-}
-
 \newcommand{\NPSsignature}{
+  % this page is always (iii), so force skip (used in non-twoside mode)
+  \ifnum \c@page < 3 \thisPageIntentionallyLeftBlankForced \fi
+  \setcounter{page}{3}          % do not reset to page 1
   \begin{center}
   \textbf{NAVAL POSTGRADUATE SCHOOL\\Monterey, California 93943-5000}
   \end{center}
@@ -1153,7 +1286,7 @@
   }{}
 
   \vspace{\medskipamount}
-  {\bf \@distribution}
+  {\bf \@DistributionClause}
   \vfill
 
   \newcommand{\sigspace}{1.5pc}
@@ -1174,6 +1307,7 @@
   \@rankthree        \> \iffourauthors \@rankfour \fi \\[\sigspace]
   \fi
 
+  \\[\sigspace]
   {\bf Reviewed by:} \> {\bf Released by:} \\[\sigspace]
   \\ \vspace{1.5\bigskipamount}
   \rule{2.5in}{1pt}  \> \rule{2.5in}{1pt} \\
@@ -1204,27 +1338,63 @@
   \ifNPSabstractWasPrinted
     % do not print the abstract
   \else
-    \begin{center}\textbf{\abstractname\ULABEL}\end{center}
+    \begin{center}\textbf{\ULABEL\abstractname}\end{center}
     \begin{quotation}
     \@abstract
     \end{quotation}
   \fi
 }
 
+
+%*************************************************************************
+% Commands for Special Sections
+%*************************************************************************
+
+\newcommand{\NPSexecsummary}[1]{%
+\ifnpsarticle
+  \begin{center}\textbf{\large{\ULABEL\execsummaryname}}\end{center}
+\else
+  \chapter*{\ULABEL\execsummaryname}
+  %\addcontentsline{toc}{chapter}{\execsummaryname}
+\fi
+  \def\execsummaryname{}
+  \onehalfspacing
+  #1
+  \cleardoublepage
+}
+
+\newcommand{\NPSacknowledgements}[1]{
+\ifnpsarticle
+  \begin{center}\textbf{\large{\ULABEL\acknowledgementsname}}\end{center}
+\else
+  \chapter*{\ULABEL\acknowledgementsname}
+  %\addcontentsline{toc}{chapter}{\acknowledgementsname}
+\fi
+  \def\acknowledgementsname{}
+  \onehalfspacing
+  #1
+  \cleardoublepage
+}
+
 \newcommand{\NPSbibliography}[1]{
+\ifnpsarticle
   \clearpage
+\else
+  \cleardoublepage
+\fi
   \bibliographystyle{nps_thesis}
   \raggedright      % don't automatically full justify bibliographic references
   \singlespacing    % reduce extra line breaks between entries
 \ifnpsarticle
-  \addcontentsline{toc}{section}{References}
+  \addcontentsline{toc}{section}{\ULABEL\bibname}
 \else
-  \addcontentsline{toc}{chapter}{References}
+  \addcontentsline{toc}{chapter}{\ULABEL\bibname}
 \fi
   \bibliography{#1}
   \doublespacing
 }
 
+% This is a legacy command for compatibility.  The newer command is below.
 \newcommand{\NPSdistribution}[1]{
 \ifnpsarticle
   \section*{#1}
@@ -1240,73 +1410,80 @@
     {\end{enumerate}}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Special Commands Sections
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\NPSSecurityStamp}{
-  \begin{picture}(1,1)
-  \put(0,75){\begin{minipage}{6.5in}\begin{center}{\textsf{\@securitybanner}}\end{center}\end{minipage}}
-   % top
-  \put(0,-590){\begin{minipage}{6.5in}\begin{center}{\textsf{\@securitybanner}}\end{center}\end{minipage}}
-   % bot
-  \end{picture}
+\newcommand{\NPSdistributionlist}{
+\ifnpsarticle
+  \clearpage
+\else
+  \cleardoublepage
+\fi
+\ifnpsarticle
+  %\section*{\ULABEL\distribname}
+  \begin{center}\textbf{\large{\ULABEL\distribname}}\end{center}
+  \addcontentsline{toc}{section}{\distribname}
+\else
+  \chapter*{\ULABEL\distribname}
+  \addcontentsline{toc}{chapter}{\distribname}
+\fi
+  \singlespacing    % reduce extra line breaks between entries
+  \newenvironment{distributionlist}
+    {\begin{enumerate}\itemsep \baselineskip}
+    {\end{enumerate}}
 }
 
 \newcommand{\NPStableOfContents}{
 \ifnpsarticle
-  %\section*{\contentsname\ULABEL}
-  \begin{center}\textbf{\large{\contentsname\ULABEL}}\end{center}
+  %\section*{\ULABEL\contentsname}
+  \begin{center}\textbf{\large{\ULABEL\contentsname}}\end{center}
 \else
-  \chapter*{\contentsname\ULABEL}
+  \chapter*{\ULABEL\contentsname}
 \fi
   \lhead{}\rhead{}
   \def\contentsname{}           % clear, because it will be in the header
-  \NPSSecurityStamp
-  \thispagestyle{fancy}\vspace{-1in}\tableofcontents\cleardoublepage
+  \tableofcontents
+  \cleardoublepage
 }
 
 \newcommand{\NPSlistOfFigures}{
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{\listfigurename\ULABEL}
-  %\addcontentsline{toc}{section}{List of Figures}
-  \begin{center}\textbf{\large{\listfigurename\ULABEL}}\end{center}
+  %\section*{\ULABEL\listfigurename}
+  %\addcontentsline{toc}{section}{\listfigurename}
+  \begin{center}\textbf{\large{\ULABEL\listfigurename}}\end{center}
 \else
-  \chapter*{\listfigurename\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Figures}
+  \chapter*{\ULABEL\listfigurename}
+  %\addcontentsline{toc}{chapter}{\listfigurename}
 \fi
   \def\listfigurename{}
-  \NPSSecurityStamp
-  \thispagestyle{fancy}\vspace{-1in}\listoffigures\cleardoublepage
+  \listoffigures
+  \cleardoublepage
 }
 
 \newcommand{\NPSlistOfTables}{
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{\listtablename\ULABEL}
-  %\addcontentsline{toc}{section}{List of Tables}
-  \begin{center}\textbf{\large{\listtablename\ULABEL}}\end{center}
+  %\section*{\ULABEL\listtablename}
+  %\addcontentsline{toc}{section}{\listtablename}
+  \begin{center}\textbf{\large{\ULABEL\listtablename}}\end{center}
 \else
-  \chapter*{\listtablename\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Tables}
+  \chapter*{\ULABEL\listtablename}
+  %\addcontentsline{toc}{chapter}{\listtablename}
 \fi
   \def\listtablename{}
-  \NPSSecurityStamp
-  \thispagestyle{fancy}\vspace{-1in}\listoftables\cleardoublepage
+  \listoftables
+  \cleardoublepage
 }
 
 \newcommand{\NPSlistOfAcronyms}[1]{
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
-  %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
-  \begin{center}\textbf{\large{List of Acronyms and Abbreviations\ULABEL}}\end{center}
+  %\section*{\ULABEL\listacronymname}\vspace{1pc}
+  %\addcontentsline{toc}{section}{\listacronymname}
+  \begin{center}\textbf{\large{\ULABEL\listacronymname}}\end{center}
 \else
-  \chapter*{List of Acronyms and Abbreviations\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+  \chapter*{\ULABEL\listacronymname}
+  %\addcontentsline{toc}{chapter}{\listacronymname}
 \fi
-  \def\listacronymname{List of Acronyms and Abbreviations}
-  \thispagestyle{fancy}
+  \def\listacronymname{}
   \onehalfspacing
   #1
   \cleardoublepage
@@ -1315,28 +1492,27 @@
 \newcommand{\NPSlistOfAcronymsFromFile}[1]{
   \lhead{}\rhead{}
 \ifnpsarticle
-  %\section*{List of Acronyms and Abbreviations\ULABEL}\vspace{1pc}
-  %\addcontentsline{toc}{section}{List of Acronyms and Abbreviations}
-  \begin{center}\textbf{\large{List of Acronyms and Abbreviations\ULABEL}}\end{center}
-
+  %\section*{\ULABEL\listacronymname}\vspace{1pc}
+  %\addcontentsline{toc}{section}{\listacronymname}
+  \begin{center}\textbf{\large{\ULABEL\listacronymname}}\end{center}
+  \vspace{1ex}
 \else
-  \chapter*{List of Acronyms and Abbreviations\ULABEL}
-  %\addcontentsline{toc}{chapter}{List of Acronyms and Abbreviations}
+  \chapter*{\ULABEL\listacronymname}
+  %\addcontentsline{toc}{chapter}{\listacronymname}
+  \vspace{2ex}
 \fi
-  \def\listacronymname{List of Acronyms and Abbreviations}
-  \thispagestyle{fancy}
+  \def\listacronymname{}
   \onehalfspacing
   \input{#1}
   \cleardoublepage
 }
 
-\def\bibname{\textbf{REFERENCES\ULABEL}}
 
 
-
-%
+%*************************************************************************
 % Simson Garfinkel's layout routines
 % From this PhD Thesis
+%*************************************************************************
 
 \newcommand{\minipagegraphic}[2]{
   \begin{minipage}{#1\textwidth}

@@ -1,37 +1,12 @@
 % This starts the document; the "npsreport" style is really a modified
 % report style. Feel free to use the options explained in the technical
 % report NPS-CS-11-011, included under the doc/ directory.
-\documentclass[singlespace]{npsreport}
+\documentclass[twoside,thesis]{npsreport}
 
 %
 % Put extra packages you may need to customize your thesis
 %
 \usepackage{doc,lipsum} % provides \BibTex and \lipsum macros, for demos
-
-%
-% For Example: you might find one of these useful:
-
-%\usepackage{epstopdf}        % to use .eps files for figures
-%\usepackage{bm}              % bold math if you need bold greek letters
-%\usepackage{glossaries}      % see http://en.wikibooks.org/wiki/LaTeX/Glossary
-%\usepackage{asymptote}       % for graphics
-% The asymptote package allows for very nice graphics and figures
-% Proper usage requires additional information located at:
-% http://asymptote.sourceforge.net/
-% See the gallery at this URL for examples
-
-%\usepackage{placeins}        % float placement
-% Provides \FloatBarrier which keeps figures/tables in the same section.
-% LaTeX sometimes moves them to fill up pages.
-% http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/placeins/placeins-doc.pdf
-
-%\usepackage[numbered]{mcode} % matlab code
-% The mcode package must be separately downloaded.
-% http://www.mathworks.com/matlabcentral/fileexchange/8015-m-code-latex-package
-
-%\usepackage{flafter}         % float placement
-% Ensures that figures/tables do not appear in the document before
-% they are referenced in the text.
 
 
 \title{[Title]}
@@ -45,54 +20,66 @@
 
 % Department info
 \department{Department of [Department]}
-%\thesisadvisor{[Primary Advisor]}
-%\secondreader{[Second Reader]}
+\thesisadvisor{[Primary Advisor]}
+\secondreader{[Second Reader]}
 \departmentchair{[Department Chair]}
 
 % The date you are graduating:
 \degreedate{[Month Year]}
 
 % See Thesis processor's release form for approved distribution statements.
-\distribution{Approved for public release; distribution is unlimited}
-
-% For Technical Report Signature Page:
-\SponsoringNotation{[prepared for Agency X and funded by Agency Y.]}
-\DistributionClause{Further distribution of all or part of this report is authorized.}
-% If the distribution statement is restricted (distribution codes B-F) use:
-% \DistributionClause{Further distribution of all or part of this report is subject to the Distribution Statement appearing on the front cover.}
-
+\distribution{[Some approved distribution statement. ``For Official Use Only'' is
+a control statement that is independent from the distribution statement.
+In other words, FOUO is in addition to the distribution statement and not itself
+a distribution statement.]}
 
 % Your abstract.  New paragraphs start after an empty line.
 \abstract{%
-\lipsum[1] % example text, remove me
+\begin{smark}[(FEUO)]
+\lipsum[1]
+\end{smark}
 }
 
 % Switch the below lines around, if FOUO
-\securitybanner{}  %\securitybanner{FOR OFFICIAL USE ONLY}
+\securitybanner{FOR ENTERTAINMENT USE ONLY}
+%\securitybanner{FOR OFFICIAL USE ONLY}
+% "classified documents containing FOUO information cannot bear an overall
+% document marking of FOUO" from (DoDM 5200.01-V4, Feb 24, 2012)
 
 %
 % Mandatory fields for the SF298.
 %
-\ReportType{Technical Report}
+\ReportType{Master's Thesis}
 \ReportDate{MM-DD-YYYY}         % for a thesis, graduation date
-\SponsoringAgency{[Sponsor]}    % really, for technical reports
+\SponsoringAgency{N/A}          % really, for technical reports
 \DatesCovered{MM-DD-YYYY to MM-DD-YYYY}
-\ReportClassification{Unclassified}
-\AbstractClassification{Unclassified}
-\PageClassification{Unclassified}
+
+%``By definition, information must be unclassified in order to be designated FOUO'.' 
+% from (DoDM 5200.01-V4, Feb 24, 2012)
+\ReportClassification{Unclassified//FEUO}
+\AbstractClassification{Unclassified//FEUO}
+\PageClassification{Unclassified//FEUO}
+\AbstractLimitation{UL} % UL = Unclassified / Limited distribution
+
 %
 % Optional fields for the SF298.
 %
 \RPTpreparedFor{}
+\SponsoringNotation{}
 \ContractNumber{}
 \GrantNumber{}
 \ProgramElementNumber{}
 \TaskNumber{}
 \WorkUnitNumber{}
-\POReportNumber{NPS-XX-YY-ZZ}
+\POReportNumber{}
 \Acronyms{}
 \SMReportNumber{}
 \SubjectTerms{}
+% "Each document determined to contain FOUO information shall identify the
+% originating agency or office. This information shall be clear and complete enough to allow
+% someone receiving the document to contact the office if questions or problems about the
+% designation or markings arise."
+% from (DoDM 5200.01-V4, Feb 24, 2012)
 \ResponsiblePerson{}
 \RPTelephone{}
 \SignatureOne{}
@@ -115,12 +102,15 @@
 \begin{document}
 
 \NPScover                  % Cover page
+%\NPSsignature             % NPS signature page, for tech reports
 \NPSsftne                  % SF298 form
-\NPSsignature              % Tech Report page (iii): signature page
-%\NPSthesistitle           % Thesis page (iii): title page
+\NPSthesistitle            % Title page
 \NPSabstractpage           % Abstract Page
 \NPSfrontmatter            % NPS front matter follows
 
+% This changes the chaptermark and includes the various tables
+% It must be here.
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}}
 
 %
 % If you don't need one of these, comment it out.
@@ -139,7 +129,7 @@
 }
 
 %
-% Put acknowledgements here.  
+% Put acknowledgements here.
 % New paragraphs start after an empty line.
 %
 \NPSacknowledgements{%
@@ -157,6 +147,7 @@
 % b) Use multiple files.  One chapter per file is recommended.
 %    This breaks your thesis up into logical units to edit.
 %
+\input{chapter_fouo_marking}
 \input{chapter1}
 %
 % (include other chapters here...)
@@ -188,7 +179,7 @@
 % The list is automatically properly numbered
 % and already populated with the mandatory recipients.
 %
-\NPSdistributionlist
+\NPSdistribution{Initial Distribution List}
 \begin{distributionlist}
 \item Defense Technical Information Center\\Ft. Belvoir, Virginia
 \item Dudley Knox Library\\Naval Postgraduate School\\Monterey, California

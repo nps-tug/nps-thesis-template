@@ -1,0 +1,73 @@
+% For classified theses, there is no point in marking paragraph-level
+% entries with the \begin{smark}\end{smark} environment, as in FOUO
+% since we always mark with the overall document classification.
+% So, its unneeded effort. Just mark the paragraphs manually.
+%
+
+\chapter{(U) Introduction to the Classified Thesis}\label{ch:marked}
+
+(U) This paragraph is not classified. These are not the droids you are
+looking for. Move along. 
+
+(F) This paragraph is classified F for fun.
+
+\begin{figure}[h]
+\begin{smarkenv}{(FUN//MICKEY MOUSE)}
+\framebox[\textwidth]{\parbox{\textwidth}{\lipsum[1]}} % example figure (text in a box)
+\end{smarkenv}
+\caption[{[(U) Alternate short name]}]{[(U) Figure name]}
+\end{figure}
+
+(F//MM) This is the beginning of Chapter~\ref{ch:marked}. Always have text
+between every head and subhead. The most commonly used references by our
+community are
+   books~\cite{IEEEexample:book_typical},
+   journal articles~\cite{IEEEexample:article_typical},
+   conference proceedings~\cite{IEEEexample:conf_typical},
+   online resources~\cite{IEEEhowto:IEEEtranpage},
+   theses~\cite{IEEEexample:masters},
+   private communication~\cite{IEEEexample:private}, and
+   class notes~\cite{NPSexample:notes}.
+Here are some citations\footnote{(U) These citations were taken
+from the IEEEtran example bib file.} that demonstrate nearly every bib 
+style\footnote{(U) \lipsum[10]} that exists~\cite{IEEEhowto:IEEEtranpage,
+IEEEexample:shellCTANpage,IEEEexample:bibtexuser,IEEEexample:bibtexdesign,
+IEEEexample:tamethebeast,IEEEexample:bibtexguide,
+IEEEexample:article_typical,IEEEexample:articleetal,IEEEexample:conf_typical,
+IEEEexample:book_typical,IEEEexample:articlelargepages,
+IEEEexample:articledualmonths,IEEEexample:TBParticle,
+IEEEexample:bookwitheditor,IEEEexample:book,IEEEexample:bookwithseriesvolume,
+IEEEexample:inbook,IEEEexample:inbookpagesnote,IEEEexample:incollection,
+IEEEexample:incollectionwithseries,IEEEexample:incollection_chpp,
+IEEEexample:incollectionmanyauthors,
+IEEEexample:motmanualhowpub,IEEEexample:confwithadddays,
+IEEEexample:confwithvolume,IEEEexample:confwithpaper,
+IEEEexample:confwithpapertype,IEEEexample:presentedatconf,
+IEEEexample:masters,IEEEexample:masterstype,IEEEexample:phdurl,
+IEEEexample:techrep,IEEEexample:techreptype,IEEEexample:techreptypeii,
+IEEEexample:techrepstdsub,IEEEexample:unpublished,IEEEexample:electronhowinfo,
+IEEEexample:electronhowinfo2,IEEEexample:electronorgadd,IEEEexample:uspat,
+IEEEexample:jppat,IEEEexample:frenchpatreq,
+IEEEexample:standard,IEEEexample:standardproposed,IEEEexample:draftasmisc,
+IEEEexample:miscforum,IEEEexample:whitepaper,IEEEexample:datasheet,
+IEEEexample:private,IEEEexample:miscrfc,IEEEexample:softmanual,
+IEEEexample:softonline,IEEEexample:miscgermanreg,IEEEexample:bluebookstandard
+}.
+
+\section{(U) Yet Another Section}\label{sec:marked_something}
+
+(F) \lipsum[1]
+
+\begin{table}
+\begin{smarkenv}[\textwidth]{(UNCLASSIFIED)}
+\centering
+\begin{tabular}{ | c | c | c | }
+\hline
+  1 & 2 & 3 \\ \hline\hline
+  4 & 5 & 6 \\
+  7 & 8 & 9 \\
+\hline
+\end{tabular}\vspace{4pt}
+\end{smarkenv}
+\caption{(U) [Table name]}
+\end{table}

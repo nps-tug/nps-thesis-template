@@ -1,40 +1,25 @@
 % This starts the document; the "npsreport" style is really a modified
 % report style. Feel free to use the options explained in the technical
 % report NPS-CS-11-011, included under the doc/ directory.
-\documentclass[singlespace]{npsreport}
+\documentclass[twoside,thesis,classified]{npsreport}
 
 %
 % Put extra packages you may need to customize your thesis
 %
-\usepackage{doc,lipsum} % provides \BibTex and \lipsum macros, for demos
+\usepackage{doc,lipsum}  % provides \BibTex and \lipsum macros, for demos
 
-%
-% For Example: you might find one of these useful:
-
-%\usepackage{epstopdf}        % to use .eps files for figures
-%\usepackage{bm}              % bold math if you need bold greek letters
-%\usepackage{glossaries}      % see http://en.wikibooks.org/wiki/LaTeX/Glossary
-%\usepackage{asymptote}       % for graphics
-% The asymptote package allows for very nice graphics and figures
-% Proper usage requires additional information located at:
-% http://asymptote.sourceforge.net/
-% See the gallery at this URL for examples
-
-%\usepackage{placeins}        % float placement
-% Provides \FloatBarrier which keeps figures/tables in the same section.
-% LaTeX sometimes moves them to fill up pages.
-% http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/placeins/placeins-doc.pdf
-
-%\usepackage[numbered]{mcode} % matlab code
-% The mcode package must be separately downloaded.
-% http://www.mathworks.com/matlabcentral/fileexchange/8015-m-code-latex-package
-
-%\usepackage{flafter}         % float placement
-% Ensures that figures/tables do not appear in the document before
-% they are referenced in the text.
+% provides bstctlcite (needed to control bib options, to add markings)
+\makeatletter
+\def\bstctlcite{\@ifnextchar[{\@bstctlcite}{\@bstctlcite[@auxout]}}
+\def\@bstctlcite[#1]#2{\@bsphack
+  \@for\@citeb:=#2\do{%
+    \edef\@citeb{\expandafter\@firstofone\@citeb}%
+    \if@filesw\immediate\write\csname #1\endcsname{\string\citation{\@citeb}}\fi}%
+  \@esphack}
+\makeatother
 
 
-\title{[Title]}
+\title{[(U) Title]}
 
 % Student info
 \author{[Author Name]}
@@ -45,54 +30,70 @@
 
 % Department info
 \department{Department of [Department]}
-%\thesisadvisor{[Primary Advisor]}
-%\secondreader{[Second Reader]}
+\thesisadvisor{[Primary Advisor]}
+\secondreader{[Second Reader]}
 \departmentchair{[Department Chair]}
 
 % The date you are graduating:
 \degreedate{[Month Year]}
 
 % See Thesis processor's release form for approved distribution statements.
-\distribution{Approved for public release; distribution is unlimited}
-
-% For Technical Report Signature Page:
-\SponsoringNotation{[prepared for Agency X and funded by Agency Y.]}
-\DistributionClause{Further distribution of all or part of this report is authorized.}
-% If the distribution statement is restricted (distribution codes B-F) use:
-% \DistributionClause{Further distribution of all or part of this report is subject to the Distribution Statement appearing on the front cover.}
-
+\distribution{[Some Appropriate Distribution statement. Something like:
+Distribution authorized to U.S. Government Agencies and their Contractors
+(fill in reason) (date of determination). Other requests for this document
+must be referred to President, Code 261, Naval Postgraduate School, Monterey,
+CA 93943-5000 via the Defense Technical Information Center, 8725 John J.
+Kingman Rd., STE 0944, Ft. Belvoir, VA 22060-6218.]}
 
 % Your abstract.  New paragraphs start after an empty line.
 \abstract{%
-\lipsum[1] % example text, remove me
+(U) \lipsum[1]
 }
 
-% Switch the below lines around, if FOUO
-\securitybanner{}  %\securitybanner{FOR OFFICIAL USE ONLY}
+% Security Banner
+\securitybanner{F//MM//SPECIAL//TOM FOOLERY}
+\declassifydate{[1-APR-2099]}
+\classifiedby{[Someone]}
+\classifiedfrom{[Multiple Sources]}
+% The banner marking for the document and all pages shall be the overall 
+% classification of the compilation. The overall classification shall be 
+% marked conspicuously at the top and bottom of each page and on the outside 
+% of the front and back covers. (DoDM 5200.01-V2, Feb 24, 2012)
 
 %
 % Mandatory fields for the SF298.
 %
-\ReportType{Technical Report}
+\ReportType{Master's Thesis}
 \ReportDate{MM-DD-YYYY}         % for a thesis, graduation date
-\SponsoringAgency{[Sponsor]}    % really, for technical reports
+\SponsoringAgency{N/A}          % really, for technical reports
 \DatesCovered{MM-DD-YYYY to MM-DD-YYYY}
-\ReportClassification{Unclassified}
-\AbstractClassification{Unclassified}
-\PageClassification{Unclassified}
+
+%``By definition, information must be unclassified in order to be designated FOUO'.' 
+% from (DoDM 5200.01-V4, Feb 24, 2012)
+\ReportClassification{Fun}
+\AbstractClassification{Jolly}
+\PageClassification{Amusing}
+\AbstractLimitation{Fun}
+
 %
 % Optional fields for the SF298.
 %
 \RPTpreparedFor{}
+\SponsoringNotation{}
 \ContractNumber{}
 \GrantNumber{}
 \ProgramElementNumber{}
 \TaskNumber{}
 \WorkUnitNumber{}
-\POReportNumber{NPS-XX-YY-ZZ}
+\POReportNumber{}
 \Acronyms{}
 \SMReportNumber{}
 \SubjectTerms{}
+% "Each document determined to contain FOUO information shall identify the
+% originating agency or office. This information shall be clear and complete enough to allow
+% someone receiving the document to contact the office if questions or problems about the
+% designation or markings arise."
+% from (DoDM 5200.01-V4, Feb 24, 2012)
 \ResponsiblePerson{}
 \RPTelephone{}
 \SignatureOne{}
@@ -115,12 +116,15 @@
 \begin{document}
 
 \NPScover                  % Cover page
+%\NPSsignature             % NPS signature page, for tech reports
 \NPSsftne                  % SF298 form
-\NPSsignature              % Tech Report page (iii): signature page
-%\NPSthesistitle           % Thesis page (iii): title page
+\NPSthesistitle            % Title page
 \NPSabstractpage           % Abstract Page
 \NPSfrontmatter            % NPS front matter follows
 
+% This changes the chaptermark and includes the various tables
+% It must be here.
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}}
 
 %
 % If you don't need one of these, comment it out.
@@ -128,27 +132,45 @@
 \NPStableOfContents
 \NPSlistOfFigures
 \NPSlistOfTables
-\NPSlistOfAcronymsFromFile{acronyms}
+
+\NPSlistOfAcronyms{
+\begin{description}
+\item[(U) A] Amusing
+\item[(U) DOD] Department of Deference\footnote{(U) May also appear DoD for historical reasons.}
+\item[(U) F] Fun
+\item[(U) J] Jolly
+\item[(U) MM] Mickey Mouse
+\item[(U) RBRB] Really Big Rubber Band
+\item[(U) PC] Pinhole Camera
+\item[(U) U] Unfunny
+\end{description}
+}
 
 %
 % Put Executive summary here.
 % New paragraphs start after an empty line.
 %
-\NPSexecsummary{%
-\lipsum[1-4] % example text; remove me
+\NPSexecsummary{
+(F//MM) \lipsum[1]
+
+(F//MM) \lipsum[2]
 }
 
 %
-% Put acknowledgements here.  
+% Put acknowledgements here.
 % New paragraphs start after an empty line.
 %
-\NPSacknowledgements{%
-\lipsum[1-3] % example text; remove me
+\NPSacknowledgements{
+(F//MM) I dedicate this thesis to Tom Cruise. Remember,
+``in the event that you are unsuccessful, the Agency will disavow
+you and your mission.''
 }
 
 % Start layout for the NPS body
 \NPSbody
 
+% Activiates classification markings for bibliographies
+\bstctlcite{NPS:BSTctl}
 
 % CHAPTERS
 % You have two options on how to structure your thesis:
@@ -157,11 +179,10 @@
 % b) Use multiple files.  One chapter per file is recommended.
 %    This breaks your thesis up into logical units to edit.
 %
-\input{chapter1}
+\input{chapter_class_marking}
 %
 % (include other chapters here...)
 %
-
 
 % APPENDICES
 % You have two recommended options for your appendix:
@@ -169,26 +190,23 @@
 % b) Multiple appendices. Look under the examples directory for a demo of
 %   multiple appendices.
 %
-\NPSappendixTOC{[My Appendix Title]}
-\input{appendix1}
-
 
 % REFERENCES
 % List all your BibTeX reference source files (ending in *.bib extension)
 %
-\NPSbibliography{thesis}
-
+\NPSbibliography{nps_class_meta,thesis}
+% nps_class_meta turns on classified marking logic for bibliography entries
 
 %
 % This is the official end of the thesis.
 %
-\NPSend
+\NPSend        
 
 % DISTRIBUTION LIST
 % The list is automatically properly numbered
 % and already populated with the mandatory recipients.
 %
-\NPSdistributionlist
+\NPSdistribution{(U) Initial Distribution List}
 \begin{distributionlist}
 \item Defense Technical Information Center\\Ft. Belvoir, Virginia
 \item Dudley Knox Library\\Naval Postgraduate School\\Monterey, California
@@ -205,7 +223,6 @@
 % Officer students in the Space Ops/Space Engineering Program or in the Information Warfare/Information Systems and Operations are also required to show:
 %\item Head, Information Operations and Space Integration Branch,\\ PLI/PP\&O/HQMC, Washington, DC
 \end{distributionlist}
-
 
 \end{document}
 
