@@ -19,7 +19,8 @@ IEEEtran homepage
   author        = "Michael Shell",
   title         = "{IEEE}tran Homepage",
   url           = "http://www.michaelshell.org/tex/ieeetran/",
-  year          = "2008"
+  year          = "2008",
+  classification = "(F//MM)"
 }
 
 
@@ -29,16 +30,6 @@ the distribution site for IEEEtran.bst
   title         = "{IEEE}tran Webpage on {CTAN}",
   url           = "http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/",
   year          = "2008"
-}
-
-
-the IEEE website
-sort key is needed for sorting styles
-@electronic{IEEEexample:IEEEwebsite,
-  title         = "The {IEEE} Website",
-  url           = "http://www.ieee.org/",
-  year          = "2008",
-  key           = "IEEE"
 }
 
 
@@ -191,24 +182,9 @@ page 21, reference #8.
 }
 
 
-journal article to be published as a misc entry type
-date information like month and year is optional 
-However, the article form like that below may be a better approach.
-From the May 2002 issue of "IEEE Journal of Selected Areas in 
-Communication", page 725, reference #3.
-@misc{IEEEexample:TBPmisc,
-  author        = "M. Coates and A. Hero and R. Nowak and B. Yu",
-  title         = "Internet Tomography",
-  howpublished  = "{IEEE} Signal Process. Mag.",
-  month         = may,
-  year          = "2002",
-  note          = "to be published"
-}
-
-
 journal article to be published as an article entry type
 year is required, so if absent, use the year field to hold
-the "submitted for publication" in order to avoid a warning for
+the "accepted for publication" in order to avoid a warning for
 the missing year field.
 From the June 2002 issue of "IEEE Transactions on Information Theory",
 page 1461, reference #21.
@@ -217,7 +193,7 @@ page 1461, reference #21.
   title         = "On the Minimum Distance of Parallel and Serially
                    Concatenated Codes",
   journal       = "{IEEE} Trans. Intell. Transp. Syst.",
-  year          = "submitted for publication"
+  year          = "accepted for publication"
 }
 
 
@@ -695,19 +671,6 @@ page 556, reference #9.
 }
 
 
-a periodical
-From the April 2001 issue of "IEEE/ACM Transactions on Networking",
-page 160, reference #1.
-sort key is needed for sorting styles
-@periodical{IEEEexample:periodical,
-  title         = "{IEEE} Personal Commun. Mag., Special Issue on Wireless {ATM}",
-  volume        = "3",
-  month         = aug,
-  year          = "1996",
-  key           = "IEEE"
-}
-
-
 standard, IEEE does not use the address for standards, but it is good
 to provide one for BibTeX styles that use it.
 From the August 2001 issue of "IEEE/ACM Transactions on Networking",
@@ -881,6 +844,15 @@ standards.
   month         = May,
   year          = "1999",
   url           = "http://www.ccsds.org/documents/pdf/CCSDS-101.0-B-4.pdf"
+}
+
+a class notes example.
+@misc{NPSexample:notes,
+  title         = "Signal integrity and interconnects for high-speed applications",
+  organization  = "Department of Electrical and Computer Engineering,
+                   University of Illinois at Urbana-Champaign",
+  howpublished  = "class notes for ECE497-JS",
+  year          = "Winter 1997"
 }
 
 

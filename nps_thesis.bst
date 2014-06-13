@@ -1,4 +1,10 @@
 %%
+%% nps_thesis.bst
+%% BibTeX Bibliography Style file for NPS Theses and Tech Reports
+%% Version 1.3
+%%
+%%*************************************************************************
+%%
 %% IEEEtran.bst
 %% BibTeX Bibliography Style file for IEEE Journals and Conferences (unsorted)
 %% Version 1.13 (2008/09/30)
@@ -178,6 +184,10 @@ FUNCTION {default.name.latex.cmd}{ "" }
 % The default URL prefix.
 FUNCTION {default.name.url.prefix}{ "[Online]. Available:" }
 
+% Related to 'classification' of bibliographic entries
+FUNCTION {default.classification.show}{ #0 } % 0 is off, #1 is on
+FUNCTION {default.classification.unmarked}{ "(U)" }
+
 
 % Other controls that cannot be accessed via IEEEtranBSTCTL entry type.
 
@@ -249,7 +259,7 @@ FUNCTION {bbl.revision}{ "Rev." }
 FUNCTION {bbl.series}{ "ser." }
 FUNCTION {bbl.standard}{ "Std." }
 FUNCTION {bbl.techrep}{ "Tech. Rep." }
-FUNCTION {bbl.mthesis}{ "Master's thesis" }
+FUNCTION {bbl.mthesis}{ "master's thesis" }
 FUNCTION {bbl.phdthesis}{ "Ph.D. dissertation" }
 FUNCTION {bbl.st}{ "st" }
 FUNCTION {bbl.nd}{ "nd" }
@@ -340,6 +350,9 @@ ENTRY
     CTLname_format_string
     CTLname_latex_cmd
     CTLname_url_prefix
+    CTLclassification_show
+    CTLclassification_unmarked
+    classification
   }
   {}
   { label }
@@ -370,7 +383,8 @@ INTEGERS { is.use.number.for.article
            max.num.names.before.forced.et.al
            num.names.shown.with.forced.et.al
            is.use.alt.interword.spacing
-           is.dash.repeated.names}
+           is.dash.repeated.names
+           classification.show}
 
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -385,7 +399,8 @@ STRINGS { bibinfo
           ALTinterwordstretchfactor
           name.format.string
           name.latex.cmd
-          name.url.prefix}
+          name.url.prefix
+          classification.unmarked}
 
 
 
@@ -406,6 +421,8 @@ FUNCTION {initialize.controls}
   default.name.format.string 'name.format.string :=
   default.name.latex.cmd 'name.latex.cmd :=
   default.name.url.prefix 'name.url.prefix :=
+  default.classification.show 'classification.show :=
+  default.classification.unmarked 'classification.unmarked :=
 }
 
 
@@ -1350,7 +1367,7 @@ FUNCTION {format.date.electronic}
     { swap$ 
         { pop$ }
         { "there's a month but no year in " cite$ * warning$
-        pop$ ")" * "(" swap$ *
+        pop$ ")." * "(" swap$ *
         this.to.prev.status
         punct.no 'this.status.punct :=
         space.normal 'this.status.space :=
@@ -1360,8 +1377,8 @@ FUNCTION {format.date.electronic}
       if$
     }
     { swap$ 
-        { swap$ pop$ ")" * "(" swap$ * }
-        { "(" swap$ * ", " * swap$ * ")" * }
+        { swap$ pop$ ")." * "(" swap$ * }
+        { "(" swap$ * ", " * swap$ * ")." * }
       if$
     this.to.prev.status
     punct.no 'this.status.punct :=
@@ -1942,7 +1959,7 @@ FUNCTION {format.url}
       this.status.std
       cap.yes 'status.cap :=
       name.url.prefix " " *
-      "\url{" * url * "}." *
+      "\url{" * url * "}" *
       punct.no 'this.status.punct :=
       punct.period 'prev.status.punct :=
       space.normal 'this.status.space :=
@@ -1953,6 +1970,36 @@ FUNCTION {format.url}
 }
 
 
+
+%% Classification marking
+
+FUNCTION {format.classification}
+{
+  classification.show
+  { this.to.prev.status
+    this.status.std
+  }
+  {}
+  if$
+
+  classification empty$
+  { classification.show
+	{ classification.unmarked }
+	{ "" }
+	if$
+  }
+  { classification.show
+	{ classification }
+	{ "" }
+	if$
+  }
+  if$
+
+  classification.show
+  { punct.no 'this.status.punct := }
+  {}
+  if$
+}
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -1969,6 +2016,7 @@ FUNCTION {article}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.journal "journal" bibinfo.check "journal" output.warn
   format.volume output
@@ -1990,6 +2038,7 @@ FUNCTION {book}
     { format.authors output.nonnull }
   if$
   name.or.dash
+  format.classification output
   format.book.title.edition output
   format.series output
   author empty$
@@ -2011,6 +2060,7 @@ FUNCTION {booklet}
   if.url.alt.interword.spacing
   format.authors output
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.howpublished "howpublished" bibinfo.check output
   format.organization "organization" bibinfo.check output
@@ -2029,6 +2079,7 @@ FUNCTION {electronic}
   format.authors output
   name.or.dash
   format.date.electronic output
+  format.classification output
   format.article.title.electronic output
   format.howpublished "howpublished" bibinfo.check output
   format.organization "organization" bibinfo.check output
@@ -2049,6 +2100,7 @@ FUNCTION {inbook}
     { format.authors output.nonnull }
   if$
   name.or.dash
+  format.classification output
   format.book.title.edition output
   format.series output
   format.address.publisher.date output
@@ -2068,6 +2120,7 @@ FUNCTION {incollection}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.in.booktitle.edition "booktitle" output.warn
   format.series output
@@ -2089,6 +2142,7 @@ FUNCTION {inproceedings}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.in.booktitle "booktitle" output.warn
   format.series output
@@ -2115,6 +2169,7 @@ FUNCTION {manual}
   if.url.alt.interword.spacing
   format.authors output
   name.or.dash
+  format.classification output
   format.book.title.edition "title" output.warn
   format.howpublished "howpublished" bibinfo.check output 
   format.organization "organization" bibinfo.check output
@@ -2132,6 +2187,7 @@ FUNCTION {mastersthesis}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.master.thesis.type output.nonnull
   format.school "school" bibinfo.warn output
@@ -2149,6 +2205,7 @@ FUNCTION {misc}
   if.url.alt.interword.spacing
   format.authors output
   name.or.dash
+  format.classification output
   format.article.title output
   format.howpublished "howpublished" bibinfo.check output 
   format.organization "organization" bibinfo.check output
@@ -2168,6 +2225,7 @@ FUNCTION {patent}
   if.url.alt.interword.spacing
   format.authors output
   name.or.dash
+  format.classification output
   format.article.title output
   format.patent.nationality.type.number output
   format.patent.date output
@@ -2184,6 +2242,7 @@ FUNCTION {periodical}
   if.url.alt.interword.spacing
   format.editors output
   name.or.dash
+  format.classification output
   format.book.title "title" output.warn
   format.series output
   format.volume output
@@ -2202,6 +2261,7 @@ FUNCTION {phdthesis}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.phd.thesis.type output.nonnull
   format.school "school" bibinfo.warn output
@@ -2219,6 +2279,7 @@ FUNCTION {proceedings}
   if.url.alt.interword.spacing
   format.editors output
   name.or.dash
+  format.classification output
   format.book.title "title" output.warn
   format.series output
   format.volume output
@@ -2241,6 +2302,7 @@ FUNCTION {standard}
   if.url.alt.interword.spacing
   format.authors output
   name.or.dash
+  format.classification output
   format.book.title "title" output.warn
   format.howpublished "howpublished" bibinfo.check output 
   format.organization.institution.standard.type.number output
@@ -2258,6 +2320,7 @@ FUNCTION {techreport}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.howpublished "howpublished" bibinfo.check output 
   format.institution "institution" bibinfo.warn output
@@ -2276,12 +2339,33 @@ FUNCTION {unpublished}
   if.url.alt.interword.spacing
   format.authors "author" output.warn
   name.or.dash
+  format.classification output
   format.article.title "title" output.warn
   format.date output
   format.note "note" output.warn
   format.url output
   fin.entry
   if.url.std.interword.spacing
+}
+
+% This is in its own function, to get around common fn line length limits
+FUNCTION {ClassificationCTL}
+{
+  CTLclassification_show
+  empty$
+    { skip$ }
+    { CTLclassification_show
+      string.to.integer
+      'classification.show :=
+    }
+  if$
+  CTLclassification_unmarked
+  missing$
+    { skip$ }
+    { CTLclassification_unmarked
+      'classification.unmarked :=
+    }
+  if$
 }
 
 
@@ -2381,14 +2465,13 @@ FUNCTION {IEEEtranBSTCTL}
       'name.url.prefix :=
     }
   if$
-
-
   num.names.shown.with.forced.et.al max.num.names.before.forced.et.al >
     { "CTLnames_show_etal cannot be greater than CTLmax_names_forced_etal in " cite$ * warning$ 
       max.num.names.before.forced.et.al 'num.names.shown.with.forced.et.al :=
     }
     { skip$ }
   if$
+  ClassificationCTL
 }
 
 
