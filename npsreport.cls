@@ -739,6 +739,8 @@
   \addcontentsline{toc}{chapter}{\appendixname}  % Insert ``Appendix'' into TOC
   \def\chaptername{\appendixname}  % not sure why this is needed, but it is
 \fi
+  \setcounter{equation}{0}
+  \renewcommand{\theequation}{A.\arabic{equation}}
 }
 
 % Use this to change to appendix mode and insert ``Appendix: Title'' into the Table of Contents.
@@ -755,6 +757,8 @@
   \chapter*{APPENDIX:~#1}
   \addcontentsline{toc}{chapter}{\appendixname:~#1}  % Insert ``Appendix: Title'' into TOC
 \fi
+  \setcounter{equation}{0} % need to re-set b/c sections are unnumbered
+  \renewcommand{\theequation}{A.\arabic{equation}}
 }
 
 % Use this to change to appendix mode and insert ``Appendices'' into the Table of Contents.
