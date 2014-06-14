@@ -770,8 +770,10 @@
 \ifnpsarticle
   \cftaddtitleline{toc}{section}{\appendicesname}{} % Insert ``Appendices'' into TOC
 \else
-  \cftaddtitleline{toc}{chapter}{\appendicesname}{} % Insert ``Appendices'' into TOC
+  %\cftaddtitleline{toc}{chapter}{\appendicesname}{} % Insert ``Appendices'' into TOC
   \def\chaptername{\appendixname}  % not sure why this is needed, but it is
+  \addtocontents{toc}{\protect\renewcommand*\protect\cftchappresnum{\appendixname\ }}
+  \addtocontents{toc}{\protect\setlength{\cftchapnumwidth}{\widthof{\textbf{\appendixname~999~}}}}
 \fi
 }
 
