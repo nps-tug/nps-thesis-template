@@ -484,7 +484,7 @@
   \def\listtablename{\textbf{LIST OF TABLES}}
   \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
   \def\distribname{\textbf{INITIAL DISTRIBUTION LIST}}
-  \def\acknowledgementsname{\textbf{ACKNOWLEDGEMENTS}}
+  \def\acknowledgementsname{\textbf{ACKNOWLEDGMENTS}}
   \def\execsummaryname{\textbf{EXECUTIVE SUMMARY}}
   \def\indexname{\textbf{\ULABELINDEX}}
   \def\bibname{\textbf{LIST OF REFERENCES}}
@@ -494,7 +494,7 @@
   \def\contentsname{Table of Contents}
   \def\listacronymname{List of Acronyms and Abbreviations}
   \def\distribname{Initial Distribution List}
-  \def\acknowledgementsname{Acknowledgements}
+  \def\acknowledgementsname{Acknowledgments}
  \def\execsummaryname{Executive Summary}
   \def\bibname{List of References}
 \fi
@@ -1374,6 +1374,10 @@
   \onehalfspacing
   #1
   \cleardoublepage
+}
+
+\newcommand{\NPSacknowledgments}[1]{ % make American spelling compatible
+ \NPSacknowledgements{#1}
 }
 
 \newcommand{\NPSbibliography}[1]{
