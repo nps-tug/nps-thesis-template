@@ -1,0 +1,100 @@
+
+\begin{lstlisting}
+\documentclass[twoside,thesis]{npsreport}   (*@\label{code:documentclass}\comment{See Section~\ref{sec:documentclass} for details.}@*)
+
+\title{[Title]} (*@\comment{Your thesis or report title.}@*)
+\author{[Author Name]} (*@\comment{Your name. See examples for multiple authors.}@*)
+\rank{[Rank, Service]} (*@\comment{Your rank. If you are a civilian, use \upshape{\texttt{\textbackslash rank\{Civilian, Organization Name\}}}.}@*)
+
+\degree{Master of Science in [Degree]}  (*@\comment{Your NPS degree, written out. See the examples for dual degree macros.}@*)
+\degreeabbreviation{MS}    (*@\comment{This should be either MS, MBA or MA.}@*)
+\prevdegrees{[B.S., My Old School, Year]} (*@\comment{Degree from your previous school. If you have more than one degree, you can do \upshape{\texttt{\textbackslash prevdegrees\{B.S., Harvard, 1901\textbackslash\textbackslash M.S., Yale, 1904\}}}.}@*)
+
+\department{Department of [Department]} (*@\comment{The name of your academic department.}@*)
+\thesisadvisor{[Primary Advisor]} 
+\secondreader{[Second Reader]}
+\departmentchair{[Department Chair]} (*@\comment{The name of your department chair. Per NPS style, do not use Dr., Prof., or similar titles.}@*)
+\degreedate{[Month Year]}   (*@\comment{The date you are graduating.}@*)
+\distribution{Approved for public release; distribution is unlimited}   (*@\comment{Review your thesis release form for approved distribution statements.}@*)
+
+\abstract{
+  [INSERT ABSTRACT HERE] (*@\comment{Your abstract goes here, or you can put the text in a file and use \upshape{\texttt{\textbackslash input\{abstract.tex\}}} }@*)
+}
+
+\securitybanner{} (*@\comment{Leave blank, unless FOUO or classified. See Section~\ref{sec:classified} for details.}@*)
+\ReportType{Master's Thesis} (*@\comment{Master's Thesis, Technical Report, or Dissertation}@*)
+\ReportDate{MM-DD-YYYY} (*@\comment{SF298: The final date of your report.}@*)
+\DatesCovered{2102-06-01 to 2104-10-31} (*@\comment{SF298: The range of dates relevant to your report.}@*)
+\SponsoringAgency{Department of the Navy}   (*@\comment{SF298: Your sponsoring organization (Department of the Air Force, Department of the Navy, \etc)}@*)
+\ReportClassification{Unclassified}  (*@\comment{SF298: classification of report.}@*)
+\AbstractClassification{Unclassified} (*@\comment{SF298: classification of the abstract.}@*)
+\PageClassification{Unclassified} (*@\comment{SF298: classification of the SF298 form itself.}@*)
+\POReportNumber{} (*@\comment{SF298: for Technical Reports, the technical report number.}@*)
+\RPTpreparedFor{}
+\ContractNumber{}
+\GrantNumber{}
+\ProgramElementNumber{}
+\TaskNumber{}
+\WorkUnitNumber{}
+\Acronyms{}
+\SMReportNumber{}
+\SubjectTerms{}
+\ResponsiblePerson{}
+\RPTelephone{}
+
+\SignatureOne{}
+\SignatureTwo{} (*@\comment{Optional: Each author's signature line can include an image of a signature; specifying the width as 2 inches is recommended.}@*)
+
+\SupplementaryNotes{The views expressed in this document are those of
+  the author and do not reflect the official policy or position of the
+  Department of Defense or the U.S. Government.
+  IRB Protocol Number: N/A    (*@\comment{If your thesis has an Institutional Review Board (IRB) protocol number, replace N/A with the the appropriate IRB number given to you or your advisor when your experiment was approved; this is \emph{required} for theses that use human subjects to collect data.  Ask your advisor for more information if this applies.}@*)
+}
+\makeatletter (*@\label{code:note1}@*)
+\@removefromreset{footnote}{chapter} 
+\makeatother  (*@\label{code:note2}@*) (*@\comment{Lines~\ref{code:note1}--\ref{code:note2} prevent footnotes from being reset at each chapter. Comment them out to have footnotes reset with each chapter.}@*)
+\end{lstlisting}
+
+
+\subsection{Document Class Options}\label{sec:documentclass}
+The \verb|documentclass| command (see Section~\ref{sec:prologue}, Line~\ref{code:documentclass}) 
+specifies that the document uses the |npsreport.cls|
+  file and all settings contained therein.  There are  several optional
+  parameters, each separated by comma: 
+  \begin{description}
+    \item[article, thesis, or dissertation] choose the appropriate one 
+    for the case.
+    \item[12pt, 11pt, or 10pt] Font size selection.  With no option given, 12pt is the default.
+    \item[times, arial, or courier]  Font selection.  With no option given, times is the default.
+    \item[twoauthors, threeauthors, or fourauthors] use these options if you have 
+    several authors.  Single authors need no option. 
+    \item[twoadvisors] if you have two advisors rather than a second reader. 
+    \item[fivemembers,advisoralone] dissertations by default have six committee members. 
+    If you have only five members, use the |fivemembers| option; if you want the fifth member
+    to be centered on the final line alone (which looks rather nice and symmetric), use the |advisorsalone| option.
+    \item[twoside] prints on both sides of the same sheet of paper; recommended.
+    \item[classified] if you are using an approved computer system to 
+    write your thesis on sensitive research.
+    \item[index] if you are including a keyword index page of your 
+    thesis important terms.
+    \item[acronym] for a more sophisticated handling of acronyms.  See 
+    |acronyms.tex| for additional information.
+    \item[traditional] prints the thesis in the style of the NPS
+      Microsoft Word thesis template. Although you are free to use
+      this style, the newer style is approved and looks quite nice 
+    when no option is given.
+    \item[singlespace] if you prefer single-spaced paragraphs, though it 
+    may be a little harder to read. This is not approved for an NPS
+    Masters Thesis, but is approved for NPS technical reports.
+  \end{description}
+
+\subsection{Multiple Authors and Multiple Advisors}
+The template supports a variety of options:
+\begin{itemize}
+\item Two authors
+\item One advisor and one second reader
+\item Two co-advisors
+\item One advisor and one co-advisor and one second reader
+\item \etc
+\end{itemize}
+Each of these require extra macros. See examples for populating the appropriate macros.

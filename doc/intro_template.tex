@@ -3,347 +3,123 @@ This chapter describes how to get the NPS report template and how to
 use it.
 
 \section{Getting the Template}
-Get a copy of the \texttt{npsthesis.zip} distribution from
-\url{http://simson.net/npsthesis/npsthesis.zip}. Unpack this into a
-directory on your computer. This is where we will be working for the
+The template is distributed by the thesis processor on the
+wiki page NPS wiki page\footnote{Available at \url{https://wiki.nps.edu/display/LaTexTP/LaTex+Thesis+Portal};
+you may need an NPS network account to log-in and download it.}, distributed as the file |NPS_LaTeX_Template.zip|. 
+Unpack this into a directory on your computer. This is where we will be working for the
 remainder of this chapter.
-
-\subsection{\LaTeX{} Files Included in the Template Package}
-
-Below you will find the important files in the package.
-
-These files are used for all document types:
+Below you will find the important files distributed with the template package.
 
 \begin{description}
-\item[Makefile] The Makefile to make the thesis
-
-\item[appendix1.tex] The example file for an appendix.
-
-\item[authorindex.*] The \LaTeX~authorindex package, for making
-the Referenced Authors page.
-
-\item[chapter1.tex] The example file for each chapter.
-
-\item[chngcntr.sty] The \texttt{chngcntr} package, for changing
-the way that \LaTeX~displays its counters.
-
-\item[fixerrors.py] A python program that removes the breaks in the
-\texttt{.bbl} file inserted by Bib\TeX~and improper authorindex items.
-
-\item[npsreport.cls] The style class file for NPS documents.
-
-\item[nps-plain.bst] A Bib\TeX~style file that makes references in a style that is acceptable to NPS for which the references appear sorted by author's last name.
-
-\item[nps-plain-unsorted.bst] A Bib\TeX~style file that makes
-  references in a style that is acceptable to NPS for which the
-  references appear in  the order of appearance.
-
-\item[nps-plain-classified.bst] A Bib\TeX~style file that makes references in a style that is acceptable to NPS for a classified thesis. References are sorted by last name.
-
-\item[nps-plain-classified-unsorted.bst] A Bib\TeX~style file that makes references in a style that is acceptable to NPS for a classified thesis. References appear in the order of appearance.
-
-\item[nps\_logo\_3clr\_cymk.pdf] NPS Logo, 3 color, in format suitable for printing
-
-\item[thesis.tex] A skeletal thesis \LaTeX{} template file
-
-\item[thesis.bib] A skeletal thesis bibliography file
+\item[acronyms.tex*] \hfill \\ 
+An example file for acronyms.
+\item[appendix1.tex*] \hfill \\ 
+An example file for an appendix.
+\item[chapter1.tex*] \hfill \\ 
+An example file for a chapter.
+\item[thesis.bib*] \hfill \\ 
+An example bibliography file
+\item[thesis.tex*] \hfill \\ 
+A skeletal thesis \LaTeX{} template file
+\item[contribs/] \hfill \\ 
+A directory of user-contributed tools related to thesis proposals and thesis preparation. None of these tools are required for using the basic template.
+\item[doc/] \hfill \\ 
+A directory, holds documentation for the template.
+\item[examples/] \hfill \\ 
+A directory, holds examples. These build via the Makefile. To use one, replace |thesis.tex| with one of these examples.
+\item[figs/] \hfill \\
+Images required to lay-out the thesis front-matter.
+\item[nps\_sf298.sty] \hfill \\ 
+The style file for preparing the SF298 form.
+\item[nps\_thesis.bst] \hfill \\ 
+A Bib\TeX{} style file that typesets references in a manner acceptable to NPS.
+\item[npsreport.cls] \hfill \\ 
+The \LaTeX{} class file for NPS documents.
 \end{description}
 
-These files are skeletal files for creating your own documents. Use
-them as a template by removing our text and inserting your own:
+It is intended that you edit or replace the starred files.
 
-\begin{description}
-\item[thesis.tex] A one-author thesis.
-\item[thesis\_two.tex] A two-author thesis.
-\item[thesis\_coadvisors.tex] A one-author thesis with two
-  co-advisors.
-\item[thesis.bib] A thesis BiB\TeX{} input file.
-\end{description}
 
-You will also find |techreport.tex|, which is the \LaTeX{} source code for this document.
 
-\subsection{\LaTeX{} Demonstration Files}
+\section{NPS Thesis Sections}
+When writing your thesis, the sections should be in this order:
+\begin{enumerate}
+  \item[] \hspace{-3em} \underline{\textit{Front-matter}}
+  \item Cover Page
+  \item Signature Page
+  \item SF298
+  \item Table of Contents
+  \item List of Figures*
+  \item List of Tables*
+  \item List of Acronyms*
+  \item Executive Summary*
+  \item Acknowledgements*
+  \item[] \hspace{-3em} \underline{\textit{Main Body}}
+  \item Chapters
+  \item[] \hspace{-3em} \underline{\textit{Back-matter}}
+  \item Appendices
+  \item Index*
+  \item References
+  \item Initial Distribution List
+\end{enumerate}
 
-In addition to the files in the |npsthesis.zip| file, we have made
-available a set of demonstration documents. These can be downloaded
-from \url{http://simson.net/npsthesis/demos.zip} and includes the following files:
-
-\begin{description}
-\item[demo\_classified.tex] A demonstration classified master's thesis that
-  shows how to use all of the macros we have created for labeling
-  classified paragraphs, figures and references. To avoid confusion,
-  this document is classified F//MM//SPECIAL//TOM FOOLERY (F is for Fun).
-\item[demo\_fouo.tex] A demonstration For Official Use Only
-  thesis. To avoid confusion this document is classified For
-  Entertainment Use Only (FEUO).
-\item[demo\_phd.tex] A demonstration PhD thesis.
-\item[demo\_report.tex] A demonstration technical report.
-\item[demo\_thesis.tex] A demonstration master's thesis.
-\item[demo\_traditional.tex] A demonstration thesis in the traditional
-  NPS master's thesis style.
-\item[demo\_twoauthor.tex] A demonstration master's thesis with two authors.
-\end{description}
+The starred items do not appear in the Table of Contents.  Not all theses
+will have an Index, but that can be generated automatically with
+\LaTeX{}.  If your thesis only has one appendix, then it is not
+lettered, but just referred to as the Appendix.  If you have multiple
+appendices, then they are lettered.  If you do not have any tables,
+then the list of tables is not included.  This also applies to list of
+figures and acronyms.  An Executive Summary is required by
+some departments.
 
 
 \section{Creating Your Document}
-The skeletal |thesis.tex| file consists of two main parts: the
+The skeletal |thesis.tex| file contains example
+text demonstrating macros that need to be filled-in to use the template.
+For example, the command |\foo{|\textcolor{red}{\texttt{[sample text]}}|}|
+is a macro named |foo| that you should modify, replacing
+\textcolor{red}{\texttt{[sample text]}} with your own input. The proper way to edit this
+is by changing it to be |\foo{real text}|, and \emph{not} |\foo{[real text]}|.
+
+The |thesis.tex| file consists of two main parts: the
 \emph{prologue} (everything before the |\begin{document}|) and the
 \emph{body} (everything between the |\begin{document}| and the
-|\end{document}|). The body is further split into two parts: the main
-body and the postmatter (the appendices, bibliography, and
+|\end{document}|). The body is further split into three parts: the front-matter,
+the main body and the back-matter (the appendices, bibliography, and
 distribution list). You will typically create your thesis or technical
 report by editing
 each. Some students put their entire thesis into the |thesis.tex|
 file, while others put each chapter into its own |.tex| file and
 include them using the \verb|\include{filename.tex}| command.
 
-The remainder of this section will show a skeletal thesis template for
-each of these three parts (the prologue, the main body and the
-postmatter), and then will explain the purpose of each command.
+The following sections annotate the commends found in the skeletal thesis template,
+broken down into four parts (the prologue, front-matter, main body, back-matter), 
+explaining the purpose of each command.
 
-\subsection{The Thesis Prologue}\label{thesisprologue}
-Below is the thesis prologue from the |thesis.tex| file, with all of
-the comments removed:
-\begin{Verbatim}[fontsize=\small]
-\documentclass[twoside,thesis,authorindex]{npsreport} 
-\securitybanner{}
-\title{[TITLE]}
-\author{[AUTHOR]}
-\degree{Master of Science in [DEGREE]}
-\degreeabbreviation{MS}
-\department{Department of [DEPARTMENT]}
-\thesisadvisor{[ADVISOR]}
-\secondreader{[SECOND READER]}
-\departmentchair{[DEPARTMENT CHAIR]}
-\rank{[RANK]}
-\prevdegrees{[UNDERGRADUATE DEGREE]}  
-\degreedate{[DEGREE DATE]} 
-\distribution{Approved for public release; distribution is unlimited}
-\abstract{
-  [INSERT ABSTRACT HERE]
-}
-\ReportType{Master's Thesis}
-\DatesCovered{2102-06-01---2104-10-31}
-\SponsoringAgency{Department of the Navy}
-\RPTpreparedFor{}
-\ReportClassification{Unclassified}
-\AbstractClassification{Unclassified}
-\PageClassification{Unclassified}
-\SupplementaryNotes{ The views expressed in this thesis are those of
-  the author and do not reflect the official policy or position of the
-  Department of Defense or the U.S. Government.
-  \footnotesize IRB Protocol Number: XXXX}
-\SignatureOne{\includegraphics[width=2in]{signature_picture}}
-\makeatletter\@removefromreset{footnote}{chapter}\makeatother
-\end{Verbatim}
 
-The following explains each of these commands and options:
+\section{The Prologue}\label{sec:prologue}
+Below is the thesis prologue from the |thesis.tex| file, with comments to help read the code.
+\input{code_preamble.tex}
 
-\begin{description}
-  \item[$\backslash$documentclass] \hfill \\
-  The documentclass specifies that the document uses the |npsreport.cls|
-  file and all settings contained therein.  There are  several optional
-  parameters, each separated by comma: 
-  \begin{description}
-    \item[article, thesis, or dissertation] choose the appropriate one 
-    for the case.
-    \item[12pt, 11pt, or 10pt] Font size selection.  With no option given, 12pt is the default.
-    \item[times, arial, or courier]  Font selection.  With no option given, times is the default.
-    \item[twoauthors, threeauthors, or fourauthors] use these options if you have 
-    several authors.  Single authors need no option. 
-    \item[twoadvisors] if you have two advisors rather than a second reader. 
-    \item[twoside] prints on both sides of the same sheet of paper; recommended.
-    \item[classified] if you are using an approved computer system to 
-    write your thesis on sensitive research.
-    \item[authorindex] if you are including an author index page of your 
-    thesis references.
-    \item[index] if you are including a keyword index page of your 
-    thesis important terms.
-    \item[acronym] for a more sophisticated handling of acronyms.  See 
-    |acronyms.tex| for additional information.
-    \item[traditional] prints the thesis in the style of the NPS
-      Microsoft Word thesis template. Although you are free to use
-      this style, the newer style is approved and looks quite nice 
-    when no option is given.
-    \item[singlespace] if you prefer single-spaced paragraphs, though it 
-    may be a little harder to read. This is not approved for an NPS
-    Masters Thesis, but is approved for NPS technical reports.
-    \item[tight] Causes the spacing between paragraphs and paragraph 
-    indentation to be smaller than standard.
-  \end{description}
-  \item[$\backslash$securitybanner] \hfill \\
-  Leave blank unless producing a FOUO or classified theses.  Whatever text appears 
-  between the braces is placed
-  at the top and bottom of each page of the document.
-  \item[$\backslash$title]  \hfill \\ Your title 
-  \item[$\backslash$degree] \hfill \\  Your planned NPS degree written out.
-  \item[$\backslash$degreeabbreviation] \hfill \\   MA, MS, MBA, or other shorthand notation
-  \item[$\backslash$prevdegrees] \hfill \\   Written out as ``B.S., Degree, School, Year'' 
-  \item[$\backslash$degreedate] \hfill \\   Written as ``Month Year'' 
-  \item[$\backslash$distribution] \hfill \\
-  One of the approved Department of Defense distribution statements 
-  (A through F or Export Control).  These are
-  listed out on the thesis release form that must also be submitted 
-  with your thesis.
-  \item[$\backslash$abstract] \hfill \\
-  Your entire abstract goes here.  
-  Do not make it too big, as it must also fit on the SF298 form.
-  \item[$\backslash$SponsoringAgency] \hfill \\
-  Your appropriate military department, such as Department of the 
-  Air Force, Department of the Navy, \etc
-  \item[$\backslash$RPTpreparedFor] \hfill \\
-  This optional item can be used to specify the sponsor of the research.
-  \item[$\backslash$SupplementaryNotes] \hfill \\
-  If your thesis does not have an Institutional Review Board (IRB) protocol 
-  number, replace the XXXX with N/A, otherwise fill in 
-  the appropriate number.  
-  This is needed for theses that use human subjects to collect data.  
-  Ask your advisor for more information if this applies. 
-  \item[$\backslash$SignatureOne, SignatureTwo, SignatureThree, and SignatureFour] \hfill \\
-  Each author's signature line can show an image of the signature, if desired.
-  Specifying the width as 2 inches is recommended.  This is an 
-  optional feature. 
-\end{description}
 
-\subsection{The Thesis Main Body}
-Below is a thesis body, with all of the comments that appear on
-lines by themselves removed:
-\begin{Verbatim}[fontsize=\small]
-\begin{document}
-\NPScover                       % Cover
-\NPSsftne                       % SF298
-\NPSthesistitle                 % Title page
-\NPSabstractpage                % Abstract Page
-\NPSfrontmatter                 % NPS front matter follows
-\renewcommand{\chaptermark}[1]{
-  \markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}}
-\NPStableOfContents
-\NPSlistOfFigures
-\NPSlistOfTables
-\NPSlistOfAcronyms{
- \begin{description}
-   \item[NPS] Naval Postgraduate School
-   \item[USG] United States Government
- \end{description}
-}
-\NPSlistOfAcronymsFromFile{acronyms}
-\NPSexecsummary{
-  [EXECUTIVE SUMMARY CONTENTS]
-}
-\NPSacknowledgements{
-  [ACKNOWLEDGEMENTS CONTENTS]
-}
-\NPSbody
-\chapter{[CHAPTER ONE TITLE]}
-[CHAPTER BODY]
+\section{The Front-Matter}\label{sec:front}
+Below is part of the thesis body from the |thesis.tex| file, with comments showing how
+the thesis front-matter gets typeset:
+\input{code_frontmatter.tex}
 
-This is the beginning of your thesis. Don't be a Micky
-Mouse\cite{mm2}: Always have text between every head and subhead.
-\section{Your First Section}
-[Section One Body]
-\section{Your Second Section}
-[Section Two Body]
-\section{Your Third Section}
-[Section Three Body]
-\chapter{[CHAPTER TWO TITLE]}
-[CHAPTER BODY]
-This is the beginning of the second chapter. 
-Always have text between every head and subhead.
-\section{Your First Section}
-[Chapter two Section One Body]
-\section{Your Second Section}
-[Chapter two Section Two Body]
-\section{Your Third Section}
-[Chapter two Section Three Body]
-\end{Verbatim}
 
-Now we describe each command:
+\section{The Main Body}\label{sec:main}
+Below is part of the thesis body from the |thesis.tex| file, with comments showing how
+the thesis main body gets typeset:
+\input{code_body.tex}
 
-\begin{description}
-  \item[$\backslash$NPScover] \hfill \\
-  Prints the coversheet page.
-  \item[$\backslash$NPSsftne] \hfill \\
-  Prints the Standard Form 298 completely filled out with the provided information.
-  \item[$\backslash$NPSthesistitle] \hfill \\
-  Prints the signature page.
-  \item[$\backslash$NPSabstractpage] \hfill \\
-  Prints the abstract page.
-  \item[$\backslash$NPSfrontmatter] \hfill \\
-  Applies some thesis settings for the remainder of the document.
-  \item[$\backslash$NPStableOfContents] \hfill \\
-  Creates the Table of Contents that lists |chapters| and |subsections|.
-  \item[$\backslash$NPSlistOfFigures and NPSlistOfTables] \hfill \\
-  These lists are automatically created based on the content of the thesis, using the \emph{figure} and \emph{table}
-  environments.  
-  \item[$\backslash$NPSlistOfAcronyms] \hfill \\
-  Manual list of acronyms, useful for a very short list of acronyms. 
-  Use this or NPSlistOfAcronymsFromFile but not both.
-  \item[$\backslash$NPSlistOfAcronymsFromFile] \hfill \\
-  Specifies the file of where the acronyms are stored, |acronyms.tex| in 
-  this instance.  Using this separate file can keep your |thesis.tex| 
-  easier to read.  Use this or NPSlistOfAcronyms but not both.
-  \item[$\backslash$NPSexecsummary] \hfill \\
-  Used by the Electrical Engineering, Systems Engineering, and Operations 
-  Research departments.
-  \item[$\backslash$NPSacknowledgements] \hfill \\
-  It is considered good form at NPS to formally thank your advisor as
-  well as others at NPS who have contributed in a positive manner to
-  your time at the Institution. You are also free to thank family
-  members, friends, team members, family pets, or anyone else you deem
-  appropriate.
-  \item[$\backslash$NPSbody] \hfill \\
-  Thesis chapters follow.  
-\end{description}
 
-\subsection{The Postmatter}
-The end of the document optionally has one or more appendices and a distribution list:
-\begin{Verbatim}[fontsize=\small]
-\def\showURL{}
-\bibliographystyle{nps-plain-unsorted}
-\bibliography{thesis}
-\NPSappendixTOC{Appendix TITLE}
-[APPENDIX BODY]
-\NPSend         
-\chapter*{Initial Distribution List}
-\addcontentsline{toc}{chapter}{Initial Distribution List}
-\singlespace
-\begin{enumerate}
-\item Defense Technical Information Center\\
-  Ft. Belvoir, Virginia
-\item Dudly Knox Library\\Naval Postgraduate School\\
-  Monterey, California
-\item Marine Corps Representative\\Naval Postgraduate School\\
-  Monterey, California
-\item Directory, Training and Education, MCCDC, Code C46\\
-  Quantico, Virginia
-\item Marine Corps Tactical System Support Activity 
-  (Attn: Operations Officer)\\Camp Pendleton, California
-\end{enumerate}
-\end{document}
-\end{Verbatim}
+\section{The Back-Matter}\label{sec:back}
+Below is part of the thesis body from the |thesis.tex| file, with comments showing how
+the thesis back-matter gets typeset, including
+one or more appendices and a distribution list:
+\input{code_backmatter.tex}
 
-Now we describe these commands:
-
-\begin{description}
-  \item[$\backslash$bibliographystyle] \hfill \\ Can be one of the
-    provided styles (|nps-plain|, |nps-plain-classified|,\\
-    |nps-plain-classified-unsorted|, |nps-plain-unsorted|) or others
-    commonly used (|acm|, |acmtrans|, |amsalpha|, |amsplain|,
-    |apa-good|, |ieeetr|, |ieeetrans|, etc.)
-  \item[$\backslash$bibliography] \hfill \\
-  Specifies your master |.bib| file, in this case, |thesis.bib|.  All cited references should be kept in this file.
-  \item[$\backslash$NPSappendix] \hfill \\
-  Use this for a single appendix thesis with an ``Appendix'' entry in the Table of Contents.
-  Add a \verb|\chapter{title}| creates a lettered appendix ``A.'' 
-  \item[$\backslash$NPSappendixTOC\{Appen TITLE\}] \hfill \\
-  Use this for a single appendix thesis with a single entry in the Table of Contents of ``Appendix: Appen TITLE.''
-  The appendix is not given an appendix letter.  This is the preferred style for NPS single-appendix theses.
-  Additionally, use \verb|\section*{name}| rather than \verb|\section{name}| to keep entries out of the Table of Contents.
-  \item[$\backslash$NPSappendices] \hfill \\
-  Use this for a multiple appendices thesis.  Each appendix will need a \verb|\chapter{title}|.
-  \item[$\backslash$NPSend] \hfill \\
-  Includes the authorindex and index, if the option was specified in the |documentclass|.  Concludes the content of the thesis.
-\end{description}
 
 \section{Additional Commands Provided by the Template}
 In additional to commands above, the NPS template provides additional
@@ -360,22 +136,14 @@ referencing labels in your text; they are presented below:
 \\
 \multicolumn{2}{l}{Provided by \texttt{npsreport.cls}:}\\
 |\chapref{l}| & Chapter reference that formats as ``Chapter 3'' \\  
-|\chapvref{l}|& Chapter reference that formats as ``Chapter 3 on page 4'' \\  
 |\secref{l}|  & Section reference that formats as ``Section 3.'' You can use this for sections, subsections, and so on. \\  
-|\secvref{l}| & Section reference that formats as ``Section 3 on page 4'' \\  
 |\figref{l}|  & Figure reference that formats as ``Figure 3'' \\  
-|\figvref{l}| & Figure reference that formats as ``Figure 3 on page 4'' \\  
 |\tabref{l}|  & Table reference that formats as ``Table 3'' \\  
-|\tabvref{l}| & Table reference that formats as ``Table 3 on page 4'' \\  
 |\eqnref{l}|  & Equation reference that formats as ``Equation (3.1)'' \\  
-|\eqnvref{l}| & Equation reference that formats as ``Equation (3.1) on page 4'' \\  
 |\eqnsref{l,m}| & Equation reference that formats as ``Equations (3.1) and (3.5)'' \\  
-|\eqnsvref{l,m}| & Equation reference that formats as ``Equations (3.1) and (3.5) on page 4'' \\  
 |\appref{l}|  & Appendix reference that formats as ``Appendix 3'' \\  
-|\appvref{l}| & Appendix reference that formats as ``Appendix 3 on page 4'' \\  
 \end{tabular}
 
-The |vref| commands can also automatically swap ``on page 4'' for ``on the preceeding page'' and other phrases.
 
 \subsection{Tables and Figures}
 Tables and figures are floating objects that \LaTeX{} moves around as
@@ -404,41 +172,32 @@ photos and other graphics into the resulting document. You can include
 graphics directly with the |\includegraphics| command or use the
 commands described in this section.
 
+\sgraphic{images/home_topimg.jpg}{Banner from the top of the NPS web site.}
+
 By using the |\sgraphic{filename}{caption}| command provided by
 |npsreport.cls|, you can embed a
 photo from a given filename and give it a label and a caption. The
 label is set to be the filename. Use the
 |\figref{tag}| command to get an in-paragraph 
-reference. \figref{images/home_topimg} shows an example of an
-embedded image using \verb+\sgraphic+. The filename is |demos/demo_cart/home_topimg|. It is embedded
+reference. \figref{images/home_topimg.jpg} shows an example of an
+embedded image using \verb+\sgraphic+. The filename is |images/home_topimg.jpg|. It is embedded
 with the command:
 
 \begin{Verbatim}[fontsize=\small]
-\sgraphic{images/home_topimg}{Banner from the top of the NPS web site.}
+\sgraphic{images/home_topimg.jpg}{Banner from the top of the NPS web site.}
 \end{Verbatim}
 
 The figure can then be referenced with the command:
 
 \begin{Verbatim}
-\figref{images/home_topimg} shows an example 
-of an embedded image using \verb+\sgraphic+.
+\figref{images/home_topimg.jpg}
 \end{Verbatim}
 
-\sgraphic{images/home_topimg}{Banner from the top of the NPS web site.}
 
 The variants of sgraphic are |b| for box, |n| for no box, |o| for boxed but not a figure, and |on| for no box and not a figure.
 
-|\sgraphicb{file}{caption}|
 \sgraphicb[width=3in]{images/photo3}{Using sgraphicb (box)}
-
-|\sgraphicn{file}{caption}|
-\sgraphicn[width=3in]{images/photo4}{Using sgraphicn (no box)}
-
-%|\sgraphico{file}{caption}|
-%\sgraphico[width=3in]{images/photo1}{Using sgraphico (no figure)}
-
-%|\sgraphicon{file}{caption}|
-%\sgraphicon[width=3in]{images/photo2}{Using sgraphicon (no figure, no box)}
+\sgraphicn[width=3in]{images/photo1}{Using sgraphicn (no box)}
 
 Each of the \emph{sgraphic} commands have an optional parameter that
 you can use to modify the image.  The |width| can be used to specify a
@@ -488,37 +247,26 @@ advanced features.  See |npsreport.cls| for additional information.
 The NPS \LaTeX{} template is also created for Ph.D. dissertations when using the |dissertation| option on the document class.  The signature page is very different from a Master's thesis.  Additional macros are available to make creating the signature page.  The following macros would all be placed into your primary |.tex| document before the |\begin{document}| (as in the prologue of \secref{thesisprologue}).
 
 \begin{Verbatim}
-\advisorOne{[Person 1]}
-\advisorTwo{[Person 2]}
-\advisorThree{[Person 3]}
-\advisorFour{[Person 4]}
-\advisorFive{[Person 5]}
-\advisorSix{[Person 6]}
+\thesisadvisor{[Person 1]}
+\committeechair{[Person 2]}
+\memberThree{[Person 3]}
+\memberFour{[Person 4]}
+\memberFive{[Person 5]}
+\memberSix{[Person 6]}
 \end{Verbatim}
 
-Most Ph.D. committees have no more than 6 members.  If your committee has more than this, you will still have to manually edit this signature page and expect difficulty in making everything fit on a single page.
+Most Ph.D. committees have no more than 6 members. The thesis advisor and committee chair are used as the first and second committee members, by default. If your committee has more than six members, you will still have to manually edit this signature page and expect difficulty in making everything fit on a single page.
 
 The names of your committee members should be placed in these macros.  Usually your primary advisor is in the One entry. You should still provide the |\thesisadvisor{[ADVISOR]}| macro as well for this person.  Your committee may have guidance on the preferred order of appearance of the remaining members.
 
-If your committee has 5 members, then use:
-\begin{Verbatim}
-\NPSdissertationfivememberstrue
-\end{Verbatim}
-
-as this will mute the sixth member.
-
-Each advisor can have up to four lines for the title (this does not include their name).  However, to provide maximum control over the exact placement over each title, the lines are called out separately.
+There is space for each advisor to have up to four lines for the title (this does not include their name), but you should manually decide where the put the line breaks using the |\\| command:
 
 \begin{Verbatim}
-\advisorOneLineOne{Dissertation Advisor}
-\advisorOneLineTwo{Professor, Department of}
-\advisorOneLineThree{Computer Science}
-\advisorOneLineFour{}
+\memberOneTitleLine{Dissertation Advisor\\ Professor, Department of\\ 
+      Computer Science}
 \end{Verbatim}
 
-When a line is to be empty, the macro does not need to be explicitly called out as in the above example; it was only provided for clarity.  The above lines will wrap the text if the entry is made too long.  This is undesirable in titles and that is why each line is called out specifically.
-
-The other macros exist for |advisorTwo|, |advisorThree|, |advisorFour|, |advisorFive| and |advisorSix|.
+Similar macros exist for the other members: |memberTwoTitleLine|, \etc.
 
 Two additional signatures are needed for a Ph.D. signature page.  
 
@@ -529,19 +277,20 @@ Two additional signatures are needed for a Ph.D. signature page.
 
 You should speak to your primary advisor if you do not know the appropriate names to provide.
 
-Ideally, the signature page will be completed with normal size 12 font.  However, it is possible to have some excessively long titles that will not properly fit.  To provide for this circumstance, the macros
+Ideally, the signature page will be completed with normal size 12 font.  However, it is possible to have some excessively long titles that will not properly fit.  To provide for this circumstance, re-define the macro files using either of these
 
 \begin{Verbatim}
-\NPSsignaturefontsizesmall
-\NPSsignaturefontsizefootnote
+\renewcommand{\NPSsigfont}{\small}
+\renewcommand{\NPSsigfont}{\footnotesize}
 \end{Verbatim}
 
-give the option of size 11 and size 10 fonts, respectively.  This font option only applies to the signature page font.
+These options give size 11 and size 10 fonts, respectively.  This font option only applies to the signature page font.
 
-\section{Macros for Creating Classified Documents}
 
+
+\section{Marking FOUO and Classified Documents}\label{sec:classified}
 The NPS \LaTeX{} template has been designed so that it can be used
-for creating documents that are For Official Use Only (FOUO) or
+for creating documents that are 
 classified at any classification level. As a general rule, you only
 create a classified document on a system that has been approved for
 processing classified data at a particular classification level. You
@@ -550,18 +299,24 @@ the system, rather than installing it yourself. However, once you have
 a system that is appropriately set up, the template can save a
 substantial amount of time over the alternative.
 
-In general, preparing a classified document requires a few
-changes from preparing an unclassified document:
+Very little support is provided for assisting you to use \LaTeX{} in
+a classified setting. This should be considered an experimental
+and unsupported feature, but a description of the template's features is
+provided for the adventurous power-user that insists
+on attempting the feat.
 
+In general, preparing a FOUO or classified document requires a few
+changes from preparing an unclassified document:
 \begin{enumerate}
 \item The security banner must be set.
+\item An appropriate distribution statement must be selected.
 \item The SF-298 form must be properly labeled.
-\item Each paragraph and caption must be labeled.
-\item Citations must be appropriately classified.
+\item Paragraphs and captions must be labeled.
+\item Citations must be appropriately labeled.
 \end{enumerate}
 
-\subsection{Setting the Security Banner}
 
+\subsection{Setting the Security Banner}
 The security banner is the notation that is printed at the top and
 bottom of each page of your classified or otherwise restricted
 document. Use the |\securitybanner{}| macro to set the banner. Here is
@@ -572,10 +327,17 @@ an example from our fictitiously classified document:
 \end{Verbatim}
 
 This document is classified F (for FUN) and it contains three
-additional restrictions: MM (Mickey Mouse), SPECIAL, and TOM FOOLERY.  
+additional restrictions: MM (Mickey Mouse), SPECIAL, and TOM FOOLERY.
+
+For unclassified theses with FOUO material, set the banner using:
+\begin{Verbatim}
+    \securitybanner{FOR OFFICIAL USE ONLY}
+\end{Verbatim}
+This will be printed only on those pages that hold 
+paragraphs, figures, and tables that you have marked as FOUO.
+
 
 \subsection{Labeling the SF-298}
-
 The NPS \LaTeX{} template automatically creates a SF-298 form for
 you. When you create a classified document you need to determine the
 classification of the document's SF-298 form, its abstract, and the
@@ -588,7 +350,6 @@ to speak with your sponsor or with the Site Security Officer.
 
 The report classification, abstract classification, and classification
 of the SF-298 are indicated with these three macros:
-
 \begin{Verbatim}
     \ReportClassification{Fun}
     \AbstractClassification{Jolly}
@@ -599,69 +360,132 @@ In this case the report is classified as Fun, the abstract is classified
 as Jolly, and the SF-298 is classified as Amusing. Of course, actual 
 classified documents should be classified with actual classifications.
 
-\subsection{Labeling the paragraphs and caption}
 
-(U) Each paragraph of your document should be proceeded with an
+\subsection{Labeling paragraphs}
+(U) In a classified document, each paragraph should be proceeded with an
 appropriate classification level. For example, this paragraph is
 explicitly labeled as being unclassified. It appears in the source of
-this document as this:
+this document as:
 
 \begin{quotation}
 \begin{Verbatim}[fontsize=\small]
-(U) Each paragraph of your document should be proceeded with an
+(U) In a classified document, each paragraph should be proceeded with an
 appropriate classification level. For example, this paragraph is
-explicitly labeled as being unclassified. It appears in the source 
-of this document as this:
+explicitly labeled as being unclassified. It appears in the source of
+this document as:
 \end{Verbatim}
 \end{quotation}
 
 As you can see from the example above, paragraph classification
-labeling must be done manually. Captions must also be manually labeled.
+labeling must be done manually.
 
-\subsection{Labeling Your References}
-
-When citing references in a classified document, use the
-|\citeafter{}| macro instead of the |\cite{}| macro.
-
-When you use BiB\TeX to produce a classified document you should use
-either the bibliographic style |nps-plain-classified| or
-|nps-plain-classified-unsorted|. These styles have been modified to
-support an additional |classification| tag. Below, the |mm2| reference
-is classified |F| and is further within the MM compartment:
-
-\begin{Verbatim}
-    @misc{mm2,
-      title="Ears, Ears and More Ears",
-      publisher="Department of Departments",
-      author="Micky Mouse",
-      year=2013,
-      classification="(F//MM)"
-    }
+For FOUO material, paragraphs should be placed inside a special
+environment, the security marking or |smark| environment.
+\begin{quotation}
+\begin{Verbatim}[fontsize=\small]
+\begin{smark}[(FOUO)]
+This paragraph is unclassified and has a FOUO restriction.
+Only put one paragraph at a time in this environment.
+Each paragraph must be marked separately.
+\end{smark}
 \end{Verbatim}
+\end{quotation}
 
-\section{Additional Files Included in the Template}
-There are several files included with the template that may be useful for your writing needs.
+This environment places the appropriate marking on the page where
+the paragraph gets typeset, marking the page as containing FOUO material. 
+Unlike classified documents, we don't mark every page of the thesis, just
+those containing FOUO material. 
+
+\subsection{Labeling captions}
+To mark classified or FOUO content in floats (figures or tables), use
+the |smarkenv| environment:
+
+\begin{quotation}
+\begin{Verbatim}[fontsize=\small]
+\begin{figure}
+\begin{smarkenv}{(FOUO)}
+   \includegraphics[width=3in]{images/fouo_graphic.jpg}
+\end{smarkenv}
+\caption{[Figure with unrestricted caption, but FOUO content]}
+\label{fig:mark}
+\end{figure}
+\end{Verbatim}
+\end{quotation}
+Unlike paragraph-level marking with |smark|, the float marking using |smarkenv| 
+will mark both the top and bottom of the figure, as is required.
+
+For FOUO caption marking, use the abbreviation of the classification, like |(FOUO)|.
+For classified content, however, you should spell out the marking in full, like |(AMUSING//JOLLY)|.
 
 \begin{description}
-\item[Makefile] Included with the template is the |Makefile| that Mac and Linux users will readily enjoy.  Typing |make| on the command prompt will perform all necessary commands to produce your document.
+\item[\caution{Note:}]
+For FOUO documents, the |smarkenv| macro will not appropriately mark
+captions, sections, subsections and similar.
+In particular, the table of contents, list of figures, \etc will not be automatically
+marked has holding FOUO material, which is strictly required if a caption is, itself, FOUO. 
+If you have a caption or a section title has FOUO content, you will have to manually
+mark front-matter pages after your PDF is generated.\\
+This is not a problem in classified documents, where the front-matter 
+will get automatically marked with the overall document classification.
+\end{description}
 
-\item[build.py] An alternate build system for Windows users.
+\subsection{Labeling References}
+For classified theses, all your references should be marked. You can achieve this
+by modifying your |.bib| file to include the marking of the reference:
 
-\item[authorindex.pl] This perl script is used to generate the
-  authorindex.  You will need to use this script if you are generating
-  your document with the authorindex option (see
-  \S\ref{thesisprologue}).  An additional install of a perl
-  interpreter is required for Microsoft\textregistered{} Windows
-  (ActivePerl\textregistered{} is recommended).
+\begin{quotation}
+\begin{Verbatim}
+@electronic{IEEEhowto:IEEEtranpage,
+  author        = "Michael Shell",
+  title         = "{IEEE}tran Homepage",
+  url           = "http://www.michaelshell.org/tex/ieeetran/",
+  year          = "2008",
+  classification = "(F//MM)"
+}
+\end{Verbatim}
+\end{quotation}
 
-\item[fixerrors.py] This python script will correct |.bib| file entries for URLs that contain long URLs and also corrects errors in the authorindex |.ain| files.
+Then, you must inform Bib\TeX{} that you are using marked references using
+a bibliography control directive, like the one inside |examples/nps_class_meta.bib|,
+which reads:
+\begin{quotation}
+\begin{Verbatim}
+@IEEEtranBSTCTL{NPS:BSTctl,
+  CTLclassification_show = "1",
+  CTLclassification_unmarked = "(U)"
+}
+\end{Verbatim}
+\end{quotation}
 
-\item[xls\_extract.py] This python script extracts all Excel terms from an NPS budget spreadsheet and write \LaTeX{} variables.
-  Although it is unlikely you will need to use the script exactly, it can be a reference of how to do something similar if needed for your document.
+This tells Bib\TeX{} (a) to show bibliography entry security markings, and
+(b) to assume all unmarked entries are unclassified so they will
+be marked (U). Thus, it will show the appropriate marking, if the
+|classification| entry is populated in the |.bib| file, otherwise it will
+mark the entry with (U).
 
-\item[xls\_covert\_to\_pdf.py] Converts the Excel workbook to PDF
-  file. This program requires additional software to operate properly
-  and can only be used on a Macintosh computer.
+Finally, you must tell Bib\TeX{} where to locate the control file and
+the marked |.bib| file, using a command in your thesis, like:
+\begin{quotation}
+\begin{Verbatim}
+\NPSbibliography{nps_class_meta,thesis}
+\end{Verbatim}
+\end{quotation}
+
+This assumes the |nps_class_meta.bib}| and |thesis.bib|
+hold the directives and references. In truth, you could
+combine these files.
+
+\begin{description}
+\item[\caution{Note:}]
+FOUO bibliography entries are not currently supported, since the
+there is no way to mark the pages where the FOUO citations
+get typeset. This is due to the build process: it is unknown
+until quite late where a citation is placed, so its not possible
+to detect that page 102 rather than 103 holds a FOUO citation.
+If you have FOUO bibliography entries, you will have to manually
+mark pages after your PDF is generated.\\
+This is not a problem in classified documents, as every page gets
+marked with the overall document classification. 
 \end{description}
 
 \section{Additional Software}
@@ -684,10 +508,9 @@ per-machine basis, you can get conflicts if different files are
 created and then committed on different machines.
 
 If you are using subversion to manage your thesis, you should instruct it to ignore these files.  This
-can be done with the \texttt{make ignore} target in the Makefile.
+can be done by issuing the following commands:
 
 \begin{Verbatim}
-ignore:
         svn propget svn:ignore . > /tmp/ignore
         echo thesis.pdf >> /tmp/ignore
         echo '*.ain' >> /tmp/ignore
@@ -702,10 +525,8 @@ ignore:
         echo '*.toc' >> /tmp/ignore
         echo '*.zip' >> /tmp/ignore
         sort /tmp/ignore|uniq|grep .|svn propset svn:ignore -F - .
-        @echo ""
-        @echo Will ignore:
         svn propget svn:ignore .
-        @/bin/rm -f /tmp/ignore
+        rm -f /tmp/ignore
 \end{Verbatim}
 
 

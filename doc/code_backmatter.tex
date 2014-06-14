@@ -1,0 +1,16 @@
+\begin{lstlisting}
+\NPSappendixTOC{[My Appendix Title]} (*@\comment{This declares a single appendix in your table of contents with the name My Appendix Title; see examples for using multiple appendices, which are handled slightly differently.}@*)
+\input{appendix1}
+
+\NPSbibliography{thesis} (*@\comment{This uses the default NPS bibliography style, based on IEEE style, declaring the master bib file to be \upshape{\texttt{thesis.bib}}.}@*)
+
+\NPSend    (*@\comment{ Includes the index, if this option was specified. Concludes the content of the thesis.}@*)
+
+\NPSdistribution{Initial Distribution List}  (*@\comment{Prints the distribution list, specified below.}@*)
+\begin{distributionlist}
+\item Defense Technical Information Center\\Ft. Belvoir, Virginia
+\item Dudley Knox Library\\Naval Postgraduate School\\Monterey, California
+\end{distributionlist}
+
+\end{document}
+\end{lstlisting}
