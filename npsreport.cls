@@ -227,6 +227,9 @@
 \setcounter{topnumber}{10}   % up to 10 floats at the top of the page; Should be enough
 \setcounter{totalnumber}{10} % see above
 
+% Make citations look like [1]--[4] instead of [1--4]
+\def\citepunct{], [}
+\def\citedash{]--[}
 
 % Here are some commands that will help you make more attractive LaTeX
 % Notice that \etal is italicized, but not e.g., etc. , or i.e.
