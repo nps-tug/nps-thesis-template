@@ -496,7 +496,7 @@
   \def\distribname{Initial Distribution List}
   \def\acknowledgementsname{Acknowledgements}
  \def\execsummaryname{Executive Summary}
-  \def\bibname{References}
+  \def\bibname{List of References}
 \fi
 
 
