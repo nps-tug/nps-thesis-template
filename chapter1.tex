@@ -1,14 +1,22 @@
-\chapter{[Chapter one Title]}\label{ch:chapter1}
+\chapter{[Chapter Title]}\label{ch:common}
 
-This is the beginning of your thesis. Always have text between every head 
-and subhead. Here are some citations\footnote{These citations were taken
+This is the beginning of Chapter~\ref{ch:common}. Always have text between every head
+and subhead. The most commonly used references by our community are
+   books~\cite{IEEEexample:book_typical},
+   journal articles~\cite{IEEEexample:article_typical},
+   conference proceedings~\cite{IEEEexample:conf_typical},
+   online resources~\cite{IEEEhowto:IEEEtranpage},
+   theses~\cite{IEEEexample:masters},
+   private communication~\cite{IEEEexample:private}, and
+   class notes~\cite{NPSexample:notes}.
+Here are some citations\footnote{These citations were taken
 from the IEEEtran example bib file.} that demonstrate nearly every bib 
-style\footnote{\lipsum[10]} that exists~\cite{IEEEhowto:IEEEtranpage,IEEEexample:shellCTANpage,
-IEEEexample:IEEEwebsite,IEEEexample:bibtexuser,IEEEexample:bibtexdesign,
+style\footnote{\lipsum[10]} that exists~\cite{IEEEhowto:IEEEtranpage,
+IEEEexample:shellCTANpage,IEEEexample:bibtexuser,IEEEexample:bibtexdesign,
 IEEEexample:tamethebeast,IEEEexample:bibtexguide,
 IEEEexample:article_typical,IEEEexample:articleetal,IEEEexample:conf_typical,
 IEEEexample:book_typical,IEEEexample:articlelargepages,
-IEEEexample:articledualmonths,IEEEexample:TBPmisc,IEEEexample:TBParticle,
+IEEEexample:articledualmonths,IEEEexample:TBParticle,
 IEEEexample:bookwitheditor,IEEEexample:book,IEEEexample:bookwithseriesvolume,
 IEEEexample:inbook,IEEEexample:inbookpagesnote,IEEEexample:incollection,
 IEEEexample:incollectionwithseries,IEEEexample:incollection_chpp,
@@ -20,7 +28,7 @@ IEEEexample:masters,IEEEexample:masterstype,IEEEexample:phdurl,
 IEEEexample:techrep,IEEEexample:techreptype,IEEEexample:techreptypeii,
 IEEEexample:techrepstdsub,IEEEexample:unpublished,IEEEexample:electronhowinfo,
 IEEEexample:electronhowinfo2,IEEEexample:electronorgadd,IEEEexample:uspat,
-IEEEexample:jppat,IEEEexample:frenchpatreq,IEEEexample:periodical,
+IEEEexample:jppat,IEEEexample:frenchpatreq,
 IEEEexample:standard,IEEEexample:standardproposed,IEEEexample:draftasmisc,
 IEEEexample:miscforum,IEEEexample:whitepaper,IEEEexample:datasheet,
 IEEEexample:private,IEEEexample:miscrfc,IEEEexample:softmanual,
@@ -32,7 +40,7 @@ IEEEexample:softonline,IEEEexample:miscgermanreg,IEEEexample:bluebookstandard
 
 \begin{figure}
 \framebox[\textwidth]{\parbox{\textwidth}{\lipsum[1]}} % example figure (text in a box)
-\caption{[Figure Name]}
+\caption[{[Alternate short name]}]{[Figure name]}
 \end{figure}
 
 \section{Another Section}
@@ -45,13 +53,15 @@ IEEEexample:softonline,IEEEexample:miscgermanreg,IEEEexample:bluebookstandard
 \lipsum[1] % remove me
 \begin{table}
 \begin{center}
-\begin{tabular}{ l c r }
-  1 & 2 & 3 \\
+\begin{tabular}{ | c | c | c | }
+\hline
+  1 & 2 & 3 \\ \hline\hline
   4 & 5 & 6 \\
   7 & 8 & 9 \\
-\end{tabular}
+\hline
+\end{tabular}\vspace{-1em}% remove some of the whitespace that pads the end
 \end{center}
-\caption{[Table Name]}
+\caption{[Table name]}
 \end{table}
 \lipsum[2]
 
@@ -80,21 +90,20 @@ start a sentence with it. However, it's best not to start a sentence
 with ``however.'' And while we're on the subject, you should try to avoid starting a sentence with ``and'' or ``because.'' 
 \item When typing a date, do not use ``st'' or ``th.'' Instead, just
   note the date: July 4, 1776, is Independence Day. Commas go 
-after Month/date, year: both Jefferson and Adams died on July 4, 1826.
+after month/date, year: both Jefferson and Adams died on July 4, 1826.
 No comma between month/yr: \textit{Alice's Adventures in Wonderland} was published in July 1865.
-\item Spell out numbers 1 through 9. 
+\item In general, spell out numbers one through nine, and use numerals for 10 and greater.
 \item Use automatic numbering and lettering.
 \item Capitalize C in Chapter, F in Figure and T in Table when referring
-to chapters, 
-figures or tables in the text. Better yet, use the \verb+\chapref+,
+to chapters, figures or tables in the text. Better yet, use the \verb+\chapref+,
 \verb+\figref+ and \verb+\tabref+ commands in the NPS report template.
 \item When there is more than one reference, put them both into the \verb+\cite+ command: \verb+\cite{john1,john2}+. It will render like this \cite{IEEEhowto:IEEEtranpage,IEEEexample:shellCTANpage}.
 \item Avoid writing in the first person!
-\item Make sure there's no widows at the
+\item Make sure there are no widows at the
   top of the page---if \LaTeX{} gives you a hard time, you may need to
   add or remove text so that everything works out properly.
 \item Footnote numbers go outside the punctuation. 
-\item When typing equations in text and use ``where'' or ``if.'' Use
+\item When typing equations in text, use ``where'' or ``if.'' Use
   Math Mode. 
 \item When inserting symbols, use Math Mode.
 \end{enumerate}

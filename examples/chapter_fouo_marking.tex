@@ -1,0 +1,84 @@
+\chapter{Introduction to the FOUO Thesis}
+
+This chapter demonstrates the \verb|\smark| macro and
+\verb|smarkenv| environment for security marking.
+
+\smarkthispage
+
+The following pages should get marked:
+\begin{itemize}
+\item The first page of the first chapter gets marked no matter what;
+you can do this manually with the \verb|\smarkthispage| macro.
+\item The front cover; this gets marked for you automagically if the
+\verb|securitybanner| macro is defined.
+\item Any page holding a marked paragraph; these are marked
+automagically, as long as each paragraph is wrapped in the
+\verb|\begin{smark}[xxx]| \ldots \verb|\end{smark}| environment,
+where \verb|xxx| is the paragraph-level marking, \ie \verb|(FOUO)|.
+\item Any page holding a marked figure or table; these are
+marked automagically, as long as the figure or table content are
+wrapped in the \verb|\begin{smarkenv}{xxx}| \ldots \verb|\end{smarkenv}|
+environment, where \verb|xxx| is the parenthesized top and bottom
+marking, \ie \verb|(FOR OFFICIAL USE ONLY)|.
+\end{itemize}
+
+\textbf{Note:} We cannot handle:
+\begin{itemize}
+\item FOUO titles in Chapters, Sections, Subsections;
+\item FOUO captions in Tables or Figures;
+\item FOUO content in the References section.
+\end{itemize}
+These have auto-generated portions (ToC, LoF, LoT, Bibliography),
+and the macros are not ``smart'' enough to detect which of the
+generated pages have FOUO content, to mark the lower pages
+appropriately. If needed, the author will need to mark the lower
+pages of the report manually in these cases.
+
+\newpage
+\section{A Section with Restricted Content}
+
+\begin{smark}[(FEUO)]
+This paragraph is unclassified and has a FEUO restriction.
+Only put one paragraph at a time in this environment.
+Each paragraph must be marked separately.
+\lipsum[2]
+\end{smark}
+
+This is a new paragraph and is not marked.
+\lipsum[3]
+
+\newpage
+\lipsum[1-3]
+
+\begin{smark}[(FEUO)]
+This paragraph is unclassified and has a FEUO restriction.
+It crosses two pages. Both pages should be marked.
+\lipsum[4]
+\end{smark}
+
+This is a new paragraph and is not marked.
+\lipsum[3]
+
+\newpage
+\section{A Chapter with Marked Figures}
+\lipsum[1-4]
+
+\begin{figure}
+\begin{smarkenv}{(FEUO)}
+\framebox[\textwidth]{\parbox{\textwidth}{\lipsum[1]}}
+\end{smarkenv}
+\caption{[Figure with unrestriced caption, FEUO content]}\label{fig:mark}
+\end{figure}
+
+Two special notes on marking floats (figures and tables):
+\begin{enumerate}
+\item When the float content is restricted, the marking abbreviation is
+used (see Figure~\ref{fig:mark}); this is an exception
+to the rules for marking classified figures or tables, where the
+marking is spelled out;
+\item Because floats may ``drift'' to a second
+page, the marking macros may sometimes mark the bottom portions
+of pages, even if they don't contain marked content. This can
+be corrected by adjusting the placement of the float, in most
+cases.
+\end{enumerate}

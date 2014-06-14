@@ -6,32 +6,44 @@ BIBTEX=bibtex
 
 TEXFILES = $(shell find . \( -iname "*.tex" -o -name "*.bib" \) -type f -exec echo "{}" \; | sed 's| |\\ |' | tr '\n' ' ')
 
+# for Mac this includes the .. directory for necessary files
 NPSREPORT=$(shell pwd)/..
 export TEXINPUTS := $(TEXINPUTS):$(NPSREPORT)
 export BSTINPUTS := $(BSTINPUTS):$(NPSREPORT)
 export BIBINPUTS := $(BIBINPUTS):$(NPSREPORT)
 
+# for Windows this includes the .. directory for necessary files
+ifeq ($(OS),Windows_NT)
+    TEXOPTS = --include-directory=..
+else
+    TEXOPTS = 
+endif
+
 ALL := dissertation.pdf
 ALL += technical_report.pdf
-ALL += technical_report_many_authors technical_report_chapters.pdf
+ALL += technical_report_many_authors.pdf technical_report_chapters.pdf
 ALL += cs_thesis_proposal.pdf
 ALL += thesis_mult_appendix.pdf
 ALL += thesis_author_advisor_reader.pdf thesis_twoauthor.pdf
+ALL += thesis_dual_degree.pdf
 ALL += thesis_coadvisors.pdf thesis_coadvisors_reader.pdf
 ALL += thesis_twoauthor_coadvisors_reader.pdf
+ALL += thesis_traditional.pdf dissertation_traditional.pdf
+ALL += thesis_fouo.pdf thesis_fouo_abstract.pdf
+ALL += thesis_classified.pdf
 
 all: $(ALL)
 
-$(ALL): $(TEXFILES) 
+$(ALL): $(TEXFILES)
 
 #
 # Build a pdf from a tex file
 #
 .tex.pdf:
-	$(LATEX) $*
-	-$(BIBTEX) $*
-	$(LATEX) $*
-	$(LATEX) $*
+	$(LATEX) $(TEXOPTS) $*
+	-$(BIBTEX) $(TEXOPTS) $*
+	$(LATEX) $(TEXOPTS) $*
+	$(LATEX) $(TEXOPTS) $*
 
 #
 # Clean routines
