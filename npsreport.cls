@@ -66,7 +66,7 @@
 \DeclareOption{acronym}{\npsacronymtrue}           % Use the acronym package
 \DeclareOption{fivemembers}{\fivememberstrue}      % five member PhD committee
 \DeclareOption{advisoralone}{\advisoralonetrue}    % list the top person alone
-\DeclareOption{draft}{\npsdrafttrue}                  % draft mode
+\DeclareOption{draft}{\npsdrafttrue}               % draft mode
 
 \DeclareOption{10pt}{
    \fontsizesettrue
