@@ -45,6 +45,7 @@
 \newif\ifnpstight\npstightfalse
 \newif\ifnpsindex\npsindexfalse
 \newif\ifnpsacronym\npsacronymfalse
+\newif\ifnpsdraft\npsdraftfalse
 
 \DeclareOption{article}{\npsarticletrue}           % use article default, not report
 \DeclareOption{traditional}{\npstraditionaltrue}   % make it look old way
@@ -65,6 +66,7 @@
 \DeclareOption{acronym}{\npsacronymtrue}           % Use the acronym package
 \DeclareOption{fivemembers}{\fivememberstrue}      % five member PhD committee
 \DeclareOption{advisoralone}{\advisoralonetrue}    % list the top person alone
+\DeclareOption{draft}{\npsdrafttrue}                  % draft mode
 
 \DeclareOption{10pt}{
    \fontsizesettrue
@@ -194,6 +196,7 @@
 \usepackage{varioref}           % provides \vref - smart referencing
 \usepackage{xspace}             % provides \xspace
 \usepackage{xifthen}            % if-then-else macro for empty fields
+\usepackage{environ}            % used to re-define environments to supress them
 \usepackage{latexsym}           % gives \Box
 \usepackage{graphicx}           % it's better
 \usepackage{multirow}           % for table cells with multiple row
@@ -713,16 +716,20 @@
 %*************************************************************************
 
 \newcommand{\NPSend}{
+\ifnpsdraft
+  % suppress index in draft mode
+\else
 \ifnpsauthorindex
   \chapter*{Referenced Authors}
   %\addcontentsline{toc}{chapter}{Referenced Authors}
   \begin{multicols}{3}
     \printauthorindex
   \end{multicols}
-\fi
+\fi %authorindex
 \ifnpsindex
   \printindex
-\fi
+\fi %index
+\fi %draft
 }
 
 % Use this to change to appendix mode and insert ``Appendix'' into the Table of Contents
@@ -858,6 +865,9 @@
   % The first page; but note --- it's a title page, so it doesn't use
   % this page style
   %
+\ifnpsdraft
+  % suppress title page in draft mode
+\else
   \begin{titlepage}
   \thispagestyle{frontmarked}
   \vfill
@@ -966,6 +976,7 @@
   \end{titlepage}
 
   \cleardoublepageEmpty
+\fi %draft
 }
 
 
@@ -974,6 +985,9 @@
 %*************************************************************************
 
 \def\NPSsftne{
+\ifnpsdraft
+  % suppress SF298 in draft mode
+\else
   % Fill in items for the SF298
   \pagenumbering{roman}        % because they are weird
   \Title{\@title}
@@ -997,6 +1011,7 @@
   \MakeRptDocPage
   \thispagestyle{plain}
   \cleardoublepage
+\fi %draft
 }
 
 
@@ -1041,6 +1056,9 @@
 \def\memberSixTitleLine#1{\gdef\@memberSixTitleLine{#1}}
 
 \def\NPSthesistitle{
+\ifnpsdraft
+  % suppress title page in draft mode
+\else
   % this page is always (iii), so force skip (used in non-twoside mode)
   \ifnum \c@page < 3 \thisPageIntentionallyLeftBlankForced \fi
   \setcounter{page}{3}          % do not reset to page 1
@@ -1240,10 +1258,15 @@
     \fi
   \fi
   \cleardoublepage
+\fi %draft
 }
 
 \newif\ifNPSabstractWasPrinted\NPSabstractWasPrintedfalse
 \def\NPSabstractpage{
+\ifnpsdraft
+  \NPSabstractWasPrintedtrue
+  % act like abstract was printed in draft
+\else
   \begin{center}
   \textbf{{\large\ULABEL ABSTRACT}}\\
   \end{center}
@@ -1256,6 +1279,7 @@
   \singlespacing                % back to single spacing
   \NPSabstractWasPrintedtrue
   \cleardoublepage
+\fi %draft
 }
 
 \def\NPSfrontmatter{
@@ -1268,6 +1292,9 @@
 }
 
 \newcommand{\NPSsignature}{
+\ifnpsdraft
+  % suppress signature page in draft mode
+\else
   % this page is always (iii), so force skip (used in non-twoside mode)
   \ifnum \c@page < 3 \thisPageIntentionallyLeftBlankForced \fi
   \setcounter{page}{3}          % do not reset to page 1
@@ -1316,6 +1343,7 @@
   \end{tabbing}
   \newpage
   \thisPageIntentionallyLeftBlank
+\fi %draft
 }
 
 \newcommand{\NPSbody}{
@@ -1351,6 +1379,9 @@
 %*************************************************************************
 
 \newcommand{\NPSexecsummary}[1]{%
+\ifnpsdraft
+  % suppress executive summary in draft mode
+\else
 \ifnpsarticle
   \begin{center}\textbf{\large{\ULABEL\execsummaryname}}\end{center}
 \else
@@ -1361,9 +1392,13 @@
   \onehalfspacing
   #1
   \cleardoublepage
+\fi %draft
 }
 
 \newcommand{\NPSacknowledgements}[1]{
+\ifnpsdraft
+  % suppress acknowledgements in draft mode
+\else
 \ifnpsarticle
   \begin{center}\textbf{\large{\ULABEL\acknowledgementsname}}\end{center}
 \else
@@ -1374,6 +1409,7 @@
   \onehalfspacing
   #1
   \cleardoublepage
+\fi %draft
 }
 
 \newcommand{\NPSbibliography}[1]{
@@ -1396,6 +1432,10 @@
 
 % This is a legacy command for compatibility.  The newer command is below.
 \newcommand{\NPSdistribution}[1]{
+\ifnpsdraft
+  \NewEnviron{distributionlist}{}
+  % suppress distribution list in draft mode
+\else
 \ifnpsarticle
   \section*{#1}
   \addcontentsline{toc}{section}{#1}
@@ -1408,9 +1448,14 @@
   \newenvironment{distributionlist}
     {\begin{enumerate}\itemsep \baselineskip}
     {\end{enumerate}}
+\fi
 }
 
 \newcommand{\NPSdistributionlist}{
+\ifnpsdraft
+  \NewEnviron{distributionlist}{}
+  % suppress distribution list in draft mode
+\else
 \ifnpsarticle
   \clearpage
 \else
@@ -1428,9 +1473,13 @@
   \newenvironment{distributionlist}
     {\begin{enumerate}\itemsep \baselineskip}
     {\end{enumerate}}
+\fi
 }
 
 \newcommand{\NPStableOfContents}{
+\ifnpsdraft
+  % suppress ToC in draft mode
+\else
 \ifnpsarticle
   %\section*{\ULABEL\contentsname}
   \begin{center}\textbf{\large{\ULABEL\contentsname}}\end{center}
@@ -1441,10 +1490,14 @@
   \def\contentsname{}           % clear, because it will be in the header
   \tableofcontents
   \cleardoublepage
+\fi %draft
 }
 
 \newcommand{\NPSlistOfFigures}{
   \lhead{}\rhead{}
+\ifnpsdraft
+  % suppress LoF in draft mode
+\else
 \ifnpsarticle
   %\section*{\ULABEL\listfigurename}
   %\addcontentsline{toc}{section}{\listfigurename}
@@ -1456,10 +1509,14 @@
   \def\listfigurename{}
   \listoffigures
   \cleardoublepage
+\fi %draft
 }
 
 \newcommand{\NPSlistOfTables}{
   \lhead{}\rhead{}
+\ifnpsdraft
+  % suppress LoT in draft mode
+\else
 \ifnpsarticle
   %\section*{\ULABEL\listtablename}
   %\addcontentsline{toc}{section}{\listtablename}
@@ -1471,10 +1528,14 @@
   \def\listtablename{}
   \listoftables
   \cleardoublepage
+\fi %draft
 }
 
 \newcommand{\NPSlistOfAcronyms}[1]{
   \lhead{}\rhead{}
+\ifnpsdraft
+  % suppress acronym list in draft mode
+\else
 \ifnpsarticle
   %\section*{\ULABEL\listacronymname}\vspace{1pc}
   %\addcontentsline{toc}{section}{\listacronymname}
@@ -1487,10 +1548,14 @@
   \onehalfspacing
   #1
   \cleardoublepage
+\fi %draft
 }
 
 \newcommand{\NPSlistOfAcronymsFromFile}[1]{
   \lhead{}\rhead{}
+\ifnpsdraft
+  % suppress acronym list in draft mode
+\else
 \ifnpsarticle
   %\section*{\ULABEL\listacronymname}\vspace{1pc}
   %\addcontentsline{toc}{section}{\listacronymname}
@@ -1505,6 +1570,7 @@
   \onehalfspacing
   \input{#1}
   \cleardoublepage
+\fi %draft
 }
 
 
