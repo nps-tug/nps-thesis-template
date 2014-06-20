@@ -225,9 +225,22 @@
 % References and citations will have clickable links.
 \makeatletter
 \usepackage[pdftex,                % use PDFTeX backend
-   pdfusetitle,                    % PDF metadata
+   hidelinks,                      % No colored links or borders
    pdfkeywords={\sf@SubjectTerms}, % use Subject terms from SF-298
-   hidelinks                       % No colored links or borders
+   pdftitle={\@title},             % set the title
+\iffourauthors
+   pdfauthor={\@author, \@authortwo, \@authorthree, \@authorfour},
+\else
+ \ifthreeauthors
+   pdfauthor={\@author, \@authortwo, \@authorthree},
+ \else
+  \iftwoauthors
+   pdfauthor={\@author, \@authortwo},
+  \else
+   pdfauthor={\@author},
+  \fi %two
+ \fi %three
+\fi %four
 ]{hyperref}
 \usepackage[all]{hypcap}
 \makeatother
