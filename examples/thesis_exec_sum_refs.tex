@@ -168,20 +168,22 @@ since the summary has no number itself.
 \subsection*{An Exec Summary Subsection}
 \lipsum[2-3] % example text; remove me
 
-\section*{Another Exec Summary Section}
-\lipsum[4] % example text; remove me
-
 %
 % this makes references appear at the section-level instead of chapter-level
 %
-\let\stdthebibliography\thebibliography
-\renewcommand{\thebibliography}{%
-\let\chapter\section
-\stdthebibliography}
+\begingroup
+ \let\stdthebibliography\thebibliography
+ \renewcommand{\thebibliography}{%
+ \let\chapter\subsection
+ \titlespacing*{\subsection}{0pt}{5ex plus 2ex}{-1ex plus .2ex}
+ \stdthebibliography}
+ \raggedright     % don't automatically full justify bibliographic references
+ \singlespacing   % reduce extra line breaks between entries
+ \putbib[thesis]  % use thesis.bib and place the bibliography here
+\endgroup
 %
-\raggedright     % don't automatically full justify bibliographic references
-\singlespacing   % reduce extra line breaks between entries
-\putbib[thesis]  % use thesis.bib and place the bibliography here
+% This is the end of special macros that tweak the appearance of the references
+%
 \end{bibunit}    % END: bibunit
 }
 
