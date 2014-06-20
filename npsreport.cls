@@ -278,6 +278,8 @@
 \def\researchchair#1{\gdef\@researchchair{#1}}
 \def\president#1{\gdef\@president{#1}}
 \def\provost#1{\gdef\@provost{#1}}
+\def\viceprovost#1{\gdef\@viceprovost{#1}}
+\def\assocprovost#1{\gdef\@viceprovost{#1}} % legacy macro for backwards compat
 
 % Provide reasonable defaults
 \department{Computer Science}
@@ -285,6 +287,7 @@
 \researchchair{Jeffrey D. Paduan}
 \president{Ronald A. Route}
 \provost{Douglas A. Hensler}
+\viceprovost{Douglas Moses}
 
 % Single degree or dual degree options
 \def\degree#1{\gdef\@degree{#1}}
@@ -1008,7 +1011,6 @@
 \newcommand{\NPSsigfont}{\normalsize}
 \newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\raggedright #1}}
 \def\committeechair#1{\gdef\@committeechair{#1}}
-\def\assocprovost#1{\gdef\@assocprovost{#1}}
 
 % Dissertation committee members
 \def\@memberOne{\@thesisadvisor}
@@ -1136,8 +1138,8 @@
       Approved by: \> \@departmentchair \\
                    \> Chair, \@department \\[\sigspace]
 
-      Approved by: \> \@assocprovost \\
-                   \> Associate Provost for Academic Affairs \\
+      Approved by: \> \@viceprovost \\
+                   \> Vice Provost for Academic Affairs \\
       \end{tabbing}
       \normalsize
   %% thesis:
