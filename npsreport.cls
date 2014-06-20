@@ -219,6 +219,33 @@
 \usepackage{subfigure}          % needs to be before tocloft, to avoid conflict
 \usepackage[subfigure]{tocloft} % TOC Control
 
+
+\newcommand{\NPShyperref}{
+% Adds the hyperref package. Populate the PDF metadata.
+% References and citations will have clickable links.
+\makeatletter
+\usepackage[pdftex,                % use PDFTeX backend
+   hidelinks,                      % No colored links or borders
+   pdfkeywords={\sf@SubjectTerms}, % use Subject terms from SF-298
+   pdftitle={\@title},             % set the title
+\iffourauthors
+   pdfauthor={\@author; \@authortwo; \@authorthree; \@authorfour},
+\else
+ \ifthreeauthors
+   pdfauthor={\@author; \@authortwo; \@authorthree},
+ \else
+  \iftwoauthors
+   pdfauthor={\@author; \@authortwo},
+  \else
+   pdfauthor={\@author},
+  \fi %two
+ \fi %three
+\fi %four
+]{hyperref}
+\usepackage[all]{hypcap}
+\makeatother
+}
+
 \pagenumbering{roman}
 
 % Control widows, orphans, and floats
