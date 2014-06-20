@@ -229,13 +229,13 @@
    pdfkeywords={\sf@SubjectTerms}, % use Subject terms from SF-298
    pdftitle={\@title},             % set the title
 \iffourauthors
-   pdfauthor={\@author, \@authortwo, \@authorthree, \@authorfour},
+   pdfauthor={\@author; \@authortwo; \@authorthree; \@authorfour},
 \else
  \ifthreeauthors
-   pdfauthor={\@author, \@authortwo, \@authorthree},
+   pdfauthor={\@author; \@authortwo; \@authorthree},
  \else
   \iftwoauthors
-   pdfauthor={\@author, \@authortwo},
+   pdfauthor={\@author; \@authortwo},
   \else
    pdfauthor={\@author},
   \fi %two
