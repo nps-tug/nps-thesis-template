@@ -174,11 +174,12 @@ since the summary has no number itself.
 \begingroup
  \let\stdthebibliography\thebibliography
  \renewcommand{\thebibliography}{%
- \let\chapter\subsection
- \titlespacing*{\subsection}{0pt}{5ex plus 2ex}{-1ex plus .2ex}
+ \let\chapter\subsubsection
+ \titlespacing*{\subsubsection}{0pt}{5ex plus 2ex}{-1ex plus .2ex}
  \stdthebibliography}
  \raggedright     % don't automatically full justify bibliographic references
  \singlespacing   % reduce extra line breaks between entries
+ \small
  \putbib[thesis]  % use thesis.bib and place the bibliography here
 \endgroup
 %
