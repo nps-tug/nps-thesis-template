@@ -33,7 +33,7 @@
 % Ensures that figures/tables do not appear in the document before
 % they are referenced in the text.
 
-
+% This package lets us build references that appear after the Executive Summary
 \usepackage{bibunits}
 
 
@@ -104,6 +104,13 @@
 \makeatletter
 \@removefromreset{footnote}{chapter}
 \makeatother
+
+% Optional. Adds pdf metadata and links.
+% This should be right before the \begin{document}, to be the
+% last package / macros defined. (Hyper-ref is fragile,
+% needs to be last, and has known conflicts with other packages.)
+% Comment out if you have build problems building with hyperref
+\NPShyperref
 
 %
 % Your thesis begins here
