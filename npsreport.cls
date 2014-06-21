@@ -216,7 +216,11 @@
 \usepackage{cite}               % for [5-8] reference style
 \usepackage{amsmath,amsfonts}   % for many types of math equations
 \usepackage{url}                % nice handling of URLs
+\ifnpstraditional
 \usepackage{subfigure}          % needs to be before tocloft, to avoid conflict
+\else
+\usepackage[sf,SF]{subfigure}   % needs to be before tocloft, to avoid conflict
+\fi
 \usepackage[subfigure]{tocloft} % TOC Control
 
 
