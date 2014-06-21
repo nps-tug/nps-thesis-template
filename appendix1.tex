@@ -1,8 +1,31 @@
-\lipsum[1-4] % example text; remove me
+\lipsum[1]
 
-This equation is to check that appendix equation numbering is correct.
 \begin{eqnarray}
  e^x &\approx& 1+x+x^2/2! + \\
    && {}+x^3/3! + x^4/4! + \\
    && + x^5/5!
 \end{eqnarray}
+
+\begin{figure}
+\framebox[\textwidth]{\parbox{\textwidth}{\lipsum[2]}}
+\caption{Some styled text in a caption, \emph{emph} and \textit{italics} in a caption.}
+\end{figure}
+
+\begin{figure}
+\framebox[\textwidth]{\parbox{\textwidth}{\lipsum[2]}}
+\caption{Some styled math in a caption, $\mathsf{Func}(x, z) = x^2 + \overline{z} + \pi$.}
+\end{figure}
+
+\begin{figure}
+\centering
+\subfigure[First sub-figure]{
+   \framebox[0.47\textwidth]{\parbox{0.45\textwidth}{\lipsum[2]}}
+}
+\hfill
+\subfigure[Second sub-figure]{
+   \framebox[0.47\textwidth]{\parbox{0.45\textwidth}{\lipsum[2]}}
+}
+\caption{Caption using subfigure package.}
+\end{figure}
+
+\lipsum[2-4]
