@@ -3,49 +3,43 @@
 %% 
 %% The source code for the NPS report that describes the LaTeX style
 %%
-\documentclass[twoside,singlespace,twoauthors]{npsreport}
+\documentclass[twoside,singlespace,threeauthors]{npsreport}
 
 %
 % Put extra packages you may need to customize your thesis
 %
 \usepackage{listings}
 
-%% Hyperref adds PDF metadata
-%% TAKE THIS OUT if it causes problems.
-%% Specifically, remove if you are using xelatex
-\usepackage[pdftex,
-  pdftitle={\@title}, 
-  pdfauthor={\@author},
-  pdfkeywords={\@SubjectTerms},
-  pdfpagemode=UseOutlines,
-  bookmarks,
-  bookmarksopen=false,
-  urlbordercolor=white,
-  linkbordercolor=white,
-  citebordercolor=white,
-  filebordercolor=white,
-  menubordercolor=white,
-  runbordercolor=white]{hyperref}	% understand PDF refs
- \usepackage[all]{hypcap}               % must follow hyperref
 
+\title{The NPS LaTeX Report and Thesis Template}
+% The \LaTeX macro causes problems in the title when embedding metadata
 
-\title{The New NPS \LaTeX\ Report and Thesis Format}
+\author{Travis W. Axtell}
+\authortwo{Mark A. Gondree}
+\authorthree{Simson L.\ Garfinkel}
 
-\author{Simson L.\ Garfinkel}
-\authortwo{Travis W. Axtell}
-
+% See Thesis processor's release form for approved distribution statements.
 \distribution{Approved for public release; distribution is unlimited}
 
-\abstract{This report introduces the NPS \LaTeX{} templates
-  that can be used to produce a master's thesis, a
+% Your abstract.  New paragraphs start after an empty line.
+\abstract{This report introduces the NPS \LaTeX{} template
+  which can be used to produce a master's thesis, a
   Ph.D.\ dissertation, or a technical report. The template can produce
-  documents that are unclassified, For Official Use Only (FOUO), or classified. Additional information on using \LaTeX\,is also provided.}
+  documents that are unclassified, For Official Use Only (FOUO), or classified.
+  Additional information on using \LaTeX\,is also provided.
+  This document is a strict update to NPS technical report NPS-CS-11-011 (by
+  Simson L.\ Garfinkel and Travis W.\ Axtell), which describes
+  an earlier version of the NPS \LaTeX\ template.
+}
+
+% Switch the below lines around, if FOUO
+\securitybanner{}  %\securitybanner{FOR OFFICIAL USE ONLY}
 
 %
 % Mandatory fields for the SF298.
 %
 \ReportType{Technical Report}
-\DatesCovered{2008-01-01---2011-09-31}
+\DatesCovered{2012-01-01---2014-10-01}
 \SponsoringAgency{Department of the Navy}
 \ReportClassification{Unclassified}
 \AbstractClassification{Unclassified}
@@ -60,14 +54,15 @@
 \ProgramElementNumber{}
 \TaskNumber{}
 \WorkUnitNumber{}
-\POReportNumber{NPS-CS-11-011}
+\POReportNumber{NPS-CS-????}
 \Acronyms{}
 \SMReportNumber{}
-\SubjectTerms{NPS Thesis, NPS Technical Report}
+\SubjectTerms{NPS Thesis, NPS Technical Report, LaTeX}
 \ResponsiblePerson{}
 \RPTelephone{}
 \SignatureOne{}
 \SignatureTwo{}
+\SignatureThree{}
 \SupplementaryNotes{The views expressed in this document are those of
   the author and do not reflect the official policy or position of the
   Department of Defense or the U.S. Government. %
@@ -80,18 +75,32 @@
 \@removefromreset{footnote}{chapter}
 \makeatother
 
+% Optional. Adds pdf metadata and links.
+% This should be right before the \begin{document}, to be the
+% last package / macros defined. (Hyper-ref is fragile,
+% needs to be last, and has known conflicts with other packages.)
+% Comment out if you have build problems building with hyperref
+\NPShyperref
+
 %
 % Your thesis begins here
 %
 \begin{document}
 
 \NPScover                       % pretty NPS cover page
-\NPSsignature                   % NPS signature page
 \NPSsftne                       % NPS SF298
+\NPSsignature                   % NPS signature page
 %\NPSthesistitle            % Title page
 %\NPSabstractpage           % Abstract Page
 \NPSfrontmatter            % NPS front matter follows
 
+% This changes the chaptermark and includes the various tables
+% It must be here.
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}}
+
+%
+% If you don't need one of these, comment it out.
+%
 \NPStableOfContents
 %\NPSlistOfFigures
 %\NPSlistOfTables
@@ -109,23 +118,23 @@
 % Put acknowledgements here.  
 % New paragraphs start after an empty line.
 %
-%\NPSacknowledgements{
-%  \lipsum[1-3] % example text; remove me
-%}
+\NPSacknowledgements{
+Enormous thanks and gratitude to Simson L.\ Garfinkel for development
+of the original NPS thesis template and its documentation.
+}
 
 % Start layout for the NPS body
 \NPSbody                        % Set up for NPS Body
 
+
+
 %% Some useful stuff that we do locally
 \DefineShortVerb{\|}            % makes |foo| a verbatim command
-
-% a command for making comments, we use it in the listings environment
 \newcommand{\comment}[1]{\hfill \\ \; \normalfont\itshape\footnotesize\color{blue!70} $\Rightarrow$ #1}
 \newcommand{\caution}[1]{\textcolor{red}{\emph{#1}}}
 
-
 % settings for the listing environment
-\lstset {
+\lstset{
   language=TeX,
   frame=bt,
   xrightmargin=1mm,
@@ -141,6 +150,7 @@
   tabsize=4,
   moredelim=*[s][\ttfamily]{:}{:} %Newly added line
 }
+
 
 % CHAPTERS
 % You have two options on how to structure your thesis:

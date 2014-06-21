@@ -1,31 +1,63 @@
 \begin{lstlisting}
 \begin{document}
 
-\NPScover   (*@\comment{Prints the coversheet page.}@*)
-\NPSsftne    (*@\comment{Prints the Standard Form 298 completely filled out with the provided information.}@*)
-%\NPSsignature        (*@\comment{Prints page (iii)---the signature page---for technical reports; it is commented out, here.}@*)
-\NPSthesistitle           (*@\comment{Prints page (iii)---the signature page---for a thesis.}@*)
-\NPSabstractpage     (*@\comment{Prints the abstract page.}@*)
-\NPSfrontmatter        (*@\comment{Applies some thesis settings for the remainder of the document.}@*)
+\NPScover   (*@\comment{
+			Prints the coversheet page.
+}@*)
+\NPSsftne    (*@\comment{
+			Prints the Standard Form 298 completely filled out with the\
+			information from \S\ref{sec:prologue}.
+}@*)
+%\NPSsignature        (*@\comment{Prints page (iii)---the signature page---for technical reports; it is commented out, in this example.}@*)
+\NPSthesistitle           (*@\comment{
+			Prints page (iii)---the signature page---for a thesis.
+}@*)
+\NPSabstractpage     (*@\comment{
+			Prints the abstract page.
+}@*)
+\NPSfrontmatter        (*@\comment{
+			Applies some thesis settings for the remainder of the document.
+}@*)
 
 \renewcommand{\chaptermark}[1]{   (*@\label{code:chmark1}@*)
-  \markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}
-} (*@\label{code:chmark2}@*) (*@\comment{Lines~\ref{code:chmark1}--\ref{code:chmark2} change the chaptermark; it must be here after the above front matter is processed. Don't move this.}@*)
+  \markboth{\MakeUppercase{\chaptername}\ \thechapter.\ #1}{}(*@\comment{
+			Lines~\ref{code:chmark1}--\ref{code:chmark2} change the\
+			chaptermark; it must be here, after the front matter\
+			is processed (don't move it).
+}@*)
+} (*@\label{code:chmark2}@*)
 
 \NPStableOfContents
 \NPSlistOfFigures
-\NPSlistOfTables (*@\comment{Creates the Table of Contents, List of Figures and List of Tables, respectively.}@*)
+\NPSlistOfTables (*@\comment{
+			Creates the Table of Contents, List of Figures and List of Tables,\
+			respectively.
+}@*)
 
-\NPSlistOfAcronymsFromFile{acronyms} (*@\comment{Reads a short list of acronyms from the example file \upshape{\texttt{acronyms.tex}}; see the contents of this file for options on using more powerful acronym packages.}@*)
+\NPSlistOfAcronymsFromFile{acronyms} (*@\comment{
+			Reads a short list of acronyms from the example file\
+			{\upshape \texttt{acronyms.tex}} (see the contents of\
+			this file for options on using more powerful acronym packages).
+}@*)
 
 \NPSexecsummary{
-  [EXECUTIVE SUMMARY CONTENTS](*@\comment{Optional: an executive summary goes here, or you can put the text in a file and use \upshape{\texttt{\textbackslash input\{summary.tex\}}}.}@*)
+  [EXECUTIVE SUMMARY CONTENTS](*@\comment{
+  			Optional: an executive summary goes here, or you can include\
+  			data from another file, like\
+  			{\upshape \texttt{\textbackslash input\{summary.tex\}}}.
+}@*)
 }
 
 \NPSacknowledgements{
-  [ACKNOWLEDGEMENTS CONTENTS](*@\comment{Optional: acknowledgments go here, or you can put the text in a file and use \upshape{\texttt{\textbackslash input\{thanks.tex\}}}.}@*)
+  [ACKNOWLEDGEMENTS CONTENTS](*@\comment{
+  			Optional: acknowledgments go here, or you or you can include\
+  			data from another file, like\
+  			{\upshape \texttt{\textbackslash input\{thanks.tex\}}}.
+}@*)
 }
 
-\NPSbody (*@\comment{Thesis chapters follow.}@*)
+\NPSbody (*@\comment{
+			Thesis chapters follow.
+}@*)
 \end{lstlisting}
 

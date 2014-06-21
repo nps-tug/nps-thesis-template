@@ -2,9 +2,8 @@
 
 \LaTeX{} is a text formatting system created by Leslie Lamport in the early
 1980s\cite{latex}. The program is based on the \TeX{} text formatting system
-created by Donald Knuth in 1978\cite{tex}. With 1980s\cite{latex}. The program
-is based on the \TeX{} text formatting system created by Donald Knuth in
-1978\cite{tex}. With \LaTeX{} you author your \LaTeX{} you author your document
+created by Donald Knuth in 1978\cite{tex}. 
+With \LaTeX{} you author your document
 by editing a text input file using a program such as EMACS, |vim|, or another
 editor. You then give this input file to \LaTeX{} (or, more accurately, to a
 program such as |pdflatex| or |xelatex|). \LaTeX{} then transforms your input
@@ -21,7 +20,7 @@ many students who write technical documents at NPS that use \LaTeX{} find that
 they save time---even when they take into account the time that they spend
 learning to use \LaTeX{} in the first place!
 
-\section{Reasons to use \LaTeX}
+\section{Reasons to use \LaTeX{}}
 
 There are many reasons to use \LaTeX{} for preparing a technical document:
 
@@ -36,22 +35,7 @@ There are many reasons to use \LaTeX{} for preparing a technical document:
 
 \item References within your document to numbered chapters, appendices,
   sections, figures, tables, equations and references are updated automatically
-  each time a |.pdf| file is produced, assuring correct.
-
-\item The Bib\TeX{} system produces consistent citations and bibliography.
-  References are pulled from a bibliographic database that is separately
-  maintained and can be shared between many documents. Records for the
-  bibliographic database can be downloaded from many online services, helping
-  to assure that they are consistent. The citation format is maintained
-  separately from the citation contents, making it easy to change citation
-  styles when submitting to different conferences or journals.  
-
-\item \LaTeX{} allows you to directly include other files at the time that the
-  |.pdf| file is created. This makes it easy to automatically incorporate the
-  results of experiments in tabular or graphical form, without having to
-  manually copy results.  Source code for programs can be included with pretty
-  syntax from the original files, and line numbers can be that they are
-  correct.
+  each time a |.pdf| file is produced, assuring it is correct.
 
 \item The Bib\TeX{} system produces consistent citations and bibliography.
   References are pulled from a bibliographic database that is separately
@@ -74,12 +58,13 @@ There are many reasons to use \LaTeX{} for preparing a technical document:
   the final file that is distributed to sponsors and archived. 
 
 \item Because the \LaTeX{} input file is plain ASCII, you can store your
-  document using a revision control system such as Subversion
-  (SVN)\cite{subversion}. This allows multiple people to work on the same
-  document at the same time; Subversion automatically merges the changes
-  together.  If you save your thesis work daily, it is possible retrieve
-  previous revisions of your thesis and undo changes or mistakes---even many
-  months after the fact.
+  document using a revision control system such as Git or Subversion (SVN). 
+  This allows multiple people to work on the same
+  document at the same time. If you save your thesis work daily, it is 
+  possible retrieve previous revisions of your thesis and undo changes 
+  or mistakes---even many months after the fact.
+  These programs can automatically merge the changes from different people,
+  allowing groups to collaborate on large technical documents. 
 
 \item \LaTeX{} is free software and runs on PCs, Macs, and Unix systems. This
   means that you can produce your documents on practically every computer you
@@ -87,8 +72,8 @@ There are many reasons to use \LaTeX{} for preparing a technical document:
 
 \end{itemize}
 
-NPS has developed this template for preparing NPS reports and theses. If you
-are using \LaTeX{} at NPS, there are many reasons for using the template:
+NPS has developed this template for preparing NPS reports and theses. 
+If you are using \LaTeX{} at NPS, there are many reasons for using the template:
 
 \begin{itemize}
 
@@ -103,7 +88,8 @@ are using \LaTeX{} at NPS, there are many reasons for using the template:
 \item The cover page, signature page, and Standard Form 298 are automatically
   generated.
 
-\item Combined with the Subversion, the template makes it possible for students
+\item Combined with some revision control system (SVN, git), the 
+  template makes it possible for students
   and their advisors to collaborate on a document without the need to pass
   files back and forth. 
 
@@ -112,14 +98,15 @@ are using \LaTeX{} at NPS, there are many reasons for using the template:
 
 \section{The Purpose of this Document}
 
-This document does not duplicate the depth of information available elsehwere
+This report supercedes an earlier technical report~\cite{nps_tr},
+reflecting recent changes made to the template.
+This document does not duplicate the depth of information available elsewhere
 on \LaTeX{}, but does provide you with the minimum amount of information
 required to use \LaTeX{} to produce a master's thesis or technical report at
 NPS.
 
 If you wish to learn more about \LaTeX, there are many good reference books and
 online tutorials for \LaTeX{}.
-
 We recommend these online resources:
 \begin{enumerate}
 \item \url{http://en.wikibooks.org/wiki/LaTeX}, a wikibook that
@@ -193,13 +180,13 @@ command.
 For Debian and Ubuntu Linux, use the |apt-get| command:
 
 \begin{Verbatim}
-% sudo apt-get install texlive-latex3
+$ sudo apt-get install texlive-latex3
 \end{Verbatim}
 
 For RedHat and Centos, use the |yum| command:
 
 \begin{Verbatim}
-% sudo yum install texlive-latex3
+$ sudo yum install texlive-latex3
 \end{Verbatim}
 
 We have noticed that the install command occasionally fails. If it fails for
@@ -215,13 +202,7 @@ Eventually, this release will be merged back to the main Fedora distribution.
 \subsection{Installation on Microsoft Windows}
 
 \TeX Live is the most up-to-date distribution for Windows and can be downloaded
-from \url{htp://www.tug.org/texlive/}.  The distribution includes the
-{\TeX}Works editor for working with \LaTeX{} documents.  You can also use the
-{\TeX}lipse plugins for the Eclipse IDE at
-\url{http://texlipse.sourceforge.net/}.
-
-\TeX Live is the most up-to-date distribution for Windows and can be downloaded
-from \url{htp://www.tug.org/texlive/}.  The distribution includes the
+from \url{http://www.tug.org/texlive/}.  The distribution includes the
 {\TeX}Works editor for working with \LaTeX{} documents.  You can also use the
 {\TeX}lipse plugins for the Eclipse IDE at
 \url{http://texlipse.sourceforge.net/}.
@@ -230,19 +211,17 @@ Another of the popular distributions for Microsoft Windows machines is called
 MiK\TeX, which can be downloaded from \url{http://www.miktex.org/}.  In most
 cases, this distribution of \LaTeX{} will automatically download additional
 packages if needed.  At this time, Mik\TeX is lagging \TeX Live in frequency of
-updates.  updates.
+updates.
 
 \subsection{Creating classified documents}
 
 If you are producing a classified thesis, you should ask a system administrator
 at the STBL or SCIF to provide you with a \LaTeX{} installation on a computer
 authorized to handle classified information. With appropriate approvals you can
-alternatively set up an installation on a stand-alone machine.  that you are
-missing a package to create your thesis, the |.sty| files can be In the event
+alternatively set up an installation on a stand-alone machine. In the event
 that you are missing a package to create your thesis, the |.sty| files can be
 copied from the package on the CTAN website into your thesis directory.  A
-system administrator should be consulted on the file transfer process.  system
-administrator should be consulted on the file transfer process.  
+system administrator should be consulted on the file transfer process.
 
 \section{Additional Applications for \LaTeX{} }
 
@@ -254,8 +233,9 @@ of the front ends for \LaTeX{} are really just text editors with syntax
 highlighting, although some will automatically compile your document and even
 jump to errors in the input file when they are encountered.
 
-\subsection{Selection of an Editor} Text editors offer a variety of features.
+\subsection{Selection of an Editor} 
 
+Text editors offer a variety of features.
 Some are easier for beginners, such as Notepad++, LEd, and TeXnicCenter.
 Advanced editors for skilled users include |emacs|, |vim|, and |Texlipse|.
 Some recent TeX editors that have been gathering attention are |TeXstudio|,
@@ -271,33 +251,6 @@ Terminal application. You can run the tutorial for EMACS by starting Terminal,
 typing |emacs| and enter at the command prompt, and then typing control-h
 followed by a ``|t|'' to start the tutorial.
 
-\subsection{LyX: An alternative \LaTeX{} system}
-
-LyX is a program that provides a WYSIWYG (What You See Is What You Get)
-graphical user interface for \LaTeX. Instead of editing the |.tex| file
-directly, however, you edit an intermediate form which is a restricted set of
-\LaTeX. LyX then runs \LaTeX{} for you and produces the results.
-
-While LyX is easier to use than \LaTeX, it does not have the power or the
-flexibility.
-
-LyX is free and open source and actively supported. LyX provides a GUI
-interface for floating figures and tables, formatting, fonts, labels, chapters,
-sections, subsections, math equations, tables, and much more.  It also has
-built-in features for supporting Bib\TeX{} bibliographies, citations, and
-cross-references, and generally supports anything that can be done with
-\LaTeX{}.  \LaTeX{}.
-
-LyX can be downloaded from  \url{http://www.lyx.org/} and is available for
-Linux, MacOS and Windows.  If you want spell-checking, you will also need to
-install the \emph{aspell} package. 
-
-An NPS thesis and dissertation template developed by CDR Michael Bilzor is
-available for use with LyX. It can be be obtained from
-\url{http://simson.net/npsthesis/lyxthesis.zip}.  
-
-Further information about the LyX template can be found in the Appendix.
-
 
 \section{Running \LaTeX}\label{runninglatex}
 The \LaTeX{} system is actually a set of programs. For creating a thesis at NPS you will use several programs:
@@ -309,9 +262,9 @@ The \LaTeX{} system is actually a set of programs. For creating a thesis at NPS 
   produces a number of intermediate files (|thesis.aux|, |thesis.bbl|,
   |thesis.toc|, \etc).
 
-\item{\texttt{xelatex}} is a version of \LaTeX designed to process Unicode used
+\item{\texttt{xelatex}} is a version of \LaTeX{} designed to process Unicode used
   in non-Roman languages. In some cases packages that are designed to work with
-  \LaTeX will not work with \texttt{xelatex}, which is why we do not recommend
+  \LaTeX{} will not work with \texttt{xelatex}, which is why we do not recommend
   using it unless you have no other choice.
 
 \item{\texttt{latex}} This is an older version of the |pdflatex| program that
@@ -324,15 +277,6 @@ The \LaTeX{} system is actually a set of programs. For creating a thesis at NPS 
   bibliography in a file called |thesis.bst| which includes the bibliography.
   The |thesis.bst| then gets read the next time |pdflatex| is run.
 
-\item{\texttt{authorindex.pl}} This is a program in perl that produces the
-  author index from the |thesis.bbl| file. The authorindex is saved in the file
-  |thesis.ain|.
-
-\item{\texttt{fixerrors.py}} It turns out that there is a bug in Bib\TeX{}
-  which causes URLs longer than 53 characters to be improperly split. This
-  program unsplits them. It also will correct |authorindex| errors.  You do not
-  need to use this program if you do not have these errors.
-
 \end{description}
 
 If you are processing a file \emph{thesis.tex} to create a \emph{thesis.pdf}
@@ -341,7 +285,6 @@ file, you will typically execute these commands in this order:
 \begin{enumerate}
 \item |pdflatex thesis|
 \item |bibtex thesis|
-\item |python fixerrors.py thesis|
 \item |pdflatex thesis|
 \item |pdflatex thesis|
 \end{enumerate}
@@ -417,16 +360,18 @@ their classes.
 This sample document illustrates a few important points about \LaTeX:
 \begin{itemize}
   \item \LaTeX{} will automatically
-  re-wrap your text as necessary to format the paragraphs. Indention is determined by the style of the current document, not by whether or not you actually indent the paragraph.
+  re-wrap your text as necessary to format the paragraphs. Indention 
+  is determined by the style of the current document, not by whether 
+  or not you actually indent the text in your input file.
 \item \LaTeX{} ignores space at the beginning of lines; breaks between
-  paragraphs are marked with blank lines.
+  paragraphs are marked using blank lines.
 \item What you type is not what you get!  In particular, opening
   double quote marks are typed as two backquotes (\verb+``+) and closing
   double quote marks are entered as two apostrophes (\verb+''+). You will
   also note that the period following Rear Adm.\ Ernest Edward
   Herrmann's name is followed by a backslash (\verb+\+) and a space, rather
   than just a space. This tells \LaTeX{} that the period does not mark
-  the end of a sentence.
+  the end of a sentence, so it can place whitespace correctly.
 \item Commands begin with a backslash (|\|) and contain only uppercase
   and lowercase letters.
 \item A command can have zero or more arguments. The arguments are
@@ -437,7 +382,7 @@ This sample document illustrates a few important points about \LaTeX:
   environment. Every |\begin| must have a matching |\end| that names
   the same environment. Environments can be nested.
 \item Comments can be embedded in your document with a percent sign
-  (|%|). Anything after the percent sign will not print. To print a
+  (|%|). Anything after the percent sign will not print. To actually print a
   percent sign, prefix it with a backslash (|\%|).
 \end{itemize}
 
@@ -572,7 +517,8 @@ Typed & Displayed & Typed & Displayed\\\hline
 
 (Note: The |\euro| command requires that the command |\usepackage{eurosym}| be
 part of the document's \emph{preamble} (the part before the
-|\begin{document}|). It is included as part of the |npsreport.cls| file.)
+|\begin{document}|). 
+It is included here automatically, as part of the |npsreport.cls| file.)
 
 \section{Fonts}
 
@@ -597,15 +543,15 @@ the examples in the following table:
 \begin{tabular}{llll}
 Size          & Point Size & Typed & Displayed  \\\hline
 |\tiny|       &  6 & |{\tiny This is tiny}| & {\tiny This is tiny}\\
-|\scriptsize| &  8 & |{\scriptsize scriptsize}| & {\scriptsize scriptsize} \\\
-|\footnotesize| & 10 & |{\footnotesize footnotesize}| & {\footnotesize footnotesize} \\\
-|\small|        & 11 & |{\small This is small}| & {\small This is small} \\\\\
-|\normalsize|   & 12 & |{\normalsize normalsize}| & {\normalsize  normalsize} \\\\\\\
-|\large|        & 14 & |{\large This is large}| & {\large This is large} \\\\\\\
-|\Large|        & 17 & |{\Large Large}| & {\Large Large} \\\\\\\
-|\LARGE|        & 20 & |{\LARGE LARGE}| & {\LARGE LARGE} \\\\\\\
-|\huge|         & 25 & |{\huge huge}| & {\huge huge} \\\\\\\
-|\Huge|         & 25 & |{\Huge Huge}| & {\Huge Huge} \\\\\\\
+|\scriptsize| &  8 & |{\scriptsize scriptsize}| & {\scriptsize scriptsize} \\
+|\footnotesize| & 10 & |{\footnotesize footnotesize}| & {\footnotesize footnotesize} \\
+|\small|        & 11 & |{\small This is small}| & {\small This is small} \\
+|\normalsize|   & 12 & |{\normalsize normalsize}| & {\normalsize  normalsize} \\
+|\large|        & 14 & |{\large This is large}| & {\large This is large} \\
+|\Large|        & 17 & |{\Large Large}| & {\Large Large} \\
+|\LARGE|        & 20 & |{\LARGE LARGE}| & {\LARGE LARGE} \\
+|\huge|         & 25 & |{\huge huge}| & {\huge huge} \\
+|\Huge|         & 25 & |{\Huge Huge}| & {\Huge Huge} \\
 \end{tabular}
 \end{center}
 
@@ -639,7 +585,7 @@ Typed                                  & Displayed\\\hline
 |\textsc{This is small capitals}|      & \textsc{This is small capitals}\\
 |\textsl{This is slanted}|             & \textsl{This is slanted}\\
 |\textsf{This is sans serif}|          & \textsf{This is sans serif}\\
-|\textit{Italics}|                     & \textit{Italics}\\
+|\textit{This is italics}|             & \textit{This is italics}\\
 |\emph{This is emphasized}|            & \emph{This is emphasized}\\
 |$\cal CALLIGRAPHICS$|                 & $\cal CALLIGRAPHICS$\\
 |{\boldmath $\cal BOLD CALIGRAPHICS$}| & {\boldmath $\cal BOLD CALIGRAPHICS$}\\
@@ -682,7 +628,7 @@ the |\includegraphics{}| command (as we did with the
 If you want to change the font for an entire document, please refer to the
 \LaTeX{} Font Catalogue at \url{http://www.tug.dk/FontCatalogue/} which
 provides documentation and examples.  To change the font of the NPS template,
-refer to \S\ref{thesisprologue}.
+refer to \S\ref{sec:prologue}.
 
 \section{Math}\label{math}
 
@@ -703,7 +649,7 @@ Society called |amsmath|.  For more detailed information, please see:
 What follows here is necessarily very brief. 
 
 \subsection{Math Mode}
-To typset math you must enter math mode. There are two easy ways to
+To typeset math you must enter math mode. There are two easy ways to
 enter math mode. 
 
 \begin{itemize}
@@ -755,7 +701,7 @@ The table below shows some examples:
 Typed                   & Displayed & Comments \\\hline
 |$1+2=3$|               & $1+2=3$ \\
 |$10 * 10 = 100$|       & $10 * 10 = 100$  & {\small Don't use asterisks for multiplication.}\\
-|$10\times10=100$|      & $10\times10=100$ & Spaces don't matter\\
+|$10\times10=100$|      & $10\times10=100$ & {\small Spaces don't matter.}\\
 |$10  \times  10  =  100$|      & $10  \times  10  =  100$\\
 |$a=3$|                 & $a=3$\\
 |$a=f/m$|               & $a=f/m$ & {\small Don't use the slash for division.}\\
@@ -774,7 +720,6 @@ placed around the symbol, like this: $f(t)$? Math mode adds clarity.
 If you wish to discuss an important equation in your document, use the
 \emph{equation} environment.  This environment sets your equation off from the
 body text and gives it a number.
-
 Using the equation environment, this:
 
 \begin{Verbatim}
@@ -783,7 +728,7 @@ a = 1+2
 \end{equation}
 \end{Verbatim}
 
-typesets as:
+will typeset as:
 
 \begin{equation}
 a = 1+2
@@ -808,9 +753,8 @@ Typed                   & Displayed\\\hline
 |$2^{16}=65,535$|       & $2^{16}=65,535$\\
 |$N_A$ is Avogadro's constant| & $N_A$ is Avogadro's constant \\
 |$A^{B^C}$|             & $A^{B^C}$\\
-|$A^{B^{C^D}}$|             & $A^{B^{C^D}}$\\
-|$a_k$ and $b_k$|       & $a_k$ and $b_k$         \\
-|$a_k$ and $b_k$|               & $a_k$ and $b_k$ \\
+|$A^{B^{C^D}}$|         & $A^{B^{C^D}}$\\
+|$a^{k_0}$ and $b_{k_0}$|  & $a^{k_0}$ and $b_{k_0}$ \\
 \end{tabular}
 \end{center}
 
@@ -1231,7 +1175,7 @@ Here is a slightly more complex table:
 
 \begin{Verbatim}
 \begin{center}
-\begin{tabular}{lcr}
+\begin{tabular}{|lcr}
 Left Justified & Center Justified & Right Justified \\
 \hline
 Each & Column & Entry \\
@@ -1367,7 +1311,7 @@ Grahpics can also be created with R, gnuplot, matplotlib, or the asymptote
 package.
 
 Specific macros for including graphics provided by the |npsreport| template are
-discussed in \secref{graphics}.
+discussed in \S\ref{graphics}.
 
 \section{Bib\TeX{} and Citations}
 Bibliography and citation are important in your thesis.  Each department has different expectations
@@ -1421,8 +1365,11 @@ documentation; the documentation frequently has better information than the
 random pages you may find by using Google.
 
 If, however, you do need to download a \LaTeX{} style or package file manually,
-the easiest way to include a |.sty|, |.cls| or similar file is to place it in
-the same folder as your current document.  If you choose to place it in your
+the easiest (and most portable) way to access it from your project
+is to include the |.sty|, |.cls| or similar 
+file in the same folder as your current document. 
+
+If you choose to place it in your
 LaTeX installation folder (perhaps to use on many documents), a manual
 installation step must be performed for your \LaTeX{} distribution:
 

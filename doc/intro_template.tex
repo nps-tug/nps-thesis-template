@@ -1,14 +1,15 @@
 \chapter{The NPS \LaTeX{} Template Package}
-This chapter describes how to get the NPS report template and how to
+This chapter describes how to get the NPS \LaTeX{} template and how to
 use it.
 
 \section{Getting the Template}
-The template is distributed by the thesis processor on the
-wiki page NPS wiki page\footnote{Available at \url{https://wiki.nps.edu/display/LaTexTP/LaTex+Thesis+Portal};
-you may need an NPS network account to log-in and download it.}, distributed as the file |NPS_LaTeX_Template.zip|. 
+The template is distributed by the thesis processor on their
+NPS wiki page\footnote{Available at \url{https://wiki.nps.edu/display/LaTexTP/LaTex+Thesis+Portal}.
+You may need an NPS network account to log-in and download it.}, distributed as the file |NPS_LaTeX_Template.zip|. 
 Unpack this into a directory on your computer. This is where we will be working for the
 remainder of this chapter.
-Below you will find the important files distributed with the template package.
+Below you will find the files distributed with the template package.
+It is intended that you edit or replace the starred files, below.
 
 \begin{description}
 \item[acronyms.tex*] \hfill \\ 
@@ -18,26 +19,28 @@ An example file for an appendix.
 \item[chapter1.tex*] \hfill \\ 
 An example file for a chapter.
 \item[thesis.bib*] \hfill \\ 
-An example bibliography file
+An example bibliography file.
 \item[thesis.tex*] \hfill \\ 
-A skeletal thesis \LaTeX{} template file
-\item[contribs/] \hfill \\ 
-A directory of user-contributed tools related to thesis proposals and thesis preparation. None of these tools are required for using the basic template.
-\item[doc/] \hfill \\ 
-A directory, holds documentation for the template.
+A skeletal thesis \LaTeX{} template file.
 \item[examples/] \hfill \\ 
-A directory, holds examples. These build via the Makefile. To use one, replace |thesis.tex| with one of these examples.
-\item[figs/] \hfill \\
-Images required to lay-out the thesis front-matter.
+A directory, holds examples. For the most part, 
+each example is basically a drop-in replacement for the skeletal |thesis.tex| file.
+You can build all the examples together, via the Makefile.
 \item[nps\_sf298.sty] \hfill \\ 
 The style file for preparing the SF298 form.
 \item[nps\_thesis.bst] \hfill \\ 
 A Bib\TeX{} style file that typesets references in a manner acceptable to NPS.
 \item[npsreport.cls] \hfill \\ 
 The \LaTeX{} class file for NPS documents.
+\item[figs/] \hfill \\
+A directory, holds images required to typeset the thesis front-matter.
+\item[doc/] \hfill \\ 
+A directory, holds documentation for the template.
+\item[contribs/] \hfill \\ 
+A directory, holds (optional) user-contributed tools for thesis-related paperwork.
 \end{description}
 
-It is intended that you edit or replace the starred files.
+
 
 
 
@@ -59,7 +62,7 @@ When writing your thesis, the sections should be in this order:
   \item[] \hspace{-3em} \underline{\textit{Back-matter}}
   \item Appendices
   \item Index*
-  \item References
+  \item List of References
   \item Initial Distribution List
 \end{enumerate}
 
@@ -71,15 +74,19 @@ appendices, then they are lettered.  If you do not have any tables,
 then the list of tables is not included.  This also applies to list of
 figures and acronyms.  An Executive Summary is required by
 some departments.
+If you have citations \emph{in} your Executive Summary, then it should get
+its own List of References section, so the summary stands on its own and 
+is self-contained (there is an example demonstrating how to achieve this).
 
 
 \section{Creating Your Document}
 The skeletal |thesis.tex| file contains example
 text demonstrating macros that need to be filled-in to use the template.
-For example, the command |\foo{|\textcolor{red}{\texttt{[sample text]}}|}|
+For example, the command |\foo{|\textcolor{blue}{\texttt{[sample text]}}|}|
 is a macro named |foo| that you should modify, replacing
-\textcolor{red}{\texttt{[sample text]}} with your own input. The proper way to edit this
-is by changing it to be |\foo{real text}|, and \emph{not} |\foo{[real text]}|.
+\textcolor{blue}{\texttt{[sample text]}} with your own input.
+You may want to a search through your final PDF, to ensure there are no
+stray square brackets associated with sample text.
 
 The |thesis.tex| file consists of two main parts: the
 \emph{prologue} (everything before the |\begin{document}|) and the
@@ -92,13 +99,13 @@ each. Some students put their entire thesis into the |thesis.tex|
 file, while others put each chapter into its own |.tex| file and
 include them using the \verb|\include{filename.tex}| command.
 
-The following sections annotate the commends found in the skeletal thesis template,
-broken down into four parts (the prologue, front-matter, main body, back-matter), 
-explaining the purpose of each command.
+The following sections 
+break down the skeleton into four parts (the prologue, front-matter, main body, back-matter), 
+explaining the purpose of each command with annotations in blue.
 
 
 \section{The Prologue}\label{sec:prologue}
-Below is the thesis prologue from the |thesis.tex| file, with comments to help read the code.
+Below is the thesis prologue from the |thesis.tex| file, with comments to help you interpert the code.
 \input{code_preamble.tex}
 
 
@@ -109,8 +116,8 @@ the thesis front-matter gets typeset:
 
 
 \section{The Main Body}\label{sec:main}
-Below is part of the thesis body from the |thesis.tex| file, with comments showing how
-the thesis main body gets typeset:
+Below is an example of contents making up the thesis body from 
+the |thesis.tex| file:
 \input{code_body.tex}
 
 
@@ -121,12 +128,14 @@ one or more appendices and a distribution list:
 \input{code_backmatter.tex}
 
 
+
 \section{Additional Commands Provided by the Template}
-In additional to commands above, the NPS template provides additional
-commands designed to make it easier to have references, tables,
+The NPS template provides some additional
+commands intended to make it easier to have references, tables,
 figures, and embedded graphics.
+
 \subsection{Labels}\label{refcommands}
-Recall from \secref{sec:labels} that labels are hidden markers in your
+Recall from \S\ref{sec:labels} that labels are hidden markers in your
 |.tex| files created by |\label{name}|.  The NPS \LaTeX{} template contains a number of commands for
 referencing labels in your text; they are presented below:
 
@@ -160,7 +169,7 @@ the \verb|\begin{table}| command while figures are inserted with
   your text. \LaTeX{} provides a command called |\ref{marker}|;
   this template provides additional commands |\tabref{marker}|
   and |\figref{marker}|. All of the reference commands are shown
-  in \secvref{refcommands}.
+  in \S\ref{refcommands}.
 \item Do not assume that figures and tables will be on the same text as your
   page. Always refer to the figures and tables by their numbering.
 \end{itemize}
@@ -194,7 +203,8 @@ The figure can then be referenced with the command:
 \end{Verbatim}
 
 
-The variants of sgraphic are |b| for box, |n| for no box, |o| for boxed but not a figure, and |on| for no box and not a figure.
+The variants of sgraphic are |b| for box, |n| for no box, |o| for boxed but not 
+a figure, and |on| for no box and not a figure.
 
 \sgraphicb[width=3in]{images/photo3}{Using sgraphicb (box)}
 \sgraphicn[width=3in]{images/photo1}{Using sgraphicn (no box)}
@@ -242,9 +252,14 @@ advanced features.  See |npsreport.cls| for additional information.
 \threesidebyside{contents1}{contents2}{contents3}{caption}{label}
 \end{Verbatim}
 
-\section{Ph.D. Dissertations}
+\section{Ph.D. Dissertations}\label{sec:dissertation}
 
-The NPS \LaTeX{} template is also created for Ph.D. dissertations when using the |dissertation| option on the document class.  The signature page is very different from a Master's thesis.  Additional macros are available to make creating the signature page.  The following macros would all be placed into your primary |.tex| document before the |\begin{document}| (as in the prologue of \secref{thesisprologue}).
+The NPS \LaTeX{} template is also created for Ph.D. dissertations when 
+using the |dissertation| option on the document class.  
+The signature page is very different from a Master's thesis.  
+Additional macros are available to make creating the signature page.  
+The following macros would all be placed into your primary |.tex| document 
+before the |\begin{document}| (as in the prologue of \S\ref{sec:prologue}).
 
 \begin{Verbatim}
 \thesisadvisor{[Person 1]}
@@ -255,11 +270,19 @@ The NPS \LaTeX{} template is also created for Ph.D. dissertations when using the
 \memberSix{[Person 6]}
 \end{Verbatim}
 
-Most Ph.D. committees have no more than 6 members. The thesis advisor and committee chair are used as the first and second committee members, by default. If your committee has more than six members, you will still have to manually edit this signature page and expect difficulty in making everything fit on a single page.
+Most Ph.D. committees have no more than 6 members. The thesis advisor and 
+committee chair are used as the first and second committee members, by default. 
+If your committee has more than six members, you will still have to manually 
+edit this signature page and expect difficulty in making everything fit on a single page.
 
-The names of your committee members should be placed in these macros.  Usually your primary advisor is in the One entry. You should still provide the |\thesisadvisor{[ADVISOR]}| macro as well for this person.  Your committee may have guidance on the preferred order of appearance of the remaining members.
+The names of your committee members should be placed in these macros.  
+Usually your primary advisor is in the One entry. You should still 
+provide the |\thesisadvisor{[ADVISOR]}| macro as well for this person.  
+Your committee may have guidance on the preferred order of appearance of the remaining members.
 
-There is space for each advisor to have up to four lines for the title (this does not include their name), but you should manually decide where the put the line breaks using the |\\| command:
+There is space for each advisor to have up to four lines for the title 
+(this does not include their name), but you should manually decide where 
+the put the line breaks using the |\\| command:
 
 \begin{Verbatim}
 \memberOneTitleLine{Dissertation Advisor\\ Professor, Department of\\ 
@@ -379,7 +402,9 @@ this document as:
 As you can see from the example above, paragraph classification
 labeling must be done manually.
 
-For FOUO material, paragraphs should be placed inside a special
+For unclassified theses containing FOUO material, the marking rules are different.
+Only FOUO paragraphs are marked, and only pages holding FOUO materl are marked.
+To accomplish this, FOUO paragraphs are placed inside a special
 environment, the security marking or |smark| environment.
 \begin{quotation}
 \begin{Verbatim}[fontsize=\small]
@@ -423,8 +448,11 @@ For FOUO documents, the |smarkenv| macro will not appropriately mark
 captions, sections, subsections and similar.
 In particular, the table of contents, list of figures, \etc will not be automatically
 marked has holding FOUO material, which is strictly required if a caption is, itself, FOUO. 
-If you have a caption or a section title has FOUO content, you will have to manually
-mark front-matter pages after your PDF is generated.\\
+If you have a caption or a section title has FOUO content, you have two choices:
+(a) manually mark the front-matter after your PDF is generated, or 
+(b) use an alternative unrestricted short-caption that can appear 
+in unmarked pages, for example:\\
+ |\caption[Redacted Caption.]{(FOUO) This is a restricted title}|.\\
 This is not a problem in classified documents, where the front-matter 
 will get automatically marked with the overall document classification.
 \end{description}
@@ -471,9 +499,9 @@ the marked |.bib| file, using a command in your thesis, like:
 \end{Verbatim}
 \end{quotation}
 
-This assumes the |nps_class_meta.bib}| and |thesis.bib|
-hold the directives and references. In truth, you could
-combine these files.
+This assumes the |nps_class_meta.bib| and |thesis.bib|
+hold the directives and references, respectively. 
+In truth, you could combine these files.
 
 \begin{description}
 \item[\caution{Note:}]
@@ -481,7 +509,7 @@ FOUO bibliography entries are not currently supported, since the
 there is no way to mark the pages where the FOUO citations
 get typeset. This is due to the build process: it is unknown
 until quite late where a citation is placed, so its not possible
-to detect that page 102 rather than 103 holds a FOUO citation.
+to detect that pg.\ 102 rather than pg.\ 103 holds a FOUO citation.
 If you have FOUO bibliography entries, you will have to manually
 mark pages after your PDF is generated.\\
 This is not a problem in classified documents, as every page gets
@@ -503,7 +531,7 @@ Revision control software such as subversion (|svn|), mercurial (|hg)|, |git|, a
 Consult their websites to determine which one best suits your needs.
 
 You will note that \LaTeX{} creates many temporary files. These files should \emph{not} be
-included in your subversion repository. Because they are generated on a
+be put under revision control and checked in. Because they are generated on a
 per-machine basis, you can get conflicts if different files are
 created and then committed on different machines.
 

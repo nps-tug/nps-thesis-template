@@ -1,16 +1,35 @@
 \begin{lstlisting}
-\NPSappendixTOC{[My Appendix Title]} (*@\comment{This declares a single appendix in your table of contents with the name My Appendix Title; see examples for using multiple appendices, which are handled slightly differently.}@*)
+\NPSappendixTOC{[My Appendix Title]} (*@\comment{
+			This declares a single appendix in your table of contents with\
+			the name [My Appendix Title]; see examples for using multiple\
+			appendices, which are handled slightly differently.
+}@*)
 \input{appendix1}
 
-\NPSbibliography{thesis} (*@\comment{This uses the default NPS bibliography style, based on IEEE style, declaring the master bib file to be \upshape{\texttt{thesis.bib}}.}@*)
+\NPSbibliography{thesis} (*@\comment{
+			This uses the default NPS bibliography style, based on IEEE style.\
+			This command declares the master bib file to be {\upshape \texttt{thesis.bib}}.
+}@*)
 
-\NPSend    (*@\comment{ Includes the index, if this option was specified. Concludes the content of the thesis.}@*)
+\NPSend    (*@\comment{
+			Includes the index, if this option was specified.\
+			Concludes the content of the thesis.
+}@*)
 
-\NPSdistribution{Initial Distribution List}  (*@\comment{Prints the distribution list, specified below.}@*)
-\begin{distributionlist}
+\NPSdistribution{Initial Distribution List}  (*@\comment{
+			Creates a section for the distribution list.\
+			Its contents are below.
+}@*)
+\begin{distributionlist}(*@\comment{
+			Starts a special environment for listing the entities.\
+			This is variable and user-specifiable, but current NPS policy\
+			limits it to a short, pre-specified list (DTIC and the NPS Library).
+}@*)
 \item Defense Technical Information Center\\Ft. Belvoir, Virginia
 \item Dudley Knox Library\\Naval Postgraduate School\\Monterey, California
-\end{distributionlist}
+\end{distributionlist}(*@\comment{
+			Ends the distribution list environment.
+}@*)
 
 \end{document}
 \end{lstlisting}
