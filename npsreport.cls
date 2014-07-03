@@ -1043,10 +1043,11 @@
 % Thesis Title Page
 %*************************************************************************
 
-% Definitions for the dissertation signature page identifications
+% Definitions for the dissertation title page identifications
 \newcommand{\NPSsigfont}{\normalsize}
 \newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\raggedright #1}}
 \def\committeechair#1{\gdef\@committeechair{#1}}
+\newcommand{\sigspace}{1.5pc}
 
 % Dissertation committee members
 \def\@memberOne{\@thesisadvisor}
@@ -1116,7 +1117,6 @@
 
   %% dissertation:
   \ifnpsdissertation 
-     \newcommand{\sigspace}{1.5pc}
 
       \vfill
       \NPSsigfont
@@ -1182,7 +1182,6 @@
   \else
     %% co-advisors
     \iftwoadvisors
-      \newcommand{\sigspace}{1.5pc}
 
       \vfill
       \begin{tabbing}
@@ -1213,7 +1212,6 @@
     \else
     %% co-advisors + reader
     \iftwoadvisorsreader
-      \newcommand{\sigspace}{1.5pc}
 
       \vfill
       \begin{tabbing}
@@ -1246,7 +1244,6 @@
       \end{tabbing}
     %% advisor + reader
     \else
-      \newcommand{\sigspace}{1.5pc}
 
       \vfill
       \begin{tabbing}
@@ -1327,7 +1324,6 @@
   {\bf \@DistributionClause}
   \vfill
 
-  \newcommand{\sigspace}{1.5pc}
   \textbf{This report was prepared by:}
   \begin{tabbing}
   \hspace{3.5in} \= \hspace{2.5in} \= \\      % set the tabs
