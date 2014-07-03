@@ -278,7 +278,7 @@ edit this signature page and expect difficulty in making everything fit on a sin
 The names of your committee members should be placed in these macros.  
 Usually your primary advisor is in the One entry. You should still 
 provide the |\thesisadvisor{[ADVISOR]}| macro as well for this person.  
-Your committee may have guidance on the preferred order of appearance of the remaining members.
+Your committee may have guidance on the preferred order of appearance of the remaining members.  
 
 There is space for each advisor to have up to four lines for the title 
 (this does not include their name), but you should manually decide where 
@@ -291,16 +291,17 @@ the put the line breaks using the |\\| command:
 
 Similar macros exist for the other members: |memberTwoTitleLine|, \etc.
 
-Two additional signatures are needed for a Ph.D. signature page.  
+The committee names are used on the title page -- which is page (iii).  This page is sometimes called the signature page (but we avoid this name in this document).
+
+Two additional signatures are needed for a Ph.D. title page: your Department Chairman and the Vice Provost of Academic Affairs.  The Vice provost name is populated by default, but the department chairman is specified with:
 
 \begin{Verbatim}
-\assocprovost{[Associate Provost]}
 \departmentchair{[Department Chairman]}
 \end{Verbatim}
 
-You should speak to your primary advisor if you do not know the appropriate names to provide.
+You should speak to your primary advisor if you do not know the Department Chairman.  
 
-Ideally, the signature page will be completed with normal size 12 font.  However, it is possible to have some excessively long titles that will not properly fit.  To provide for this circumstance, re-define the macro files using either of these
+Ideally, the title page will be completed with normal size 12 font.  It is possible to have some excessively long titles for professors or several previous degrees for the author that cause the title page not properly fit on a single page.  To provide for this circumstance, re-define the macro files using either of these:
 
 \begin{Verbatim}
 \renewcommand{\NPSsigfont}{\small}
@@ -309,7 +310,13 @@ Ideally, the signature page will be completed with normal size 12 font.  However
 
 These options give size 11 and size 10 fonts, respectively.  This font option only applies to the signature page font.
 
+Additionally, if a different blank spacing is desired for signatures, it is possible to use:
 
+\begin{Verbatim}
+\renewcommand{\sigspace}{1.5pc}
+\end{Verbatim}
+
+The number |1.5pc| is the default spacing.  Using a combination of changing the font size and spacing can produce the desired title page.
 
 \section{Marking FOUO and Classified Documents}\label{sec:classified}
 The NPS \LaTeX{} template has been designed so that it can be used
