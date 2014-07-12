@@ -8,6 +8,34 @@
 %
 \usepackage{doc,lipsum} % provides \BibTex and \lipsum macros, for demos
 
+%
+% For Example: you might find one of these useful:
+
+%\usepackage{epstopdf}        % to use .eps files for figures
+%\usepackage{bm}              % bold math if you need bold greek letters
+%\usepackage{glossaries}      % see http://en.wikibooks.org/wiki/LaTeX/Glossary
+%\usepackage{asymptote}       % for graphics
+% The asymptote package allows for very nice graphics and figures
+% Proper usage requires additional information located at:
+% http://asymptote.sourceforge.net/
+% See the gallery at this URL for examples
+
+%\usepackage{placeins}        % float placement
+% Provides \FloatBarrier which keeps figures/tables in the same section.
+% LaTeX sometimes moves them to fill up pages.
+% http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/placeins/placeins-doc.pdf
+
+%\usepackage[numbered]{mcode} % matlab code
+% The mcode package must be separately downloaded.
+% http://www.mathworks.com/matlabcentral/fileexchange/8015-m-code-latex-package
+
+%\usepackage{flafter}         % float placement
+% Ensures that figures/tables do not appear in the document before
+% they are referenced in the text.
+
+% This package lets us build references that appear after the Executive Summary
+\usepackage{bibunits}
+
 
 \title{[Title]}
 
@@ -28,23 +56,15 @@
 \degreedate{[Month Year]}
 
 % See Thesis processor's release form for approved distribution statements.
-\distribution{[Some approved distribution statement. ``For Official Use Only'' is
-a control statement that is independent from the distribution statement.
-In other words, FOUO is in addition to the distribution statement and not itself
-a distribution statement.]}
+\distribution{Approved for public release; distribution is unlimited}
 
 % Your abstract.  New paragraphs start after an empty line.
 \abstract{%
-\begin{smark}[(FEUO)]
-\lipsum[1]
-\end{smark}
+\lipsum[1] % example text, remove me
 }
 
 % Switch the below lines around, if FOUO
-\securitybanner{FOR ENTERTAINMENT USE ONLY}
-%\securitybanner{FOR OFFICIAL USE ONLY}
-% "classified documents containing FOUO information cannot bear an overall
-% document marking of FOUO" from (DoDM 5200.01-V4, Feb 24, 2012)
+\securitybanner{}  %\securitybanner{FOR OFFICIAL USE ONLY}
 
 %
 % Mandatory fields for the SF298.
@@ -53,19 +73,13 @@ a distribution statement.]}
 \ReportDate{MM-DD-YYYY}         % for a thesis, graduation date
 \SponsoringAgency{N/A}          % really, for technical reports
 \DatesCovered{MM-DD-YYYY to MM-DD-YYYY}
-
-%``By definition, information must be unclassified in order to be designated FOUO'.' 
-% from (DoDM 5200.01-V4, Feb 24, 2012)
-\ReportClassification{Unclassified//FEUO}
-\AbstractClassification{Unclassified//FEUO}
-\PageClassification{Unclassified//FEUO}
-\AbstractLimitation{UL} % UL = Unclassified / Limited distribution
-
+\ReportClassification{Unclassified}
+\AbstractClassification{Unclassified}
+\PageClassification{Unclassified}
 %
 % Optional fields for the SF298.
 %
 \RPTpreparedFor{}
-\SponsoringNotation{}
 \ContractNumber{}
 \GrantNumber{}
 \ProgramElementNumber{}
@@ -75,11 +89,6 @@ a distribution statement.]}
 \Acronyms{}
 \SMReportNumber{}
 \SubjectTerms{}
-% "Each document determined to contain FOUO information shall identify the
-% originating agency or office. This information shall be clear and complete enough to allow
-% someone receiving the document to contact the office if questions or problems about the
-% designation or markings arise."
-% from (DoDM 5200.01-V4, Feb 24, 2012)
 \ResponsiblePerson{}
 \RPTelephone{}
 \SignatureOne{}
@@ -109,9 +118,9 @@ a distribution statement.]}
 \begin{document}
 
 \NPScover                  % Cover page
-%\NPSsignature             % NPS signature page, for tech reports
 \NPSsftne                  % SF298 form
-\NPSthesistitle            % Title page
+%\NPSsignature             % Tech Report page (iii): signature page
+\NPSthesistitle            % Thesis page (iii): title page
 \NPSabstractpage           % Abstract Page
 \NPSfrontmatter            % NPS front matter follows
 
@@ -131,12 +140,63 @@ a distribution statement.]}
 % Put Executive summary here.
 % New paragraphs start after an empty line.
 %
-\NPSexecsummary{%
-\lipsum[1-4] % example text; remove me
+\NPSexecsummary{
+\begin{bibunit}[nps_thesis] % START: bibunit, use nps_thesis.bst for the style
+
+This is an example of how to create an executive summary with its own references 
+section using the \texttt{bibunit} package.
+The build process needs to change to accomodate this. 
+The \texttt{bibunit} package builds separate unit files
+\texttt{bu1.aux}, \texttt{bu2.aux}, etc. 
+These needs to be run through Bib\TeX{} separately.
+In this example, the executive summary if the first (and only) bibunit, 
+so we need to do the commands:
+\begin{itemize}
+	\item[] \texttt{pdflatex report}
+	\item[] \texttt{bibtex report}
+	\item[] \texttt{bibtex bu1}
+	\item[] \texttt{pdflatex report}
+	\item[] \texttt{pdflatex report}
+\end{itemize}
+The \texttt{Makefile} demonstrates how to script this.
+
+\section*{Executive Summary Section}
+The references~\cite{IEEEexample:incollectionmanyauthors},
+\cite{IEEEexample:articledualmonths}
+are in both the summary,
+and in the final references; they are numbered separately.
+Some references~\cite{IEEEexample:shellCTANpage,IEEEexample:bibtexuser,
+IEEEexample:article_typical} only appear in this section,
+and are not part of the final bibliography.
+
+Note, you cannot use numbered sections in the executive summary,
+since the summary has no number itself.
+
+\subsection*{An Exec Summary Subsection}
+\lipsum[2-3] % example text; remove me
+
+%
+% this makes references appear at the section-level instead of chapter-level
+%
+\begingroup
+ \let\stdthebibliography\thebibliography
+ \renewcommand{\thebibliography}{%
+ \let\chapter\subsubsection
+ \titlespacing*{\subsubsection}{0pt}{5ex plus 2ex}{-1ex plus .2ex}
+ \stdthebibliography}
+ \raggedright     % don't automatically full justify bibliographic references
+ \singlespacing   % reduce extra line breaks between entries
+ \small
+ \putbib[thesis]  % use thesis.bib and place the bibliography here
+\endgroup
+%
+% This is the end of special macros that tweak the appearance of the references
+%
+\end{bibunit}    % END: bibunit
 }
 
 %
-% Put acknowledgements here.
+% Put acknowledgements here.  
 % New paragraphs start after an empty line.
 %
 \NPSacknowledgements{%
@@ -154,7 +214,6 @@ a distribution statement.]}
 % b) Use multiple files.  One chapter per file is recommended.
 %    This breaks your thesis up into logical units to edit.
 %
-\input{chapter_fouo_marking}
 \input{chapter1}
 %
 % (include other chapters here...)

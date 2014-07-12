@@ -43,7 +43,7 @@ These were thought to work properly earlier, but not recently tested / vetted:
 
 Development
 -----------
-The [GitHub repository](https://github.com/nps-lug/nps-thesis-template) 
+The [GitHub repository](https://github.com/nps-tug/nps-thesis-template) 
 for this template is for maintenance and development.
 It is being maintained there, in an attempt to simplify and consolidate
 improvement efforts for the template, which previously were distributed

@@ -2,7 +2,6 @@
 % report style. Feel free to use the options explained in the technical
 % report NPS-CS-11-011, included under the doc/ directory.
 \documentclass[twoside,dissertation,fivemembers,advisoralone]{npsreport}
-
 % Default is a PhD committee with 6 members
 % Additional Options:
 % 'fivemembers': if you only have five members in your committee
@@ -82,7 +81,6 @@
 \memberSixTitleLine{Professor of [Dept Six]}
 
 \departmentchair{[Department Chair]}
-\assocprovost{[Associate Provost]}
 
 % See Thesis processor's release form for approved distribution statements.
 \distribution{Approved for public release; distribution is unlimited}
@@ -134,6 +132,13 @@
 \makeatletter
 \@removefromreset{footnote}{chapter}
 \makeatother
+
+% Optional. Adds pdf metadata and links.
+% This should be right before the \begin{document}, to be the
+% last package / macros defined. (Hyper-ref is fragile,
+% needs to be last, and has known conflicts with other packages.)
+% Comment out if you have build problems building with hyperref
+\NPShyperref
 
 %
 % Your thesis begins here

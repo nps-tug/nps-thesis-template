@@ -31,6 +31,7 @@ ALL += thesis_twoauthor_coadvisors_reader.pdf
 ALL += thesis_traditional.pdf dissertation_traditional.pdf
 ALL += thesis_fouo.pdf thesis_fouo_abstract.pdf
 ALL += thesis_classified.pdf
+ALL += thesis_exec_sum_refs.pdf
 
 all: $(ALL)
 
@@ -42,6 +43,13 @@ $(ALL): $(TEXFILES)
 .tex.pdf:
 	$(LATEX) $(TEXOPTS) $*
 	-$(BIBTEX) $(TEXOPTS) $*
+	$(LATEX) $(TEXOPTS) $*
+	$(LATEX) $(TEXOPTS) $*
+
+thesis_exec_sum_refs.pdf: thesis_exec_sum_refs.tex
+	$(LATEX) $(TEXOPTS) $*
+	-$(BIBTEX) $(TEXOPTS) $*
+	-$(BIBTEX) $(TEXOPTS) bu1
 	$(LATEX) $(TEXOPTS) $*
 	$(LATEX) $(TEXOPTS) $*
 

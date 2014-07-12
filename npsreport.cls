@@ -1,7 +1,7 @@
 %%
 %% npsreport.cls
 %% LaTeX class file for NPS Theses and Tech Reports
-%% Version 1.2
+%% Version 1.3
 %%
 %% NOTE:
 %% There is typically no reason to modify this file. If something
@@ -216,8 +216,39 @@
 \usepackage{cite}               % for [5-8] reference style
 \usepackage{amsmath,amsfonts}   % for many types of math equations
 \usepackage{url}                % nice handling of URLs
+\ifnpstraditional
 \usepackage{subfigure}          % needs to be before tocloft, to avoid conflict
+\else
+\usepackage[sf,SF]{subfigure}   % needs to be before tocloft, to avoid conflict
+\fi
 \usepackage[subfigure]{tocloft} % TOC Control
+
+
+\newcommand{\NPShyperref}{
+% Adds the hyperref package. Populate the PDF metadata.
+% References and citations will have clickable links.
+\makeatletter
+\usepackage[pdftex,                % use PDFTeX backend
+   hidelinks,                      % No colored links or borders
+   pdfkeywords={\sf@SubjectTerms}, % use Subject terms from SF-298
+   pdftitle={\@title},             % set the title
+\iffourauthors
+   pdfauthor={\@author; \@authortwo; \@authorthree; \@authorfour},
+\else
+ \ifthreeauthors
+   pdfauthor={\@author; \@authortwo; \@authorthree},
+ \else
+  \iftwoauthors
+   pdfauthor={\@author; \@authortwo},
+  \else
+   pdfauthor={\@author},
+  \fi %two
+ \fi %three
+\fi %four
+]{hyperref}
+\usepackage[all]{hypcap}
+\makeatother
+}
 
 \pagenumbering{roman}
 
@@ -227,6 +258,9 @@
 \setcounter{topnumber}{10}   % up to 10 floats at the top of the page; Should be enough
 \setcounter{totalnumber}{10} % see above
 
+% Make citations look like [1]--[4] instead of [1--4]
+\def\citepunct{], [}
+\def\citedash{]--[}
 
 % Here are some commands that will help you make more attractive LaTeX
 % Notice that \etal is italicized, but not e.g., etc. , or i.e.
@@ -278,6 +312,8 @@
 \def\researchchair#1{\gdef\@researchchair{#1}}
 \def\president#1{\gdef\@president{#1}}
 \def\provost#1{\gdef\@provost{#1}}
+\def\viceprovost#1{\gdef\@viceprovost{#1}}
+\def\assocprovost#1{\gdef\@viceprovost{#1}} % legacy macro for backwards compat
 
 % Provide reasonable defaults
 \department{Computer Science}
@@ -285,6 +321,7 @@
 \researchchair{Jeffrey D. Paduan}
 \president{Ronald A. Route}
 \provost{Douglas A. Hensler}
+\viceprovost{Douglas Moses}
 
 % Single degree or dual degree options
 \def\degree#1{\gdef\@degree{#1}}
@@ -484,7 +521,7 @@
   \def\listtablename{\textbf{LIST OF TABLES}}
   \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
   \def\distribname{\textbf{INITIAL DISTRIBUTION LIST}}
-  \def\acknowledgementsname{\textbf{ACKNOWLEDGEMENTS}}
+  \def\acknowledgementsname{\textbf{ACKNOWLEDGMENTS}}
   \def\execsummaryname{\textbf{EXECUTIVE SUMMARY}}
   \def\indexname{\textbf{\ULABELINDEX}}
   \def\bibname{\textbf{LIST OF REFERENCES}}
@@ -494,9 +531,9 @@
   \def\contentsname{Table of Contents}
   \def\listacronymname{List of Acronyms and Abbreviations}
   \def\distribname{Initial Distribution List}
-  \def\acknowledgementsname{Acknowledgements}
+  \def\acknowledgementsname{Acknowledgments}
  \def\execsummaryname{Executive Summary}
-  \def\bibname{References}
+  \def\bibname{List of References}
 \fi
 
 
@@ -736,6 +773,8 @@
   \addcontentsline{toc}{chapter}{\appendixname}  % Insert ``Appendix'' into TOC
   \def\chaptername{\appendixname}  % not sure why this is needed, but it is
 \fi
+  \setcounter{equation}{0}
+  \renewcommand{\theequation}{A.\arabic{equation}}
 }
 
 % Use this to change to appendix mode and insert ``Appendix: Title'' into the Table of Contents.
@@ -752,6 +791,8 @@
   \chapter*{APPENDIX:~#1}
   \addcontentsline{toc}{chapter}{\appendixname:~#1}  % Insert ``Appendix: Title'' into TOC
 \fi
+  \setcounter{equation}{0} % need to re-set b/c sections are unnumbered
+  \renewcommand{\theequation}{A.\arabic{equation}}
 }
 
 % Use this to change to appendix mode and insert ``Appendices'' into the Table of Contents.
@@ -763,8 +804,10 @@
 \ifnpsarticle
   \cftaddtitleline{toc}{section}{\appendicesname}{} % Insert ``Appendices'' into TOC
 \else
-  \cftaddtitleline{toc}{chapter}{\appendicesname}{} % Insert ``Appendices'' into TOC
+  %\cftaddtitleline{toc}{chapter}{\appendicesname}{} % Insert ``Appendices'' into TOC
   \def\chaptername{\appendixname}  % not sure why this is needed, but it is
+  \addtocontents{toc}{\protect\renewcommand*\protect\cftchappresnum{\appendixname\ }}
+  \addtocontents{toc}{\protect\setlength{\cftchapnumwidth}{\widthof{\textbf{\appendixname~999~}}}}
 \fi
 }
 
@@ -1008,7 +1051,6 @@
 \newcommand{\NPSsigfont}{\normalsize}
 \newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\raggedright #1}}
 \def\committeechair#1{\gdef\@committeechair{#1}}
-\def\assocprovost#1{\gdef\@assocprovost{#1}}
 
 % Dissertation committee members
 \def\@memberOne{\@thesisadvisor}
@@ -1136,8 +1178,8 @@
       Approved by: \> \@departmentchair \\
                    \> Chair, \@department \\[\sigspace]
 
-      Approved by: \> \@assocprovost \\
-                   \> Associate Provost for Academic Affairs \\
+      Approved by: \> \@viceprovost \\
+                   \> Vice Provost for Academic Affairs \\
       \end{tabbing}
       \normalsize
   %% thesis:
@@ -1374,6 +1416,10 @@
   \onehalfspacing
   #1
   \cleardoublepage
+}
+
+\newcommand{\NPSacknowledgments}[1]{ % make American spelling compatible
+ \NPSacknowledgements{#1}
 }
 
 \newcommand{\NPSbibliography}[1]{
