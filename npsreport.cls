@@ -270,7 +270,7 @@
 \newcommand{\ie}{i.e.,\xspace}
 \newcommand{\etc}{etc.\xspace}
 \newcommand{\etal}{\emph{et al.}\xspace}
-\newcommand{\naive}{na\"{\i}ve\xpsace}
+\newcommand{\naive}{na\"{\i}ve\xspace}
 \newcommand{\Naive}{Na\"{\i}ve\xspace}
 
 % You can also insert this before paragraphs that have problems:
