@@ -793,6 +793,7 @@
 \fi
   \setcounter{equation}{0} % need to re-set b/c sections are unnumbered
   \renewcommand{\theequation}{A.\arabic{equation}}
+  \renewcommand{\thesection}{A.\arabic{section}}
 }
 
 % Use this to change to appendix mode and insert ``Appendices'' into the Table of Contents.
