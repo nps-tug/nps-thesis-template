@@ -154,7 +154,8 @@
 
 %% Font selection
 \usepackage[T1]{fontenc}        % http://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc
-\usepackage{url}                % make\url work (be nice have [lowtidle])
+\usepackage[hyphens]{url}       % make\url work (be nice have [lowtidle])
+\usepackage{ragged2e}           % RaggedRight puts url linebreaks in slightly better places
 \usepackage{eurosym}
 
 \iffontnameset
@@ -216,7 +217,6 @@
 \usepackage{float}              % reimplementation of float package
 \usepackage{cite}               % for [5-8] reference style
 \usepackage{amsmath,amsfonts}   % for many types of math equations
-\usepackage{url}                % nice handling of URLs
 \ifnpstraditional
 \usepackage{subfigure}          % needs to be before tocloft, to avoid conflict
 \else
@@ -231,6 +231,7 @@
 \makeatletter
 \usepackage[pdftex,                % use PDFTeX backend
    hidelinks,                      % No colored links or borders
+   breaklinks,                     % use linebreaks w/in urls under pdftex
    pdfkeywords={\sf@SubjectTerms}, % use Subject terms from SF-298
    pdftitle={\@title},             % set the title
 \iffourauthors
@@ -1433,7 +1434,7 @@
   \cleardoublepage
 \fi
   \bibliographystyle{nps_thesis}
-  \raggedright      % don't automatically full justify bibliographic references
+  \RaggedRight      % don't automatically full justify bibliographic references
   \singlespacing    % reduce extra line breaks between entries
 \ifnpsarticle
   \addcontentsline{toc}{section}{\ULABEL\bibname}
