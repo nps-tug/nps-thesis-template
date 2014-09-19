@@ -1,7 +1,7 @@
 %%
 %% npsreport.cls
 %% LaTeX class file for NPS Theses and Tech Reports
-%% Version 1.4
+%% Version 1.5
 %%
 %% NOTE:
 %% There is typically no reason to modify this file. If something
