@@ -1,58 +1,56 @@
-
-%% The NPS template readily supports two types of list of acronyms.
-%% Option 1 - Basic list of acronyms
-%% In your document, you are responsible to write out the long form on the
-%% first use, then you can simply use the acronym in your paragraphs that
-%% follow.  This can become cumbersome during revisions to your thesis
-%% because it is your responsibility to know if the acronym has been used yet.
-\begin{description}
-
-
-% NOTE: Please follow the capitalization from the "DoD Dictionary of Military
+% NOTE: Follow the capitalization from the "DoD Dictionary of Military
 % and Associated Terms" (http://www.dtic.mil/doctrine/new_pubs/jp1_02.pdf)
 % or from common use.
-\item[MASINT] measurement and signature intelligence
-\item[NPS] Naval Postgraduate School
-\item[SRWBR] short range wide band radio
-\item[TCP] Transmission Control Protocol
-\item[UDP] User Datagram Protocol
-\item[USG] United States Government
-\end{description}
+
+%% The NPS template readily supports two methods of generating list of acronyms.
 
 
-%% Option 2 - Powerful list of acronyms
-%% The acronym option must be used on the documentclass line in thesis.tex
-%% LaTeX tracks the usage of acronyms and uses the long form on their 
-%% first use.  This ensures consistency throughout your document even 
-%% in different revisions of your document.
-%% Your writing is also more portable to a journal or conference paper.
-%% 
-%% The NPS template will only print items in this list that are actually
-%% used in the paper.  In this manner, your acronym list will always be 
-%% up to date.  You can then reuse this acronyms.tex in other documents
-%% as you continue to expand your acronyms in use.
 %%
+%% Option 1 - Powerful list of acronyms
+%% ========
 %% On the first line below, the longest acronym is placed in the 
 %% square brackets.  This is used to size the column of the table 
 %% correctly.
-%\begin{acronym}[XXX] % longest acronym in these square brackets
-%\acro{NPS}{Naval Postgraduate School}
-%\acro{US}{United States}
-%\acro{DoD}{Department of Defense}
-%\acro{TCP}{Transmission Control Protocol}	
-%\acro{UDP}{User Datagram Protocol}	
-%\end{acronym}
+%%
+\begin{acronym}[XXXXXXX] % longest acronym in these square brackets
+\acro{DoD}{Department of Defense}
+\acro{MASINT}{measurement and signature intelligence}
+\acro{NPS}{Naval Postgraduate School}
+\acro{SRWBR}{short range wide band radio}
+\acro{US}{United States}
+\acro{TCP}{Transmission Control Protocol}
+\acro{UDP}{User Datagram Protocol}
+\acro{USG}{United States government}
+\end{acronym}
 
-%% Additional notes on option 2
-
+%% Using documentclass[acronym,...]
+%% --------------------------------
+%% If you include the 'acronym' package in the documentclass[] options
+%% of the NPS template, it will only print items in this acro list that are
+%% actually used in your paper.  In this manner, your acronym list will always
+%% be up to date.  You can then reuse this acronyms.tex in other documents
+%% as you continue to expand your acronyms in use.
+%%
+%% If you don't include the 'acronym' package explicitly, the package is
+%% auto-included by the NPS Thesis Template, but all the acro{} entries
+%% will be put into your thesis, whether you actually use them or not.
+%%
+%% Using the macros:
+%% ----------------
+%% It will track the usage of acronyms and uses the long form on their
+%% first use.  This ensures consistency throughout your document even
+%% in different revisions of your document. Your writing is also more portable.
+%%
 %% To use your acronym in a paragraph use \ac{shortname} or \acplural{shortname}
 %% \acp{shortname} for plural shorthand.
 %% Ex:  The \ac{FFT2} is performed on the data. 
 %% The \acplural{FFT2} are efficient.
 %% This command is how LaTeX tracks their usage.
-
-%% If you are also using the index option, you may want to use this:
-%% \newcommand{\FFT2}{\ac{FFT2}\index{fast Fourier Transform}\xspace}
+%%
+%% Using documentclass[acronym,index,...]
+%% --------------------------------------
+%% You may want to use this:
+%%   \newcommand{\FFT2}{\ac{FFT2}\index{fast Fourier Transform}\xspace}
 %% to save some time and typing.  Then you can do:
 %% Ex: The \FFT2 is performed on the data.
 %% The acronym will be used correctly, and the index will contain the 
@@ -62,4 +60,24 @@
 %% handled correctly (ie, last word of a sentence gets a period on 
 %% the word).
 
+
+%%
+%% Option 2 - Build your own list of acronyms
+%% =========
+
+%% With this option, you are responsible to write out the long form on the
+%% first use, then you can simply use the acronym in your paragraphs that
+%% follow.  This can become cumbersome during revisions to your thesis
+%% because it is your responsibility to know if the acronym has been used yet.
+
+%% The spacing with this option is wonky. It is no longer supported or reviewed.
+
+%\begin{description}
+%\item[MASINT] measurement and signature intelligence
+%\item[NPS] Naval Postgraduate School
+%\item[SRWBR] short range wide band radio
+%\item[TCP] Transmission Control Protocol
+%\item[UDP] User Datagram Protocol
+%\item[USG] United States government
+%\end{description}
 
