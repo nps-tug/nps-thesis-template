@@ -103,12 +103,13 @@
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 % Options Processing
-\PassOptionsToClass{twoside}{geometry}
-\PassOptionsToClass{twoside}{report}           % Options for report
-\PassOptionsToClass{openright}{report}
-
-\PassOptionsToClass{twoside}{article}          % Options for article
-\PassOptionsToClass{openright}{article}
+\ifnpstwoside
+  \PassOptionsToClass{twoside}{geometry}
+  \PassOptionsToClass{twoside}{report}           % Options for report
+  \PassOptionsToClass{openright}{report}
+  \PassOptionsToClass{twoside}{article}          % Options for article
+  \PassOptionsToClass{openright}{article}
+\fi
 
 \ProcessOptions
 
