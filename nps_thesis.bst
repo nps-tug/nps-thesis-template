@@ -291,8 +291,8 @@ MACRO {feb} {"Feb."}
 MACRO {mar} {"Mar."}
 MACRO {apr} {"Apr."}
 MACRO {may} {"May"}
-MACRO {jun} {"Jun."}
-MACRO {jul} {"Jul."}
+MACRO {jun} {"June"}
+MACRO {jul} {"July"}
 MACRO {aug} {"Aug."}
 MACRO {sep} {"Sep."}
 MACRO {oct} {"Oct."}
