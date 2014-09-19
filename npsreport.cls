@@ -250,6 +250,7 @@
 \makeatother
 }
 
+
 \pagenumbering{roman}
 
 % Control widows, orphans, and floats
@@ -446,16 +447,18 @@
 % Support for the acronym package
 \ifnpsacronym
   \usepackage[printonlyused]{acronym}
-  \iffonttimesset
-    % fixes the acronym list to be in times font as well.
-    % it originally is in arial font based on an earlier
-    % define of bflabel.
-    \renewcommand{\bflabel}[1]{{\textbf{#1}\hfill}}
-  \fi
-  \iffontcourierset
-    % this is the fix for the courier font.
-    \renewcommand{\bflabel}[1]{{\textbf{\texttt{#1}}\hfill}}
-  \fi
+\else
+  \usepackage{acronym}
+\fi
+\iffonttimesset
+  % fixes the acronym list to be in times font as well.
+  % it originally is in arial font based on an earlier
+  % define of bflabel.
+  \renewcommand{\bflabel}[1]{{\textbf{#1}\hfill}}
+\fi
+\iffontcourierset
+  % this is the fix for the courier font.
+  \renewcommand{\bflabel}[1]{{\textbf{\texttt{#1}}\hfill}}
 \fi
 
 
@@ -1295,6 +1298,7 @@
   \end{minipage}
   \singlespacing                % back to single spacing
   \NPSabstractWasPrintedtrue
+  \acresetall                   % re-set acronym counter
   \cleardoublepage
 }
 
@@ -1399,6 +1403,7 @@
   \def\execsummaryname{}
   \onehalfspacing
   #1
+  \acresetall                   % re-set acronym counter
   \cleardoublepage
 }
 
@@ -1412,6 +1417,7 @@
   \def\acknowledgementsname{}
   \onehalfspacing
   #1
+  \acresetall                   % re-set acronym counter
   \cleardoublepage
 }
 
