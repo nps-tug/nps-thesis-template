@@ -1,7 +1,7 @@
 %%
 %% npsreport.cls
 %% LaTeX class file for NPS Theses and Tech Reports
-%% Version 1.3
+%% Version 1.5
 %%
 %% NOTE:
 %% There is typically no reason to modify this file. If something
@@ -103,12 +103,13 @@
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 % Options Processing
-\PassOptionsToClass{twoside}{geometry}
-\PassOptionsToClass{twoside}{report}           % Options for report
-\PassOptionsToClass{openright}{report}
-
-\PassOptionsToClass{twoside}{article}          % Options for article
-\PassOptionsToClass{openright}{article}
+\ifnpstwoside
+  \PassOptionsToClass{twoside}{geometry}
+  \PassOptionsToClass{twoside}{report}           % Options for report
+  \PassOptionsToClass{openright}{report}
+  \PassOptionsToClass{twoside}{article}          % Options for article
+  \PassOptionsToClass{openright}{article}
+\fi
 
 \ProcessOptions
 
@@ -153,7 +154,8 @@
 
 %% Font selection
 \usepackage[T1]{fontenc}        % http://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc
-\usepackage{url}                % make\url work (be nice have [lowtidle])
+\usepackage[hyphens]{url}       % make\url work (be nice have [lowtidle])
+\usepackage{ragged2e}           % RaggedRight puts url linebreaks in slightly better places
 \usepackage{eurosym}
 
 \iffontnameset
@@ -215,7 +217,6 @@
 \usepackage{float}              % reimplementation of float package
 \usepackage{cite}               % for [5-8] reference style
 \usepackage{amsmath,amsfonts}   % for many types of math equations
-\usepackage{url}                % nice handling of URLs
 \ifnpstraditional
 \usepackage{subfigure}          % needs to be before tocloft, to avoid conflict
 \else
@@ -230,6 +231,7 @@
 \makeatletter
 \usepackage[pdftex,                % use PDFTeX backend
    hidelinks,                      % No colored links or borders
+   breaklinks,                     % use linebreaks w/in urls under pdftex
    pdfkeywords={\sf@SubjectTerms}, % use Subject terms from SF-298
    pdftitle={\@title},             % set the title
 \iffourauthors
@@ -249,6 +251,7 @@
 \usepackage[all]{hypcap}
 \makeatother
 }
+
 
 \pagenumbering{roman}
 
@@ -270,7 +273,7 @@
 \newcommand{\ie}{i.e.,\xspace}
 \newcommand{\etc}{etc.\xspace}
 \newcommand{\etal}{\emph{et al.}\xspace}
-\newcommand{\naive}{na\"{\i}ve\xpsace}
+\newcommand{\naive}{na\"{\i}ve\xspace}
 \newcommand{\Naive}{Na\"{\i}ve\xspace}
 
 % You can also insert this before paragraphs that have problems:
@@ -446,16 +449,18 @@
 % Support for the acronym package
 \ifnpsacronym
   \usepackage[printonlyused]{acronym}
-  \iffonttimesset
-    % fixes the acronym list to be in times font as well.
-    % it originally is in arial font based on an earlier
-    % define of bflabel.
-    \renewcommand{\bflabel}[1]{{\textbf{#1}\hfill}}
-  \fi
-  \iffontcourierset
-    % this is the fix for the courier font.
-    \renewcommand{\bflabel}[1]{{\textbf{\texttt{#1}}\hfill}}
-  \fi
+\else
+  \usepackage{acronym}
+\fi
+\iffonttimesset
+  % fixes the acronym list to be in times font as well.
+  % it originally is in arial font based on an earlier
+  % define of bflabel.
+  \renewcommand{\bflabel}[1]{{\textbf{#1}\hfill}}
+\fi
+\iffontcourierset
+  % this is the fix for the courier font.
+  \renewcommand{\bflabel}[1]{{\textbf{\texttt{#1}}\hfill}}
 \fi
 
 
@@ -793,6 +798,7 @@
 \fi
   \setcounter{equation}{0} % need to re-set b/c sections are unnumbered
   \renewcommand{\theequation}{A.\arabic{equation}}
+  \renewcommand{\thesection}{A.\arabic{section}}
 }
 
 % Use this to change to appendix mode and insert ``Appendices'' into the Table of Contents.
@@ -1047,10 +1053,11 @@
 % Thesis Title Page
 %*************************************************************************
 
-% Definitions for the dissertation signature page identifications
+% Definitions for the dissertation title page identifications
 \newcommand{\NPSsigfont}{\normalsize}
 \newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\raggedright #1}}
 \def\committeechair#1{\gdef\@committeechair{#1}}
+\newcommand{\sigspace}{1.5pc}
 
 % Dissertation committee members
 \def\@memberOne{\@thesisadvisor}
@@ -1120,7 +1127,6 @@
 
   %% dissertation:
   \ifnpsdissertation 
-     \newcommand{\sigspace}{1.5pc}
 
       \vfill
       \NPSsigfont
@@ -1186,7 +1192,6 @@
   \else
     %% co-advisors
     \iftwoadvisors
-      \newcommand{\sigspace}{1.5pc}
 
       \vfill
       \begin{tabbing}
@@ -1217,7 +1222,6 @@
     \else
     %% co-advisors + reader
     \iftwoadvisorsreader
-      \newcommand{\sigspace}{1.5pc}
 
       \vfill
       \begin{tabbing}
@@ -1250,7 +1254,6 @@
       \end{tabbing}
     %% advisor + reader
     \else
-      \newcommand{\sigspace}{1.5pc}
 
       \vfill
       \begin{tabbing}
@@ -1297,6 +1300,7 @@
   \end{minipage}
   \singlespacing                % back to single spacing
   \NPSabstractWasPrintedtrue
+  \acresetall                   % re-set acronym counter
   \cleardoublepage
 }
 
@@ -1331,7 +1335,6 @@
   {\bf \@DistributionClause}
   \vfill
 
-  \newcommand{\sigspace}{1.5pc}
   \textbf{This report was prepared by:}
   \begin{tabbing}
   \hspace{3.5in} \= \hspace{2.5in} \= \\      % set the tabs
@@ -1402,6 +1405,7 @@
   \def\execsummaryname{}
   \onehalfspacing
   #1
+  \acresetall                   % re-set acronym counter
   \cleardoublepage
 }
 
@@ -1415,6 +1419,7 @@
   \def\acknowledgementsname{}
   \onehalfspacing
   #1
+  \acresetall                   % re-set acronym counter
   \cleardoublepage
 }
 
@@ -1429,7 +1434,7 @@
   \cleardoublepage
 \fi
   \bibliographystyle{nps_thesis}
-  \raggedright      % don't automatically full justify bibliographic references
+  \RaggedRight      % don't automatically full justify bibliographic references
   \singlespacing    % reduce extra line breaks between entries
 \ifnpsarticle
   \addcontentsline{toc}{section}{\ULABEL\bibname}
