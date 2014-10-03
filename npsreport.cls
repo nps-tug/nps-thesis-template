@@ -103,6 +103,8 @@
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 % Options Processing
+
+\ProcessOptions               % Process options to get \ifnpstwoside
 \ifnpstwoside
   \PassOptionsToClass{twoside}{geometry}
   \PassOptionsToClass{twoside}{report}           % Options for report
@@ -111,6 +113,7 @@
   \PassOptionsToClass{openright}{article}
 \fi
 
+% Now process all the options
 \ProcessOptions
 
 % Now options can be used
