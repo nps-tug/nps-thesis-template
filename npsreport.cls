@@ -456,14 +456,18 @@
   \usepackage{acronym}
 \fi
 \iffonttimesset
-  % fixes the acronym list to be in times font as well.
-  % it originally is in arial font based on an earlier
-  % define of bflabel.
-  \renewcommand{\bflabel}[1]{{\textbf{#1}\hfill}}
+  % fixes the acronym list when using times font (default, arial)
+  % if using older versions of acronym, changed via \bflabel:
+  \ifthenelse{\isundefined{\bflabel}}{}{\renewcommand{\bflabel}[1]{{\textbf{#1}\hfill}}}
+  % newer versions use \aclabel:
+  \ifthenelse{\isundefined{\aclabel}}{}{\renewcommand{\aclabelfont}[1]{{\textbf{#1}\hfill}}}
 \fi
 \iffontcourierset
-  % this is the fix for the courier font.
-  \renewcommand{\bflabel}[1]{{\textbf{\texttt{#1}}\hfill}}
+  % fixes the acronym list when using courier font
+  % if using older versions of acronym, changed via \bflabel:
+  \ifthenelse{\isundefined{\bflabel}}{}{\renewcommand{\bflabel}[1]{{\textbf{\texttt{#1}}\hfill}}}
+  % newer versions use \aclabel:
+  \ifthenelse{\isundefined{\aclabel}}{}{\renewcommand{\aclabelfont}[1]{{\textbf{\texttt{#1}}\hfill}}}
 \fi
 
 
