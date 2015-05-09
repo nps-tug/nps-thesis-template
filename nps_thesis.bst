@@ -2084,8 +2084,12 @@ FUNCTION {electronic}
   format.howpublished "howpublished" bibinfo.check output
   format.organization "organization" bibinfo.check output
   format.address "address" bibinfo.check output
-  format.note output
   format.url output
+  format.url empty$ format.note empty$ or
+    { }
+    { add.period$ }
+  if$
+  format.note output
   fin.entry
   empty.entry.warn
   if.url.std.interword.spacing
