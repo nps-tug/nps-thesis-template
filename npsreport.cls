@@ -588,14 +588,14 @@
               {1pc}                                    % {sep}
               {\vspace{-1in}\enlargethispage{-0.5in}}  % {before}
   \titleformat{\section}[block] 
-              {\normalfont\Large}    % {fmt}
-              {\thesection.\ }       % {label}
-              {1pc}                  % {sep}
+              {\singlespacing\normalfont\Large}        % {fmt}
+              {\thesection.\ }                         % {label}
+              {1pc}                                    % {sep}
               {}%
   \titleformat{\subsection}[block] 
-              {\normalfont}                       % {fmt}
-              {\hspace{.5in}\thesubsection.\ }    % {label}
-              {1pc}                               % {sep}
+              {\singlespacing\normalfont}              % {fmt}
+              {\hspace{.5in}\thesubsection.\ }         % {label}
+              {1pc}                                    % {sep}
               {}%
 \else
   % New, avant garde Titles (courtesy of titlesec)
@@ -606,17 +606,17 @@
               {}               % before
               [\titlerule]     % after
   \titleformat{\section}
-              {\normalfont\Large\bfseries}
+              {\singlespacing\normalfont\Large\bfseries}
               {\thesection}
               {1em}
               {}%
   \titleformat{\subsection}
-              {\normalfont\large\bfseries}
+              {\singlespacing\normalfont\large\bfseries}
               {\thesubsection}
               {1em}
               {}%
   \titleformat{\subsubsection}
-              {\normalfont\normalsize\bfseries}
+              {\singlespacing\normalfont\normalsize\bfseries}
               {\thesubsubsection}
               {1em}
               {}%
