@@ -272,10 +272,10 @@
 % Notice that \etal is italicized, but not e.g., etc. , or i.e.
 % Please see p. 5, Section VI, para. 3, of The IEEE Editorial Style Manual
 %\newcommand{\checkmark}{\Pisymbol{pzd}{52}}
-\newcommand{\eg}{e.g.,\xspace}
-\newcommand{\ie}{i.e.,\xspace}
-\newcommand{\etc}{etc.\xspace}
-\newcommand{\etal}{\emph{et al.}\xspace}
+\newcommand{\eg}{\@ifnextchar{,}{e.g.}{e.g.,\xspace}}
+\newcommand{\ie}{\@ifnextchar{,}{i.e.}{i.e.,\xspace}}
+\newcommand{\etc}{\@ifnextchar{.}{etc}{etc.\@\xspace}}
+\newcommand{\etal}{\@ifnextchar{.}{\emph{et al}}{\emph{et al.}\@\xspace}}
 \newcommand{\naive}{na\"{\i}ve\xspace}
 \newcommand{\Naive}{Na\"{\i}ve\xspace}
 
