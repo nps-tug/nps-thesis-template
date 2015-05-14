@@ -47,7 +47,7 @@
 \newif\ifnpsacronym\npsacronymfalse
 
 \DeclareOption{article}{\npsarticletrue}           % use article default, not report
-\DeclareOption{traditional}{\npstraditionaltrue}   % make it look old way
+\DeclareOption{traditional}{\npstraditionalfalse}   % make it look old way
 \DeclareOption{signatureline}{\signaturelinetrue}
 \DeclareOption{twoside}{\npstwosidetrue}
 \DeclareOption{authorindex}{\npsauthorindextrue}   % generate an author index
