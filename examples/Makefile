@@ -30,7 +30,7 @@ ALL += thesis_coadvisors.pdf thesis_coadvisors_reader.pdf
 ALL += thesis_twoauthor_coadvisors_reader.pdf
 ALL += thesis_traditional.pdf dissertation_traditional.pdf
 ALL += thesis_fouo.pdf thesis_fouo_abstract.pdf
-ALL += thesis_classified.pdf
+ALL += thesis_classified.pdf thesis_distro_statement.pdf
 ALL += thesis_exec_sum_refs.pdf
 
 all: $(ALL)

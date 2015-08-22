@@ -22,7 +22,7 @@
 % npsreport package
 
 \newif\ifnpstraditional\npstraditionalfalse
-\newif\ifsignatureline\signaturelinefalse
+\newif\ifcompacttitle\compacttitlefalse
 \newif\ifnpstwoside\npstwosidefalse
 \newif\ifnpsauthorindex\npsauthorindexfalse
 \newif\ifnpsarticle\npsarticlefalse
@@ -48,7 +48,7 @@
 
 \DeclareOption{article}{\npsarticletrue}           % use article default, not report
 \DeclareOption{traditional}{\npstraditionalfalse}   % make it look old way
-\DeclareOption{signatureline}{\signaturelinetrue}
+\DeclareOption{compacttitle}{\compacttitletrue}
 \DeclareOption{twoside}{\npstwosidetrue}
 \DeclareOption{authorindex}{\npsauthorindextrue}   % generate an author index
 \DeclareOption{thesis}{\npsthesistrue}             % is this a thesis?
@@ -919,36 +919,40 @@
   %
   \begin{titlepage}
   \thispagestyle{frontmarked}
-  \vfill
-  \textbf{\sf@POReportNumber}   % if not defined, will be blank
-  \begin{center}
+  %
+  % technical report number
+  \ifthenelse{\equal{\sf@POReportNumber}{}}{}{%
+    \textbf{\sf@POReportNumber}\\[1ex]\par
+  }
+  %
+  \centering
+  \vspace*{0pt minus 100pt}                  % moves logo into margin if needed
   \includegraphics{figs/nps_logo_3clr_cymk}
+  \vspace*{5pt plus 1fill minus 4pt}
   \textbf{\huge\ifclassified\Large\fi{}\\NAVAL\\POSTGRADUATE\\SCHOOL\\}
-  \vspace{2pc}
-  \textbf{\large{}MONTEREY, CALIFORNIA\\}
-  \vfill
+  \vspace{8pt plus 1fill minus 5pt}
+  \textbf{\large MONTEREY, CALIFORNIA\\}
+  \vspace{8pt plus 1fill minus 5pt}
   \ifnpsthesis
     \ifnpsdissertation
       \textbf{\huge DISSERTATION\\} 
     \else
       \textbf{\huge THESIS\\} 
     \fi
-    ~
-    \vfill
-     \vspace*{\fill}
+    \vspace{8pt plus 1fill minus 6pt}
   \fi  
-
+  %
   % Print the box on the front page
   \setlength{\fboxrule}{1pt}
-
   \framebox[4.5in][c]{
+  %
     \begin{minipage}{4.45in}
-      \vspace{3pt}
+      \vspace{2pt}
       \centering
         \textbf{\MakeUppercase{\@title}}\\
-        \vspace{1pc}
+        \vspace{12pt}
         by\\
-        \vspace{1pc}
+        \vspace{12pt}
         \@author\\
         \iftwoauthors
           \@authortwo\\
@@ -959,10 +963,11 @@
         \iffourauthors
           \@authorfour\\
         \fi
-        \vspace{1pc}
+        \vspace{12pt}
         \@date\\
-        \vspace{1pc}
+        \vspace{2pt}
         \ifnpsthesis
+        \vspace{10pt}
           \begin{tabularx}{4.45in}{lXr}
             \ifnpsdissertation
                 Dissertation Supervisor: & & \@thesisadvisor \\
@@ -985,15 +990,29 @@
         \fi
     \end{minipage}
   }
-  \parbox{\textwidth}{\centering \singlespacing \bf \small \@distribution} \\
-
-  % define \RPTpreparedFor when needed in you tex file
+  \vspace{2pt plus 1fill minus 2pt}
+  %
+  % distribution statement
+  \newdimen\dsheight       % height of distribution statement w/ normal settings
+  \settoheight\dsheight{
+    \begin{minipage}{\textwidth} \singlespacing \bf \small \@distribution \end{minipage}
+  }
+  \begin{minipage}{\textwidth}\begin{singlespace}
+  \ifdim\dsheight>20pt     % choose different font for long statements
+    \centering \bf \fontsize{9}{11}\selectfont \@distribution
+  \else                    % normal setting for short statements
+    \centering \bf \small \@distribution
+  \fi
+  \end{singlespace}\end{minipage}
+  %
+  % Report Prepared By:
+  %   define \RPTpreparedFor when needed in you tex file
   \ifthenelse{\equal{\@RPTpreparedFor}{}}{}{%
     \vspace{\smallskipamount}
     Prepared for: \@RPTpreparedFor
   }
-  \vfill
   \ifclassified 
+    \vfill
     \enlargethispage{4pc}
     \smallskip
     \begin{tabular}{ccc}
@@ -1019,11 +1038,11 @@
      pages.
     }
     \end{tabular}
+    \vspace*{10pt minus 8pt}   % little flex between notice and footer markings
   \fi
-  \end{center}
   \vfill
   \end{titlepage}
-
+  %
   \cleardoublepageEmpty
 }
 
@@ -1067,7 +1086,7 @@
 \newcommand{\NPSsigfont}{\normalsize}
 \newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\raggedright #1}}
 \def\committeechair#1{\gdef\@committeechair{#1}}
-\newcommand{\sigspace}{1.5pc}
+\newcommand{\sigspace}{12pt}
 
 % Dissertation committee members
 \def\@memberOne{\@thesisadvisor}
@@ -1105,15 +1124,28 @@
   \setcounter{page}{3}          % do not reset to page 1
   \smarkthispage
   \begin{center}
-    \textbf{\@distribution}\\
-    \vspace{\bigskipamount}\vfill
-    \textbf{\MakeUppercase{\@title}}\\
-    \vspace{\bigskipamount}\vfill
+    %
+    % distribution statement
+    \newdimen\dsheight       % height of distribution statement w/ normal settings
+    \settoheight\dsheight{
+      \begin{minipage}{\textwidth} \centering \bf \@distribution \end{minipage}
+    }
+    \begin{minipage}{\textwidth}
+    \ifdim\dsheight>50pt     % choose different font for long statements
+      \centering \bf \small \@distribution
+    \else                    % normal setting for short statements
+      \centering \bf \@distribution
+    \fi
+    \end{minipage}
+    %
+    \vspace{12pt plus 1fill minus 8pt}
+    \textbf{\singlespace \uppercase{\@title}}\\
+    \vspace{12pt plus 1fill minus 8pt}
     \@author~\\
     \@rank~\\
     \@prevdegrees\\
     \iftwoauthors
-      \vspace{1.5\medskipamount}
+      \vspace{9pt plus 3pt minus 3pt}
       \@authortwo~\\
       \@ranktwo~\\
       \@prevdegreestwo\\
@@ -1130,15 +1162,16 @@
       }
     \vspace{\medskipamount}
     from the\\
-    \vspace{1.5\medskipamount}
+    \vspace{\medskipamount}
     \textbf{NAVAL POSTGRADUATE SCHOOL}\\
     \textbf{\@date}
   \end{center}
-
+  \vfill
+  %%
   %% dissertation:
-  \ifnpsdissertation 
-
-      \vfill
+  %%
+  \ifnpsdissertation
+      %
       \NPSsigfont
       \begin{tabbing}
       \hspace{1.1in} \= \hspace{2.4in} \= \\      % Set the tabs
@@ -1196,12 +1229,30 @@
                    \> Vice Provost for Academic Affairs \\
       \end{tabbing}
       \normalsize
+  %%
   %% thesis:
+  %%
   \else
+    %%
     %% co-advisors
     \iftwoadvisors
+      \ifcompacttitle  % compact version of this section
+      \begin{tabbing}
+      \hspace{1.5in}\=\hspace{2.5in}\=\\    % Two tab columns
 
-      \vfill
+      Approved by:   \> \@thesisadvisorone    \> \@thesisadvisortwo \\
+                     \> Thesis Co-Advisor     \> Thesis Co-Advisor \\[\sigspace]
+
+                     \> \@departmentchair \\
+                     \>  Chair, \@department
+
+                  \ifthenelse{\equal{\@departmenttwo}{}}{}{%
+                     \\[\sigspace]
+                     \> \@departmentchairtwo \\
+                     \> Chair, \@departmenttwo \\
+                  }
+      \end{tabbing}
+      \else            % normal (long) version of this section
       \begin{tabbing}
       \hspace{1.5in}\=\\       % Set the tabs
   
@@ -1214,17 +1265,37 @@
                      \> \@departmentchair \\
                      \>  Chair, \@department
 
-                  \ifthenelse{\equal{\@departmenttwo}{}}{\\}{ %
+                  \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
                      \> \@departmentchairtwo \\
                      \> Chair, \@departmenttwo \\
                   }
       \end{tabbing}
+      \fi
     \else
+    %%
     %% co-advisors + reader
     \iftwoadvisorsreader
+      \ifcompacttitle  % compact version of this section
+      \begin{tabbing}
+      \hspace{1.5in}\=\hspace{2.5in}\=\\    % Two tab columns
 
-      \vfill
+      Approved by:   \> \@thesisadvisorone    \> \@thesisadvisortwo \\
+                     \> Thesis Co-Advisor     \> Thesis Co-Advisor \\[\sigspace]
+
+                     \> \@secondreader \\
+                     \> Second Reader \\[\sigspace]
+
+                     \> \@departmentchair \\
+                     \>  Chair, \@department
+
+                  \ifthenelse{\equal{\@departmenttwo}{}}{}{%
+                     \\[\sigspace]
+                     \> \@departmentchairtwo \\
+                     \> Chair, \@departmenttwo \\
+                  }
+      \end{tabbing}
+      \else            % normal (long) version of this section
       \begin{tabbing}
       \hspace{1.5in}\=\\       % Set the tabs
 
@@ -1240,16 +1311,32 @@
                      \> \@departmentchair \\
                      \>  Chair, \@department
 
-                  \ifthenelse{\equal{\@departmenttwo}{}}{\\}{ %
+                  \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
                      \> \@departmentchairtwo \\
                      \> Chair, \@departmenttwo \\
                   }
       \end{tabbing}
+      \fi
+    %%
     %% advisor + reader
     \else
+      \ifcompacttitle  % compact version of this section
+      \hspace{1.5in}\=\hspace{2.5in}\=\\    % Two tab columns
 
-      \vfill
+      Approved by:   \> \@thesisadvisor    \> \@secondreader \\
+                     \> Thesis Advisor     \> Second Reader \\[\sigspace]
+
+                     \> \@departmentchair \\
+                     \>  Chair, \@department
+
+                  \ifthenelse{\equal{\@departmenttwo}{}}{}{%
+                     \\[\sigspace]
+                     \> \@departmentchairtwo \\
+                     \> Chair, \@departmenttwo \\
+                  }
+      \end{tabbing}
+      \else            % normal (long) version of this section
       \begin{tabbing}
       \hspace{1.5in}\=\\       % Set the tabs
 
@@ -1262,12 +1349,13 @@
                      \> \@departmentchair \\
                      \>  Chair, \@department
 
-                  \ifthenelse{\equal{\@departmenttwo}{}}{\\}{ %
+                  \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
                      \> \@departmentchairtwo \\
                      \> Chair, \@departmenttwo \\
                   }
       \end{tabbing}
+      \fi
     \fi
     \fi
   \fi
