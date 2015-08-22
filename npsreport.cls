@@ -1143,8 +1143,6 @@
       \begin{tabbing}
       \hspace{1.1in} \= \hspace{2.4in} \= \\      % Set the tabs
 
-      Author: \> \@author \\[\sigspace]
-
       %% Row 1:
       % process member 1
       \ifadvisoralone
@@ -1206,13 +1204,6 @@
       \vfill
       \begin{tabbing}
       \hspace{1.5in}\=\\       % Set the tabs
-
-      \iftwoauthors
-      Authors: \> \@author \\[\sigspace]
-               \> \@authortwo\\[\sigspace]
-      \else
-      Author: \> \@author \\[\sigspace]
-      \fi
   
       Approved by:   \> \@thesisadvisorone \\
                      \> Thesis Co-Advisor \\[\sigspace]
@@ -1236,13 +1227,6 @@
       \vfill
       \begin{tabbing}
       \hspace{1.5in}\=\\       % Set the tabs
-
-      \iftwoauthors
-      Authors: \> \@author \\[\sigspace]
-               \> \@authortwo\\[\sigspace]
-      \else
-      Author: \> \@author \\[\sigspace]
-      \fi
 
       Approved by:   \> \@thesisadvisorone \\
                      \> Thesis Co-Advisor \\[\sigspace]
@@ -1268,13 +1252,6 @@
       \vfill
       \begin{tabbing}
       \hspace{1.5in}\=\\       % Set the tabs
-
-      \iftwoauthors
-      Authors: \> \@author \\[\sigspace]
-               \> \@authortwo\\[\sigspace]
-      \else
-      Author: \> \@author \\[\sigspace]
-      \fi
 
       Approved by:   \> \@thesisadvisor \\
                      \> Thesis Advisor \\[\sigspace]
