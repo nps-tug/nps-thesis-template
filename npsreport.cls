@@ -47,7 +47,7 @@
 \newif\ifnpsacronym\npsacronymfalse
 
 \DeclareOption{article}{\npsarticletrue}           % use article default, not report
-\DeclareOption{traditional}{\npstraditionalfalse}   % make it look old way
+\DeclareOption{traditional}{\npstraditionalfalse}  % no longer supported option
 \DeclareOption{compacttitle}{\compacttitletrue}
 \DeclareOption{twoside}{\npstwosidetrue}
 \DeclareOption{authorindex}{\npsauthorindextrue}   % generate an author index
@@ -220,11 +220,7 @@
 \usepackage{float}              % reimplementation of float package
 \usepackage{cite}               % for [5-8] reference style
 \usepackage{amsmath,amsfonts}   % for many types of math equations
-\ifnpstraditional
-\usepackage{subfigure}          % needs to be before tocloft, to avoid conflict
-\else
 \usepackage[sf,SF]{subfigure}   % needs to be before tocloft, to avoid conflict
-\fi
 \usepackage[subfigure]{tocloft} % TOC Control
 
 
@@ -522,151 +518,60 @@
 %
 % Section names
 %
-\ifnpstraditional
-  % Traditionally lots of things need to be in uppercase and bold
-  \def\abstractname{ABSTRACT}
-  \def\figurename{Figure}
-  \def\tablename{Table}
-  \def\chaptername{CHAPTER}
-  \def\appendixname{APPENDIX}
-  \def\appendicesname{APPENDICES}
-  \def\partname{PART}
-  \def\contentsname{\textbf{TABLE OF CONTENTS}}
-  \def\listfigurename{\textbf{LIST OF FIGURES}}
-  \def\listtablename{\textbf{LIST OF TABLES}}
-  \def\listacronymname{\textbf{LIST OF ACRONYMS AND ABBREVIATIONS}}
-  \def\distribname{\textbf{INITIAL DISTRIBUTION LIST}}
-  \def\acknowledgementsname{\textbf{ACKNOWLEDGMENTS}}
-  \def\execsummaryname{\textbf{EXECUTIVE SUMMARY}}
-  \def\indexname{\textbf{\ULABELINDEX}}
-  \def\bibname{\textbf{LIST OF REFERENCES}}
-\else
-  \def\appendixname{Appendix}
-  \def\appendicesname{Appendices}
-  \def\contentsname{Table of Contents}
-  \def\listacronymname{List of Acronyms and Abbreviations}
-  \def\distribname{Initial Distribution List}
-  \def\acknowledgementsname{Acknowledgments}
- \def\execsummaryname{Executive Summary}
-  \def\bibname{List of References}
-\fi
-
-
-%
-% Section Numbering and Labels
-%
-\ifnpstraditional
-  % Traditional numbering scheme
-  \def\thepart          {\arabic{part}}
-  \def\thechapter       {\Roman{chapter}}
-  \def\thesection       {\Alph{section}}
-  \def\thesubsection    {\arabic{subsection}}
-  \def\thesubsubsection {\alph{subsubsection}}
-  \def\theparagraph     {\arabic{paragraph}}
-  \def\thesubparagraph  {\roman{subparagraph}}
-
-  % Traditional labels to include punctuation, for toc, etc.
-  \def\labelpart          {\thepart.}
-  \def\labelchapter       {\thechapter.}
-  \def\labelsection       {\thesection.}
-  \def\labelsubsection    {\thesubsection.}
-  \def\labelsubsubsection {\thesubsubsection.}
-  \def\labelparagraph     {(\theparagraph)}
-  \def\labelsubparagraph  {(\thesubparagraph)}
-  \def\to@appendix{\global\def\ap@pen@dix{OK}% this is a flag, set at first app.
-    \setcounter{chapter}{0}%
-    \setcounter{section}{0}%
-    \def\thechapter       {\Alph{chapter}}%
-    \def\thesection       {\arabic{section}}%
-    \def\thesubsection    {\alph{subsection}}%
-    \def\thesubsubsection {\roman{subsubsection}}%
-  }
-\fi
-
+\def\appendixname{Appendix}
+\def\appendicesname{Appendices}
+\def\contentsname{Table of Contents}
+\def\listacronymname{List of Acronyms and Abbreviations}
+\def\distribname{Initial Distribution List}
+\def\acknowledgementsname{Acknowledgments}
+\def\execsummaryname{Executive Summary}
+\def\bibname{List of References}
 
 %
 % Title Control
 % This is done with the titlesec package
 %
-\ifnpstraditional
-  \titleformat{\chapter}[display] 
-              {\normalfont\bf\Large\filcenter}         % {fmt}
-              {\thechapter.\ }                         % {label}
-              {1pc}                                    % {sep}
-              {\vspace{-1in}\enlargethispage{-0.5in}}  % {before}
-  \titleformat{\section}[block] 
-              {\singlespacing\normalfont\Large}        % {fmt}
-              {\thesection.\ }                         % {label}
-              {1pc}                                    % {sep}
-              {}%
-  \titleformat{\subsection}[block] 
-              {\singlespacing\normalfont}              % {fmt}
-              {\hspace{.5in}\thesubsection.\ }         % {label}
-              {1pc}                                    % {sep}
-              {}%
-\else
-  % New, avant garde Titles (courtesy of titlesec)
-  \titleformat{\chapter}[display]
-              {\vskip 0\p@ \LARGE\filcenter\sffamily\titlerule[1pt]\vspace{1pt}\titlerule}
-              {\MakeUppercase{\chaptertitlename} \thechapter:} % label (not for * chapters)
-              {-1pc}           % sep
-              {}               % before
-              [\titlerule]     % after
-  \titleformat{\section}
-              {\singlespacing\normalfont\Large\bfseries}
-              {\thesection}
-              {1em}
-              {}%
-  \titleformat{\subsection}
-              {\singlespacing\normalfont\large\bfseries}
-              {\thesubsection}
-              {1em}
-              {}%
-  \titleformat{\subsubsection}
-              {\singlespacing\normalfont\normalsize\bfseries}
-              {\thesubsubsection}
-              {1em}
-              {}%
-\fi
+\titleformat{\chapter}[display]
+          {\vskip 0\p@ \LARGE\filcenter\sffamily\titlerule[1pt]\vspace{1pt}\titlerule}
+          {\MakeUppercase{\chaptertitlename} \thechapter:} % label (not for * chapters)
+          {-1pc}           % sep
+          {}               % before
+          [\titlerule]     % after
+\titleformat{\section}
+          {\singlespacing\normalfont\Large\bfseries}
+          {\thesection}
+          {1em}
+          {}%
+\titleformat{\subsection}
+          {\singlespacing\normalfont\large\bfseries}
+          {\thesubsection}
+          {1em}
+          {}%
+\titleformat{\subsubsection}
+          {\singlespacing\normalfont\normalsize\bfseries}
+          {\thesubsubsection}
+          {1em}
+          {}%
 
 % ``The starred version kills the indention of the paragraph following the title.''
 % \titlespacing%{<command>}{<left>}{<beforesep>}{<aftersep>}[<right>]
-\ifnpstraditional
-  \titlespacing*{\chapter}{0pt}{15pt}{.25in}
-  \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
-  \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
-  \titlespacing*{\subsubsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
-  \titlespacing*{\paragraph}{0pt}{0pt plus 2ex}{3pt}
-  \setlength{\parskip}{2ex}
-  \setlength{\parindent}{0pt}
-\else
-  \titlespacing*{\chapter}{0pt}{-.5in}{.25in}
-  \titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
-  \titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
-  \titlespacing*{\subsubsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex} 
-  \titlespacing*{\paragraph}{0pt}{0pt plus 2ex}{3pt}
-  \setlength{\parskip}{2ex}
-  \setlength{\parindent}{0pt}
-\fi
+\titlespacing*{\chapter}{0pt}{-.5in}{.25in}
+\titlespacing*{\section}{0pt}{0pt plus 2ex}{-2ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex}
+\titlespacing*{\subsubsection}{0pt}{0pt plus 2ex}{-2ex plus .2ex}
+\titlespacing*{\paragraph}{0pt}{0pt plus 2ex}{3pt}
+\setlength{\parskip}{2ex}
+\setlength{\parindent}{0pt}
 
 
 %
 % Figure / Table Caption Control
+% Put captions is a sanserif font, smaller, and tighter
 %
-\ifnpstraditional
-  % Make traditional figures and tables not reset and not include the figure/table tag
-  \usepackage{chngcntr}
-  \@removefromreset{figure}{chapter}
-  \@removefromreset{table}{chapter}
-  \counterwithout{figure}{chapter}
-  \counterwithout{table}{chapter}
-\else
-  % Put captions is a sanserif font, smaller, and tighter
-  \captionnamefont{\sffamily\fontsize{11}{12}\selectfont}
-  \captiontitlefont{\sffamily\fontsize{11}{12}\selectfont}
-  \setlength{\abovecaptionskip}{5pt}
-  \setlength{\belowcaptionskip}{0pt}
-\fi
+\captionnamefont{\sffamily\fontsize{11}{12}\selectfont}
+\captiontitlefont{\sffamily\fontsize{11}{12}\selectfont}
+\setlength{\abovecaptionskip}{5pt}
+\setlength{\belowcaptionskip}{0pt}
 
 
 %
@@ -696,9 +601,7 @@
 \addtolength\cfttabnumwidth{\tablelen}
 \renewcommand\cfttabpresnum{\hspace{-1.5pc}Table }
 
-\ifnpstraditional
-\else
-  \ifnpsarticle
+\ifnpsarticle
   \setcounter{tocdepth}{3}  % put sections and subsections in TOC for articles
   \else
   \setcounter{tocdepth}{1}  % only put chapters and sections in the TOC
@@ -730,7 +633,7 @@
             {\contentslabel{3.1em}}                   % before with label
             {\hspace*{-2.3em}}                        % before without label
             {\titlerule*[1pc]{.}\contentspage}        % filler and page
-  \else
+\else
     \titlecontents{section}                                 % section
             [25pt]                                    % left
             {\vspace{-1.2ex}}                         % above
@@ -751,7 +654,6 @@
             {\contentslabel{2.3em}}                   % before with label
             {\hspace*{-2.3em}}                        % before without label
             {\titlerule*[1pc]{.}\contentspage}        % filler and page
-  \fi
 \fi
 
 \ifnpstight
@@ -872,11 +774,8 @@
 %*************************************************************************
 
 \def\NPScover{
-%% These commands are the first commands that run when printing
-%% starts, because the \NPScover command appears first
-\ifnpstraditional
-  \fancyhead{}                  % clear all header fields
-\fi
+% These commands are the first commands that run when printing
+% starts, because the \NPScover command appears first
   %%
   %% 'fancy' and 'plain' - classified marking, page numbers
   %% used: everywhere
@@ -1369,8 +1268,7 @@
   \end{center}
   \begin{minipage}{\textwidth}
   \vspace{2pc}
-  \onehalfspacing                 % a really bad idea, but apparently required
-  \ifnpstraditional\hspace{.5in}\fi % indent if traditional
+  \onehalfspacing               % a really bad idea, but apparently required
   \@abstract
   \end{minipage}
   \singlespacing                % back to single spacing
@@ -1380,11 +1278,8 @@
 }
 
 \def\NPSfrontmatter{
-  \ifnpstraditional
-  \else
-    \lhead{\nouppercase{\rightmark}} % don't use upper-case headers
-    \rhead{\nouppercase{\leftmark}}  % must appear after \pagestyle command
-  \fi
+  \lhead{\nouppercase{\rightmark}} % don't use upper-case headers
+  \rhead{\nouppercase{\leftmark}}  % must appear after \pagestyle command
   \singlespacing
 }
 
