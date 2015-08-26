@@ -827,18 +827,18 @@
   \centering
   \vspace*{0pt minus 100pt}                  % moves logo into margin if needed
   \includegraphics{figs/nps_logo_3clr_cymk}
-  \vspace*{5pt plus 1fill minus 4pt}
+  \vspace*{5pt plus 1fill minus 1pt}
   \textbf{\huge\ifclassified\Large\fi{}\\NAVAL\\POSTGRADUATE\\SCHOOL\\}
-  \vspace{8pt plus 1fill minus 5pt}
+  \vspace{10pt plus 1fill minus 5pt}
   \textbf{\large MONTEREY, CALIFORNIA\\}
-  \vspace{8pt plus 1fill minus 5pt}
+  \vspace{10pt plus 1fill minus 5pt}
   \ifnpsthesis
     \ifnpsdissertation
       \textbf{\huge DISSERTATION\\} 
     \else
       \textbf{\huge THESIS\\} 
     \fi
-    \vspace{8pt plus 1fill minus 6pt}
+    \vspace{10pt plus 1fill minus 5pt}
   \fi  
   %
   % Print the box on the front page
@@ -1031,15 +1031,16 @@
     }
     \begin{minipage}{\textwidth}
     \ifdim\dsheight>50pt     % choose different font for long statements
-      \centering \bf \small \@distribution
+      \centering \bf \footnotesize \@distribution
     \else                    % normal setting for short statements
       \centering \bf \@distribution
     \fi
     \end{minipage}
     %
-    \vspace{12pt plus 1fill minus 8pt}
+    \vspace{5pt plus 1fill minus 5pt}
     \textbf{\singlespace \uppercase{\@title}}\\
-    \vspace{12pt plus 1fill minus 8pt}
+    \vspace{\baselineskip} % matches the \baselineskip after the minipage
+    \vspace{5pt plus 1fill minus 5pt}
     \@author~\\
     \@rank~\\
     \@prevdegrees\\
