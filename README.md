@@ -38,7 +38,6 @@ through the thesis processing office. The following options are supported:
 These were thought to work properly earlier, but not recently tested / vetted:
 
 * Classified marking for theses and disserations
-* Traditional layout (looks more like the Word template)
 
 
 Development
