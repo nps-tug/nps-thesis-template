@@ -220,9 +220,13 @@
 \usepackage{float}              % reimplementation of float package
 \usepackage{cite}               % for [5-8] reference style
 \usepackage{amsmath,amsfonts}   % for many types of math equations
-\usepackage[sf,SF]{subfigure}   % needs to be before tocloft, to avoid conflict
+\usepackage[labelfont=sf,textfont=sf]{caption}
+\usepackage{subfig}             % needs to be before tocloft, to avoid conflict
 \usepackage[subfigure]{tocloft} % TOC Control
 
+% for compatibility with older subfigure package, to get \subfigure{} macro
+\@ifundefined{c@subfigure}{\newsubfloat{figure}}{}
+\def\subfigure{\subfloat}
 
 \newcommand{\NPShyperref}{
 % Adds the hyperref package. Populate the PDF metadata.
