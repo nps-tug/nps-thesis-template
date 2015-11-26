@@ -160,6 +160,7 @@
 \usepackage[hyphens]{url}       % make\url work (be nice have [lowtidle])
 \usepackage{ragged2e}           % RaggedRight puts url linebreaks in slightly better places
 \usepackage{eurosym}
+\urlstyle{same}                 % don't put \url{} into monospace font
 
 \iffontnameset
   % Font name is set
@@ -167,8 +168,8 @@
   \fonttimessettrue
 \fi 
 
-\iffonttimesset
-  \usepackage{mathptmx}           % print the thesis in Times
+\iffonttimesset             % print the thesis in Times
+  % \usepackage{mathptmx}   % ugly math font for times: we are no longer using it
 \fi
 
 \iffontarialset
@@ -227,6 +228,9 @@
 % for compatibility with older subfigure package, to get \subfigure{} macro
 \@ifundefined{c@subfigure}{\newsubfloat{figure}}{}
 \def\subfigure{\subfloat}
+
+\usepackage{bibentry}           % to put full citations directly in text
+\nobibliography*                % required for bibentry package
 
 \newcommand{\NPShyperref}{
 % Adds the hyperref package. Populate the PDF metadata.
@@ -455,6 +459,8 @@
 \else
   \usepackage{acronym}
 \fi
+\newcommand{\NPSacrocommon}{}   % custom macro to play with acronym counters
+
 \iffonttimesset
   % fixes the acronym list when using times font (default, arial)
   \ifthenelse{\isundefined{\bflabel}}{% new ver. of acronym uses \aclabel:
@@ -570,13 +576,14 @@
 
 %
 % Figure / Table Caption Control
-% Put captions is a sanserif font, smaller, and tighter
+% Put captions is a sanserif font, smaller, tighter, single space
 %
 \captionnamefont{\sffamily\fontsize{11}{12}\selectfont}
 \captiontitlefont{\sffamily\fontsize{11}{12}\selectfont}
-\setlength{\abovecaptionskip}{5pt}
-\setlength{\belowcaptionskip}{0pt}
-
+\captionsetup{font={stretch=1.0}}
+\captionsetup{width=0.85\textwidth}
+\captionsetup[table]{aboveskip=0pt,belowskip=5pt}
+\captionsetup[figure]{aboveskip=5pt,belowskip=0pt}
 
 %
 % ToC, LoF, LoT Controls
@@ -695,7 +702,11 @@
   \def\chaptername{\appendixname}  % not sure why this is needed, but it is
 \fi
   \setcounter{equation}{0}
+  \setcounter{figure}{0}
+  \setcounter{table}{0}
   \renewcommand{\theequation}{A.\arabic{equation}}
+  \renewcommand{\thefigure}{A.\arabic{figure}}
+  \renewcommand{\thetable}{A.\arabic{table}}
 }
 
 % Use this to change to appendix mode and insert ``Appendix: Title'' into the Table of Contents.
@@ -713,7 +724,11 @@
   \addcontentsline{toc}{chapter}{\appendixname:~#1}  % Insert ``Appendix: Title'' into TOC
 \fi
   \setcounter{equation}{0} % need to re-set b/c sections are unnumbered
+  \setcounter{figure}{0}
+  \setcounter{table}{0}
   \renewcommand{\theequation}{A.\arabic{equation}}
+  \renewcommand{\thefigure}{A.\arabic{figure}}
+  \renewcommand{\thetable}{A.\arabic{table}}
   \renewcommand{\thesection}{A.\arabic{section}}
 }
 
@@ -1279,6 +1294,7 @@
   \singlespacing                % back to single spacing
   \NPSabstractWasPrintedtrue
   \acresetall                   % re-set acronym counter
+  \NPSacrocommon{}
   \cleardoublepage
 }
 
@@ -1381,6 +1397,7 @@
   \onehalfspacing
   #1
   \acresetall                   % re-set acronym counter
+  \NPSacrocommon{}
   \cleardoublepage
 }
 
@@ -1395,6 +1412,7 @@
   \onehalfspacing
   #1
   \acresetall                   % re-set acronym counter
+  \NPSacrocommon{}
   \cleardoublepage
 }
 

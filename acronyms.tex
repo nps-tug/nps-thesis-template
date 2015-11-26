@@ -4,23 +4,40 @@
 
 %% The NPS template readily supports two methods of generating list of acronyms.
 
-
 %%
 %% Option 1 - Powerful list of acronyms
 %% ========
+
+%% These acronyms are common and do not appear in our list of acronyms
+%% We use a different way to define them, so they don't appear in the list:
+\newacro{US}[U.S.]{United States}
+\newacro{FBI}[FBI]{Federal Bureau of Investigations}
+\newacro{CIA}[CIA]{Central Intelligence Agency}
+
+% Mark the above as used, so they appear in short form by default:
+\renewcommand{\NPSacrocommon}{
+ \acused{US}
+ \acused{FBI}
+ \acused{CIA}
+}
+\NPSacrocommon{}
+
 %% On the first line below, the longest acronym is placed in the 
 %% square brackets.  This is used to size the column of the table 
 %% correctly.
+%% Other acronyms appear in the list of acronyms, in the order defined.
 %%
 \begin{acronym}[XXXXXXX] % longest acronym in these square brackets
+
 \acro{DoD}{Department of Defense}
 \acro{MASINT}{measurement and signature intelligence}
 \acro{NPS}{Naval Postgraduate School}
 \acro{SRWBR}{short range wide band radio}
-\acro{US}{United States}
 \acro{TCP}{Transmission Control Protocol}
+\acro{USN}{\ac{US} Navy}
 \acro{UDP}{User Datagram Protocol}
 \acro{USG}{United States government}
+
 \end{acronym}
 
 %% Using documentclass[acronym,...]

@@ -35,8 +35,11 @@ IEEEexample:private,IEEEexample:miscrfc,IEEEexample:softmanual,
 IEEEexample:softonline,IEEEexample:miscgermanreg,IEEEexample:bluebookstandard
 }.
 
-This shows the acronym macro being used for the \ac{US}, which can
-be used again in its short form \ac{US}.
+This shows the acronym macro being used for \ac{TCP}, which is
+produced in its short form \ac{TCP} on all subsequent uses of the macro.
+Acronyms are re-set after the abstract and executive summary, and will be
+shown in their long form in their first use by default. You can mark some
+special acronyms so they appear in their short form by default.
 
 \section{A Section}\label{sec:something}
 A simple equation to check numbering.
@@ -47,7 +50,12 @@ a^2 + b^2 = c^2
 
 \begin{figure}
 \framebox[\textwidth]{\parbox{\textwidth}{\lipsum[1]}} % example figure (text in a box)
-\caption[{[Alternate short name]}]{[Figure name]}
+\caption[Short figure title (customized for LoF).]{Short figure title.}
+\caption*{\small This is the long caption that explains the figure in detail and
+expounds on its relevance to the text.
+All figures need to be referenced in the text before the image or table.
+Full source citation, as applicable, is required.
+Source~\cite[Figure 10]{IEEEexample:article_typical}: \bibentry{IEEEexample:article_typical}.}
 \end{figure}
 
 \section{Another Section}
@@ -63,16 +71,21 @@ L' = {L}{\sqrt{1-\frac{v^2}{c^2}}}
 \section{Yet Another Section}
 \lipsum[1] % remove me
 \begin{table}
+\caption{This is the less than 15 word title.}
 \begin{center}
-\begin{tabular}{ | c | c | c | }
+\begin{tabular}{ c c c }
 \hline
-  1 & 2 & 3 \\ \hline\hline
+  1 & 2 & 3 \\ \hline
   4 & 5 & 6 \\
   7 & 8 & 9 \\
+  10 & 11 & 12 \\
+  13 & 14 & 15 \\
 \hline
-\end{tabular}\vspace{-1em}% remove some of the whitespace that pads the end
+\end{tabular}
 \end{center}
-\caption{[Table name]}
+\caption*{\small This is the long caption that explains the table.
+This table is not entirely original and requires an ``Adapted from'' caption.
+Adapted from~\cite[Table 5]{IEEEexample:article_typical}: \bibentry{IEEEexample:article_typical}.}
 \end{table}
 \lipsum[2]
 
@@ -82,34 +95,36 @@ L' = {L}{\sqrt{1-\frac{v^2}{c^2}}}
 \subsubsection{A subsubsection}\label{sec:minorstuff}
 \lipsum[4]
 
-
 \section{Things to Remember When Writing}\label{sec:remember}
 \begin{enumerate}
 \item Punctuation (periods and commas) go inside quotation marks. 
+\item The macros \verb+\etal+, \verb+\ie+, \verb+\eg+ and \verb+\etc+ force proper
+  American English convention for these (\ie a comma follows).
+  It is redundant and incorrect to use \etc at the end of a list of
+  examples (\eg apples, pears, \etc).
+\item Chicago style recommends subordinate clauses using \verb+\ie+ and \verb+\eg+ be
+separated from the main clause using parentheses (\eg, as shown above).
 \item Use the \LaTeX{} \verb+\begin{figure}+ and \verb+\begin{table}+ environment to
   create floating figures and tables. Use the \verb+\caption+ command
   to create your captions. Label your captions with the
   \verb+\label{foo}+ command inside the caption itself. Reference
   these figures and tables with the \verb+\ref{foo}+ reference command.
-\item The macros \verb+\etal+, \verb+\ie+, \verb+\eg+ and \verb+\etc+ force proper
-  U.S. convention for use of these, \ie a comma follows.
-  It is redundant and incorrect to use \etc at the end of a list of
-  examples, \eg, apples, pears, \etc.
 \item Do not split text around a figure or table. 
 \item Master's degree has an apostrophe and Postgraduate is one word. 
+\item Most acronyms do not need periods, like \ac{NPS}. There are some exceptions:
+\ac{NPS} ``house-style'' prefers United States when used as a noun and the acronym (with periods) when used as an adjective (\eg, \ac{US} soil, \ac{US} forces).
+Common acronyms do not appear in the list of acronyms (\eg, \ac{US}, \ac{FBI}, \ac{CIA}).
 \item If you use ``however,'' make sure there's a comma before and after,
-unless you 
-start a sentence with it. However, it's best not to start a sentence
-with ``however.'' And while we're on the subject, you should try to avoid starting a sentence with ``and'' or ``because.'' 
+unless you start a sentence with it. However, it is best not to start a sentence
+with ``however.'' And while we are on the subject, you should try to avoid starting a sentence with ``and'' or ``because.'' 
 \item When typing a date, do not use ``st'' or ``th.'' Instead, just
   note the date: July 4, 1776, is Independence Day. Commas go 
 after month/date, year: both Jefferson and Adams died on July 4, 1826.
 No comma between month/yr: \textit{Alice's Adventures in Wonderland} was published in July 1865.
 \item In general, spell out numbers one through nine, and use numerals for 10 and greater.
 \item Use automatic numbering and lettering.
-\item Capitalize C in Chapter, F in Figure and T in Table when referring
-to chapters, figures or tables in the text. Better yet, use the \verb+\chapref+,
-\verb+\figref+ and \verb+\tabref+ commands in the NPS report template.
+\item Capitalize C in Chapter, F in Figure, T in Table and E in Equation when referring
+to chapters, figures, tables and equations in the text.
 \item When there is more than one reference, put them both into the \verb+\cite+ command: \verb+\cite{john1,john2}+. It will render like this \cite{IEEEhowto:IEEEtranpage,IEEEexample:shellCTANpage}.
 \item Avoid writing in the first person!
 \item Make sure there are no widows at the
