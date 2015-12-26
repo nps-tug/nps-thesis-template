@@ -1,7 +1,7 @@
 %%
 %% nps_thesis.bst
 %% BibTeX Bibliography Style file for NPS Theses and Tech Reports
-%% Version 1.7
+%% Version 1.8
 %%
 %%*************************************************************************
 %%
