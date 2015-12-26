@@ -147,10 +147,11 @@
 
 %% Page geometry
 \usepackage[letterpaper]{geometry} % use 'showframe' for debugging
+\usepackage{layout}
 \newgeometry{includeheadfoot,            % headers and footers aren't in margins
              right=1.25in,left=1.25in,   % right/left margins
              top=1in,bottom=1in,         % top/bottom margins
-             footskip=.5in,              % pg nums in footer need breathing room
+             footskip=25pt,              % pg nums in footer need breathing room
              marginparwidth=0pt,         % no marginal paragraphs
              marginparsep=0pt,           % no marginal paragraphs
              head=30pt,headsep=0pt,hoffset=0pt}
@@ -1001,10 +1002,9 @@
 %*************************************************************************
 
 % Definitions for the dissertation title page identifications
-\newcommand{\NPSsigfont}{\normalsize}
 \newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\raggedright #1}}
 \def\committeechair#1{\gdef\@committeechair{#1}}
-\newcommand{\sigspace}{12pt}
+\newcommand{\sigspace}{45pt minus 30pt}
 
 % Dissertation committee members
 \def\@memberOne{\@thesisadvisor}
@@ -1050,48 +1050,46 @@
     }
     \begin{minipage}{\textwidth}
     \ifdim\dsheight>50pt     % choose different font for long statements
-      \centering \bf \footnotesize \@distribution
+      \centering \bf \fontsize{9pt}{10pt}\selectfont \@distribution
     \else                    % normal setting for short statements
       \centering \bf \@distribution
     \fi
     \end{minipage}
     %
-    \vspace{5pt plus 1fill minus 5pt}
+    \vspace{20pt minus 5pt} % there is some built-in vspace after minipage
     \textbf{\singlespace \uppercase{\@title}}\\
-    \vspace{\baselineskip} % matches the \baselineskip after the minipage
-    \vspace{5pt plus 1fill minus 5pt}
+    \vspace{30pt minus 5pt}
     \@author~\\
     \@rank~\\
     \@prevdegrees\\
     \iftwoauthors
-      \vspace{9pt plus 3pt minus 3pt}
+      \vspace{15pt plus 5pt}
       \@authortwo~\\
       \@ranktwo~\\
       \@prevdegreestwo\\
     \fi
-    \vspace{\bigskipamount}\vfill
+    \vspace{30pt minus 15pt}
     Submitted in partial fulfillment of the\\
     requirements for the \@degreeword\ of\\
-    \vspace{\bigskipamount}\vfill
+    \vspace{30pt minus 15pt}
     \textbf{\MakeUppercase{\@degree}}\\
       \ifthenelse{\equal{\@degreetwo}{}}{}{%
             \vspace{\smallskipamount}
             and \\ \vspace{\smallskipamount}
             \textbf{\MakeUppercase{\@degreetwo}}\\
       }
-    \vspace{\medskipamount}
+    \vspace{15pt minus 15pt}
     from the\\
-    \vspace{\medskipamount}
+    \vspace{15pt minus 15pt}
     \textbf{NAVAL POSTGRADUATE SCHOOL}\\
     \textbf{\@date}
   \end{center}
-  \vfill
+  \vspace{15pt plus 10pt minus 10pt}
   %%
   %% dissertation:
   %%
   \ifnpsdissertation
       %
-      \NPSsigfont
       \begin{tabbing}
       \hspace{1.1in} \= \hspace{2.4in} \= \\      % Set the tabs
 
@@ -1145,9 +1143,8 @@
                    \> Chair, \@department \\[\sigspace]
 
       Approved by: \> \@viceprovost \\
-                   \> Vice Provost for Academic Affairs \\
+                   \> Vice Provost for Academic Affairs
       \end{tabbing}
-      \normalsize
   %%
   %% thesis:
   %%
@@ -1155,23 +1152,6 @@
     %%
     %% co-advisors
     \iftwoadvisors
-      \ifcompacttitle  % compact version of this section
-      \begin{tabbing}
-      \hspace{1.5in}\=\hspace{2.5in}\=\\    % Two tab columns
-
-      Approved by:   \> \@thesisadvisorone    \> \@thesisadvisortwo \\
-                     \> Thesis Co-Advisor     \> Thesis Co-Advisor \\[\sigspace]
-
-                     \> \@departmentchair \\
-                     \>  Chair, \@department
-
-                  \ifthenelse{\equal{\@departmenttwo}{}}{}{%
-                     \\[\sigspace]
-                     \> \@departmentchairtwo \\
-                     \> Chair, \@departmenttwo \\
-                  }
-      \end{tabbing}
-      \else            % normal (long) version of this section
       \begin{tabbing}
       \hspace{1.5in}\=\\       % Set the tabs
   
@@ -1187,10 +1167,9 @@
                   \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
                      \> \@departmentchairtwo \\
-                     \> Chair, \@departmenttwo \\
+                     \> Chair, \@departmenttwo
                   }
       \end{tabbing}
-      \fi
     \else
     %%
     %% co-advisors + reader
@@ -1211,7 +1190,7 @@
                   \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
                      \> \@departmentchairtwo \\
-                     \> Chair, \@departmenttwo \\
+                     \> Chair, \@departmenttwo
                   }
       \end{tabbing}
       \else            % normal (long) version of this section
@@ -1233,7 +1212,7 @@
                   \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
                      \> \@departmentchairtwo \\
-                     \> Chair, \@departmenttwo \\
+                     \> Chair, \@departmenttwo
                   }
       \end{tabbing}
       \fi
@@ -1252,7 +1231,7 @@
                   \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
                      \> \@departmentchairtwo \\
-                     \> Chair, \@departmenttwo \\
+                     \> Chair, \@departmenttwo
                   }
       \end{tabbing}
       \else            % normal (long) version of this section
@@ -1271,13 +1250,14 @@
                   \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
                      \> \@departmentchairtwo \\
-                     \> Chair, \@departmenttwo \\
+                     \> Chair, \@departmenttwo
                   }
       \end{tabbing}
       \fi
     \fi
     \fi
   \fi
+  \vspace{5pt plus 1fill minus 1pt}
   \cleardoublepage
 }
 
