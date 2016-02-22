@@ -1,9 +1,12 @@
 \lipsum*[65]
+
+When an equation occurs in the middle of a sentence, such as this one involving $e \in \mathbb{R}$,
 \begin{eqnarray}
- e^x &\approx& 1+x+x^2/2! + \\
-   && {}+x^3/3! + x^4/4! + \\
-   && + x^5/5!
+ e^x &\approx& 1+x+x^2/2! \nonumber \\
+   && \hphantom{1} + x^3/3! + x^4/4! \nonumber \\
+   && \hphantom{1} + x^5/5!,
 \end{eqnarray}
+then we need proper punctuation (such as the comma above) and the sentence ends here, on the next line.
 
 \section{Section Example}
 \lipsum[47]
