@@ -161,6 +161,7 @@
 \usepackage[hyphens]{url}       % make\url work (be nice have [lowtidle])
 \usepackage{ragged2e}           % RaggedRight puts url linebreaks in slightly better places
 \usepackage{eurosym}
+\usepackage{amsmath,amsfonts}   % for many types of math equations
 \urlstyle{same}                 % don't put \url{} into monospace font
 
 \iffontnameset
@@ -171,6 +172,9 @@
 
 \iffonttimesset             % print the thesis in Times
   % \usepackage{mathptmx}   % ugly math font for times: we are no longer using it
+  \usepackage{newtxtext}
+  \usepackage[varg,cmintegrals,cmbraces]{newtxmath}
+  \renewcommand{\sfdefault}{cmss}
 \fi
 
 \iffontarialset
@@ -221,7 +225,6 @@
 
 \usepackage{float}              % reimplementation of float package
 \usepackage{cite}               % for [5-8] reference style
-\usepackage{amsmath,amsfonts}   % for many types of math equations
 \usepackage[labelfont=sf,textfont=sf]{caption}
 \usepackage{subfig}             % needs to be before tocloft, to avoid conflict
 \usepackage[subfigure]{tocloft} % TOC Control
@@ -1057,7 +1060,7 @@
     \end{minipage}
     %
     \vspace{20pt minus 5pt} % there is some built-in vspace after minipage
-    \textbf{\singlespace \uppercase{\@title}}\\
+    \textbf{\singlespace \MakeUppercase{\@title}}\\
     \vspace{30pt minus 5pt}
     \@author~\\
     \@rank~\\
