@@ -226,7 +226,8 @@
 \usepackage{float}              % reimplementation of float package
 \usepackage{cite}               % for [5-8] reference style
 \usepackage[labelfont=sf,textfont=sf]{caption}
-\usepackage{subfig}             % needs to be before tocloft, to avoid conflict
+                                % needs to be before tocloft, to avoid conflict
+\usepackage[labelfont=sf,textfont=sf,caption=false]{subfig}
 \usepackage[subfigure]{tocloft} % TOC Control
 
 % for compatibility with older subfigure package, to get \subfigure{} macro
@@ -1005,6 +1006,7 @@
 %*************************************************************************
 
 % Definitions for the dissertation title page identifications
+\newcommand{\NPSsigfont}{\normalsize}
 \newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\raggedright #1}}
 \def\committeechair#1{\gdef\@committeechair{#1}}
 \newcommand{\sigspace}{45pt minus 30pt}
@@ -1093,6 +1095,7 @@
   %%
   \ifnpsdissertation
       %
+      \NPSsigfont
       \begin{tabbing}
       \hspace{1.1in} \= \hspace{2.4in} \= \\      % Set the tabs
 
@@ -1148,6 +1151,7 @@
       Approved by: \> \@viceprovost \\
                    \> Vice Provost for Academic Affairs
       \end{tabbing}
+      \normalsize
   %%
   %% thesis:
   %%
