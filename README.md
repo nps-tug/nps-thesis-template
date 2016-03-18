@@ -25,6 +25,7 @@ through the thesis processing office. The following options are supported:
 |  Author | Advisor | Reader | Type   |
 |:-------:|:-------:|:------:|:------:|
 | 1       | 1       | 1      | thesis |
+| 1       | 1       | 2      | thesis |
 | 1       | 2       | -      | thesis |
 | 1       | 2       | 1      | thesis |
 | 2       | 1       | 1      | thesis |

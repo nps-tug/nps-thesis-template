@@ -32,6 +32,7 @@
 \newif\iffourauthors\fourauthorsfalse
 \newif\iftwoadvisors\twoadvisorsfalse
 \newif\iftwoadvisorsreader\twoadvisorsreaderfalse
+\newif\iftworeaders\tworeadersfalse
 \newif\ifnpssinglespace\npssinglespacefalse
 \newif\ifclassified\classifiedfalse
 \newif\ifnpsdissertation\npsdissertationfalse
@@ -57,6 +58,7 @@
 \DeclareOption{fourauthors}{\fourauthorstrue}      % or four students? 
 \DeclareOption{twoadvisors}{\twoadvisorstrue}      % two advisors? (but no second reader)
 \DeclareOption{twoadvisorsreader}{\twoadvisorsreadertrue}      % two advisors? (AND also second reader)
+\DeclareOption{tworeaders}{\tworeaderstrue}        % two readers
 \DeclareOption{classified}{\classifiedtrue}        % you're in the STBL or SCIF
 \DeclareOption{singlespace}{\npssinglespacetrue}   % looks better
 \DeclareOption{dissertation}{\npsdissertationtrue} % getting a phd!
@@ -428,6 +430,9 @@
 
 \def\secondreader#1{\setbox0\hbox{#1}
    \gdef\@secondreader{#1}}
+
+\def\secondreadertwo#1{\setbox0\hbox{#1}
+   \gdef\@secondreadertwo{#1}}
 
 % Some useful defines
 \newcommand{\tablefont}{\sffamily\fontsize{9}{10}\selectfont}
@@ -902,9 +907,18 @@
                   \iftwoadvisorsreader
                     Thesis Co-Advisors: & \hspace{1in} & \@thesisadvisorone \\
                                         & \hspace{1in} & \@thesisadvisortwo \\
+                    \iftworeaders
+                    Second Readers:     & \hspace{1in} & \@secondreader  \\
+                                        & \hspace{1in} & \@secondreadertwo  \\
+                    \else
                     Second Reader:      & \hspace{1in} & \@secondreader  \\
+                    \fi
                   \else
                     Thesis Advisor:     & \hspace{1in} & \@thesisadvisor \\
+                    \iftworeaders
+                    Second Readers:     & \hspace{1in} & \@secondreader  \\
+                                        & \hspace{1in} & \@secondreadertwo  \\
+                    \else
                     Second Reader:      & \hspace{1in} & \@secondreader  \\
                   \fi
                 \fi
@@ -1188,8 +1202,13 @@
       Approved by:   \> \@thesisadvisorone    \> \@thesisadvisortwo \\
                      \> Thesis Co-Advisor     \> Thesis Co-Advisor \\[\sigspace]
 
+      \iftworeaders
+                     \> \@secondreader        \> \@secondreadertwo \\
+                     \> Second Reader         \> Second Reader \\[\sigspace]
+      \else
                      \> \@secondreader \\
                      \> Second Reader \\[\sigspace]
+      \fi
 
                      \> \@departmentchair \\
                      \>  Chair, \@department
@@ -1213,6 +1232,11 @@
                      \> \@secondreader \\
                      \> Second Reader \\[\sigspace]
 
+      \iftworeaders
+                     \> \@secondreadertwo \\
+                     \> Second Reader \\[\sigspace]
+      \fi
+
                      \> \@departmentchair \\
                      \>  Chair, \@department
 
@@ -1227,10 +1251,19 @@
     %% advisor + reader
     \else
       \ifcompacttitle  % compact version of this section
+      \begin{tabbing}
       \hspace{1.5in}\=\hspace{2.5in}\=\\    % Two tab columns
 
+      \iftworeaders
+      Approved by:   \> \@thesisadvisor \\
+                     \> Thesis Advisor \\[\sigspace]
+
+                     \> \@secondreader    \> \@secondreadertwo \\
+                     \> Second Reader     \> Second Reader \\[\sigspace]
+      \else
       Approved by:   \> \@thesisadvisor    \> \@secondreader \\
                      \> Thesis Advisor     \> Second Reader \\[\sigspace]
+      \fi
 
                      \> \@departmentchair \\
                      \>  Chair, \@department
@@ -1250,6 +1283,11 @@
 
                      \> \@secondreader \\
                      \> Second Reader \\[\sigspace]
+
+      \iftworeaders
+                     \> \@secondreadertwo \\
+                     \> Second Reader \\[\sigspace]
+      \fi
 
                      \> \@departmentchair \\
                      \>  Chair, \@department
