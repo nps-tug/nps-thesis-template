@@ -286,7 +286,7 @@
 \newcommand{\eg}{\@ifnextchar{,}{e.g.}{e.g.,\xspace}}
 \newcommand{\ie}{\@ifnextchar{,}{i.e.}{i.e.,\xspace}}
 \newcommand{\etc}{\@ifnextchar{.}{etc}{etc.\@\xspace}}
-\newcommand{\etal}{\@ifnextchar{.}{\emph{et al}}{\emph{et al.}\@\xspace}}
+\newcommand{\etal}{\@ifnextchar{.}{et al}{et al.\@\xspace}}
 \newcommand{\naive}{na\"{\i}ve\xspace}
 \newcommand{\Naive}{Na\"{\i}ve\xspace}
 
