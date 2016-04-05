@@ -30,7 +30,8 @@ COMMON = Makefile npsreport.cls nps_sf298.sty nps_thesis.bst
 RELEASE = acronyms.tex appendix1.tex chapter1.tex thesis.bib thesis.tex \
           contrib/*.tex contrib/*.pdf \
           nps_sf298.sty nps_thesis.bst npsreport.cls figs/nps_logo*.pdf \
-          examples/*.tex doc/NPS-CS-11-011.pdf
+          examples/*.tex examples/*.sty examples/*.bib \
+          doc/NPS-CS-11-011.pdf
 
 all: $(ALL)
 
