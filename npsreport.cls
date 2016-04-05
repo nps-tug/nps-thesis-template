@@ -920,6 +920,7 @@
                                         & \hspace{1in} & \@secondreadertwo  \\
                     \else
                     Second Reader:      & \hspace{1in} & \@secondreader  \\
+                    \fi
                   \fi
                 \fi
             \fi
