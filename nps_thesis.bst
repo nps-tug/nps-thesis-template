@@ -1,8 +1,18 @@
 %%
+%%*************************************************************************
 %% nps_thesis.bst
 %% BibTeX Bibliography Style file for NPS Theses and Tech Reports
-%% Version 1.8
+%% Conforms more directly with the 2014-2015 IEEE Editorial Style Guide
 %%
+%% Copyright (c) 2014-2016 Mark Gondree
+%% https://github.com/nps-tug/nps-thesis-template
+
+FUNCTION{bst.file.version} { "1.8" }
+FUNCTION{bst.file.date} { "2016/05/05" }
+FUNCTION{bst.file.name} { "nps_thesis.bst" }
+
+%%
+%% based on:
 %%*************************************************************************
 %%
 %% IEEEtran.bst
@@ -98,6 +108,12 @@
 % 1.13 (2008/09/30)
 %  1. Fixed bug with edition number to ordinal conversion. Thanks to
 %     Michael Roland for reporting this and correcting the algorithm.
+% 1.8  (2016/05/05) Mark Gondree
+%   - more clearly separated from IEEEtran, to be maintained for NPS
+%     since we have drifted so far from IEEEtran at this point
+%   - book series are in parenthesis
+%   - added @ebook class
+%   - @electronic: added journal field, "version" field for software
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -182,7 +198,7 @@ FUNCTION {default.name.latex.cmd}{ "" }
 
 
 % The default URL prefix.
-FUNCTION {default.name.url.prefix}{ "[Online]. Available:" }
+FUNCTION {default.name.url.prefix}{ "Available:" }
 
 % Related to 'classification' of bibliographic entries
 FUNCTION {default.classification.show}{ #0 } % 0 is off, #1 is on
@@ -203,14 +219,14 @@ FUNCTION {is.print.banners.to.terminal} { #1 }
 %% FILE VERSION AND BANNER %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-FUNCTION{bst.file.version} { "1.13" }
-FUNCTION{bst.file.date} { "2008/09/30" }
 FUNCTION{bst.file.website} { "http://www.michaelshell.org/tex/ieeetran/bibtex/" }
 
 FUNCTION {banner.message}
 { is.print.banners.to.terminal
-     { "-- IEEEtran.bst version" " " * bst.file.version *
-       " (" * bst.file.date * ") " * "by Michael Shell." *
+     { "-- " bst.file.name * " version " * bst.file.version *
+       " (" * bst.file.date * ") " * "by Mark Gondree." *
+       top$
+       "-- based on IEEEtran.bst (2008/09/30) by Michael Shell."
        top$
        "-- " bst.file.website *
        top$
@@ -256,10 +272,11 @@ FUNCTION {bbl.part}{ "pt." }
 FUNCTION {bbl.patent}{ "Patent" }
 FUNCTION {bbl.patentUS}{ "U.S." }
 FUNCTION {bbl.revision}{ "Rev." }
+FUNCTION {bbl.version}{ "version" }
 FUNCTION {bbl.series}{ "ser." }
 FUNCTION {bbl.standard}{ "Std." }
 FUNCTION {bbl.techrep}{ "Tech. Rep." }
-FUNCTION {bbl.mthesis}{ "master's thesis" }
+FUNCTION {bbl.mthesis}{ "Master's thesis" }
 FUNCTION {bbl.phdthesis}{ "Ph.D. dissertation" }
 FUNCTION {bbl.st}{ "st" }
 FUNCTION {bbl.nd}{ "nd" }
@@ -333,6 +350,7 @@ ENTRY
     school
     series
     revision
+    version
     title
     type
     url
@@ -1484,13 +1502,18 @@ FUNCTION {format.article.title.electronic}
     { this.to.prev.status
       this.status.std
       cap.status.std
-      "t" change.case$ 
     }
   if$
   "title" bibinfo.check
   duplicate$ empty$ 
     { skip$ } 
     { select.language }
+  if$
+  version empty$ 'skip$
+	{ ", " *
+	  bbl.version * "~" *
+	  version *
+	}
   if$
 }
 
@@ -1653,8 +1676,7 @@ FUNCTION {format.series}
    { "" }
    { this.to.prev.status
      this.status.std
-     bbl.series " " *
-     series "series" bibinfo.check *
+     " (" series * ")" * "series" bibinfo.check
      cap.status.std
    }
  if$
@@ -2076,14 +2098,53 @@ FUNCTION {electronic}
 { std.status.using.period
   start.entry
   if.url.alt.interword.spacing
+  author empty$
+    { format.article.title.electronic output }
+    { format.authors output
+      name.or.dash
+    }
+  if$
+  format.date.electronic output
+  format.classification output
+  format.journal "journal" bibinfo.check output
+  format.organization "organization" bibinfo.check output
+  format.address "address" bibinfo.check output
+  format.howpublished "howpublished" bibinfo.check output
+  howpublished empty$
+    { add.period$ " [Online]." * }
+    { }
+  if$
+  volume empty$ number empty$ or
+    { }
+    { " " * volume emphasize * "(" * number * ")." * }
+  if$
+  format.url output
+  format.url empty$ format.note empty$ or
+    { }
+    { add.period$ }
+  if$
+  format.note output
+  fin.entry
+  empty.entry.warn
+  if.url.std.interword.spacing
+}
+
+FUNCTION {ebook}
+{ std.status.using.period
+  start.entry
+  if.url.alt.interword.spacing
   format.authors output
   name.or.dash
   format.date.electronic output
   format.classification output
-  format.article.title.electronic output
-  format.howpublished "howpublished" bibinfo.check output
+  format.book.title.edition output
   format.organization "organization" bibinfo.check output
   format.address "address" bibinfo.check output
+  format.howpublished "howpublished" bibinfo.check output
+  howpublished empty$
+    { add.period$ " [Online]." * }
+    'skip$
+  if$
   format.url output
   format.url empty$ format.note empty$ or
     { }
@@ -2126,11 +2187,12 @@ FUNCTION {incollection}
   name.or.dash
   format.classification output
   format.article.title "title" output.warn
-  format.in.booktitle.edition "booktitle" output.warn
+  format.in.booktitle "booktitle" output.warn
+  format.volume output
   format.series output
   format.editors output
+  format.edition output
   format.address.publisher.date.nowarn output
-  format.volume output
   format.number output
   format.chapter output
   format.pages output
@@ -2148,10 +2210,9 @@ FUNCTION {inproceedings}
   name.or.dash
   format.classification output
   format.article.title "title" output.warn
-  format.in.booktitle "booktitle" output.warn
+  format.in.booktitle.edition "booktitle" output.warn
   format.series output
   format.editors output
-  format.volume output
   format.number output
   publisher empty$
     { format.address.organization.date output }
@@ -2159,6 +2220,7 @@ FUNCTION {inproceedings}
       format.address.publisher.date output
     }
   if$
+  format.volume output
   format.paper output
   format.pages output
   format.note output
@@ -2179,6 +2241,7 @@ FUNCTION {manual}
   format.organization "organization" bibinfo.check output
   format.address "address" bibinfo.check output
   format.date output
+  format.pages output
   format.note output
   format.url output
   fin.entry
@@ -2483,6 +2546,7 @@ FUNCTION {IEEEtranBSTCTL}
 %% ENTRY ALIASES %%
 %%%%%%%%%%%%%%%%%%%
 FUNCTION {conference}{inproceedings}
+FUNCTION {software}{manual}
 FUNCTION {online}{electronic}
 FUNCTION {internet}{electronic}
 FUNCTION {webpage}{electronic}
