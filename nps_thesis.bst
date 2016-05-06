@@ -2120,8 +2120,9 @@ FUNCTION {electronic}
   if$
   volume empty$ number empty$ or
     { }
-    { " " * volume emphasize * "(" * number * ")." * }
+    { " " * volume emphasize * "(" * number * ")" * }
   if$
+  format.pages output
   format.url output
   format.url empty$ format.note empty$ or
     { }
