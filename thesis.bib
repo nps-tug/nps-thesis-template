@@ -12,12 +12,413 @@ between the "START" and "END" comments, and start a fresh bib file.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% START %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EXAMPLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+These examples are taken from http://libguides.nps.edu/citation/ieee
+
+Normal use of book class.
+@book{orend_2013,
+  author        = "B. Orend",
+  title         = "Morality of War",
+  publisher     = "Broadview Press",
+  address       = "Tonawanda, NY",
+  edition       = "2nd ed.",
+  year          = "2013",
+}
+
+An edited book that is really a volume in a multi-book series.
+@incollection{stein_1994,
+  author        = "L. Stein",
+  editor        = "J. S. Brake",
+  title         = "Random patterns",
+  booktitle     = "Computers and You",
+  publisher     = "Wiley",
+  address       = "New York, NY",
+  year          = "1994",
+  pages         = "55--70",
+}
+
+Normal ebook entry, with howpublished decorations.
+@ebook{krishnan_2008,
+  author        = "A. Krishnan",
+  title         = "War as Business: Technological Change and Military Service Contracting",
+  year          = "2008",
+  howpublished  = "[Ebrary version]. [Online]",
+  url           = "http://www.ebrary.com/corp/",
+}
+
+This is not just a book, but a part of a book portion (since there is page range),
+so the inbook class is more appropriate. If there were no pages, we could use book.
+@inbook{abramowitz_64,
+  editor        = "M. Abramowitz and I. A. Stegun",
+  title         = "Handbook of Mathematical Functions",
+  series        = "Applied Mathematics Series 55",
+  publisher     = "NBS",
+  address       = "Washington, DC",
+  pages         = "32--33",
+  year          = "1964",
+}
+
+Normal use of inbook used for a book portion.
+@inbook{orend_2013b,
+  author        = "B. Orend",
+  title         = "Morality of War",
+  publisher     = "Broadview Press",
+  address       = " Tonawanda, NY",
+  edition       = "2nd ed.",
+  year          = "2013",
+  chapter       = "2, sec.\ 3",
+  pages         = "67--70",
+}
+
+Normal use of incollection for a chapter in a volume of collected works.
+@incollection{myer_77,
+  author        = "R. L. Myer",
+  editor        = "P. G. Harper and B. S. Wherret",
+  title         = "Parametric oscillators and nonlinear materials",
+  booktitle     = "Nonlinear Optics",
+  publisher     = "Academic Press",
+  address       = "San Francisco, CA",
+  year          = "1977",
+  volume        = "4",
+  pages         = "47--160",
+}
+
+We need to use misc for class notes.
+@misc{NPS_notes_2013,
+  title         = "New applications in computational mechanics",
+  organization  = "Dept. of Mech. and Aerosp. Eng., Naval Postgraduate School",
+  howpublished  = "class notes for Computational Mechanics",
+  address       = "Monterey, CA",
+  year          = "spring 2013"
+}
+
+Variant of ebook, requiring (mis-)use of the author field to get desired style.
+@ebook{panda1,
+  author        = "{Panda Security, Maitland, FL}",
+  title         = "Panda Free Antivirus",
+  url           = "http://download.cnet.com/Panda-Free-Antivirus/3000-2239_4-10914099.html",
+  year          = "2016",
+  note          = "Accessed Jan. 12, 2016",
+}
+
+Software follows the manual style.
+@manual{panda2,
+  title         = "Windows 98",
+  organization  = "Microsoft Corporation",
+  address       = "Redmond, WA",
+  note          = "1998",
+}
+
+Use misc for presentations, use inproceedings if there is an associated published work.
+@misc{kirby_2013,
+  author        = "K. Kirby and J. Stratton",
+  title         = "{Van Allen} probes: Successful launch campaign and early operations exploring earth's radiation belts",
+  howpublished  = "presented at IEEE Aerospace Conference",
+  address       = "Big Sky, MT",
+  year          = "2013",
+}
+
+Normal use of inproceedings class.
+@inproceedings{janow_1994,
+  author        = "C. Janow",
+  title         = "Guidance and control components for space applications",
+  booktitle     = "Proceedings National Electronics Conference",
+  year          = "1994",
+  volume        = "24",
+  pages         = "30--35",
+}
+
+Normal use of inproceedings class.
+@inproceedings{delac_20014,
+  author        = "K. Delac and M. Grgic",
+  title         = "A survey of biometric recognition methods",
+  booktitle     = "46th International Symposium on Electronics",
+  address       = "Zadar, Croatia",
+  year          = "2004",
+  pages         = "184--193",
+}
+
+Normal use of electronic class.
+@electronic{nsa_ipac_2012,
+  author        = "{NASA/IPAC Extragalactic Database}",
+  organization  = "Object name IRAS F00400+4059",
+  url           = "http://nedwww.ipac.caltech.edu/",
+  note          = "Accessed Dec. 10, 2012",
+}
+
+Directives follow the manual style.
+@manual{dod_5000.1,
+  title         = "The Defense Acquisition System",
+  howpublished  = "DOD Directive 5000.1",
+  organization  = "Under Secretary of Defense (AT\&L)",
+  address       = "Washington, DC",
+  year          = "2003",
+  pages         = "20--21",
+}
+
+DOD Instructions follow the manual style.
+@manual{instruction_1000.01,
+  title         = "Identification (ID) Cards Required by the Geneva Convention",
+  howpublished  = "DOD Instruction 1000.01",
+  organization  = "Department of Defense",
+  address       = "Washington, DC",
+  year          = "2012",
+  pages         = "1-1, 1--10",
+}
+
+A handbook follows the manual style.
+@manual{transmission_comm_85,
+  title         = "Transmission Systems for Communications",
+  edition       = "3rd",
+  organization  = "Western Elect. Co.",
+  address       = "Winston-Salem, NC",
+  year          = "1985",
+  pages         = "44--60",
+}
+
+Field manuals follow the manual style. We add the section range as a note,
+since its not a normal page range.
+@manual{engineer_ops_2011,
+  title         = "Engineer Operations",
+  howpublished  = "FM 3-34",
+  organization  = "U.S. Dept. of the Army",
+  address       = "Washington, DC",
+  year          = "2011",
+  note          = "3.8--3.9",
+}
+
+Online handbooks follow the electronic class.
+@electronic{talleen_1996,
+  author        = "S. L. Talleen",
+  title         = "The IntraNet architecture: Managing information in the new paradigm",
+  organization  = "Amdahl Corps",
+  address       = "Sunnyvale, CA",
+  year          = "1996",
+  month         = Aug,
+  url           = "http://www.Amdahl.com/doc/products/bsg/intra/intra/html",
+}
+
+Normal use of article class.
+@article{wang_2014,
+  author        = "W. Q. Wang and H. Shao",
+  title         = "High altitude platform multichannel {SAR} for wide-area and staring imaging",
+  journal       = "Aerosp. and Electron. Syst.",
+  volume        = "29",
+  number        = "25",
+  month         = mar,
+  year          = "2014",
+  pages         = "12--17"
+}
+
+An electronic entry populated with special journal information.
+@electronic{semilof_1996,
+  author        = "M. Semilof",
+  title         = "Driving commerce to the Web---Corporate Intranets and the Internet: Lines blur",
+  journal       = "Communications Week",
+  volume        = "6",
+  number        = "19",
+  year          = "1996",
+  month         = "July 15",
+  url           = "http://www.techweb.com/se/index.html",
+}
+
+Variant of electronic with strange authors, use journal field to put title in italics.
+@electronic{congress_1991,
+  author        = "{U.S. House. 102nd Congress, 1st Session}",
+  journal       = "H. Con. Res. 1, Sense of the Congress on Approval of Military Action",
+  year          = "1991",
+  month         = "Jan. 11",
+  url           = "http://thomas.loc.gov/cgi-bin/query/z?c102:H.CON.RES.1.IH",
+}
+
+Variant electronic, use journal when publisher is a recognized publication.
+@electronic{ellwood_2013,
+  author        = "A. Ellwood",
+  title         = "Plagiarism isn't the sincerest form of flattery",
+  journal       = "Forbes",
+  year          = "2013",
+  month         = "Feb. 11",
+  url           = "http://www.forbes.com/sites/andyellwood/2013/02/11/plagiarism-isnt-the-sincerest-form-of-flattery/",
+}
+
+Variant electronic, use journal when publisher is a recognized publication.
+@electronic{martin_2014,
+  author        = "J. Martin",
+  title         = "Senator quits Montana race after charge of plagiarism",
+  journal       = "New York Times",
+  year          = "2014",
+  month         = "Aug. 7",
+  url           = "http://www.nytimes.com/2014/08/08/us/politics/john-walsh-drops-campaign-under-pressure-from-democrats.html?_r=0",
+}
+
+Normal use of patent class.
+@patent{wilkinson_1990,
+  author        = "J. P. Wilkinson",
+  title         = "Nonlinear resonant circuit devices",
+  nationality   = "United States",
+  number        = "3 624 125",
+  day           = "16",
+  month         = aug,
+  year          = "1990",
+}
+
+Variant of electronic, use journal to make title in italics.
+@electronic{brooks_1992,
+  title          = "Musical toothbrush with adjustable neck and mirror, by L. M. R. Brooks",
+  journal        = "Patent D 326 189",
+  year           = "1992",
+  month          = jul,
+  day            = "19",
+  note           = "Available: NEXIS Library: LEXPAT File: DESIGN",
+}
+
+Use misc.
+@misc{alexander_2012,
+  author        = "D. D. Alexander",
+  howpublished  = "private communication",
+  year          = "2012",
+  month         = aug,
+}
+
+Normal use of techreport class.
+@techreport{reber_1988,
+  author        = "E. E. Reber and R. L. Michell and C. J. Carter",
+  title         = "Oxygen absorption in the earth's atmosphere",
+  institution   = "Aerosp. Corp.",
+  address       = "Los Angeles, CA",
+  number        = "TR-2000 (4230-46)-3",
+  month         = nov,
+  year          = "1988",
+}
+
+Standards fit well with manual class.
+@manual{ieee_308,
+  title         = "IEEE Criteria for Class IE Electric Systems",
+  howpublished  = "IEEE Standard 308",
+  year          = "1969",
+}
+
+Normal use of mastersthesis class. By default the type is "Master's thesis". 
+If we want something more specific like M.S. thesis, we need to set a new type field.
+@mastersthesis{kawasaki_1993,
+  author        = "N. Kawasaki",
+  title         = "Parametric study of thermal and chemical nonequilibrium nozzle flow",
+  school        = "Dept. Electron. Eng., Osaka Univ.",
+  address       = "Osaka, Japan",
+  type          = "M.S. thesis",
+  year          = "1993",
+}
+
+Normal use of phdthesis class.
+@phdthesis{williams_1993,
+  author        = "J. O. Williams",
+  title         = "Narrow-band analyzer",
+  school        = "Dept. Elect. Eng., Harvard Univ.",
+  address       = "Cambridge, MA",
+  year          = "1993"
+}
+
+Normal use of unpublished class.
+@unpublished{garcia_unpub,
+  author        = "L. J. Garcia",
+  title         = "New ideas for security in democracies",
+  note          = "unpublished"
+}
+
+Normal use of electronic class.
+@electronic{kaneshiro_2011,
+  author        = "J. Kaneshiro",
+  title         = "Nano technology marches on",
+  month         = "Dec. 3",
+  year          = "2011",
+  url           = "http://www.army.mil/article/70358/Nano_technology_marches_on/",
+}
+
+Normal use of electronic class.
+@electronic{vergun_2014,
+  author        = "D. Vergun",
+  title         = "Smarter robots partnering with soldiers",
+  month         = "Aug. 14",
+  year          = "2014",
+  url           = "http://www.army.mil/article/131847/Smarter_ground_robots_partnering_with_Soldiers/",
+}
+
+Normal use of electronic class.
+@electronic{raytheon_2014,
+  title         = "{Raytheon} fires four {TALON} laser-guided rockets from {MD 530G} helicopter",
+  month         = "Jul. 31",
+  year          = "2014",
+  organization  = "Raytheon",
+  url           = "http://raytheon.mediaroom.com/index.php?s=43&item=2624",
+}
+
+Normal use of electronic class.
+@electronic{ge_2013,
+  title        = "{U.S. Navy} deploys {Standard Missile-6} for first time",
+  month         = "Dec. 2",
+  year          = "2014",
+  organization  = "General Electric",
+  url           = "http://raytheon.mediaroom.com/index.php?s=43&item=2473",
+}
+
+Normal use of electronic class.
+@electronic{dept_vet_2013,
+  title         = "Veteran voices on {PTSD}",
+  year          = "n.d.",
+  organization  = "U.S. Dept. of Veterans Affairs",
+  url           = "http://maketheconnection.net/conditions/ptsd2",
+  note          = "Accessed Nov. 13, 2013",
+}
+
+Normal use of electronic class, note special escaping of # in the url.
+@electronic{nps_tpo_2014,
+  title         = "Compliance matters",
+  year          = "n.d.",
+  organization  = "Naval Postgraduate School Thesis Processing Office",
+  url           = "http://www.nps.edu/research/research1.html\#Compliance",
+  note          = "Accessed Mar. 14, 2014",
+}
+
+Variant of electronic class, treating Wikipedia like a publication name.
+@electronic{wiki_2016,
+  title         = "Strength training",
+  journal       = "Wikipedia",
+  year          = "n.d.",
+  url           = "https://en.wikipedia.org/wiki/Strength_training",
+  note          = "Accessed Apr. 28, 2016.",
+}
+
+Variant of electronic.
+@electronic{youtube_2013,
+  author        = "{HKUST Library}",
+  title         = "How to Cite in IEEE Style",
+  howpublished  = "[YouTube video]",
+  year          = "2013",
+  month         = "Oct. 9",
+  url           = "http://www.youtube.com/watch?v=18uWvm6W4bc",
+  note          = "Accessed Jun. 12, 2014",
+}
+
+Variant of electronic.
+@electronic{youtube_2014,
+  author        = "{IEEE}",
+  title         = "IEEE One Voice",
+  howpublished  = "[YouTube video]",
+  year          = "n.d.",
+  url           = "https://www.youtube.com/user/IEEEorg",
+  note          = "Accessed Aug. 14, 2014",
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MORE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EXAMPLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 references for the IEEEtran.bst documentation
 IEEEtran homepage
 @electronic{IEEEhowto:IEEEtranpage,
   author        = "Michael Shell",
-  title         = "{IEEE}tran Homepage",
+  title         = "{IEEE}tran homepage",
   url           = "http://www.michaelshell.org/tex/ieeetran/",
   year          = "2008",
   note          = "Accessed May 9, 2015",
@@ -28,7 +429,7 @@ IEEEtran homepage
 the distribution site for IEEEtran.bst
 @electronic{IEEEexample:shellCTANpage,
   author        = "Michael Shell",
-  title         = "{IEEE}tran Webpage on {CTAN}",
+  title         = "{IEEE}tran webpage on {CTAN}",
   url           = "http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/",
   year          = "2008",
   note          = "Accessed May 9, 2015"
@@ -42,8 +443,7 @@ the filename might change before the directory that contains it.
 @electronic{IEEEexample:bibtexuser,
   author        = "Oren Patashnik",
   title         = "{{\BibTeX}}ing",
-  howpublished  = "{btxdoc.pdf}",
-  url           = "http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/",
+  url           = "http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/btxdoc.pdf",
   month         = feb,
   year          = "1988",
   note          = "Accessed May 9, 2015"
@@ -462,7 +862,7 @@ Systems", page 186, reference #11.
   author        = "Nin C. Loh",
   title         = "High-Resolution Micromachined Interferometric
                    Accelerometer",
-  school        = "Massachusetts Institute of Technology",
+  school        = "Dept. of Mechanical Engineering, Massachusetts Institute of Technology",
   address       = "Cambridge",
   year          = "1992"
 }
@@ -579,7 +979,7 @@ page 391, reference #7.
 @electronic{IEEEexample:electronhowinfo,
   author        = "V. Jacobson",
   title         = "Modified {TCP} Congestion Avoidance Algorithm",
-  howpublished  = "end2end-interest mailing list",
+  howpublished  = "end2end-interest mailing list. [Online].",
   url           = "ftp://ftp.isi.edu/end2end/end2end-interest-1990.mail",
   month         = apr,
   year          = "1990"
@@ -592,7 +992,7 @@ page 418, reference #31.
 @electronic{IEEEexample:electronhowinfo2,
   author        = "V. Valloppillil and K. W. Ross",
   title         = "Cache Array Routing Protocol v1.1",
-  howpublished  = "Internet draft",
+  howpublished  = "Internet draft. [Online].",
   url           = "https://tools.ietf.org/html/draft-vinod-carp-v1-03",
   year          = "1998",
   note          = "Accessed May 9, 2015"
@@ -799,7 +1199,9 @@ page 46, reference #24. If there is no author or organization, a sorting
 key is required for sorting styles. It might be a good idea to include
 month and year fields as well.
 @electronic{IEEEexample:softonline,
-  title         = "Ucb/lbnl/vint Network Simulator---ns (Version 2)",
+  title         = "Ucb/lbnl/vint Network Simulator---ns",
+  version       = "2",
+  date          = "n.d.",
   url           = "http://www-mash.cs.berkeley.edu/ns/",
   key           = "ns"
 }
@@ -851,16 +1253,6 @@ standards.
   year          = "1999",
   url           = "http://www.ccsds.org/documents/pdf/CCSDS-101.0-B-4.pdf"
 }
-
-a class notes example.
-@misc{NPSexample:notes,
-  title         = "Signal integrity and interconnects for high-speed applications",
-  organization  = "Department of Electrical and Computer Engineering,
-                   University of Illinois at Urbana-Champaign",
-  howpublished  = "class notes for ECE497-JS",
-  year          = "Winter 1997"
-}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
