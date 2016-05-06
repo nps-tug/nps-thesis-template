@@ -1674,7 +1674,8 @@ FUNCTION {format.number.if.use.for.article}
 FUNCTION {format.series}
 { series empty$ 
    { "" }
-   { this.to.prev.status
+   { punct.no 'this.status.punct :=
+     this.to.prev.status
      this.status.std
      " (" series * ")" * "series" bibinfo.check
      cap.status.std
@@ -2106,6 +2107,9 @@ FUNCTION {electronic}
   if$
   format.date.electronic output
   format.classification output
+  author empty$ 'skip$
+    { format.article.title.electronic output }
+  if$
   format.journal "journal" bibinfo.check output
   format.organization "organization" bibinfo.check output
   format.address "address" bibinfo.check output
