@@ -1446,13 +1446,13 @@
  \NPSacknowledgements{#1}
 }
 
-\newcommand{\NPSbibliography}[1]{
+\newcommand{\NPSbibliography}[2][nps_thesis]{
 \ifnpsarticle
   \clearpage
 \else
   \cleardoublepage
 \fi
-  \bibliographystyle{nps_thesis}
+  \bibliographystyle{#1}
   \RaggedRight      % don't automatically full justify bibliographic references
   \singlespacing    % reduce extra line breaks between entries
 \ifnpsarticle
@@ -1460,7 +1460,7 @@
 \else
   \addcontentsline{toc}{chapter}{\ULABEL\bibname}
 \fi
-  \bibliography{#1}
+  \bibliography{#2}
   \doublespacing
 }
 
