@@ -552,7 +552,7 @@
 % This is done with the titlesec package
 %
 \titleformat{\chapter}[display]
-          {\vskip 0\p@ \LARGE\filcenter\sffamily\titlerule[1pt]\vspace{1pt}\titlerule}
+          {\singlespacing\vskip 0\p@ \LARGE\filcenter\sffamily\titlerule[1pt]\vspace{1pt}\titlerule}
           {\MakeUppercase{\chaptertitlename} \thechapter:} % label (not for * chapters)
           {-1pc}           % sep
           {}               % before
