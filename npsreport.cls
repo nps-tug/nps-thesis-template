@@ -1396,6 +1396,7 @@
   \fi
   \cleardoublepage
   \pagenumbering{arabic}
+  \raggedbottom
 
   \ifNPSabstractWasPrinted
     % do not print the abstract
