@@ -7,7 +7,7 @@
 %% Copyright (c) 2014-2016 Mark Gondree
 %% https://github.com/nps-tug/nps-thesis-template
 
-FUNCTION{bst.file.version} { "1.9" }
+FUNCTION{bst.file.version} { "2.0" }
 FUNCTION{bst.file.date} { "2016/05/05" }
 FUNCTION{bst.file.name} { "nps_thesis.bst" }
 
