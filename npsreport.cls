@@ -592,8 +592,8 @@
 \captiontitlefont{\sffamily\fontsize{11}{12}\selectfont}
 \captionsetup{font={stretch=1.0}}
 \captionsetup{width=0.85\textwidth}
-\captionsetup[table]{aboveskip=0pt,belowskip=5pt}
-\captionsetup[figure]{aboveskip=5pt,belowskip=0pt}
+\captionsetup[table]{aboveskip=0pt,belowskip=5pt,labelsep=period}
+\captionsetup[figure]{aboveskip=5pt,belowskip=0pt,labelsep=period}
 
 %
 % ToC, LoF, LoT Controls
