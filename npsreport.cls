@@ -317,48 +317,6 @@
 % other pages. This is liberally borrowed from MIT Thesis guide
 %*************************************************************************
 
-\def\declassifydate#1{\gdef\@declassifydate{#1}} \gdef\@declassifydate{}
-\def\classifiedby#1{\gdef\@classifiedby{#1}}     \gdef\@classifiedby{}
-\def\classifiedfrom#1{\gdef\@classifiedfrom{#1}} \gdef\@classifiedfrom{Multiple Sources}
-\def\degreedate#1{\date{#1}}
-\def\prevdegrees#1{\gdef\@prevdegrees{#1}}       \def\@prevdegrees{}
-\def\department#1{\gdef\@department{#1}}
-\def\departmenttwo#1{\gdef\@departmenttwo{#1}}   \gdef\@departmenttwo{}
-\def\departmentchair#1{\gdef\@departmentchair{#1}}
-\def\departmentchairtwo#1{\gdef\@departmentchairtwo{#1}} \gdef\@departmentchairtwo{}
-\def\researchchair#1{\gdef\@researchchair{#1}}
-\def\president#1{\gdef\@president{#1}}
-\def\provost#1{\gdef\@provost{#1}}
-\def\viceprovost#1{\gdef\@viceprovost{#1}}
-\def\assocprovost#1{\gdef\@viceprovost{#1}} % legacy macro for backwards compat
-
-% Provide reasonable defaults
-\department{Computer Science}
-\departmentchair{Peter Denning}
-\researchchair{Jeffrey D. Paduan}
-\president{Ronald A. Route}
-\provost{Douglas A. Hensler}
-\viceprovost{Douglas Moses}
-
-% Single degree or dual degree options
-\def\degree#1{\gdef\@degree{#1}}
-\gdef\@degree{}
-\gdef\@degreeword{degree}
-\def\degreetwo#1{\gdef\@degreetwo{#1}\gdef\@degreeword{degrees}}
-\gdef\@degreetwo{}
-
-% Degree abbreviation
-\def\degreeabbreviation#1{\setbox0\hbox{#1}\gdef\@degreeabbreviation{#1}}
-
-% \rank
-\def\rank#1{\setbox0\hbox{#1}
-  \gdef\@rank{#1}}
-\rank{}                         % default is no rank
-
-% \prevdegrees
-\def\prevdegrees#1{\setbox0\hbox{#1}
-  \gdef\@prevdegrees{#1}}
-
 % For a second author
 \def\authortwo#1{\setbox0\hbox{#1} \gdef\@authortwo{#1}} \authortwo{}
 \def\ranktwo#1{\setbox0\hbox{#1} \gdef\@ranktwo{#1}} \ranktwo{}
@@ -416,26 +374,274 @@
 \def\SponsoringAgency#1{\setbox0\hbox{#1}
   \gdef\@sponsoringagency{#1}}
 
+% Single degree or dual degree options
+\def\degree#1{\gdef\@degree{#1}}                 \gdef\@degree{}
+\gdef\@degreeword{degree}
+\def\degreetwo#1{\gdef\@degreetwo{#1}\gdef\@degreeword{degrees}}
+\gdef\@degreetwo{}
+
+% Degree abbreviation
+\def\degreeabbreviation#1{\setbox0\hbox{#1}\gdef\@degreeabbreviation{#1}}
+
+\def\declassifydate#1{\gdef\@declassifydate{#1}} \gdef\@declassifydate{}
+\def\classifiedby#1{\gdef\@classifiedby{#1}}     \gdef\@classifiedby{}
+\def\classifiedfrom#1{\gdef\@classifiedfrom{#1}} \gdef\@classifiedfrom{Multiple Sources}
+\def\degreedate#1{\date{#1}}
+\def\prevdegrees#1{\gdef\@prevdegrees{#1}}       \def\@prevdegrees{}
+\def\department#1{\gdef\@department{#1}}
+\def\departmenttwo#1{\gdef\@departmenttwo{#1}}   \gdef\@departmenttwo{}
+\def\rank#1{\setbox0\hbox{#1}                    \gdef\@rank{#1}}
+\rank{}                                          % default is no rank
+
+
+% \departmentchair
+\DeclareRobustCommand\departmentchair{
+  \@ifnextchar[{\@@@departmentchairalt}{\@@@departmentchair}}
+\def\@@@departmentchairalt[#1]#2{
+  \gdef\@departmentchair{#2}
+  \gdef\@@departmentchair{#1}
+}
+\def\@@@departmentchair#1{
+  \gdef\@departmentchair{#1}
+  \gdef\@@departmentchair{#1}
+}
+
+% \committeechair
+\DeclareRobustCommand\committeechair{
+  \@ifnextchar[{\@@@committeechairalt}{\@@@committeechair}}
+\def\@@@committeechairalt[#1]#2{
+  \gdef\@committeechair{#2}
+  \gdef\@@committeechair{#1}
+}
+\def\@@@committeechair#1{
+  \gdef\@committeechair{#1}
+  \gdef\@@committeechair{#1}
+}
+
+% \departmentchairtwo
+\DeclareRobustCommand\departmentchairtwo{
+  \@ifnextchar[{\@@@departmentchairtwoalt}{\@@@departmentchairtwo}}
+\def\@@@departmentchairtwoalt[#1]#2{
+  \gdef\@departmentchairtwo{#2}
+  \gdef\@@departmentchairtwo{#1}
+}
+\def\@@@departmentchairtwo#1{
+  \gdef\@departmentchairtwo{#1}
+  \gdef\@@departmentchairtwo{#1}
+}
+
+% \researchchair
+\DeclareRobustCommand\researchchair{
+  \@ifnextchar[{\@@@researchchairalt}{\@@@researchchair}}
+\def\@@@researchchairalt[#1]#2{
+  \gdef\@researchchair{#2}
+  \gdef\@@researchchair{#1}
+}
+\def\@@@researchchair#1{
+  \gdef\@researchchair{#1}
+  \gdef\@@researchchair{#1}
+}
+
+% \president
+\DeclareRobustCommand\president{
+  \@ifnextchar[{\@@@presidentalt}{\@@@president}}
+\def\@@@presidentalt[#1]#2{
+  \gdef\@president{#2}
+  \gdef\@@president{#1}
+}
+\def\@@@president#1{
+  \gdef\@president{#1}
+  \gdef\@@president{#1}
+}
+
+% \provost
+\DeclareRobustCommand\provost{
+  \@ifnextchar[{\@@@provostalt}{\@@@provost}}
+\def\@@@provostalt[#1]#2{
+  \gdef\@provost{#2}
+  \gdef\@@provost{#1}
+}
+\def\@@@provost#1{
+  \gdef\@provost{#1}
+  \gdef\@@provost{#1}
+}
+
+% \viceprovost
+\DeclareRobustCommand\viceprovost{
+  \@ifnextchar[{\@@@viceprovostalt}{\@@@viceprovost}}
+\def\@@@viceprovostalt[#1]#2{
+  \gdef\@viceprovost{#2}
+  \gdef\@@viceprovost{#1}
+}
+\def\@@@viceprovost#1{
+  \gdef\@viceprovost{#1}
+  \gdef\@@viceprovost{#1}
+}
+
+% \assocprovost  % legacy macro for backwards compat
+\DeclareRobustCommand\assocprovost{
+  \@ifnextchar[{\@@@assocprovostalt}{\@@@assocprovost}}
+\def\@@@assocprovostalt[#1]#2{
+  \gdef\@assocprovost{#2}
+  \gdef\@@assocprovost{#1}
+}
+\def\@@@assocprovost#1{
+  \gdef\@assocprovost{#1}
+  \gdef\@@assocprovost{#1}
+}
+
 % \thesisadvisor
-\def\thesisadvisor#1{\setbox0\hbox{#1}
-   \gdef\@thesisadvisor{#1}}
+\DeclareRobustCommand\thesisadvisor{
+  \@ifnextchar[{\@@@thesisadvisoralt}{\@@@thesisadvisor}}
+\def\@@@thesisadvisoralt[#1]#2{
+  \gdef\@thesisadvisor{#2}
+  \gdef\@@thesisadvisor{#1}
+}
+\def\@@@thesisadvisor#1{
+  \gdef\@thesisadvisor{#1}
+  \gdef\@@thesisadvisor{#1}
+}
 
-% \co thesisadvisor1
-\def\thesisadvisorone#1{\setbox0\hbox{#1}
-   \gdef\@thesisadvisorone{#1}}
+% \thesisadvisorone
+\DeclareRobustCommand\thesisadvisorone{
+  \@ifnextchar[{\@@@thesisadvisoronealt}{\@@@thesisadvisorone}}
+\def\@@@thesisadvisoronealt[#1]#2{
+  \gdef\@thesisadvisorone{#2}
+  \gdef\@@thesisadvisorone{#1}
+}
+\def\@@@thesisadvisorone#1{
+  \gdef\@thesisadvisorone{#1}
+  \gdef\@@thesisadvisorone{#1}
+}
 
-% \co thesisadvisor2
-\def\thesisadvisortwo#1{\setbox0\hbox{#1}
-   \gdef\@thesisadvisortwo{#1}}
+% \thesisadvisortwo
+\DeclareRobustCommand\thesisadvisortwo{
+  \@ifnextchar[{\@@@thesisadvisortwoalt}{\@@@thesisadvisortwo}}
+\def\@@@thesisadvisortwoalt[#1]#2{
+  \gdef\@thesisadvisortwo{#2}
+  \gdef\@@thesisadvisortwo{#1}
+}
+\def\@@@thesisadvisortwo#1{
+  \gdef\@thesisadvisortwo{#1}
+  \gdef\@@thesisadvisortwo{#1}
+}
 
-\def\secondreader#1{\setbox0\hbox{#1}
-   \gdef\@secondreader{#1}}
+% \secondreader
+\DeclareRobustCommand\secondreader{
+  \@ifnextchar[{\@@@secondreaderalt}{\@@@secondreader}}
+\def\@@@secondreaderalt[#1]#2{
+  \gdef\@secondreader{#2}
+  \gdef\@@secondreader{#1}
+}
+\def\@@@secondreader#1{
+  \gdef\@secondreader{#1}
+  \gdef\@@secondreader{#1}
+}
 
-\def\secondreadertwo#1{\setbox0\hbox{#1}
-   \gdef\@secondreadertwo{#1}}
+% \secondreadertwo
+\DeclareRobustCommand\secondreadertwo{
+  \@ifnextchar[{\@@@secondreadertwoalt}{\@@@secondreadertwo}}
+\def\@@@secondreadertwoalt[#1]#2{
+  \gdef\@secondreadertwo{#2}
+  \gdef\@@secondreadertwo{#1}
+}
+\def\@@@secondreadertwo#1{
+  \gdef\@secondreadertwo{#1}
+  \gdef\@@secondreadertwo{#1}
+}
+
+% Dissertation committee members 1--6
+
+% \memberOne
+\DeclareRobustCommand\memberOne{
+  \@ifnextchar[{\@@@memberOnealt}{\@@@memberOne}}
+\def\@@@memberOnealt[#1]#2{
+  \gdef\@memberOne{#2}
+  \gdef\@@memberOne{#1}
+}
+\def\@@@memberOne#1{
+  \gdef\@memberOne{#1}
+  \gdef\@@memberOne{#1}
+}
+
+% \memberTwo
+\DeclareRobustCommand\memberTwo{
+  \@ifnextchar[{\@@@memberTwoalt}{\@@@memberTwo}}
+\def\@@@memberTwoalt[#1]#2{
+  \gdef\@memberTwo{#2}
+  \gdef\@@memberTwo{#1}
+}
+\def\@@@memberTwo#1{
+  \gdef\@memberTwo{#1}
+  \gdef\@@memberTwo{#1}
+}
+
+% \memberThree
+\DeclareRobustCommand\memberThree{
+  \@ifnextchar[{\@@@memberThreealt}{\@@@memberThree}}
+\def\@@@memberThreealt[#1]#2{
+  \gdef\@memberThree{#2}
+  \gdef\@@memberThree{#1}
+}
+\def\@@@memberThree#1{
+  \gdef\@memberThree{#1}
+  \gdef\@@memberThree{#1}
+}
+
+% \memberFour
+\DeclareRobustCommand\memberFour{
+  \@ifnextchar[{\@@@memberFouralt}{\@@@memberFour}}
+\def\@@@memberFouralt[#1]#2{
+  \gdef\@memberFour{#2}
+  \gdef\@@memberFour{#1}
+}
+\def\@@@memberFour#1{
+  \gdef\@memberFour{#1}
+  \gdef\@@memberFour{#1}
+}
+
+% \memberFive
+\DeclareRobustCommand\memberFive{
+  \@ifnextchar[{\@@@memberFivealt}{\@@@memberFive}}
+\def\@@@memberFivealt[#1]#2{
+  \gdef\@memberFive{#2}
+  \gdef\@@memberFive{#1}
+}
+\def\@@@memberFive#1{
+  \gdef\@memberFive{#1}
+  \gdef\@@memberFive{#1}
+}
+
+% \memberSix
+\DeclareRobustCommand\memberSix{
+  \@ifnextchar[{\@@@memberSixalt}{\@@@memberSix}}
+\def\@@@memberSixalt[#1]#2{
+  \gdef\@memberSix{#2}
+  \gdef\@@memberSix{#1}
+}
+\def\@@@memberSix#1{
+  \gdef\@memberSix{#1}
+  \gdef\@@memberSix{#1}
+}
+
+% Provide reasonable defaults
+\department{Computer Science}
+\departmentchair{Peter Denning}
+\researchchair{Jeffrey D. Paduan}
+\president{Ronald A. Route}
+\provost{Douglas A. Hensler}
+\viceprovost{Douglas Moses}
+\memberOne[\@@thesisadvisor]{\@thesisadvisor}
+\memberTwo[\@committeechair]{\@committeechair}
+\memberThree{}
+\memberFour{}
+\memberFive{}
+\memberSix{}
+
 
 % Some useful defines
 \newcommand{\tablefont}{\sffamily\fontsize{9}{10}\selectfont}
+
 
 
 %*************************************************************************
@@ -1023,23 +1229,7 @@
 % Definitions for the dissertation title page identifications
 \newcommand{\NPSsigfont}{\normalsize}
 \newcommand{\NPScommitteebox}[1]{\parbox[t]{2.2in}{\raggedright #1}}
-\def\committeechair#1{\gdef\@committeechair{#1}}
 \newcommand{\sigspace}{45pt minus 30pt}
-
-% Dissertation committee members
-\def\@memberOne{\@thesisadvisor}
-\def\@memberTwo{\@committeechair}
-\def\@memberThree{}
-\def\@memberFour{}
-\def\@memberFive{}
-\def\@memberSix{}
-
-\def\memberOne#1{\gdef\@memberOne{#1}}
-\def\memberTwo#1{\gdef\@memberTwo{#1}}
-\def\memberThree#1{\gdef\@memberThree{#1}}
-\def\memberFour#1{\gdef\@memberFour{#1}}
-\def\memberFive#1{\gdef\@memberFive{#1}}
-\def\memberSix#1{\gdef\@memberSix{#1}}
 
 % Title lines for each dissertation committee member.
 \def\@memberOneTitleLine{Dissertation Supervisor}
@@ -1117,53 +1307,53 @@
       %% Row 1:
       % process member 1
       \ifadvisoralone
-      Approved by: \> \@memberOne \\
+      Approved by: \> \@@memberOne \\
                    \> \NPScommitteebox{\@memberOneTitleLine} \\[\sigspace]
       \else
       % process member 1 and 2
-      Approved by: \> \@memberOne
-                   \> \@memberTwo \\
+      Approved by: \> \@@memberOne
+                   \> \@@memberTwo \\
                    \> \NPScommitteebox{\@memberOneTitleLine} \>
                       \NPScommitteebox{\@memberTwoTitleLine} \\[\sigspace]
       \fi
       %% Row 2:
       \ifadvisoralone
       % process member 2 and 3
-                   \> \@memberTwo
-                   \> \@memberThree \\
+                   \> \@@memberTwo
+                   \> \@@memberThree \\
                    \> \NPScommitteebox{\@memberTwoTitleLine} \>
                       \NPScommitteebox{\@memberThreeTitleLine} \\[\sigspace]
       \else
       % process member 3 and 4
-                   \> \@memberThree
-                   \> \@memberFour \\
+                   \> \@@memberThree
+                   \> \@@memberFour \\
                    \> \NPScommitteebox{\@memberThreeTitleLine} \>
                       \NPScommitteebox{\@memberFourTitleLine} \\[\sigspace]
       \fi
       %% Row 3:
       \ifadvisoralone
       % process member 4 and 5
-                   \> \@memberFour
-                   \> \@memberFive \\
+                   \> \@@memberFour
+                   \> \@@memberFive \\
                    \> \NPScommitteebox{\@memberFourTitleLine} \>
                       \NPScommitteebox{\@memberFiveTitleLine} \\[\sigspace]
       \else
       \iffivemembers
       % process member 5 and done
-                   \> \@memberFive \\
+                   \> \@@memberFive \\
                    \> \NPScommitteebox{\@memberFiveTitleLine} \\[\sigspace]
       \else
       % process member 5 and 6
-                   \> \@memberFive
-                   \> \@memberSix \\
+                   \> \@@memberFive
+                   \> \@@memberSix \\
                    \> \NPScommitteebox{\@memberFiveTitleLine} \> %
                       \NPScommitteebox{\@memberSixTitleLine} \\[\sigspace]
       \fi
       \fi
-      Approved by: \> \@departmentchair \\
+      Approved by: \> \@@departmentchair \\
                    \> Chair, \@department \\[\sigspace]
 
-      Approved by: \> \@viceprovost \\
+      Approved by: \> \@@viceprovost \\
                    \> Vice Provost for Academic Affairs
       \end{tabbing}
       \normalsize
@@ -1177,18 +1367,18 @@
       \begin{tabbing}
       \hspace{1.5in}\=\\       % Set the tabs
   
-      Approved by:   \> \@thesisadvisorone \\
+      Approved by:   \> \@@thesisadvisorone \\
                      \> Thesis Co-Advisor \\[\sigspace]
 
-                     \> \@thesisadvisortwo \\
+                     \> \@@thesisadvisortwo \\
                      \> Thesis Co-Advisor \\[\sigspace]
 
-                     \> \@departmentchair \\
+                     \> \@@departmentchair \\
                      \>  Chair, \@department
 
                   \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
-                     \> \@departmentchairtwo \\
+                     \> \@@departmentchairtwo \\
                      \> Chair, \@departmenttwo
                   }
       \end{tabbing}
@@ -1200,23 +1390,23 @@
       \begin{tabbing}
       \hspace{1.5in}\=\hspace{2.5in}\=\\    % Two tab columns
 
-      Approved by:   \> \@thesisadvisorone    \> \@thesisadvisortwo \\
+      Approved by:   \> \@@thesisadvisorone   \> \@@thesisadvisortwo \\
                      \> Thesis Co-Advisor     \> Thesis Co-Advisor \\[\sigspace]
 
       \iftworeaders
-                     \> \@secondreader        \> \@secondreadertwo \\
+                     \> \@@secondreader       \> \@@secondreadertwo \\
                      \> Second Reader         \> Second Reader \\[\sigspace]
       \else
-                     \> \@secondreader \\
+                     \> \@@secondreader \\
                      \> Second Reader \\[\sigspace]
       \fi
 
-                     \> \@departmentchair \\
+                     \> \@@departmentchair \\
                      \>  Chair, \@department
 
                   \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
-                     \> \@departmentchairtwo \\
+                     \> \@@departmentchairtwo \\
                      \> Chair, \@departmenttwo
                   }
       \end{tabbing}
@@ -1224,26 +1414,26 @@
       \begin{tabbing}
       \hspace{1.5in}\=\\       % Set the tabs
 
-      Approved by:   \> \@thesisadvisorone \\
+      Approved by:   \> \@@thesisadvisorone \\
                      \> Thesis Co-Advisor \\[\sigspace]
 
-                     \> \@thesisadvisortwo \\
+                     \> \@@thesisadvisortwo \\
                      \> Thesis Co-Advisor \\[\sigspace]
 
-                     \> \@secondreader \\
+                     \> \@@secondreader \\
                      \> Second Reader \\[\sigspace]
 
       \iftworeaders
-                     \> \@secondreadertwo \\
+                     \> \@@secondreadertwo \\
                      \> Second Reader \\[\sigspace]
       \fi
 
-                     \> \@departmentchair \\
+                     \> \@@departmentchair \\
                      \>  Chair, \@department
 
                   \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
-                     \> \@departmentchairtwo \\
+                     \> \@@departmentchairtwo \\
                      \> Chair, \@departmenttwo
                   }
       \end{tabbing}
@@ -1256,22 +1446,22 @@
       \hspace{1.5in}\=\hspace{2.5in}\=\\    % Two tab columns
 
       \iftworeaders
-      Approved by:   \> \@thesisadvisor \\
+      Approved by:   \> \@@thesisadvisor \\
                      \> Thesis Advisor \\[\sigspace]
 
-                     \> \@secondreader    \> \@secondreadertwo \\
+                     \> \@@secondreader   \> \@@secondreadertwo \\
                      \> Second Reader     \> Second Reader \\[\sigspace]
       \else
-      Approved by:   \> \@thesisadvisor    \> \@secondreader \\
+      Approved by:   \> \@@thesisadvisor   \> \@@secondreader \\
                      \> Thesis Advisor     \> Second Reader \\[\sigspace]
       \fi
 
-                     \> \@departmentchair \\
+                     \> \@@departmentchair \\
                      \>  Chair, \@department
 
                   \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
-                     \> \@departmentchairtwo \\
+                     \> \@@departmentchairtwo \\
                      \> Chair, \@departmenttwo
                   }
       \end{tabbing}
@@ -1279,23 +1469,23 @@
       \begin{tabbing}
       \hspace{1.5in}\=\\       % Set the tabs
 
-      Approved by:   \> \@thesisadvisor \\
+      Approved by:   \> \@@thesisadvisor \\
                      \> Thesis Advisor \\[\sigspace]
 
-                     \> \@secondreader \\
+                     \> \@@secondreader \\
                      \> Second Reader \\[\sigspace]
 
       \iftworeaders
-                     \> \@secondreadertwo \\
+                     \> \@@secondreadertwo \\
                      \> Second Reader \\[\sigspace]
       \fi
 
-                     \> \@departmentchair \\
+                     \> \@@departmentchair \\
                      \>  Chair, \@department
 
                   \ifthenelse{\equal{\@departmenttwo}{}}{}{%
                      \\[\sigspace]
-                     \> \@departmentchairtwo \\
+                     \> \@@departmentchairtwo \\
                      \> Chair, \@departmenttwo
                   }
       \end{tabbing}
