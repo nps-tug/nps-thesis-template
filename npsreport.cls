@@ -317,9 +317,14 @@
 % other pages. This is liberally borrowed from MIT Thesis guide
 %*************************************************************************
 
+% For first author
+\def\degreedate#1{\date{#1}}
+\def\rank#1{\setbox0\hbox{#1} \gdef\@rank{#1}} \rank{}
+\def\prevdegrees#1{\gdef\@prevdegrees{#1}} \def\@prevdegrees{}
+
 % For a second author
 \def\authortwo#1{\setbox0\hbox{#1} \gdef\@authortwo{#1}} \authortwo{}
-\def\ranktwo#1{\setbox0\hbox{#1} \gdef\@ranktwo{#1}} \ranktwo{}
+\def\ranktwo#1{\setbox0\hbox{#1}  \gdef\@ranktwo{#1}} \ranktwo{}
 \def\prevdegreestwo#1{\setbox0\hbox{#1} \gdef\@prevdegreestwo{#1}} \prevdegreestwo{}
 
 % For a third author
@@ -386,12 +391,9 @@
 \def\declassifydate#1{\gdef\@declassifydate{#1}} \gdef\@declassifydate{}
 \def\classifiedby#1{\gdef\@classifiedby{#1}}     \gdef\@classifiedby{}
 \def\classifiedfrom#1{\gdef\@classifiedfrom{#1}} \gdef\@classifiedfrom{Multiple Sources}
-\def\degreedate#1{\date{#1}}
-\def\prevdegrees#1{\gdef\@prevdegrees{#1}}       \def\@prevdegrees{}
+
 \def\department#1{\gdef\@department{#1}}
 \def\departmenttwo#1{\gdef\@departmenttwo{#1}}   \gdef\@departmenttwo{}
-\def\rank#1{\setbox0\hbox{#1}                    \gdef\@rank{#1}}
-\rank{}                                          % default is no rank
 
 
 % \departmentchair
