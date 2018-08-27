@@ -7,8 +7,8 @@
 %% Copyright (c) 2014-2016 Mark Gondree
 %% https://github.com/nps-tug/nps-thesis-template
 
-FUNCTION{bst.file.version} { "2.0" }
-FUNCTION{bst.file.date} { "2016/05/05" }
+FUNCTION{bst.file.version} { "2.1" }
+FUNCTION{bst.file.date} { "2018/08/27" }
 FUNCTION{bst.file.name} { "nps_thesis.bst" }
 
 %%
@@ -2229,6 +2229,20 @@ FUNCTION {inproceedings}
   format.paper output
   format.pages output
   format.note output
+  format.url output
+  fin.entry
+  if.url.std.interword.spacing
+}
+
+FUNCTION {law}
+{ std.status.using.comma
+  start.entry
+  if.url.alt.interword.spacing
+  format.classification output
+  format.book.title.edition "title" output.warn
+  std.status.using.period
+  format.howpublished "howpublished" bibinfo.warn output
+  format.date "year" output.warn
   format.url output
   fin.entry
   if.url.std.interword.spacing
