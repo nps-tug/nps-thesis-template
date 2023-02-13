@@ -1,10 +1,15 @@
 NPS LaTeX Thesis Template
 =========================
 
-This is the "officially" supported LaTeX template
-for NPS theses and technical reports. It is
-based on style files originally modified by Simson Garfinkel
-for this purpose.
+This is LaTeX template is **no longer supported**.
+It is based on style files originally modified by Simson Garfinkel,
+and maintained by volunteers.
+
+The **officially supported template** is maintained
+at https://wiki.nps.edu/display/LaTexTP/LaTeX+Thesis+Portal
+
+This repository of the old template is being left online for
+historical and archival purposes
 
 Documentation
 -------------
